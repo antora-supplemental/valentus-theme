@@ -1,0 +1,39 @@
+# Build demo using manifest-driven UI modules (orchestrator)
+site:
+  title: Valentus Theme (UI Modules)
+  url: https://antora-supplemental.github.io/valentus-theme
+  start_page: valentus-theme:guide:index.adoc
+
+content:
+  sources:
+    - url: .
+      branches: HEAD
+      start_path: docs
+
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+
+output:
+  dir: ./build/site-ui-modules
+
+runtime:
+  fetch: true
+
+antora:
+  extensions:
+    - require: ./ui-modules/packages/orchestrator/lib/index.js
+      registry: ./ui-modules/registry.json5
+      recipe: valentus-site
+    - require: "@antora/lunr-extension"
+      index_latest_only: true
+      index_by_heading: true
+      snippet_length: 200
+
+asciidoc:
+  extensions:
+    - "@asciidoctor/tabs"
+  attributes:
+    source-highlighter: highlight.js
+    icons: font

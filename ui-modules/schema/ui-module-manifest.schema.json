@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://antora-supplemental.github.io/schemas/ui-module-manifest.schema.json",
+  "title": "Antora Supplemental UI Module Manifest",
+  "description": "Machine-readable manifest for a composable Antora UI module. Indexers read this file; npm is optional.",
+  "type": "object",
+  "required": ["id", "name", "version", "type"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Stable module identifier within a repository or org namespace."
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable module name for registry listings."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$",
+      "description": "Semver of this module manifest and bundled UI assets."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["ui-module", "ui-recipe"],
+      "description": "ui-module ships UI assets; ui-recipe lists modules to enable together."
+    },
+    "description": {
+      "type": "string"
+    },
+    "repository": {
+      "type": "string",
+      "format": "uri",
+      "description": "Source repository URL (for registry metadata)."
+    },
+    "requires": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Module ids that must be enabled before this module."
+    },
+    "recommends": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Optional modules commonly paired with this one."
+    },
+    "conflicts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Module ids that cannot be enabled at the same time as this module."
+    },
+    "slots": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "head": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "stylesheets": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "CSS paths relative to the module ui/ root."
+            },
+            "scripts": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Inline script files (e.g. FOUC prevention) injected early in head."
+            },
+            "links": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Raw HTML link tags injected into head."
+            },
+            "fragments": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Handlebars snippet files (under ui/) merged into head-meta."
+            }
+          }
+        },
+        "foot": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "scripts": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "JS asset paths appended after Default UI footer scripts."
+            }
+          }
+        }
+      }
+    },
+    "ui": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "partials": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "provide": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "New partial stems (fragment components) for manual inclusion."
+            },
+            "replace": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Partial stems this module overrides in the UI bundle."
+            }
+          }
+        }
+      }
+    },
+    "modules": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "For type ui-recipe only: ordered module ids to enable."
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "type": { "const": "ui-recipe" } } },
+      "then": { "required": ["modules"] }
+    }
+  ]
+}

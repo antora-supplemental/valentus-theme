@@ -1,0 +1,186 @@
+= Configuration
+:navtitle: Configuration
+:description: Configuration options for the Antora Dark Theme.
+
+The dark theme works out of the box with sensible defaults.
+This page covers the configuration options available.
+
+== Playbook Configuration
+
+Sites use the *release UI bundle* only:
+
+[source,yaml]
+----
+ui:
+  bundle:
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1.1.0/ui-bundle.zip
+    snapshot: true
+----
+
+Optional branding (one supplemental directory on top of the bundle):
+
+[source,yaml]
+----
+  supplemental_files: ./supplemental-ui-overrides
+----
+
+Former npm installs: xref:npm-deprecation.adoc[npm deprecation].
+
+Pin strategy (exact vs. `latest` vs. rolling `v1.0` / Renovate): xref:version-pinning.adoc[Version Pinning].
+
+[[site-keys]]
+== Playbook `site.keys`
+
+The supplemental header and footer read optional playbook keys so you can brand the site without forking partials.
+
+[cols="2,3,3", options="header"]
+|===
+| Key | Default | Purpose
+
+| `header_logo`
+| `logo.svg`
+| Basename of the header mark under `img/` (for example `mybrand.svg` → `img/mybrand.svg`). Drop the SVG in supplemental or use a virtual `supplemental_files` entry.
+
+| `site_home_url`
+| `site.url`
+| URL for the logo link (opens in a new tab).
+
+| `site_home_label`
+| `Project home`
+| Accessible name for the logo link.
+
+| `header_doc_title`
+| `site.title`
+| Navbar text beside the logo (links to the docs home).
+
+| `github_profile_url`
+| `https://github.com`
+| Fallback VCS host link when the page has no `origin.webUrl`.
+
+| `footer_note`
+| _(none)_
+| HTML fragment appended after the base footer line.
+
+| `title_bar_brand`
+| `site.title`
+| Browser tab suffix; see `partials/head-title.hbs`.
+
+| `title_bar_section`
+| component title
+| Browser tab middle segment; see `partials/head-title.hbs`.
+|===
+
+Example—custom logo without overriding `partials/header-content.hbs`:
+
+[source,yaml]
+----
+site:
+  title: My Docs
+  keys:
+    header_logo: mybrand.svg
+    site_home_url: https://example.com
+    site_home_label: Example project home
+    header_doc_title: Example Docs
+
+ui:
+  bundle:
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1.1.0/ui-bundle.zip
+    snapshot: true
+  supplemental_files: ./supplemental-ui-overrides
+----
+
+Place `mybrand.svg` at `supplemental-ui-overrides/img/mybrand.svg`, or use xref:configuration.adoc#virtual-supplemental-files[virtual supplemental files] with `path: img/mybrand.svg`.
+
+[[virtual-supplemental-files]]
+== Virtual supplemental files
+
+When you only need one or two files (not a full supplemental directory), use Antora's virtual `supplemental_files` entries with `path` and `contents`:
+
+[source,yaml]
+----
+ui:
+  bundle:
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1.1.0/ui-bundle.zip
+    snapshot: true
+  supplemental_files:
+    - path: img/logo.svg
+      contents: ./branding/logo.svg
+----
+
+== Search (demo site)
+
+This repository's demo playbooks register https://gitlab.com/antora/antora-lunr-extension[`@antora/lunr-extension`]—the usual choice for self-hosted Antora sites (offline-capable, no Algolia account).
+
+[source,yaml]
+----
+antora:
+  extensions:
+    - require: "@antora/lunr-extension"
+      index_latest_only: true
+      index_by_heading: true
+      snippet_length: 200
+----
+
+The supplemental `header-content.hbs` renders the search field when the extension sets `SITE_SEARCH_PROVIDER`; `footer-scripts.hbs` already includes `search-scripts` under the same condition.
+
+== Default Behavior
+
+=== Theme Detection
+
+The theme automatically detects your preference in this order:
+
+. *Saved preference* - If you've previously toggled the theme, that choice is remembered
+. *System preference* - If no saved preference exists, the theme checks your OS dark mode setting
+. *Light mode* - Falls back to light mode if neither of the above applies
+
+=== Storage Key
+
+The theme stores your preference in `localStorage` under the key `antora-theme`.
+Values are either `light` or `dark`.
+
+To programmatically set the theme:
+
+[source,javascript]
+----
+// Set dark mode
+localStorage.setItem('antora-theme', 'dark');
+location.reload();
+
+// Set light mode
+localStorage.setItem('antora-theme', 'light');
+location.reload();
+
+// Clear preference (use system default)
+localStorage.removeItem('antora-theme');
+location.reload();
+----
+
+== File Structure
+
+The supplemental UI consists of four files:
+
+[source]
+----
+supplemental-ui/
+├── css/
+│   └── site-extra.css      # Dark mode CSS styles
+├── js/
+│   └── site-dark-mode.js   # Toggle button logic
+└── partials/
+    ├── footer-scripts.hbs  # Loads the dark mode script
+    └── head-meta.hbs       # Loads CSS and prevents FOUC
+----
+
+Each file serves a specific purpose:
+
+`site-extra.css`::
+Contains all dark mode styles using the `html.dark-theme` selector prefix.
+
+`site-dark-mode.js`::
+Injects the toggle button and handles theme switching logic.
+
+`head-meta.hbs`::
+Handlebars partial injected into `<head>` that loads CSS and prevents flash of unstyled content.
+
+`footer-scripts.hbs`::
+Handlebars partial that loads the JavaScript at the end of the page body.

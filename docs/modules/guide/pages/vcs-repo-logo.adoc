@@ -1,0 +1,92 @@
+= VCS Repo Logo (Replacing the Download Button)
+:navtitle: VCS Repo Logo
+:description: How the theme replaces Antora's nonfunctional Download button with a version-control provider logo linking to the docs repository.
+
+The default Antora UI includes a "Download" button in the navbar that has no default behavior (often `href="#"`).
+This theme replaces it with a **square logo** that links to the **repository** that hosts the current docs.
+
+== Why a Repo Link Instead of Download
+
+* **Edit this page** already opens the web editor for the current file on the host (GitHub, GitLab, etc.).
+* A "Download" button in the base theme is nonfunctional and confusing.
+* Linking to the **repository root** (e.g. `https://github.com/org/repo`) gives users a clear way to open the repo in the browser (clone URL, issues, PRs, releases).
+
+The logo is shown in a fixed 1:1 container (e.g. 32×32 px) so it stays compact and consistent with the navbar.
+
+== Provider Detection
+
+The theme detects the **version control provider** from the repository URL (by domain) and picks the matching logo:
+
+| Domain / host | Provider | Logo file
+| `github.com` | GitHub | `img/vcs/github.svg`
+| `*.gitlab*` | GitLab | `img/vcs/gitlab.svg`
+| `bitbucket.org` | Bitbucket | `img/vcs/bitbucket.svg`
+| `*gitea*` | Gitea | `img/vcs/gitea.svg`
+| `codeberg.org` | Codeberg | `img/vcs/codeberg.svg`
+| `*forgejo*` | Forgejo | `img/vcs/forgejo.svg`
+| `*sourcehut*`, `*.sr.ht` | SourceHut | `img/vcs/sourcehut.svg`
+| Other | Generic repo | `img/vcs/repo.svg`
+
+Provider SVGs are themed to the navbar text color: a single div with fixed proportions (24×24 px) uses the logo as a CSS mask and `background-color: currentColor`, so the logo matches the link/text color. No button class or image element is used.
+Icons are from the https://simpleicons.org/[Simple Icons] project (CC0-1.0); the theme uses white-fill versions so the mask shape shows the themed color.
+
+The repo URL comes from Antora's `page.origin.webUrl` (exposed as `<meta name="antora-repo-url">`).
+If that is not set, the script tries to derive the repo root from the "Edit this page" link.
+
+== How to Change the Logo
+
+=== Replace the SVG for a provider
+
+To use your own logo for a given provider (e.g. GitHub), replace the file in your **supplemental UI** (or in a fork of this theme):
+
+* Path: `supplemental-ui/img/vcs/<provider>.svg`
+* Example: `supplemental-ui/img/vcs/github.svg`
+
+Use a square viewBox (e.g. `viewBox="0 0 24 24"`) so it scales cleanly in the 24×24 px display area.
+The logo inherits the navbar text color; use `currentColor` in the SVG if you want it to follow the theme.
+
+=== Add or override a provider
+
+Detection is in `site-dark-mode.js` in `detectVcsProvider(repoUrl)`.
+Add a new host check and ensure the corresponding `img/vcs/<name>.svg` exists:
+
+[source,javascript]
+----
+if (host === "myforge.example.com") return "myforge";
+----
+
+Then add `img/vcs/myforge.svg` to the theme.
+
+=== Hide the logo
+
+To remove the VCS logo and leave the navbar without a repo link, you can:
+
+* Override the script and skip calling `replaceDownloadWithVcsLogo()`, or
+* Add CSS to hide it: `.navbar .vcs-repo-logo { display: none; }`
+
+=== Custom repo URL
+
+The link target is always the repo root from Antora's content source (`page.origin.webUrl`).
+To point to a different URL (e.g. a docs subfolder or a different repo), you would need to either set the playbook's content source URL accordingly or add a custom data attribute / site key and extend the script to read it (not provided by default).
+
+=== Logo not showing (e.g. local build)
+
+The logo is injected by JavaScript when the page loads.
+`replaceDownloadWithVcsLogo()` only runs when a default Antora “Download” button is present; if your layout removes that button, add your own nav link or extend the script.
+The script resolves the asset path from `data-ui-root-path` on the script tag, or from the script’s own URL so local or non-root builds can load `img/vcs/*.svg`.
+If the logo still doesn’t appear, ensure `.navbar .navbar-end` exists and that `site-dark-mode.js` runs (no script errors in the console).
+
+== Breadcrumb “Edit” link (optional partial)
+
+The theme ships `supplemental-ui/partials/edit-breadcrumb.hbs` for sites that add that partial to a custom `breadcrumbs` (for example, `+{{> edit-breadcrumb}}+` next to the rest of the trail).
+It **prefers** `page.editUrl` (https) over `page.fileUri` (file) when the usual public-edit conditions hold, and falls back to the file URL for local work when there is no web edit URL (same ordering as a well-formed `edit-this-page` override).
+`site-dark-mode.js` runs `applyVcsIcons()` to set the correct `img/vcs/<provider>.svg` from each link’s URL (GitHub, GitLab, and others), instead of a generic `code.svg` when the `href` is an `https` edit link.
+
+== Files Involved
+
+| File | Role
+| `supplemental-ui/partials/head-meta.hbs` | Emits `<meta name="antora-repo-url" content="{{page.origin.webUrl}}">` when the page has an origin.
+| `supplemental-ui/js/site-dark-mode.js` | `replaceDownloadWithVcsLogo()` replaces the default Download button when present; `applyVcsIcons()` maps edit/header/repo `img` tags to `img/vcs/*.svg` by URL. `getRepoUrl()` uses meta, then edit/blob links. Asset base path falls back to the script’s URL when needed for local viewing.
+| `supplemental-ui/img/vcs/*.svg` | One SVG per provider (and `repo.svg` fallback).
+| `supplemental-ui/css/site-extra.css` | Hides the default Download button until JS runs (avoids flash). `.vcs-repo-logo`, `.vcs-repo-link`, `.vcs-logo` (div proportions and mask) and hover.
+| `supplemental-ui/partials/edit-breadcrumb.hbs` (optional) | Breadcrumb “Edit” link; prefers `page.editUrl` over `fileUri`. Pair with your custom `breadcrumbs` partial.

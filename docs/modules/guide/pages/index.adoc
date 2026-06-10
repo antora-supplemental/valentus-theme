@@ -1,0 +1,26 @@
+= Valentus Theme
+:navtitle: Getting Started
+:description: Composed Antora doc-site chrome — mast, header, layout, and VCS icons.
+
+Valentus is debranded doc-site chrome for Antora 3.x: sticky header, breadcrumb mast with component/version pickers, sidebar layout, and VCS provider icons.
+
+For *dark mode*, pair this theme with link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] (separate extension).
+
+== Demo
+
+https://antora-supplemental.github.io/valentus-theme[Live demo on GitHub Pages]
+
+== Install
+
+See xref:installation.adoc[Installation] and xref:ui-modules.adoc[UI Modules].
+
+== Pair with dark mode
+
+[source,yaml]
+----
+ui:
+  bundle:
+    url: https://github.com/antora-supplemental/antora-dark-mode/releases/download/v1.1.0/ui-bundle.zip
+    snapshot: true
+  supplemental_files: ./path/to/valentus-theme/supplemental-ui
+----

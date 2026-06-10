@@ -1,0 +1,265 @@
+= Code Blocks
+:navtitle: Code Blocks
+:description: Demonstrates syntax-highlighted code blocks in various languages.
+
+This page showcases code blocks with syntax highlighting.
+
+== Inline Code
+
+Use `const` for constants and `let` for variables in JavaScript.
+
+The `git status` command shows the working tree status.
+
+== Basic Code Block
+
+----
+This is a basic code block without syntax highlighting.
+It preserves whitespace and formatting.
+----
+
+== Source Code with Highlighting
+
+=== JavaScript
+
+[source,javascript]
+----
+// Dark mode toggle implementation
+const THEME_KEY = 'antora-theme';
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.classList.toggle('dark-theme');
+  localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
+  updateIcon(isDark);
+}
+
+function initTheme() {
+  const saved = localStorage.getItem(THEME_KEY);
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  if (saved === 'dark' || (!saved && prefersDark)) {
+    document.documentElement.classList.add('dark-theme');
+  }
+}
+----
+
+=== Python
+
+[source,python]
+----
+"""Configuration parser for documentation sites."""
+
+from pathlib import Path
+from typing import Optional
+import yaml
+
+class Config:
+    """Site configuration handler."""
+    
+    def __init__(self, config_path: Path):
+        self.path = config_path
+        self._data: Optional[dict] = None
+    
+    @property
+    def data(self) -> dict:
+        if self._data is None:
+            with open(self.path) as f:
+                self._data = yaml.safe_load(f)
+        return self._data
+    
+    def get(self, key: str, default=None):
+        """Get a configuration value."""
+        return self.data.get(key, default)
+----
+
+=== CSS
+
+[source,css]
+----
+/* Dark theme variables */
+html.dark-theme {
+  --bg-primary: #1a1b1e;
+  --bg-elevated: #25262b;
+  --text-primary: #c1c2c5;
+  --text-heading: #ffffff;
+  --link-color: #4dabf7;
+  --border-color: #373a40;
+}
+
+html.dark-theme .navbar {
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+----
+
+=== YAML
+
+[source,yaml]
+----
+site:
+  title: My Documentation
+  start_page: component::index.adoc
+
+content:
+  sources:
+    - url: https://github.com/org/repo.git
+      branches: [main, v*]
+      start_path: docs
+
+ui:
+  bundle:
+    url: https://example.com/ui-bundle.zip
+  supplemental_files: ./supplemental-ui
+----
+
+=== Bash/Shell
+
+[source,bash]
+----
+#!/bin/bash
+# Build and deploy documentation
+
+set -euo pipefail
+
+echo "Building documentation..."
+antora --fetch antora-playbook.yml
+
+echo "Deploying to server..."
+rsync -avz --delete build/site/ user@server:/var/www/docs/
+
+echo "Done!"
+----
+
+=== HTML
+
+[source,html]
+----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark Theme Demo</title>
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/site-extra.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-brand">Documentation</div>
+    <button class="theme-toggle" id="theme-toggle">
+      <span class="theme-icon">☀</span>
+    </button>
+  </nav>
+</body>
+</html>
+----
+
+=== JSON
+
+[source,json]
+----
+{
+  "name": "valentus-theme",
+  "version": "1.0.0",
+  "description": "Dark mode theme for Antora",
+  "keywords": ["antora", "dark-mode", "theme"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antora-supplemental/valentus-theme.git"
+  }
+}
+----
+
+== Code Block with Title
+
+.site-dark-mode.js
+[source,javascript]
+----
+export function initDarkMode() {
+  const toggle = document.getElementById('theme-toggle');
+  toggle?.addEventListener('click', toggleTheme);
+}
+----
+
+== Code Block with Callouts
+
+[source,javascript]
+----
+function toggleTheme() {
+  const html = document.documentElement; // <1>
+  const isDark = html.classList.toggle('dark-theme'); // <2>
+  localStorage.setItem('theme', isDark ? 'dark' : 'light'); // <3>
+}
+----
+<1> Get the root HTML element
+<2> Toggle the dark-theme class
+<3> Persist the preference
+
+== Code Block with Line Numbers
+
+[source,python,linenums]
+----
+def fibonacci(n: int) -> int:
+    """Calculate the nth Fibonacci number."""
+    if n <= 1:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+# Example usage
+for i in range(10):
+    print(f"fib({i}) = {fibonacci(i)}")
+----
+
+== Literal Block
+
+....
+This is a literal block.
+It preserves all formatting
+    including indentation
+        and spacing.
+....
+
+== Listing Block
+
+The theme ships as a release `ui-bundle.zip` in your playbook (not npm).
+The following commands run Antora and preview the site locally.
+
+[tabs]
+====
+pnpm::
++
+[listing]
+----
+$ pnpm add -D antora
+$ pnpm exec antora --fetch antora-playbook.yml
+$ pnpm dlx http-server build/site
+----
+
+npm::
++
+[listing]
+----
+$ npm install --save-dev antora
+$ npx antora --fetch antora-playbook.yml
+$ npx http-server build/site
+----
+
+yarn::
++
+[listing]
+----
+$ yarn add -D antora
+$ yarn exec antora --fetch antora-playbook.yml
+$ yarn dlx http-server build/site
+----
+
+bun::
+`bunx` runs from project dependencies or fetches and runs on demand (same command for both, like npx).
++
+[listing]
+----
+$ bun add -d antora
+$ bunx antora --fetch antora-playbook.yml
+$ bunx http-server build/site
+----
+====

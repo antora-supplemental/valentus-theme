@@ -1,0 +1,345 @@
+= Extensions & Integrations
+:navtitle: Extensions
+:description: Exploring how common Asciidoctor extensions and third-party integrations render with the dark theme.
+:icons: font
+:experimental:
+
+This page explores various Asciidoctor extensions and third-party integrations.
+Some work seamlessly with the dark theme, others may need additional styling.
+Toggle between light and dark modes to see how each renders.
+
+Use the *Search* box in the top bar on this demo site (powered by `@antora/lunr-extension`).
+Try queries such as `installation`, `dark`, or `title:configuration`.
+
+'''
+
+[.float-group]
+--
+[.left]
+****
+.Lunr search (`@antora/lunr-extension`)
+The official Antora search extension indexes pages at build time and serves results in the browser—no external search service required.
+This demo playbook registers it under `antora.extensions`; the supplemental header exposes `#search-input` when `SITE_SEARCH_PROVIDER` is set.
+****
++
+The search dropdown, highlights, and input field inherit dark-mode colors from `site-extra.css`.
+Results can jump to section headings when `index_by_heading: true` is enabled in the playbook.
+--
+
+'''
+
+[.float-group]
+--
+[.left]
+****
+.Tabs Extension
+The `@asciidoctor/tabs` extension creates tabbed content blocks—perfect for showing alternatives like package managers or platform-specific instructions.
+****
+
+[tabs]
+====
+JavaScript::
++
+[source,javascript]
+----
+const greeting = "Hello, dark mode!";
+console.log(greeting);
+----
+
+Python::
++
+[source,python]
+----
+greeting = "Hello, dark mode!"
+print(greeting)
+----
+
+Ruby::
++
+[source,ruby]
+----
+greeting = "Hello, dark mode!"
+puts greeting
+----
+====
+--
+
+'''
+
+[.float-group]
+--
+[.right.text-right]
+****
+.STEM / Mathematical Notation
+AsciiDoc supports mathematical notation via MathJax or KaTeX.
+The formulas render as SVG or HTML, typically inheriting text color.
+****
+
+When latexmath is enabled, you can write inline math like latexmath:[\sqrt{x^2 + y^2}] or display equations:
+
+[latexmath]
+++++
+E = mc^2
+++++
+
+[latexmath]
+++++
+\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+++++
+
+NOTE: Math rendering depends on your playbook's STEM configuration.
+If formulas don't appear, ensure `asciidoc.attributes.stem` is set.
+--
+
+'''
+
+[.float-group]
+--
+[.left]
+****
+.Kroki Diagrams
+Kroki renders diagrams from text—Mermaid, PlantUML, D2, and dozens more.
+These generate SVGs that may need dark-mode-aware colors.
+****
+
+Here's a Mermaid flowchart (requires Kroki or native Mermaid integration):
+
+[source,mermaid]
+----
+graph LR
+    A[Start] --> B{Decision}
+    B -->|Yes| C[Action 1]
+    B -->|No| D[Action 2]
+    C --> E[End]
+    D --> E
+----
+
+CAUTION: Diagram colors are defined in the diagram source, not CSS.
+For dark mode compatibility, use neutral colors or theme-aware palettes in your diagram definitions.
+--
+
+'''
+
+[.float-group]
+--
+[.right.text-right]
+****
+.PlantUML Sequence
+PlantUML excels at sequence diagrams, class diagrams, and more.
+The default colors are light-theme oriented.
+****
+
+[source,plantuml]
+----
+@startuml
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+Alice -> Bob: Another request
+Bob --> Alice: Another response
+@enduml
+----
+
+TIP: PlantUML supports `skinparam` for theming.
+Use `skinparam backgroundColor transparent` and dark-friendly colors for better results.
+--
+
+'''
+
+== Embedded Content
+
+Iframes and embedded widgets maintain their own styling—they don't inherit from the parent page's CSS.
+
+[.float-group]
+--
+[.left]
+****
+.Video Embeds
+YouTube, Vimeo, and other video embeds work fine—the player chrome adapts to the video, not your site theme.
+****
+
+video::dQw4w9WgXcQ[youtube,width=480,height=270]
+--
+
+'''
+
+[.float-group]
+--
+[.right.text-right]
+****
+.Raw HTML Passthrough
+Passthrough blocks let you inject arbitrary HTML.
+Inline styles override the theme, so plan accordingly.
+****
+
+++++
+<div style="padding: 1.5em; border-radius: 8px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center;">
+  <strong>Custom HTML Block</strong><br>
+  <small>This has hardcoded colors—it looks the same in both themes.</small>
+</div>
+++++
+
+--
+
+'''
+
+== Interactive Elements
+
+[.float-group]
+--
+[.left]
+****
+.Keyboard Shortcuts
+The `kbd` macro renders keyboard shortcuts.
+These typically style well in dark mode.
+****
+
+Press kbd:[Ctrl+Shift+P] to open the command palette.
+
+Use kbd:[Cmd+K] then kbd:[Cmd+S] to save all files.
+
+Common shortcuts: kbd:[Esc], kbd:[Enter], kbd:[Tab], kbd:[Space]
+--
+
+'''
+
+[.float-group]
+--
+[.right.text-right]
+****
+.Menu & Button UI Macros
+Menu selections and button references help document GUIs.
+****
+
+Select menu:File[Save As... > PDF] to export.
+
+Click btn:[OK] to confirm or btn:[Cancel] to abort.
+
+Navigate to menu:Settings[Appearance > Theme > Dark].
+--
+
+'''
+
+== Font Icons
+
+[.float-group]
+--
+[.left]
+****
+.Font Awesome Icons
+When `:icons: font` is set, AsciiDoc renders icons via Font Awesome.
+These inherit text color automatically.
+****
+
+icon:heart[role=red] Love this theme
+
+icon:code[] Write some code
+
+icon:sun-o[] Light mode / icon:moon-o[] Dark mode
+
+icon:github[] Check out the repo
+
+icon:warning[] Warnings stand out
+--
+
+'''
+
+== Custom Roles & Styling
+
+[.float-group]
+--
+[.right.text-right]
+****
+.Text Roles
+Custom roles apply CSS classes.
+The dark theme styles common roles, but custom ones need your own CSS.
+****
+
+[.lead]
+Lead paragraphs introduce sections with emphasis.
+
+[.small]
+Small text for footnotes or asides.
+
+[.big]
+Big text for impact.
+
+[.underline]
+Underlined for emphasis.
+
+[.line-through]
+Struck through for deletions.
+--
+
+'''
+
+== What Needs Extra Work?
+
+Some extensions require additional dark mode CSS:
+
+[cols="2,1,3"]
+|===
+| Extension | Status | Notes
+
+| Tabs (`@asciidoctor/tabs`)
+| icon:check[role=green] Works
+| Inherits theme colors
+
+| Search (`@antora/lunr-extension`)
+| icon:check[role=green] Works
+| Input + dropdown styled in `site-extra.css`; enable via playbook `antora.extensions`
+
+| STEM / Math
+| icon:check[role=green] Works
+| SVG/HTML inherits text color
+
+| Kroki / Diagrams
+| icon:warning[role=yellow] Partial
+| Diagram colors are hardcoded in source
+
+| Video embeds
+| icon:check[role=green] Works
+| Player has own chrome
+
+| HTML Passthrough
+| icon:times[role=red] Manual
+| Inline styles override theme
+
+| Keyboard macros
+| icon:check[role=green] Works
+| Styled by theme
+
+| Menu/Button macros
+| icon:check[role=green] Works
+| Styled by theme
+
+| Font icons
+| icon:check[role=green] Works
+| Inherits text color
+
+| Custom roles
+| icon:warning[role=yellow] Partial
+| Standard roles styled; custom need CSS
+|===
+
+'''
+
+== Extending for Your Content
+
+To style custom elements in dark mode, add selectors to your CSS:
+
+[source,css]
+----
+/* Your custom component */
+html.dark-theme .my-custom-widget {
+  background-color: #25262b;
+  color: #c1c2c5;
+  border-color: #373a40;
+}
+
+/* Dark-mode-aware diagram wrapper */
+html.dark-theme .diagram-wrapper svg {
+  filter: invert(0.85) hue-rotate(180deg);
+}
+----
+
+TIP: The `filter: invert() hue-rotate()` trick can make light-themed diagrams readable in dark mode, though colors will shift.

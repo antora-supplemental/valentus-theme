@@ -1,0 +1,16 @@
+= Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on https://keepachangelog.com/en/1.1.0/[Keep a Changelog],
+and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Versioning].
+
+== [Unreleased]
+
+== [1.0.0] - 2026-06-09
+
+* Initial release: doc-site chrome split from `antora-dark-theme` into `valentus-theme` (mast, header, layout, VCS icons, UI modules orchestrator).
+* Pair with link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] for dark styling and the theme toggle.
+* GitHub Pages demo via `.github/workflows/deploy.yml`.
+
+link:changelog-details/2026-06-09%20-%201.0.0%20initial%20chrome%20split.adoc[Detailed notes — 2026-06-09]

@@ -1,0 +1,56 @@
+= Installation
+:navtitle: Installation
+:description: Install Antora Dark Theme using the release UI bundle.
+
+== Release UI bundle
+
+**Use `ui-bundle.zip` from GitHub Releases.** One pinned `ui.bundle.url`; Default UI and this theme are already merged.
+
+* link:https://github.com/antora-supplemental/valentus-theme/releases[GitHub Releases]
+* link:https://antora-supplemental.github.io/docs/[Antora Supplemental docs portal] (extensions registry)
+
+The npm package is deprecated and unpublished—see xref:npm-deprecation.adoc[npm deprecation (lessons learned & migration)] if you still have it in a lockfile.
+
+== Steps
+
+. Configure `antora-playbook.yml`:
++
+[source,yaml]
+----
+ui:
+  bundle:
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1.1.0/ui-bundle.zip
+    snapshot: true
+----
+
+For floating, line-pin, or Renovate strategies see xref:version-pinning.adoc[Version Pinning].
+
+. Optional branding—*one* override directory:
++
+[source,yaml]
+----
+  supplemental_files: ./supplemental-ui-overrides
+----
+
+. Build:
++
+[source,bash]
+----
+antora antora-playbook.yml
+----
+
+Pin `releases/download/vX.Y.Z/ui-bundle.zip` in CI.
+
+[[overrides-on-bundle]]
+=== Overrides
+
+Logo, favicon, or a few partials in a single directory (for example `supplemental-ui-overrides/`).
+See xref:configuration.adoc#virtual-supplemental-files[virtual supplemental files] for single-file entries.
+
+== Vendor `supplemental-ui` (forks)
+
+Copy `supplemental-ui/` from this repository into git for a maintained fork; use the Default UI bundle plus `supplemental_files: ./supplemental-ui`.
+
+== Verify
+
+Open the built site and use the sun/moon navbar toggle; preference should persist across pages.

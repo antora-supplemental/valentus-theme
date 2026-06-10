@@ -1,0 +1,56 @@
+# Composable Antora UI modules (manifest-driven)
+
+This directory holds **UI modules** — reusable Antora UI components installed via the
+`ui-orchestrator` generator extension. Indexers read `registry.json5` and per-module
+`ui-module.json5` manifests; **npm is optional**.
+
+## Quick start
+
+```yaml
+antora:
+  extensions:
+    - require: ./ui-modules/packages/orchestrator/lib/index.js
+      registry: ./ui-modules/registry.json5
+      recipe: doc-site   # or: modules: [dark-mode, bc-mast]
+```
+
+See `examples/antora-playbook-ui-modules.yml`.
+
+## Layout
+
+```
+ui-modules/
+  registry.json5           # Catalog of modules in this repo (indexer entry point)
+  registry-index.json      # Generated index for external registries
+  schema/                  # JSON Schema for manifests
+  recipes/                 # Named module combinations
+  packages/
+    orchestrator/          # Generator extension
+    dark-mode/             # Example atomic module
+    bc-mast/               # Breadcrumb / doc mast fragments
+    ...
+  scripts/
+    validate-ui-modules.mjs
+```
+
+## Validate and build registry index
+
+```bash
+pnpm ui-modules:validate
+```
+
+## Module manifest
+
+Each module directory contains `ui-module.json5` and a `ui/` tree (partials, css, js).
+Manifest fields include `requires`, `conflicts`, `recommends`, and `slots` for head/foot injection.
+
+## Registry indexing (no npm required)
+
+External registries should:
+
+1. Read `ui-modules/registry.json5` from the repository
+2. Optionally run `validate-ui-modules.mjs --index-out registry-index.json`
+3. The Antora Extensions Registry (`antora-extensions.org`) indexes manifests at `/extensions` and `/api/extensions/catalog`
+3. List **each module id** as a separate catalog entry using manifest metadata
+
+Install instructions point at a git path + orchestrator config, not `npm install`.

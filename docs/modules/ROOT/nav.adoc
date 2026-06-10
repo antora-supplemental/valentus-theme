@@ -1,0 +1,10 @@
+.Theme Demo
+* xref:index.adoc[Demo Home]
+* xref:typography.adoc[Typography]
+* xref:code-blocks.adoc[Code Blocks]
+* xref:admonitions.adoc[Admonitions]
+* xref:tables.adoc[Tables]
+* xref:blocks.adoc[Blocks & Quotes]
+* xref:lists.adoc[Lists]
+* xref:images.adoc[Images & Media]
+* xref:extensions.adoc[Extensions]

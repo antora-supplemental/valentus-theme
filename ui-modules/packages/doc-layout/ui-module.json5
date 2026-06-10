@@ -1,0 +1,22 @@
+{
+  id: "doc-layout",
+  name: "Doc layout body and styles",
+  version: "1.0.0",
+  type: "ui-module",
+  description: "Body/nav/article layout, site-doc-layout.css, and footer chrome for the debranded doc site pattern.",
+  repository: "https://github.com/antora-supplemental/valentus-theme",
+  requires: ["header-chrome"],
+  recommends: ["dark-mode"],
+  conflicts: [],
+  slots: {
+    head: {
+      stylesheets: ["css/site-doc-layout.css"],
+    },
+  },
+  ui: {
+    partials: {
+      provide: [],
+      replace: ["body", "nav", "nav-menu", "main", "article", "footer-content", "edit-this-page"],
+    },
+  },
+}

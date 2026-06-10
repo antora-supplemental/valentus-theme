@@ -1,0 +1,80 @@
+= Version Control and Fossil SCM
+:navtitle: Version Control & Fossil
+:description: Discourse on Fossil SCM as an alternative to Git, and plans for Dev-Centr support.
+
+This page acknowledges https://fossil-scm.org[Fossil SCM] as a legitimate alternative to Git and outlines plans for its support in the Dev-Centr publishing workflow.
+
+== Why Acknowledge Fossil?
+
+Many documentation and publishing workflows assume Git: clone from GitHub/GitLab, run CI from Git refs, and follow Git-based branching models.
+Fossil is a distributed version control system that deserves recognition alongside Git—especially for projects and teams that prefer its design or already use it.
+
+Fossil is a single executable, stores the entire repository (including wiki, tickets, and tech notes) in a single SQLite database, and was created by D. Richard Hipp (author of SQLite).
+It is a perfectly good alternative to Git for version control and collaboration.
+
+== Fossil vs Git: A Short Discourse
+
+=== What They Have in Common
+
+Both Fossil and Git are *distributed* version control systems:
+
+* Each clone is a full copy of the history
+* You can commit, branch, merge, and sync without a central server
+* They support similar core operations: diff, patch, branch, merge, cherry-pick, bisect, and private branches
+* Fossil can interoperate with Git via conversion and mirroring for teams that need to bridge both worlds
+
+=== Where Fossil Differs
+
+**All-in-one and self-contained**
+
+Fossil bundles version control with an integrated wiki, issue tracking, technical notes, and a built-in web UI—all in one executable and one SQLite file.
+Git focuses on version control; wikis and issue tracking usually come from separate services (e.g., GitHub, GitLab).
+
+**Repository model**
+
+Fossil keeps the repository (a single SQLite database) separate from working directories; you can have multiple checkouts of the same repo.
+Git typically has one working tree per clone with a `.git` directory inside it.
+
+**Philosophy and scale**
+
+Fossil is well-suited to smaller or medium-sized projects, educational use, and teams that want a single, auditable artifact (the SQLite repo file).
+Git was designed for very large, highly distributed projects (e.g., the Linux kernel) and has a larger ecosystem of tooling and hosting.
+
+**Platform support**
+
+Fossil runs natively on Windows and POSIX systems from a single binary; no separate "Git for Windows" style layer is required.
+
+=== When Fossil Might Be a Better Fit
+
+* You want version control, wiki, and tickets in one place without relying on a SaaS host
+* You prefer a single-file, SQLite-based repository that is easy to backup and inspect
+* You value simplicity and a small, self-contained toolchain
+* Your project or team is small to medium in size and doesn't depend on Git-only CI or hosting
+
+=== When Git May Still Be Preferable
+
+* You need maximum ecosystem and third-party integration (GitHub, GitLab, CI, code review tools)
+* Your workflow is deeply tied to Git-specific features or hosting APIs
+* You collaborate with parties that only support Git
+
+== Plans for Dev-Centr: Fossil Support
+
+*Dev-Centr* is a development-environment and publishing framework that provides guidelines for Antora-based documentation, deployment, and repository layout.
+Currently, much of its guidance and automation assumes Git (e.g., clone URLs, branch names, and CI triggers).
+
+**Planned direction**
+
+Dev-Centr intends to add explicit support and acknowledgement for Fossil SCM:
+
+* Document how to use the same Antora playbooks and publishing workflows with Fossil repositories
+* Describe Fossil equivalents for common Git operations (clone, branch, sync) in the context of Doc-Centr/Antora
+* Where automation or scripts assume Git, provide Fossil-compatible alternatives or options so that Fossil users can follow the same structural and publishing guidelines
+
+This will allow projects that use Fossil to adopt Dev-Centr's publishing model without being treated as second-class.
+Timeline and implementation details will be updated in the Dev-Centr documentation as work progresses.
+
+== Further Reading
+
+* https://fossil-scm.org/home/doc/trunk/www/fossil-v-git.wiki[Fossil vs Git] — Official comparison
+* https://fossil-scm.org/home/doc/trunk/www/concepts.wiki[Fossil concepts] — How Fossil represents repositories and history
+* https://fossil-scm.org/home/doc/trunk/www/gitusers.md[Git to Fossil translation] — For teams considering or already switching from Git

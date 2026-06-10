@@ -1,0 +1,105 @@
+= UI Modules (Composable Chrome)
+:navtitle: UI Modules
+:description: Manifest-driven, composable Antora UI modules installed via the ui-orchestrator extension.
+:page-tags: ui-modules, orchestrator, extensions
+
+This repository is evolving from a monolithic supplemental UI overlay into **composable UI modules** — reusable chrome components (dark mode, breadcrumb mast, header, layout) that you enable à la carte via manifests, without npm.
+
+== Why manifests instead of npm only
+
+Each module ships a `ui-module.json5` manifest beside its `ui/` assets.
+The repository root `ui-modules/registry.json5` catalogs every module for indexers (for example the Antora Supplemental docs portal).
+
+* Indexers read manifests from git — not npm package names.
+* Consumers register modules in the Antora playbook via a generator extension.
+* npm remains optional transport; a git path works.
+
+== Install (orchestrator)
+
+[source,yaml]
+----
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+
+antora:
+  extensions:
+    - require: ./ui-modules/packages/orchestrator/lib/index.js
+      registry: ./ui-modules/registry.json5
+      recipe: doc-site
+----
+
+=== Pick modules explicitly
+
+[source,yaml]
+----
+    - require: ./ui-modules/packages/orchestrator/lib/index.js
+      registry: ./ui-modules/registry.json5
+      modules:
+        - dark-mode
+        - bc-mast
+        - edit-crumb
+----
+
+Required dependencies are auto-expanded (for example `bc-mast` pulls in `edit-crumb`).
+Conflicts fail the build with a clear error.
+
+== Available modules
+
+[cols="2,4", options="header"]
+|===
+| Module id | Purpose
+
+| `dark-mode`
+| CSS overrides, FOUC script, navbar theme toggle
+
+| `vcs-icons`
+| Provider SVG assets + URL detection for repo/edit icons
+
+| `bc-mast`
+| Component/version kickers (`adt-bc-cluster`), trail fragment, doc mast, accordion JS
+
+| `edit-crumb`
+| Inline edit link partial for breadcrumb rows
+
+| `header-chrome`
+| Site navbar, logo slot, doc mast include, Source Sans 3
+
+| `doc-layout`
+| Body/nav/article layout and `site-doc-layout.css`
+|===
+
+== Recipes
+
+Pre-defined combinations live under `ui-modules/recipes/`:
+
+* `doc-site` — full chrome stack (this demo site's layout)
+* `dark-mode-only` — toggle + styles on stock Default UI
+
+== Validate and generate registry index
+
+[source,bash]
+----
+pnpm ui-modules:validate
+----
+
+Writes `ui-modules/registry-index.json` for external catalog crawlers.
+
+== Fragment partials
+
+Modules such as `bc-mast` ship *fragment* partials (`adt-bc-cluster`, `adt-bc-trail`) you can include from custom headers:
+
+[source,handlebars]
+----
+{{> adt-bc-cluster}}
+----
+
+You are not required to adopt the full `doc-site` recipe.
+
+== Legacy supplemental UI
+
+The release `ui-bundle.zip` and `./supplemental-ui` tree remain supported.
+UI modules are the forward path for composable chrome; the monolithic bundle is a convenience artifact.
+
+See link:../../ui-modules/README.adoc[`ui-modules/README.adoc`] and link:../../antora-playbook-ui-modules.yml[`antora-playbook-ui-modules.yml`].

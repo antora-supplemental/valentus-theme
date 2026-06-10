@@ -1,0 +1,45 @@
+// Valentus UI module catalog — chrome and composed layout (no dark-mode; pair with antora-dark-mode).
+{
+  schema: "1.0",
+  repository: "https://github.com/antora-supplemental/valentus-theme",
+  modules: [
+    {
+      id: "vcs-icons",
+      path: "packages/vcs-icons",
+      manifest: "ui-module.json5",
+    },
+    {
+      id: "bc-mast",
+      path: "packages/bc-mast",
+      manifest: "ui-module.json5",
+    },
+    {
+      id: "edit-crumb",
+      path: "packages/edit-crumb",
+      manifest: "ui-module.json5",
+    },
+    {
+      id: "header-chrome",
+      path: "packages/header-chrome",
+      manifest: "ui-module.json5",
+    },
+    {
+      id: "doc-layout",
+      path: "packages/doc-layout",
+      manifest: "ui-module.json5",
+    },
+  ],
+  recipes: [
+    {
+      id: "valentus-site",
+      path: "recipes/valentus-site.json5",
+    },
+  ],
+  pairsWith: [
+    {
+      id: "dark-mode",
+      repository: "https://github.com/antora-supplemental/antora-dark-mode",
+      description: "Dark mode CSS and toggle — layer antora-dark-mode supplemental or release bundle on top.",
+    },
+  ],
+}

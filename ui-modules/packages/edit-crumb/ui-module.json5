@@ -1,0 +1,17 @@
+{
+  id: "edit-crumb",
+  name: "Edit in breadcrumb",
+  version: "1.0.0",
+  type: "ui-module",
+  description: "Inline edit link partial for breadcrumb rows (pairs with bc-mast or custom breadcrumbs).",
+  repository: "https://github.com/antora-supplemental/valentus-theme",
+  requires: [],
+  recommends: ["vcs-icons"],
+  conflicts: [],
+  ui: {
+    partials: {
+      provide: ["edit-breadcrumb"],
+      replace: [],
+    },
+  },
+}

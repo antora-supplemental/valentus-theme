@@ -1,0 +1,148 @@
+= Customization
+:navtitle: Customization
+:description: How to customize the Antora Dark Theme colors, toggle button, and more.
+
+The dark theme is fully customizable.
+This guide covers common customization scenarios.
+
+== Changing Colors
+
+Edit `supplemental-ui/css/site-extra.css` to customize the color palette.
+
+=== Current Color Palette
+
+[cols="1,1,2", options="header"]
+|===
+| Color | Value | Usage
+
+| Background (main)
+| `#1a1b1e`
+| Page body background
+
+| Background (elevated)
+| `#25262b`
+| Sidebar, navigation panels, blocks
+
+| Background (navbar)
+| `#141517`
+| Top navigation bar
+
+| Text (primary)
+| `#c1c2c5`
+| Main body text
+
+| Text (headings)
+| `#ffffff`
+| Headings and titles
+
+| Link color
+| `#4dabf7`
+| Hyperlinks
+
+| Link hover
+| `#74c0fc`
+| Hovered hyperlinks
+
+| Border color
+| `#373a40`
+| Dividers and borders
+|===
+
+=== Example: Change Link Color
+
+To change the link color to green:
+
+[source,css]
+----
+html.dark-theme a {
+  color: #51cf66;
+}
+
+html.dark-theme a:hover {
+  color: #8ce99a;
+}
+----
+
+== Adding Custom Styles
+
+To style additional elements not covered by the default theme, add new selectors prefixed with `html.dark-theme`:
+
+[source,css]
+----
+html.dark-theme .my-custom-element {
+  background-color: #25262b;
+  color: #c1c2c5;
+}
+----
+
+== Toggle Button Position
+
+By default, the toggle button is inserted at the beginning of `.navbar-end`.
+
+To change its position, modify the `ensureToggleButton()` function in `site-dark-mode.js`:
+
+[source,javascript]
+----
+// Insert at the end instead of the beginning
+navbarEnd.appendChild(button);
+----
+
+== Custom Toggle Button
+
+If you want to use your own toggle button markup, add an element with `id="theme-toggle"` anywhere in your page:
+
+[source,html]
+----
+<button id="theme-toggle" aria-label="Toggle dark mode">
+  🌙
+</button>
+----
+
+The script will detect it and attach the click handler automatically instead of creating its own button.
+
+== Disable System Preference Detection
+
+To always start in light mode regardless of system preference, modify the inline script in `head-meta.hbs`:
+
+[source,handlebars]
+----
+<script>
+(function () {
+  const themeKey = 'antora-theme';
+  const savedTheme = localStorage.getItem(themeKey);
+  // Only apply dark mode if explicitly saved
+  if (savedTheme === 'dark') {
+    document.documentElement.classList.add('dark-theme');
+  }
+})();
+</script>
+----
+
+== CSS Custom Properties
+
+While the current theme uses explicit color values, you can refactor to use CSS custom properties for easier theming:
+
+[source,css]
+----
+html.dark-theme {
+  --dt-bg-primary: #1a1b1e;
+  --dt-bg-elevated: #25262b;
+  --dt-text-primary: #c1c2c5;
+  --dt-text-heading: #ffffff;
+  --dt-link: #4dabf7;
+  --dt-border: #373a40;
+}
+
+html.dark-theme body {
+  background-color: var(--dt-bg-primary);
+  color: var(--dt-text-primary);
+}
+----
+
+This makes it easier to create multiple dark theme variants.
+
+== VCS Repo Logo (Download button replacement)
+
+The theme replaces the default UI's nonfunctional "Download" button with a version control provider logo that links to the docs repository.
+Provider is detected by domain (GitHub, GitLab, Bitbucket, Gitea, Codeberg, Forgejo, SourceHut); you can change or add logos by replacing or adding SVGs under `supplemental-ui/img/vcs/`.
+See xref:vcs-repo-logo.adoc[VCS Repo Logo] for detection rules and how to customize or hide the logo.

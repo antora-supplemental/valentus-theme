@@ -1,0 +1,37 @@
+# Valentus demo site (GitHub Pages)
+site:
+  title: Valentus Theme
+  url: https://antora-supplemental.github.io/valentus-theme
+  start_page: valentus-theme:guide:index.adoc
+
+content:
+  sources:
+    - url: .
+      branches: HEAD
+      start_path: docs
+
+ui:
+  bundle:
+    url: https://github.com/antora-supplemental/antora-dark-mode/releases/download/v1.1.0/ui-bundle.zip
+    snapshot: true
+  supplemental_files: ./supplemental-ui
+
+output:
+  dir: ./build/site
+
+runtime:
+  fetch: true
+
+antora:
+  extensions:
+    - require: "@antora/lunr-extension"
+      index_latest_only: true
+      index_by_heading: true
+      snippet_length: 200
+
+asciidoc:
+  extensions:
+    - "@asciidoctor/tabs"
+  attributes:
+    source-highlighter: highlight.js
+    icons: font

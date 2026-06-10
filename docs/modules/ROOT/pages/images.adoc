@@ -1,0 +1,134 @@
+= Images & Media
+:navtitle: Images & Media
+:description: Demonstrates image blocks and figure captions.
+
+This page demonstrates image handling in the dark theme.
+
+== Inline Images
+
+You can include small inline images image:https://img.shields.io/badge/antora-3.x-purple.svg[Antora 3.x] within text, like badges.
+
+Here's another badge: image:https://img.shields.io/badge/license-MIT-blue.svg[License: MIT]
+
+== Block Images
+
+=== Basic Image
+
+image::https://placehold.co/600x300/25262b/c1c2c5?text=Sample+Image[Sample Image,600,300]
+
+=== Image with Caption
+
+.A placeholder image demonstrating dark theme colors
+image::https://placehold.co/600x200/1a1b1e/4dabf7?text=Dark+Theme+Colors[Dark Theme Colors,600,200]
+
+=== Image with Title and Alt Text
+
+[#fig-placeholder]
+.Figure 1: Theme Color Palette
+image::https://placehold.co/500x150/141517/f1f3f5?text=Navbar+Color[Navbar Background Color,500,150]
+
+== Image Alignment
+
+=== Left Aligned Image
+
+image::https://placehold.co/200x100/373a40/c1c2c5?text=Left[Left aligned,200,100,role=left]
+
+This text flows around the left-aligned image.
+The dark theme ensures images integrate well with the surrounding content regardless of alignment.
+Notice how the text wraps naturally around the image.
+
+{empty} +
+{empty} +
+
+=== Right Aligned Image
+
+image::https://placehold.co/200x100/373a40/c1c2c5?text=Right[Right aligned,200,100,role=right]
+
+This text flows around the right-aligned image.
+Right alignment is useful for supplementary visuals that support the main content.
+The clear float ensures content flows properly.
+
+{empty} +
+{empty} +
+
+=== Center Aligned Image
+
+image::https://placehold.co/300x100/2c2e33/f1f3f5?text=Centered[Centered image,300,100,role=text-center]
+
+== Image Sizes
+
+=== Small Image
+
+image::https://placehold.co/150x100/25262b/c1c2c5?text=Small[Small,150,100]
+
+=== Medium Image
+
+image::https://placehold.co/300x150/25262b/c1c2c5?text=Medium[Medium,300,150]
+
+=== Large Image
+
+image::https://placehold.co/600x200/25262b/c1c2c5?text=Large[Large,600,200]
+
+== Image Gallery
+
+[.image-gallery]
+--
+image:https://placehold.co/150x150/4dabf7/ffffff?text=1[Image 1,150,150]
+image:https://placehold.co/150x150/74c0fc/ffffff?text=2[Image 2,150,150]
+image:https://placehold.co/150x150/a5d8ff/1a1b1e?text=3[Image 3,150,150]
+--
+
+== Icons
+
+When icons are enabled (`:icons: font`), you can use Font Awesome icons:
+
+icon:check-circle[role=green] Success indicator
+
+icon:exclamation-triangle[role=yellow] Warning indicator
+
+icon:times-circle[role=red] Error indicator
+
+icon:info-circle[] Information
+
+icon:github[] GitHub icon
+
+icon:code[] Code icon
+
+== Video Placeholder
+
+NOTE: Video embeds depend on your Antora configuration and extensions.
+Below is an example of how video might be embedded.
+
+.Example Video Embed (iframe)
+====
+Videos would be embedded here using an HTML passthrough or video macro.
+The dark theme styles the surrounding container appropriately.
+====
+
+== Figure References
+
+Refer to <<fig-placeholder>> for an example of the theme color palette.
+
+== Image in Table
+
+[cols="1,2", options="header"]
+|===
+| Preview | Description
+
+| image:https://placehold.co/100x60/25262b/c1c2c5?text=Thumb[Thumbnail,100,60]
+| This is a thumbnail image inside a table cell.
+
+| image:https://placehold.co/100x60/141517/f1f3f5?text=Dark[Dark theme,100,60]
+| Another image demonstrating dark colors in a table.
+|===
+
+== Image in Admonition
+
+[TIP]
+====
+Here's a visual tip:
+
+image::https://placehold.co/400x100/25262b/4dabf7?text=Tip+Image[Tip with image,400,100]
+
+Images work well inside admonition blocks.
+====

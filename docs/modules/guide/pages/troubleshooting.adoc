@@ -1,0 +1,144 @@
+= Troubleshooting
+:navtitle: Troubleshooting
+:description: Solutions to common issues with the Antora Dark Theme.
+
+This page covers common issues and their solutions.
+
+== Toggle Button Doesn't Appear
+
+*Symptom:* The sun/moon toggle button is missing from the navbar.
+
+*Possible causes:*
+
+. *Supplemental files not loaded* - Verify your `antora-playbook.yml` has the correct path:
++
+[source,yaml]
+----
+ui:
+  supplemental_files: ./node_modules/valentus-theme/supplemental-ui
+----
+
+. *Different UI bundle structure* - The toggle button is injected into `.navbar-end`. If your UI bundle has a different navbar structure, modify the selector in `site-dark-mode.js`:
++
+[source,javascript]
+----
+// Change this line to match your navbar structure
+const navbarEnd = document.querySelector('.navbar-end');
+----
+
+. *JavaScript error* - Check the browser console for errors that might prevent the script from running.
+
+== Dark Mode Doesn't Persist
+
+*Symptom:* Dark mode resets to light mode on page reload.
+
+*Possible causes:*
+
+. *localStorage blocked* - Some browsers or extensions block `localStorage`. Check your browser settings.
+
+. *Incognito/private mode* - Some browsers restrict `localStorage` in private browsing.
+
+. *Content Security Policy* - If your site has a strict CSP, it might block the inline script. Add the script hash to your CSP or move the script to an external file.
+
+To test if `localStorage` is working:
+
+[source,javascript]
+----
+// Run in browser console
+localStorage.setItem('test', 'value');
+console.log(localStorage.getItem('test')); // Should print "value"
+----
+
+== Flash of Light Mode on Page Load
+
+*Symptom:* The page briefly shows light mode before switching to dark.
+
+*Possible causes:*
+
+. *head-meta.hbs not loading* - Ensure the partial is in the correct location:
++
+[source]
+----
+supplemental-ui/partials/head-meta.hbs
+----
+
+. *CSP blocking inline script* - The FOUC prevention relies on an inline script in `<head>`. If blocked by CSP, add the script's hash to your policy.
+
+. *Caching issue* - Clear your browser cache and rebuild the site.
+
+== Some Elements Aren't Styled
+
+*Symptom:* Certain page elements remain light-colored in dark mode.
+
+*Solution:* The CSS covers the most common Antora elements, but custom extensions or modified UI bundles may have additional elements.
+
+Add styles for unstyled elements in `site-extra.css`:
+
+[source,css]
+----
+html.dark-theme .your-custom-element {
+  background-color: #25262b;
+  color: #c1c2c5;
+}
+----
+
+TIP: Use browser DevTools to inspect the unstyled element and find its CSS class.
+
+== Code Blocks Look Wrong
+
+*Symptom:* Syntax highlighting colors clash with dark background.
+
+*Solution:* The theme includes styles for highlight.js code blocks. If you're using a different syntax highlighter (like Prism or Rouge), you may need to add custom styles or use a dark-compatible theme for that highlighter.
+
+For highlight.js, ensure the dark theme styles are present in `site-extra.css`:
+
+[source,css]
+----
+html.dark-theme .hljs {
+  background: #1e1e1e;
+  color: #dcdcdc;
+}
+----
+
+== Theme Toggle Conflicts with Custom JavaScript
+
+*Symptom:* Custom scripts interfere with theme switching.
+
+*Solution:* The theme stores its state in:
+
+* `localStorage` key: `antora-theme`
+* HTML class: `dark-theme` on the `<html>` element
+
+If your scripts modify either of these, conflicts may occur. Ensure your code checks for and respects these values:
+
+[source,javascript]
+----
+// Check current theme
+const isDark = document.documentElement.classList.contains('dark-theme');
+
+// Listen for theme changes
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    if (mutation.attributeName === 'class') {
+      const isDark = document.documentElement.classList.contains('dark-theme');
+      console.log('Theme changed:', isDark ? 'dark' : 'light');
+    }
+  });
+});
+
+observer.observe(document.documentElement, { attributes: true });
+----
+
+== Still Having Issues?
+
+If your issue isn't covered here:
+
+. Check the https://github.com/antora-supplemental/valentus-theme/issues[GitHub Issues] for similar problems
+. Open a new issue with:
+** Browser and version
+** Antora version
+** Steps to reproduce
+** Browser console errors (if any)
+
+
+

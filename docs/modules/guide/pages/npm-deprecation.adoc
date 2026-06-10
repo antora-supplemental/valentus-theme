@@ -1,0 +1,101 @@
+= npm registry deprecation (archive)
+:navtitle: npm deprecation
+:page-pagination:
+:page-pagination-prev: installation.adoc
+:page-pagination-next: configuration.adoc
+:description: Why npm distribution ended, lessons learned, and how to migrate to the release UI bundle.
+
+== Status
+
+The https://www.npmjs.com/package/valentus-theme[`valentus-theme` npm package] is *deprecated* and *no longer published*.
+CI no longer runs `npm publish`; GitHub Releases ship `ui-bundle.zip` only.
+
+Use the release bundle in your playbook—see xref:installation.adoc[Installation].
+Discover this theme on link:https://antora-supplemental.github.io/docs/[Antora Supplemental docs] (extensions registry), not npmjs.
+
+== Migrate off npm
+
+. Remove `valentus-theme` from `package.json` and the lockfile (`pnpm remove -D valentus-theme`, etc.).
+. Delete scripts that copied `node_modules/valentus-theme/supplemental-ui` (`prebuild`, `sync:ui`, …).
+. Point `ui.bundle` at a pinned release:
++
+[source,yaml]
+----
+ui:
+  bundle:
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1.1.0/ui-bundle.zip
+    snapshot: true
+----
++
+. Optional branding—*one* override directory:
++
+[source,yaml]
+----
+  supplemental_files: ./supplemental-ui-overrides
+----
+
+Rebuild and verify the dark-mode toggle in the navbar.
+
+== Lessons learned
+
+=== Static UI does not belong on npm
+
+Antora Dark Theme is a *UI bundle* (Handlebars, CSS, JS)—not a Node library you `require()`.
+Publishing it on npm:
+
+* Polluted the registry namespace with an install step that docs sites do not need.
+* Implied the theme was a runtime dependency alongside `antora`, when only the playbook URL matters.
+* Invited copy/sync workflows from `node_modules` that duplicate what a release zip already provides.
+
+*Habit:* ship `ui-bundle.zip` on GitHub Releases; index the artifact in the Antora extensions catalog.
+
+=== npm encouraged invalid Antora playbooks
+
+Common mistakes when “installing” the theme:
+
+* *Two supplemental directories* — Antora accepts one directory *or* virtual files, not a YAML list of folders (e.g. `node_modules/.../supplemental-ui` *and* `./supplemental-ui-overrides`).
+* *Sync on every build* — copying from `node_modules` into the repo before `antora` when the merged release bundle already contains the theme.
+* *Default UI + npm overlay* — workable but redundant once `ui-bundle.zip` exists; extra moving parts for no benefit on a standard docs site.
+
+*Habit:* one pinned `ui.bundle.url` to the release zip; optional *one* small override directory for logo/favicon.
+
+=== Discovery should not be npm-shaped
+
+Documentation sites are not npm applications.
+Versioning and “where do I get this?” belong next to other Antora extensions—link:https://antora-supplemental.github.io/docs/[Supplemental docs portal] / extensions registry—with the bundle URL and release notes, not `npm install` snippets in READMEs.
+
+=== What npm was briefly used for (historical)
+
+Early docs described:
+
+* `npm install --save-dev valentus-theme` plus `supplemental_files: ./node_modules/valentus-theme/supplemental-ui` on the Antora Default UI zip.
+* `github:antora-supplemental/valentus-theme` or release `.tgz` in `package.json` (same overlay model).
+* Merged `supplemental-ui/` in git after copying from npm (valid, but vendoring—npm was only the transport).
+
+All of that is replaced by the release bundle. Forks may still vendor `supplemental-ui/` from this repository without any registry package.
+
+== Archive: former npm install (do not use)
+
+[source,bash]
+----
+# REMOVED — do not run
+pnpm add -D valentus-theme
+----
+
+[source,yaml]
+----
+# REMOVED — use ui-bundle.zip instead
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+  supplemental_files: ./node_modules/valentus-theme/supplemental-ui
+----
+
+If you still have the above in a playbook, xref:installation.adoc[switch to Installation] and delete the dependency.
+
+== Maintainers
+
+* Release workflow: `.github/workflows/release.yml` attaches `ui-bundle.zip` only.
+* Catalog: list bundle URL + version in `antora-extensions-registry`, not `npm install`.
+* This repo keeps `package.json` for local Antora demo builds (`pnpm build`), not for npm distribution.

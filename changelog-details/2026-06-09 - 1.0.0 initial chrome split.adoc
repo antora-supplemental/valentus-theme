@@ -1,0 +1,8 @@
+= 1.0.0 — initial release (chrome split from antora-dark-theme)
+:description: Changelog detail for valentus-theme 1.0.0
+:navtitle: 1.0.0 initial release
+
+* *Origin:* Doc-site chrome extracted from the former monolithic `antora-dark-theme` package into `valentus-theme`.
+* *Includes:* `supplemental-ui` partials (`header-content`, `body`, `nav`, breadcrumb mast, edit crumb), `site-doc-layout.css`, `site-adt-accordion.js`, VCS icon assets, and composable `ui-modules/` (`vcs-icons`, `bc-mast`, `edit-crumb`, `header-chrome`, `doc-layout`) with `valentus-site` recipe.
+* *Pairing:* Dark styling and the theme toggle remain in link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode]. Recommended playbook: pin the `antora-dark-mode` `ui-bundle.zip`, then add this repository's `supplemental-ui` as `ui.supplemental_files`.
+* *Distribution:* GitHub Releases ship `ui-bundle.zip` (Default UI + valentus supplemental, pre-merged). GitHub Pages demo via `.github/workflows/deploy.yml`.

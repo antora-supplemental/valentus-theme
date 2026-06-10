@@ -1,0 +1,22 @@
+{
+  id: "bc-mast",
+  name: "Breadcrumb doc mast",
+  version: "1.0.0",
+  type: "ui-module",
+  description: "Component/version kickers in the breadcrumb row, trail fragments, doc mast wrapper, and accordion behavior.",
+  repository: "https://github.com/antora-supplemental/valentus-theme",
+  requires: ["edit-crumb"],
+  recommends: ["dark-mode"],
+  conflicts: [],
+  slots: {
+    foot: {
+      scripts: ["js/site-adt-accordion.js"],
+    },
+  },
+  ui: {
+    partials: {
+      provide: ["adt-bc-cluster", "adt-bc-trail", "adt-doc-mast"],
+      replace: ["breadcrumbs"],
+    },
+  },
+}

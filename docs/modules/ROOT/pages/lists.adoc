@@ -1,0 +1,206 @@
+= Lists
+:navtitle: Lists
+:description: Demonstrates ordered, unordered, and description lists.
+
+This page showcases different list types and nesting.
+
+== Unordered Lists
+
+=== Basic Unordered List
+
+* First item
+* Second item
+* Third item
+* Fourth item
+
+=== Nested Unordered List
+
+* Level 1 item A
+** Level 2 item A1
+** Level 2 item A2
+*** Level 3 item A2a
+*** Level 3 item A2b
+** Level 2 item A3
+* Level 1 item B
+** Level 2 item B1
+
+=== List with Complex Content
+
+* First item with a longer description that wraps to multiple lines to demonstrate how the dark theme handles list item text.
+
+* Second item with inline formatting: *bold*, _italic_, and `code`.
+
+* Third item with a link: https://antora.org[Antora Documentation]
+
+* Fourth item with multiple paragraphs:
++
+This is a continuation paragraph.
+It belongs to the fourth item.
++
+And another continuation paragraph.
+
+== Ordered Lists
+
+=== Basic Ordered List
+
+. First step
+. Second step
+. Third step
+. Fourth step
+
+=== Nested Ordered List
+
+. Main step one
+.. Sub-step 1.1
+.. Sub-step 1.2
+... Sub-sub-step 1.2.1
+... Sub-sub-step 1.2.2
+.. Sub-step 1.3
+. Main step two
+.. Sub-step 2.1
+. Main step three
+
+=== Ordered List with Custom Start
+
+[start=5]
+. This starts at five
+. Six
+. Seven
+. Eight
+
+=== Ordered List with Different Numbering Styles
+
+[loweralpha]
+. Item a
+. Item b
+. Item c
+
+[upperroman]
+. Item I
+. Item II
+. Item III
+
+[lowergreek]
+. Item α
+. Item β
+. Item γ
+
+== Mixed Lists
+
+* Unordered item
+** Nested unordered
+. Ordered inside unordered
+. Second ordered item
+** Back to nested unordered
+* Another unordered item
+
+== Description Lists
+
+=== Basic Description List
+
+Term 1:: Definition for term 1.
+This can span multiple lines.
+
+Term 2:: Definition for term 2.
+
+Term 3:: Definition for term 3.
+
+=== Description List with Nested Content
+
+First Term::
+This is the definition of the first term.
++
+It includes a continuation paragraph.
+
+Second Term::
+This term has a code block:
++
+[source,javascript]
+----
+const example = "code in description list";
+----
+
+Third Term::
+This term has a nested list:
++
+* Sub-item A
+* Sub-item B
+* Sub-item C
+
+=== Horizontal Description List
+
+[horizontal]
+CPU:: Central Processing Unit
+RAM:: Random Access Memory
+SSD:: Solid State Drive
+HDD:: Hard Disk Drive
+
+=== Q&A Style Description List
+
+[qanda]
+What is Antora?::
+Antora is a documentation site generator for AsciiDoc content.
+
+Why use a dark theme?::
+Dark themes reduce eye strain in low-light conditions and can save battery on OLED screens.
+
+How do I enable dark mode?::
+Click the sun/moon toggle button in the navigation bar.
+
+== Checklists
+
+=== Task List
+
+* [x] Completed task
+* [x] Another completed task
+* [ ] Pending task
+* [ ] Another pending task
+* [x] Final completed task
+
+=== Interactive Checklist (Static)
+
+* [*] Required: Install Node.js 18+
+* [*] Required: Install pnpm
+* [ ] Optional: Configure custom colors
+* [ ] Optional: Set up CI/CD
+
+== Lists with Block Content
+
+. First step
++
+[source,bash]
+----
+pnpm install
+----
+
+. Second step
++
+NOTE: Make sure to run this from the project root.
++
+[source,bash]
+----
+pnpm build
+----
+
+. Third step
++
+.Expected output
+====
+Build completed successfully.
+Output written to ./build/site
+====
+
+== Compact Lists (No Blank Lines Between Items)
+
+[%compact]
+* Compact item one
+* Compact item two
+* Compact item three
+* Compact item four
+
+== Bibliography Style List
+
+[bibliography]
+* [[[ref1]]] Author One. _Title of First Reference_. Publisher, 2024.
+* [[[ref2]]] Author Two. _Title of Second Reference_. Publisher, 2023.
+* [[[ref3]]] Author Three. _Title of Third Reference_. Publisher, 2022.

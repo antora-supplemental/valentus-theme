@@ -1,0 +1,51 @@
+= Theme Demo
+:navtitle: Demo Home
+:description: A comprehensive demonstration of the Antora Dark Theme styling.
+
+This section showcases all the UI elements styled by the dark theme.
+Use these pages to see how different AsciiDoc elements render in both light and dark modes.
+
+TIP: Use the *theme toggle button* in the navbar (sun/moon icon) to switch between light and dark modes.
+
+== Demo Pages
+
+[cols="1,2"]
+|===
+| Page | Description
+
+| xref:typography.adoc[Typography]
+| Headings, paragraphs, inline formatting, and links
+
+| xref:code-blocks.adoc[Code Blocks]
+| Syntax-highlighted source code examples
+
+| xref:admonitions.adoc[Admonitions]
+| Note, tip, warning, caution, and important blocks
+
+| xref:tables.adoc[Tables]
+| Various table layouts and styles
+
+| xref:blocks.adoc[Blocks & Quotes]
+| Sidebars, examples, quotes, and literal blocks
+
+| xref:lists.adoc[Lists]
+| Ordered, unordered, and description lists
+
+| xref:images.adoc[Images & Media]
+| Image blocks and figure captions
+
+| xref:extensions.adoc[Extensions]
+| Tabs, diagrams, math, embeds, and third-party integrations
+|===
+
+== Quick Code Example
+
+[source,javascript]
+----
+// Toggle dark mode programmatically
+function toggleTheme() {
+  document.documentElement.classList.toggle('dark-theme');
+}
+----
+
+NOTE: For installation and usage instructions, see xref:guide:index.adoc[Getting Started].

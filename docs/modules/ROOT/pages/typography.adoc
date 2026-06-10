@@ -1,0 +1,94 @@
+= Typography
+:navtitle: Typography
+:description: Demonstrates headings, text formatting, and links in the dark theme.
+
+This page demonstrates typography elements and text styling.
+
+== Headings
+
+Headings help organize content hierarchically.
+
+=== Level 3 Heading
+
+Content under a level 3 heading.
+
+==== Level 4 Heading
+
+Content under a level 4 heading.
+
+===== Level 5 Heading
+
+Content under a level 5 heading.
+
+====== Level 6 Heading
+
+Content under a level 6 heading.
+
+== Inline Formatting
+
+Text can be formatted in various ways:
+
+* *Bold text* for emphasis
+* _Italic text_ for subtle emphasis
+* `Monospace text` for inline code
+* *_Bold and italic_* combined
+* ^Superscript^ and ~subscript~ text
+* #Highlighted# text using the mark role
+* [.underline]#Underlined text#
+* [.line-through]#Strikethrough text#
+
+== Links
+
+=== External Links
+
+Visit the https://antora.org[Antora website] for more information.
+
+Here's a link to https://github.com/antora-supplemental/valentus-theme[this project on GitHub].
+
+=== Internal Cross-References
+
+* Go to the xref:index.adoc[Home page]
+* Check out xref:code-blocks.adoc[Code Blocks]
+* See xref:admonitions.adoc[Admonitions]
+
+== Paragraphs
+
+This is a regular paragraph.
+Paragraphs are separated by blank lines.
+Text within a paragraph wraps naturally.
+
+This is another paragraph demonstrating the spacing between paragraphs.
+The dark theme ensures comfortable reading with appropriate contrast ratios.
+
+[.lead]
+This is a lead paragraph, typically used for introductory text.
+It appears slightly larger and more prominent.
+
+== Horizontal Rules
+
+Content above the rule.
+
+'''
+
+Content below the rule.
+
+== Keyboard Shortcuts
+
+Press kbd:[Ctrl+C] to copy and kbd:[Ctrl+V] to paste.
+
+On macOS, use kbd:[Cmd+C] and kbd:[Cmd+V] instead.
+
+== Menu and Button UI
+
+Navigate to menu:File[Save As...] to save the document.
+
+Click the btn:[Submit] button to continue.
+
+== Footnotes
+
+This text has a footnote.footnote:[This is the footnote content.]
+
+Another footnote reference.footnote:note2[Second footnote with a reference ID.]
+
+
+

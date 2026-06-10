@@ -1,0 +1,210 @@
+= Blocks & Quotes
+:navtitle: Blocks & Quotes
+:description: Demonstrates sidebars, examples, quotes, and various block types.
+
+This page showcases different block types styled by the dark theme.
+
+== Sidebar Block
+
+****
+This is a sidebar block.
+
+Sidebars are used for supplementary content that relates to but is separate from the main text.
+They're often used for tangential information, fun facts, or related topics.
+
+* Sidebars can contain lists
+* And other block elements
+* Like this one
+****
+
+== Example Block
+
+.Example: Basic Configuration
+====
+Here's an example of a basic configuration:
+
+[source,yaml]
+----
+site:
+  title: My Documentation
+  url: https://docs.example.com
+----
+
+This configuration sets the site title and base URL.
+====
+
+.Example: With Multiple Steps
+====
+Follow these steps:
+
+. Create a new file
+. Add the configuration
+. Save and test
+
+[source,bash]
+----
+touch config.yml
+echo "site:" >> config.yml
+antora config.yml
+----
+====
+
+== Quote Block
+
+[quote, Albert Einstein]
+____
+Imagination is more important than knowledge.
+Knowledge is limited.
+Imagination encircles the world.
+____
+
+[quote, Douglas Adams, The Hitchhiker's Guide to the Galaxy]
+____
+A common mistake that people make when trying to design something completely foolproof is to underestimate the ingenuity of complete fools.
+____
+
+=== Quote Without Attribution
+
+____
+This is a blockquote without attribution.
+It can span multiple paragraphs.
+
+Second paragraph of the quote.
+____
+
+=== Short Quote
+
+[quote]
+____
+Simple, direct quotes work well for emphasis.
+____
+
+== Verse Block
+
+[verse, William Shakespeare, Sonnet 18]
+____
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date.
+____
+
+== Literal Block
+
+A literal block preserves whitespace and displays text in a monospace font:
+
+....
+   ,---.
+  /     \
+ |       |
+ |  ^_^  |
+ |       |
+  \     /
+   `---'
+....
+
+== Listing Block
+
+[listing]
+----
+This is a listing block.
+It's similar to a literal block but uses different delimiters.
+Commonly used for terminal output or file contents.
+
+$ command --option value
+Output line 1
+Output line 2
+----
+
+== Open Block
+
+An open block is a generic container that can hold other blocks:
+
+--
+This is an open block.
+
+It can contain:
+
+* Lists
+* Paragraphs
+* Other elements
+
+[source,javascript]
+----
+console.log('Even code blocks!');
+----
+--
+
+== Passthrough Block
+
+A passthrough block passes content directly through without processing:
+
+++++
+<div style="padding: 1em; border: 1px dashed #4dabf7; border-radius: 4px;">
+  <p style="margin: 0; color: #4dabf7;">
+    This HTML is passed through directly.
+  </p>
+</div>
+++++
+
+== Collapsible Block (Details)
+
+[%collapsible]
+====
+This content is hidden by default.
+
+Click the summary to reveal it.
+
+* Hidden item 1
+* Hidden item 2
+* Hidden item 3
+====
+
+[%collapsible]
+.Click to reveal advanced configuration
+====
+[source,yaml]
+----
+advanced:
+  cache:
+    enabled: true
+    ttl: 3600
+  logging:
+    level: debug
+    format: json
+----
+====
+
+== Comment Block
+
+////
+This is a comment block.
+It will not appear in the rendered output.
+Use it for notes to other authors or future reference.
+////
+
+The comment block above is not visible in the rendered output.
+
+== Block with Role
+
+[.lead]
+This paragraph has the "lead" role applied, making it stand out as introductory text.
+
+[.text-center]
+This paragraph is centered using the text-center role.
+
+== Nested Blocks
+
+.Outer Example
+====
+This is the outer example block.
+
+.Inner Sidebar
+****
+This sidebar is nested inside the example block.
+
+Nesting blocks can help organize complex content.
+****
+
+Back to the outer example block.
+====

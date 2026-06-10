@@ -1,0 +1,9 @@
+// Valentus — composed Antora doc-site chrome.
+{
+  repository: "https://github.com/antora-supplemental/valentus-theme",
+  githubTopics: [
+    "antora-theme",
+    "antora-extension",
+    "antora-ui",
+  ],
+}

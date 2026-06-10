@@ -1,0 +1,232 @@
+{
+  "schema": "1.0",
+  "generatedAt": "2026-06-09T05:36:25.872Z",
+  "repository": "https://github.com/antora-supplemental/valentus-theme",
+  "source": "ui-modules/registry.json5",
+  "modules": [
+    {
+      "id": "vcs-icons",
+      "name": "VCS provider icons",
+      "version": "1.0.0",
+      "type": "ui-module",
+      "description": "Provider SVG assets and JS to map repository URLs to icons in header and edit links.",
+      "repository": "https://github.com/antora-supplemental/valentus-theme",
+      "manifestPath": "packages/vcs-icons/ui-module.json5",
+      "modulePath": "packages/vcs-icons",
+      "requires": [],
+      "recommends": [
+        "dark-mode"
+      ],
+      "conflicts": [],
+      "partials": {
+        "provide": [],
+        "replace": []
+      },
+      "slots": {
+        "foot": {
+          "scripts": [
+            "js/site-vcs-icons.js"
+          ]
+        }
+      },
+      "uiFileCount": 10,
+      "install": {
+        "orchestrator": {
+          "registry": "./ui-modules/registry.json5",
+          "modules": [
+            "vcs-icons"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bc-mast",
+      "name": "Breadcrumb doc mast",
+      "version": "1.0.0",
+      "type": "ui-module",
+      "description": "Component/version kickers in the breadcrumb row, trail fragments, doc mast wrapper, and accordion behavior.",
+      "repository": "https://github.com/antora-supplemental/valentus-theme",
+      "manifestPath": "packages/bc-mast/ui-module.json5",
+      "modulePath": "packages/bc-mast",
+      "requires": [
+        "edit-crumb"
+      ],
+      "recommends": [
+        "dark-mode"
+      ],
+      "conflicts": [],
+      "partials": {
+        "provide": [
+          "adt-bc-cluster",
+          "adt-bc-trail",
+          "adt-doc-mast"
+        ],
+        "replace": [
+          "breadcrumbs"
+        ]
+      },
+      "slots": {
+        "foot": {
+          "scripts": [
+            "js/site-adt-accordion.js"
+          ]
+        }
+      },
+      "uiFileCount": 5,
+      "install": {
+        "orchestrator": {
+          "registry": "./ui-modules/registry.json5",
+          "modules": [
+            "bc-mast"
+          ]
+        }
+      }
+    },
+    {
+      "id": "edit-crumb",
+      "name": "Edit in breadcrumb",
+      "version": "1.0.0",
+      "type": "ui-module",
+      "description": "Inline edit link partial for breadcrumb rows (pairs with bc-mast or custom breadcrumbs).",
+      "repository": "https://github.com/antora-supplemental/valentus-theme",
+      "manifestPath": "packages/edit-crumb/ui-module.json5",
+      "modulePath": "packages/edit-crumb",
+      "requires": [],
+      "recommends": [
+        "vcs-icons"
+      ],
+      "conflicts": [],
+      "partials": {
+        "provide": [
+          "edit-breadcrumb"
+        ],
+        "replace": []
+      },
+      "slots": {},
+      "uiFileCount": 1,
+      "install": {
+        "orchestrator": {
+          "registry": "./ui-modules/registry.json5",
+          "modules": [
+            "edit-crumb"
+          ]
+        }
+      }
+    },
+    {
+      "id": "header-chrome",
+      "name": "Doc site header chrome",
+      "version": "1.0.0",
+      "type": "ui-module",
+      "description": "Sticky site navbar with logo slot, doc title, search slot, VCS link, and doc mast include.",
+      "repository": "https://github.com/antora-supplemental/valentus-theme",
+      "manifestPath": "packages/header-chrome/ui-module.json5",
+      "modulePath": "packages/header-chrome",
+      "requires": [
+        "bc-mast"
+      ],
+      "recommends": [
+        "vcs-icons",
+        "dark-mode"
+      ],
+      "conflicts": [],
+      "partials": {
+        "provide": [],
+        "replace": [
+          "header",
+          "header-content",
+          "head-title"
+        ]
+      },
+      "slots": {
+        "head": {
+          "links": [
+            "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">",
+            "<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>",
+            "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap\">"
+          ],
+          "fragments": [
+            "snippets/repo-meta.hbs"
+          ]
+        }
+      },
+      "uiFileCount": 5,
+      "install": {
+        "orchestrator": {
+          "registry": "./ui-modules/registry.json5",
+          "modules": [
+            "header-chrome"
+          ]
+        }
+      }
+    },
+    {
+      "id": "doc-layout",
+      "name": "Doc layout body and styles",
+      "version": "1.0.0",
+      "type": "ui-module",
+      "description": "Body/nav/article layout, site-doc-layout.css, and footer chrome for the debranded doc site pattern.",
+      "repository": "https://github.com/antora-supplemental/valentus-theme",
+      "manifestPath": "packages/doc-layout/ui-module.json5",
+      "modulePath": "packages/doc-layout",
+      "requires": [
+        "header-chrome"
+      ],
+      "recommends": [
+        "dark-mode"
+      ],
+      "conflicts": [],
+      "partials": {
+        "provide": [],
+        "replace": [
+          "body",
+          "nav",
+          "nav-menu",
+          "main",
+          "article",
+          "footer-content",
+          "edit-this-page"
+        ]
+      },
+      "slots": {
+        "head": {
+          "stylesheets": [
+            "css/site-doc-layout.css"
+          ]
+        }
+      },
+      "uiFileCount": 9,
+      "install": {
+        "orchestrator": {
+          "registry": "./ui-modules/registry.json5",
+          "modules": [
+            "doc-layout"
+          ]
+        }
+      }
+    }
+  ],
+  "recipes": [
+    {
+      "id": "valentus-site",
+      "name": "Valentus doc site chrome",
+      "version": "1.0.0",
+      "type": "ui-recipe",
+      "description": "Composed doc-site layout: mast, header, VCS icons, and body chrome. Pair with antora-dark-mode for dark styling.",
+      "modules": [
+        "vcs-icons",
+        "bc-mast",
+        "edit-crumb",
+        "header-chrome",
+        "doc-layout"
+      ],
+      "manifestPath": "recipes/valentus-site.json5",
+      "install": {
+        "orchestrator": {
+          "registry": "./ui-modules/registry.json5",
+          "recipe": "valentus-site"
+        }
+      }
+    }
+  ]
+}

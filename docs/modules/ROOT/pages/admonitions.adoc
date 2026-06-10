@@ -1,0 +1,116 @@
+= Admonitions
+:navtitle: Admonitions
+:description: Demonstrates note, tip, warning, caution, and important blocks.
+
+Admonitions draw attention to important information.
+The dark theme styles each type distinctively.
+
+== Note
+
+NOTE: This is a note admonition.
+Use notes for additional information that supplements the main content.
+
+== Tip
+
+TIP: This is a tip admonition.
+Tips provide helpful suggestions or best practices.
+
+== Important
+
+IMPORTANT: This is an important admonition.
+Use this for critical information the reader must not miss.
+
+== Warning
+
+WARNING: This is a warning admonition.
+Warnings alert readers to potential problems or risks.
+
+== Caution
+
+CAUTION: This is a caution admonition.
+Cautions indicate actions that could have negative consequences.
+
+== Admonitions with Titles
+
+[NOTE]
+.Configuration Required
+====
+You must configure the `antora-playbook.yml` file before building the site.
+See the xref:index.adoc[installation guide] for details.
+====
+
+[TIP]
+.Performance Optimization
+====
+Enable caching in your playbook for faster subsequent builds:
+
+[source,yaml]
+----
+runtime:
+  cache_dir: .cache/antora
+----
+====
+
+[WARNING]
+.Breaking Changes in v2.0
+====
+The configuration format changed in version 2.0.
+Please review the migration guide before upgrading.
+====
+
+== Admonitions with Complex Content
+
+[IMPORTANT]
+.Multi-step Process
+====
+Follow these steps in order:
+
+. Clone the repository
+. Install dependencies with `pnpm install`
+. Configure your playbook
+. Run `pnpm build`
+
+[source,bash]
+----
+git clone https://github.com/antora-supplemental/valentus-theme.git
+cd valentus-theme
+pnpm install
+pnpm build
+----
+====
+
+[CAUTION]
+.Data Loss Warning
+====
+The following actions are *irreversible*:
+
+* Deleting a branch without a backup
+* Force pushing to a shared branch
+* Running `git clean -fd` without reviewing changes
+
+Always create backups before performing destructive operations.
+
+[cols="1,1"]
+|===
+| Action | Risk Level
+
+| `git reset --hard`
+| High
+
+| `git push --force`
+| Critical
+
+| `git clean -fd`
+| High
+|===
+====
+
+== Inline Admonitions
+
+You can also use shorter inline syntax:
+
+NOTE: Short notes can be written inline.
+
+TIP: Quick tips are great for brevity.
+
+WARNING: Brief warnings catch attention.

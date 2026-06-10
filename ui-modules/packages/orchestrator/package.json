@@ -1,0 +1,8 @@
+{
+  "name": "@antora-supplemental/ui-orchestrator",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Manifest-driven Antora UI module orchestrator — no npm publish required; load via playbook path.",
+  "main": "lib/index.js",
+  "license": "MIT"
+}

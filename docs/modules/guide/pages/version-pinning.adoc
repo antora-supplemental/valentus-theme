@@ -1,0 +1,137 @@
+= Version Pinning
+:navtitle: Version Pinning
+:description: How to pin the Antora Dark Theme UI bundle — exact versions, rolling lines, Renovate, and semver contract.
+
+GitHub Releases distribute this theme as `ui-bundle.zip`.
+There is no npm-style range syntax (`^1.0`, `~1.0`) in the URL itself—you choose how much automation you want around a zip URL.
+
+== What `snapshot: true` is (and isn't)
+
+`ui.bundle.snapshot: true` tells Antora to re-fetch the bundle URL on each build instead of caching the zip forever.
+
+* *Is:* re-download this URL each build.
+* *Isn't:* semver range resolution or "latest within v1.0.x."
+
+With an exact pin, `snapshot: true` still matters if a release asset is ever replaced (rare).
+With `releases/latest`, it is what makes every deploy pick up new releases.
+
+== Three consumer strategies
+
+Think of this as a stability vs. freshness tradeoff—the same as any dependency, distributed as a zip URL.
+
+=== 1. Float on latest (fastest, least control)
+
+[source,yaml]
+----
+ui:
+  bundle:
+    url: https://github.com/antora-supplemental/valentus-theme/releases/latest/download/ui-bundle.zip
+    snapshot: true
+----
+
+*Gets:* every release automatically on the next docs deploy.
+*Risk:* a v1.1.0 or v2.0.0 can land without you noticing.
+*Good for:* light consumers who watch releases closely.
+
+=== 2. Pin exact version (most control)
+
+[source,yaml]
+----
+ui:
+  bundle:
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1.1.0/ui-bundle.zip
+    snapshot: true
+----
+
+*Gets:* nothing new until you change the URL.
+*Risk:* lowest—you know exactly what CI builds.
+*Good for:* sites with heavy supplemental overrides that assume specific partials, CSS, or JS.
+
+This is the **recommended default for production** and what this theme's install docs show.
+
+=== 3. Pin a line, float patches (middle ground)
+
+You want: stay on v1.0 assumptions, pick up v1.0.x bugfixes, do not auto-jump to v1.1.0.
+
+GitHub does not offer `releases/latest-v1.0/`.
+Implement the range yourself:
+
+==== Option A — Renovate / Dependabot (recommended)
+
+Treat the version in `antora-playbook.yml` like a dependency.
+Configure Renovate with a regex manager on the bundle URL—see link:https://github.com/antora-supplemental/valentus-theme/blob/main/examples/renovate.json[`examples/renovate.json`] in this repository.
+
+* `~1.0.0` — patches only within v1.0.x
+* `^1.0.0` — patches and minors within v1.x
+
+Renovate opens a PR when v1.0.13 ships.
+You review the changelog, run a local build, merge when ready.
+
+==== Option B — Prebuild resolver script
+
+Call the GitHub API for releases, filter tags matching `v1.0.*`, pick the highest patch, write the URL into the playbook or an env var.
+Fully automatic patch pickup within the line; you own the script.
+
+==== Option C — Rolling maintainer tags (first-class line pin)
+
+This theme publishes **moving** Git tags and prerelease aliases (updated by the release workflow):
+
+[cols="2,3", options="header"]
+|===
+| Pin URL | Resolves to
+
+| `.../releases/download/v1.0/ui-bundle.zip`
+| Latest **v1.0.x** patch
+
+| `.../releases/download/v1.1/ui-bundle.zip`
+| Latest **v1.1.x** patch
+
+| `.../releases/download/v1/ui-bundle.zip`
+| Latest **v1.x.x** (minor + patch within major 1)
+|===
+
+Rolling releases are marked *prerelease* so `releases/latest` still tracks normal semver tags.
+
+Machine-readable current pointers: link:https://github.com/antora-supplemental/valentus-theme/blob/main/supported-lines.json[`supported-lines.json`] at the repository root.
+
+WARNING: Moving tags trade reproducibility for convenience.
+Prefer exact pins or Renovate PRs when CI must be bitwise stable.
+
+== Semver contract (maintainer)
+
+This theme tags releases with semver (`v1.0.0` … `v1.1.0`, …).
+Honoring the contract lets consumers choose a strategy safely:
+
+[cols="1,2,2", options="header"]
+|===
+| Release | Should mean | Consumer can
+
+| Patch (v1.0.12)
+| Bugfix; no partial/CSS/`adt-*` hook breaks
+| Auto-adopt if pinned to `~1.0.0` via Renovate
+
+| Minor (v1.1.0)
+| Additive, backward compatible (new `site.keys`, rolling tags, docs)
+| Adopt when ready (`^1.0.0` or manual)
+
+| Major (v2.0.0)
+| Breaking partial/CSS/JS contract
+| Never auto; explicit migration
+|===
+
+Sites with forked supplemental partials or vendored `site-dark-mode.js` should still review *patches*—renamed `adt-*` classes or header structure changes can affect overlays.
+
+== Practical workflow (example)
+
+For a site with deep supplemental overlays:
+
+. Pin exact in `antora-playbook.yml` today (`v1.1.0`).
+. Add Renovate with `~1.0.0` or `~1.1.0` on the playbook URL (see `examples/renovate.json`).
+. On each Renovate PR: read the theme changelog, run `antora` locally, spot-check header, nav, and dark mode.
+. Bump minor/major only when you schedule it—treat like a small migration (port supplemental JS/CSS if needed).
+
+== Related
+
+* xref:installation.adoc[Installation] — exact-pin quick start
+* xref:configuration.adoc#site-keys[Configuration — `site.keys`] — branding without header forks
+* link:https://github.com/antora-supplemental/valentus-theme/releases[GitHub Releases]

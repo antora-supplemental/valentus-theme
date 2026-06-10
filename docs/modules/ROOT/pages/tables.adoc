@@ -1,0 +1,235 @@
+= Tables
+:navtitle: Tables
+:description: Demonstrates various table layouts and styles in the dark theme.
+
+Tables organize data in rows and columns.
+The dark theme provides clear styling for table headers, footers, and alternating rows.
+
+== Basic Table
+
+[cols="1,1,1"]
+|===
+| Column 1 | Column 2 | Column 3
+
+| Cell A1
+| Cell A2
+| Cell A3
+
+| Cell B1
+| Cell B2
+| Cell B3
+
+| Cell C1
+| Cell C2
+| Cell C3
+|===
+
+== Table with Header
+
+[cols="1,2,1", options="header"]
+|===
+| Name | Description | Status
+
+| Feature A
+| Implements dark mode toggle
+| Complete
+
+| Feature B
+| Adds persistent preferences
+| Complete
+
+| Feature C
+| System preference detection
+| Complete
+
+| Feature D
+| Custom color schemes
+| Planned
+|===
+
+== Table with Header and Footer
+
+[cols="2,1,1", options="header,footer"]
+|===
+| Item | Quantity | Price
+
+| Widget A
+| 10
+| $5.00
+
+| Widget B
+| 25
+| $3.00
+
+| Widget C
+| 15
+| $4.00
+
+| *Total*
+| *50*
+| *$180.00*
+|===
+
+== Table with Column Widths
+
+[cols="1,3,2"]
+|===
+| ID | Description | Notes
+
+| 001
+| This is a longer description that demonstrates how content wraps within table cells
+| Short note
+
+| 002
+| Another description
+| This note is a bit longer to show the width difference
+
+| 003
+| Brief
+| Medium length note text
+|===
+
+== Table with Horizontal Alignment
+
+[cols="<1,^2,>1", options="header"]
+|===
+| Left Aligned | Center Aligned | Right Aligned
+
+| Left
+| Center
+| Right
+
+| Data
+| More Data
+| 123
+
+| Text
+| Middle
+| 456.78
+|===
+
+== Table with Vertical Alignment
+
+[cols="1,1,1", options="header"]
+|===
+| Top | Middle | Bottom
+
+a|
+Content at top
+
+More content
+^.^a|
+Content in middle
+
+More content
+.>a|
+Content at bottom
+
+More content
+|===
+
+== Table with Styled Cells
+
+[cols="1,2", options="header"]
+|===
+| Type | Example
+
+| *Bold text*
+| Cell content can include *bold* formatting
+
+| _Italic text_
+| Cell content can include _italic_ formatting
+
+| `Code`
+| Cell content can include `inline code`
+
+| Link
+| Cell content can include https://antora.org[links]
+|===
+
+== Table with AsciiDoc Content
+
+[cols="1,2", options="header"]
+|===
+| Feature | Details
+
+| Lists
+a|
+* Item one
+* Item two
+* Item three
+
+| Code Block
+a|
+[source,javascript]
+----
+const x = 42;
+----
+
+| Admonition
+a|
+NOTE: Tables can contain admonitions.
+|===
+
+== Narrow Table
+
+[%autowidth]
+|===
+| A | B | C
+
+| 1 | 2 | 3
+| 4 | 5 | 6
+|===
+
+== Wide Table (Full Width)
+
+[cols="1,1,1,1,1", width="100%", options="header"]
+|===
+| Col 1 | Col 2 | Col 3 | Col 4 | Col 5
+
+| Data
+| Data
+| Data
+| Data
+| Data
+
+| More
+| More
+| More
+| More
+| More
+|===
+
+== Nested Table
+
+[cols="1,2", options="header"]
+|===
+| Category | Items
+
+| Group A
+a|
+[cols="1,1"]
+!===
+! Sub A1 ! Sub A2
+! Value 1 ! Value 2
+!===
+
+| Group B
+a|
+[cols="1,1"]
+!===
+! Sub B1 ! Sub B2
+! Value 3 ! Value 4
+!===
+|===
+
+== CSV Data Table
+
+[%header,format=csv]
+|===
+Name,Department,Location
+Alice,Engineering,Building A
+Bob,Marketing,Building B
+Carol,Finance,Building C
+David,Engineering,Building A
+|===

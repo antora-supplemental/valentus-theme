@@ -1,0 +1,45 @@
+{
+  "name": "valentus-theme",
+  "version": "1.0.0",
+  "description": "Valentus — composed Antora doc-site chrome (mast, header, layout). Pair with antora-dark-mode for dark styling.",
+  "private": true,
+  "keywords": [
+    "antora",
+    "antora-theme",
+    "documentation",
+    "asciidoc"
+  ],
+  "homepage": "https://antora-supplemental.github.io/valentus-theme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antora-supplemental/valentus-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/antora-supplemental/valentus-theme/issues"
+  },
+  "license": "MIT",
+  "author": "Ryan Johnson (https://github.com/AMDphreak)",
+  "files": [
+    "supplemental-ui/**/*",
+    "ui-modules/**/*"
+  ],
+  "scripts": {
+    "build": "antora antora-playbook.yml",
+    "build:local": "antora antora-playbook-local.yml",
+    "build:ui-modules": "antora antora-playbook-ui-modules.yml",
+    "preview": "antora antora-playbook.yml",
+    "serve": "pnpm build && npx http-server build/site -p 8080 -o",
+    "clean": "rimraf build .cache",
+    "ui-modules:validate": "node ui-modules/scripts/validate-ui-modules.mjs"
+  },
+  "devDependencies": {
+    "@antora/lunr-extension": "1.0.0-alpha.12",
+    "@asciidoctor/tabs": "^1.0.0-beta.6",
+    "antora": "^3.1.14",
+    "biome": "^0.3.3",
+    "http-server": "^14.1.1",
+    "json5": "^2.2.3",
+    "rimraf": "^6.0.1"
+  },
+  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319"
+}

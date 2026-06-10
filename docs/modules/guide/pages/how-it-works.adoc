@@ -1,0 +1,132 @@
+= How It Works
+:navtitle: How It Works
+:description: Technical explanation of how the Antora Dark Theme works.
+
+This page explains the technical implementation of the dark theme.
+
+== Overview
+
+The theme uses Antora's https://docs.antora.org/antora/latest/playbook/ui-supplemental-files/[supplemental UI feature] to overlay additional files onto the default UI bundle.
+This approach means you don't need to fork or rebuild the Antora Default UI.
+
+== The Four Key Files
+
+=== 1. head-meta.hbs (FOUC Prevention)
+
+This Handlebars partial is injected into the `<head>` of every page.
+It does two critical things:
+
+. Loads the `site-extra.css` stylesheet
+. Runs an inline script that immediately applies dark mode if needed
+
+[source,handlebars]
+----
+<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-extra.css">
+<script>
+(function () {
+  const themeKey = 'antora-theme';
+  const savedTheme = localStorage.getItem(themeKey);
+  if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark-theme');
+  }
+})();
+</script>
+----
+
+The inline script runs before the page renders, preventing the flash of light mode that would occur if we waited for the main JavaScript to load.
+
+=== 2. footer-scripts.hbs (Script Loading)
+
+This partial is injected at the end of the page body.
+It loads:
+
+* The main Antora site script
+* highlight.js for syntax highlighting
+* The dark mode toggle script
+
+=== 3. site-dark-mode.js (Toggle Logic)
+
+This JavaScript module handles:
+
+* *Button injection* - Creates and inserts the toggle button into `.navbar-end`
+* *Click handling* - Switches between light and dark themes
+* *Persistence* - Saves preference to `localStorage`
+* *Icon updates* - Shows sun icon in dark mode, moon icon in light mode
+
+Key functions:
+
+[source,javascript]
+----
+// Apply theme and update button icon
+function applyTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark-theme');
+  } else {
+    document.documentElement.classList.remove('dark-theme');
+  }
+  updateButtonIcon(theme);
+  localStorage.setItem('antora-theme', theme);
+}
+
+// Toggle between themes
+function toggleTheme() {
+  const isDark = document.documentElement.classList.contains('dark-theme');
+  applyTheme(isDark ? 'light' : 'dark');
+}
+----
+
+=== 4. site-extra.css (Dark Styles)
+
+All dark mode styles use the selector prefix `html.dark-theme`:
+
+[source,css]
+----
+html.dark-theme body {
+  background-color: #1a1b1e;
+  color: #c1c2c5;
+}
+
+html.dark-theme .navbar {
+  background-color: #141517;
+}
+----
+
+This explicit selector approach works because the Antora Default UI's compiled CSS doesn't use CSS custom properties for theming.
+Our dark styles simply override the default light styles when the `dark-theme` class is present.
+
+== Why This Approach?
+
+=== No UI Bundle Modification
+
+The standard way to customize Antora's appearance is to fork the https://gitlab.com/antora/antora-ui-default[Antora Default UI] and rebuild the UI bundle.
+This works but has downsides:
+
+* You must maintain your fork
+* UI updates require manual merging
+* Build complexity increases
+
+The supplemental UI approach avoids all of this.
+Your dark theme overlays the standard UI bundle, and you can update the UI bundle independently.
+
+=== CSS Specificity
+
+Dark mode styles use `html.dark-theme` as a prefix, which provides enough specificity to override the default UI styles without using `!important`.
+
+=== No JavaScript Framework
+
+The toggle script is vanilla JavaScript with no dependencies.
+It's small (~2KB) and works in all modern browsers.
+
+== Sequence of Events
+
+When a page loads:
+
+. Browser starts parsing HTML
+. `<head>` is processed, loading `head-meta.hbs`
+. Inline script checks `localStorage` and system preference
+. If dark mode should be active, `dark-theme` class is added to `<html>` immediately
+. CSS loads with dark mode already applied (no flash)
+. Page renders in the correct theme
+. Footer scripts load, including `site-dark-mode.js`
+. Toggle button is injected into navbar
+. User can now toggle between themes

@@ -1,0 +1,14 @@
+{
+  id: "valentus-site",
+  name: "Valentus doc site chrome",
+  version: "1.0.0",
+  type: "ui-recipe",
+  description: "Composed doc-site layout: mast, header, VCS icons, and body chrome. Pair with antora-dark-mode for dark styling.",
+  modules: [
+    "vcs-icons",
+    "bc-mast",
+    "edit-crumb",
+    "header-chrome",
+    "doc-layout",
+  ],
+}

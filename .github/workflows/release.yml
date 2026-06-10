@@ -1,0 +1,108 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    # Rolling aliases (v1, v1.0, v1.1) are updated by post-release.mjs — not full releases.
+    if: github.ref_name =~ /^v\d+\.\d+\.\d+$/
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Verify package version matches tag
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          TAG_VERSION=${GITHUB_REF#refs/tags/v}
+          if [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
+            echo "Error: package.json version ($PACKAGE_VERSION) does not match tag version ($TAG_VERSION)"
+            exit 1
+          fi
+
+      - name: Generate changelog for release
+        id: changelog
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          if [ -f "CHANGELOG.adoc" ]; then
+            NOTES=$(awk -v v="$VERSION" '
+              $0 ~ "^== \\[" v "\\]" {flag=1; next}
+              flag && /^== \[/ {exit}
+              flag {print}' CHANGELOG.adoc)
+            if [ -z "$NOTES" ]; then
+              NOTES="Release v$VERSION"
+            fi
+          else
+            NOTES="Release v$VERSION"
+          fi
+          echo "$NOTES" > release_notes.md
+
+      - name: Build Antora UI Bundle
+        run: |
+          curl -L -o default-ui-bundle.zip https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+          mkdir -p build/ui-bundle
+          unzip default-ui-bundle.zip -d build/ui-bundle
+          cp -r supplemental-ui/* build/ui-bundle/
+          cd build/ui-bundle
+          zip -r ../../ui-bundle.zip .
+          cd ../..
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: release_notes.md
+          files: ui-bundle.zip
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Resolve release commit
+        id: rel
+        run: echo "sha=$(git rev-list -n 1 "${GITHUB_REF}")" >> "$GITHUB_OUTPUT"
+
+      - name: Update rolling release lines
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ github.ref_name }}
+          RELEASE_SHA: ${{ steps.rel.outputs.sha }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node .github/scripts/post-release.mjs "${VERSION#v}"
+
+      - name: Commit supported-lines.json on main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cp supported-lines.json /tmp/supported-lines.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git checkout main
+          git pull origin main
+          cp /tmp/supported-lines.json supported-lines.json
+          git add supported-lines.json
+          if git diff --staged --quiet; then
+            echo "supported-lines.json unchanged"
+          else
+            git commit -m "chore: update supported-lines.json for ${GITHUB_REF#refs/tags/}"
+            git push origin main
+          fi

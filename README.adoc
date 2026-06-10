@@ -1,0 +1,47 @@
+= Valentus Theme
+:toc:
+:icons: font
+
+Composed Antora doc-site chrome: breadcrumb mast, header, layout, and VCS icons.
+
+Pair with link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] for dark styling and the theme toggle.
+
+**Changelog:** link:CHANGELOG.adoc[CHANGELOG.adoc] and link:changelog-details/[`changelog-details/`].
+
+== Quick start
+
+[source,yaml]
+----
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+  supplemental_files: ./path/to/valentus-theme/supplemental-ui
+----
+
+With dark mode (recommended):
+
+[source,yaml]
+----
+ui:
+  bundle:
+    url: https://github.com/antora-supplemental/antora-dark-mode/releases/download/v1.2.0/ui-bundle.zip
+    snapshot: true
+  supplemental_files: ./path/to/valentus-theme/supplemental-ui
+----
+
+== Demo
+
+https://antora-supplemental.github.io/valentus-theme[GitHub Pages demo] (published from `main` via GitHub Actions).
+
+Local preview requires at least one Git commit on `HEAD` (Antora reads `content.sources` from the repo). Then:
+
+[source,shell]
+----
+pnpm install
+pnpm build:local
+----
+
+== UI modules
+
+Composable chrome via `ui-modules/` and the orchestrator extension — see `ui-modules/README.adoc`.

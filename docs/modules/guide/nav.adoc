@@ -1,0 +1,11 @@
+.Documentation
+* xref:index.adoc[Getting Started]
+* xref:installation.adoc[Installation]
+* xref:configuration.adoc[Configuration]
+* xref:version-pinning.adoc[Version Pinning]
+* xref:customization.adoc[Customization]
+* xref:vcs-repo-logo.adoc[VCS Repo Logo]
+* xref:how-it-works.adoc[How It Works]
+* xref:ui-modules.adoc[UI Modules]
+* xref:version-control-and-fossil.adoc[Version Control & Fossil]
+* xref:troubleshooting.adoc[Troubleshooting]
