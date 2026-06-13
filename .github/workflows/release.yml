@@ -58,9 +58,13 @@ jobs:
           fi
           echo "$NOTES" > release_notes.md
 
+      - name: Fetch antora-dark-mode for vendor sync
+        run: |
+          git clone --depth 1 --branch v1.3.1 https://github.com/antora-supplemental/antora-dark-mode.git ../antora-dark-mode
+
       - name: Build Antora UI Bundle
         run: |
-          DARK_MODE_BUNDLE_URL="https://github.com/antora-supplemental/antora-dark-mode/releases/download/v1.2.0/ui-bundle.zip"
+          DARK_MODE_BUNDLE_URL="https://github.com/antora-supplemental/antora-dark-mode/releases/download/v1.3.1/ui-bundle.zip"
           curl -L -o dark-mode-ui-bundle.zip "$DARK_MODE_BUNDLE_URL"
           mkdir -p build/ui-bundle
           unzip dark-mode-ui-bundle.zip -d build/ui-bundle

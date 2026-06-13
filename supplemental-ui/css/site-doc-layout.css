@@ -30,6 +30,9 @@
      share the *same* inset so the home icon, component title, and first tree column line up. */
   --adt-mast-pad-h: 1rem;
   --adt-global-rail-hpad: var(--adt-mast-pad-h);
+  --adt-footer-pad-top: 1.5rem;
+  --adt-footer-pad-h: 1.5rem;
+  --adt-footer-pad-bottom: 1.5rem;
 }
 
 html.dark-theme {
@@ -286,7 +289,8 @@ a.adt-header-title:focus {
   filter: var(--adt-header-vcs-icon-filter, none);
 }
 
-.header.adt-header .adt-header-icon-btn .theme-icon {
+.header.adt-header .adt-header-icon-btn .theme-icon,
+.header.adt-header .navbar .navbar-end .theme-toggle .theme-icon {
   width: 18px;
   height: 18px;
   display: block;
@@ -298,8 +302,44 @@ a.adt-header-title:focus {
 }
 
 .header.adt-header .adt-header-icon-btn .theme-icon path,
-.header.adt-header .adt-header-icon-btn .theme-icon circle {
+.header.adt-header .adt-header-icon-btn .theme-icon circle,
+.header.adt-header .navbar .navbar-end .theme-toggle .theme-icon path,
+.header.adt-header .navbar .navbar-end .theme-toggle .theme-icon circle {
   fill: none;
+}
+
+/* Theme toggle matches other header icon buttons (dark-mode JS adds adt-header-icon-btn). */
+.header.adt-header .navbar .navbar-end .theme-toggle.adt-header-icon-btn {
+  min-width: var(--adt-header-ctrl) !important;
+  min-height: var(--adt-header-ctrl) !important;
+  width: var(--adt-header-ctrl) !important;
+  height: var(--adt-header-ctrl) !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 0.2rem;
+  color: var(--adt-header-bar-fg) !important;
+  background: transparent !important;
+  cursor: pointer;
+}
+
+.header.adt-header .navbar .navbar-end .theme-toggle.adt-header-icon-btn:hover {
+  background: var(--adt-header-bar-hover) !important;
+}
+
+.header.adt-header .navbar .navbar-end .theme-toggle.adt-header-icon-btn:focus {
+  outline: none;
+  background: transparent !important;
+}
+
+.header.adt-header .navbar .navbar-end .theme-toggle.adt-header-icon-btn:focus-visible {
+  background: var(--adt-header-bar-hover) !important;
+  outline: 2px solid var(--adt-header-bar-fg);
+  outline-offset: 2px;
 }
 
 @media screen and (min-width: 1024px) {
@@ -353,7 +393,6 @@ html.dark-theme .adt-doc-mast {
 @media screen and (min-width: 1024px) {
   .body.adt-body {
     align-items: stretch;
-    min-height: var(--body-min-height);
   }
 
   .nav-container {
@@ -934,7 +973,40 @@ html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-
   height: 100% !important;
 }
 
-/* ——— Layout ——— */
+/* ——— Page shell: footer panel grows to viewport bottom on short pages ——— */
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header.adt-header {
+  flex: 0 0 auto;
+}
+
 .body.adt-body {
+  flex: 0 1 auto;
   min-height: 0;
+}
+
+/* Footer region absorbs leftover viewport; copy stays top-aligned with padding. */
+footer.footer {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: var(--adt-footer-pad-top) var(--adt-footer-pad-h) var(--adt-footer-pad-bottom);
+}
+
+footer.footer > p {
+  margin: 0;
+  max-width: 100%;
 }

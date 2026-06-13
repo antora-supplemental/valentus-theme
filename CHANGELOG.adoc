@@ -7,6 +7,10 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 == [Unreleased]
 
+== [1.1.1] - 2026-06-13
+
+* *Dark-mode toggle:* Default `site.keys.dark_mode_navbar` to `light` so the theme toggle uses a dark icon on Valentus' light top bar; vendors `antora-dark-mode` v1.3.1 navbar-tone support.
+
 == [1.1.0] - 2026-06-13
 
 * *Bundled dark mode:* Release `ui-bundle.zip` merges link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] with Valentus chrome. Successor install path for former `antora-dark-theme` consumers.

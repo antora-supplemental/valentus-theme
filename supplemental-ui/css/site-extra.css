@@ -473,7 +473,10 @@ html.dark-theme .home-link {
   color: #ffffff;
 }
 
-/* Toggle button styles */
+/* Toggle button styles
+   Light-mode navbar tone: playbook site.keys.dark_mode_navbar → meta[name=dm-navbar] → html[data-dm-navbar].
+   dark (default): Antora default UI black top bar — inherit white icon from navbar.
+   light: light top bar — dark icon; set dark_mode_navbar: light or meta content="light". */
 .theme-toggle {
   background: none;
   border: 0;
@@ -491,8 +494,16 @@ html.dark-theme .home-link {
   text-transform: none;
 }
 
-.theme-toggle:hover {
-  background-color: #e9ecef;
+html:not(.dark-theme):not([data-dm-navbar="light"]) .theme-toggle:hover {
+  background-color: #1f2125;
+}
+
+html[data-dm-navbar="light"]:not(.dark-theme) .theme-toggle {
+  color: #1a1a1a;
+}
+
+html[data-dm-navbar="light"]:not(.dark-theme) .theme-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.07);
 }
 
 .theme-toggle .theme-icon {

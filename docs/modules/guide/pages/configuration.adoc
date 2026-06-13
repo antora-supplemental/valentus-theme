@@ -68,6 +68,10 @@ The supplemental header and footer read optional playbook keys so you can brand 
 | `title_bar_section`
 | component title
 | Browser tab middle segment; see `partials/head-title.hbs`.
+
+| `dark_mode_navbar`
+| `light`
+| Light-mode top bar tone for the bundled dark-mode toggle. `light` (Valentus default) — dark icon on the light header strip. `dark` — inherit navbar foreground (Antora default UI black bar). See link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] customization guide.
 |===
 
 Example—custom logo without overriding `partials/header-content.hbs`:

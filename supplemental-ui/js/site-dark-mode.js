@@ -120,6 +120,14 @@
     if (toggle) toggle.blur();
   }
 
+  function toggleButtonClassName() {
+    const useLightNavbarChrome = document.querySelector(".header.adt-header");
+    if (useLightNavbarChrome) {
+      return "navbar-item adt-header-icon-btn theme-toggle";
+    }
+    return "navbar-item theme-toggle";
+  }
+
   function ensureToggleButton() {
     const selector = document.getElementById("theme-selector");
     if (selector) {
@@ -141,7 +149,7 @@
 
     const button = document.createElement("button");
     button.id = "theme-toggle";
-    button.className = "navbar-item theme-toggle";
+    button.className = toggleButtonClassName();
     button.type = "button";
     button.addEventListener("click", toggleTheme);
 
