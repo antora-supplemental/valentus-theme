@@ -47,9 +47,25 @@ ui:
 *Risk:* lowest—you know exactly what CI builds.
 *Good for:* sites with heavy supplemental overrides that assume specific partials, CSS, or JS.
 
-This is the **recommended default for production** and what this theme's install docs show.
+=== 3. Pin a rolling line (recommended default)
 
-=== 3. Pin a line, float patches (middle ground)
+Use the maintainer rolling tag for the major line you want:
+
+[source,yaml]
+----
+ui:
+  bundle:
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1/ui-bundle.zip
+    snapshot: true
+----
+
+*Gets:* latest **v1.x.x** (minors and patches within major 1) on each build.
+*Risk:* low for most sites—semver contract keeps minors additive; majors get a new line tag (`v2`, …).
+*Good for:* most production sites that want fixes without hand-editing the playbook every patch.
+
+This is the **recommended default** and what install docs show.
+
+=== 4. Pin a sub-line, float patches (narrower range)
 
 You want: stay on v1.0 assumptions, pick up v1.0.x bugfixes, do not auto-jump to v1.1.0.
 
@@ -125,13 +141,13 @@ Sites with forked supplemental partials or vendored `site-dark-mode.js` should s
 
 For a site with deep supplemental overlays:
 
-. Pin exact in `antora-playbook.yml` today (`v1.1.0`).
+. Pin rolling line `v1` in `antora-playbook.yml` today (or exact `v1.1.0` if overrides are brittle).
 . Add Renovate with `~1.0.0` or `~1.1.0` on the playbook URL (see `examples/renovate.json`).
 . On each Renovate PR: read the theme changelog, run `antora` locally, spot-check header, nav, and dark mode.
 . Bump minor/major only when you schedule it—treat like a small migration (port supplemental JS/CSS if needed).
 
 == Related
 
-* xref:installation.adoc[Installation] — exact-pin quick start
+* xref:installation.adoc[Installation] — `v1` rolling-line quick start
 * xref:configuration.adoc#site-keys[Configuration — `site.keys`] — branding without header forks
 * link:https://github.com/antora-supplemental/valentus-theme/releases[GitHub Releases]

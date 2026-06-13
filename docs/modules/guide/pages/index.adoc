@@ -6,10 +6,6 @@ Valentus is debranded doc-site chrome for Antora 3.x: sticky header, breadcrumb 
 
 The release `ui-bundle.zip` includes dark mode (successor to the former `antora-dark-theme` package).
 
-== Demo
-
-https://antora-supplemental.github.io/valentus-theme[Live demo on GitHub Pages]
-
 == Install
 
 See xref:installation.adoc[Installation] and xref:ui-modules.adoc[UI Modules].
@@ -18,6 +14,6 @@ See xref:installation.adoc[Installation] and xref:ui-modules.adoc[UI Modules].
 ----
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1.1.0/ui-bundle.zip
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1/ui-bundle.zip
     snapshot: true
 ----

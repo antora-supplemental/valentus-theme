@@ -13,7 +13,7 @@ Sites use the *release UI bundle* only:
 ----
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1.1.0/ui-bundle.zip
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1/ui-bundle.zip
     snapshot: true
 ----
 
@@ -84,7 +84,7 @@ site:
 
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1.1.0/ui-bundle.zip
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1/ui-bundle.zip
     snapshot: true
   supplemental_files: ./supplemental-ui-overrides
 ----
@@ -100,7 +100,7 @@ When you only need one or two files (not a full supplemental directory), use Ant
 ----
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1.1.0/ui-bundle.zip
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1/ui-bundle.zip
     snapshot: true
   supplemental_files:
     - path: img/logo.svg
