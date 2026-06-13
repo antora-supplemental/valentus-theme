@@ -19,10 +19,10 @@ env:
 
 jobs:
   release:
-    # Rolling aliases (v1, v1.0, v1.1) are updated by post-release.mjs — not full releases.
+    # Full semver tags only (exclude rolling aliases v1, v1.0, v1.1).
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      matches(github.ref_name, '^v[0-9]+\.[0-9]+\.[0-9]+$')
+      (startsWith(github.ref_name, 'v') && length(split(github.ref_name, '.')) == 3)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
