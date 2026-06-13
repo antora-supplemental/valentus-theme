@@ -7,6 +7,8 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 == [Unreleased]
 
+* *CI:* Fix Release workflow `matches()` guard, dynamic antora-dark-mode pin from `antora-playbook.yml`, `workflow_dispatch` re-publish.
+
 == [1.1.1] - 2026-06-13
 
 * *Dark-mode toggle:* Default `site.keys.dark_mode_navbar` to `light` so the theme toggle uses a dark icon on Valentus' light top bar; vendors `antora-dark-mode` v1.3.1 navbar-tone support.
