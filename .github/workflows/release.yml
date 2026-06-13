@@ -115,7 +115,7 @@ jobs:
           VERSION: ${{ env.RELEASE_VERSION }}
           RELEASE_SHA: ${{ steps.rel.outputs.sha }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: node .github/scripts/post-release.mjs "${VERSION#v}"
+        run: node .github/scripts/post-release.mjs "${VERSION#v}" ui-bundle.zip
 
       - name: Commit supported-lines.json on main
         env:

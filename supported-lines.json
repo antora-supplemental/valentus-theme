@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "updated": "2026-06-13T17:47:06.301Z",
-  "latest": "1.1.0",
+  "updated": "2026-06-13T18:32:17.831Z",
+  "latest": "1.1.1",
   "lines": {
     "1": {
       "tag": "v1",
-      "current": "1.1.0",
+      "current": "1.1.1",
       "url": "https://github.com/antora-supplemental/valentus-theme/releases/download/v1/ui-bundle.zip"
     },
     "1.0": {
@@ -15,7 +15,7 @@
     },
     "1.1": {
       "tag": "v1.1",
-      "current": "1.1.0",
+      "current": "1.1.1",
       "url": "https://github.com/antora-supplemental/valentus-theme/releases/download/v1.1/ui-bundle.zip"
     }
   }
