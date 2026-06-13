@@ -1,15 +1,15 @@
 = Installation
 :navtitle: Installation
-:description: Install Antora Dark Theme using the release UI bundle.
+:description: Install Valentus Theme using the release UI bundle (chrome + bundled dark mode).
 
-== Release UI bundle
+== Release UI bundle (recommended)
 
-**Use `ui-bundle.zip` from GitHub Releases.** One pinned `ui.bundle.url`; Default UI and this theme are already merged.
+**Use `ui-bundle.zip` from GitHub Releases.** One pinned `ui.bundle.url`; doc-site chrome and dark mode are pre-merged.
+
+Successor to the former `antora-dark-theme` package — migrate playbook URLs to Valentus.
 
 * link:https://github.com/antora-supplemental/valentus-theme/releases[GitHub Releases]
 * link:https://antora-supplemental.github.io/docs/[Antora Supplemental docs portal] (extensions registry)
-
-The npm package is deprecated and unpublished—see xref:npm-deprecation.adoc[npm deprecation (lessons learned & migration)] if you still have it in a lockfile.
 
 == Steps
 
@@ -41,6 +41,30 @@ antora antora-playbook.yml
 
 Pin `releases/download/vX.Y.Z/ui-bundle.zip` in CI.
 
+[[migrate-from-antora-dark-theme]]
+== Migrate from `antora-dark-theme`
+
+Replace:
+
+[source,yaml]
+----
+ui:
+  bundle:
+    url: https://github.com/antora-supplemental/antora-dark-theme/releases/.../ui-bundle.zip
+----
+
+With:
+
+[source,yaml]
+----
+ui:
+  bundle:
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1.1.0/ui-bundle.zip
+    snapshot: true
+----
+
+Remove `antora-dark-theme` from `package.json` if present; use the release bundle URL or `pnpm add -D valentus-theme` for supplemental vendoring.
+
 [[overrides-on-bundle]]
 === Overrides
 
@@ -49,7 +73,8 @@ See xref:configuration.adoc#virtual-supplemental-files[virtual supplemental file
 
 == Vendor `supplemental-ui` (forks)
 
-Copy `supplemental-ui/` from this repository into git for a maintained fork; use the Default UI bundle plus `supplemental_files: ./supplemental-ui`.
+Copy `supplemental-ui/` from this repository into git for a maintained fork.
+Run `pnpm dark-mode:sync` to refresh vendored dark mode CSS/JS from link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode].
 
 == Verify
 

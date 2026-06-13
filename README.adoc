@@ -2,13 +2,24 @@
 :toc:
 :icons: font
 
-Composed Antora doc-site chrome: breadcrumb mast, header, layout, and VCS icons.
+Composed Antora doc-site chrome with **bundled dark mode**: breadcrumb mast, header, layout, VCS icons, and the theme toggle.
 
-Pair with link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] for dark styling and the theme toggle.
+Successor to the former `antora-dark-theme` monolithic package — use the Valentus release `ui-bundle.zip` for the full stack.
 
 **Changelog:** link:CHANGELOG.adoc[CHANGELOG.adoc] and link:changelog-details/[`changelog-details/`].
 
 == Quick start
+
+[source,yaml]
+----
+ui:
+  bundle:
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1.1.0/ui-bundle.zip
+    snapshot: true
+  supplemental_files: ./supplemental-ui-overrides   # optional branding only
+----
+
+Optional overlay from git instead of the release bundle:
 
 [source,yaml]
 ----
@@ -19,16 +30,7 @@ ui:
   supplemental_files: ./path/to/valentus-theme/supplemental-ui
 ----
 
-With dark mode (recommended):
-
-[source,yaml]
-----
-ui:
-  bundle:
-    url: https://github.com/antora-supplemental/antora-dark-mode/releases/download/v1.2.0/ui-bundle.zip
-    snapshot: true
-  supplemental_files: ./path/to/valentus-theme/supplemental-ui
-----
+The `supplemental-ui/` tree vendors dark mode assets (`site-extra.css`, `site-dark-mode.js`). Run `pnpm dark-mode:sync` after updating `antora-dark-mode`.
 
 == Demo
 
@@ -39,9 +41,14 @@ Local preview requires at least one Git commit on `HEAD` (Antora reads `content.
 [source,shell]
 ----
 pnpm install
+pnpm dark-mode:sync
 pnpm build:local
 ----
 
 == UI modules
 
 Composable chrome via `ui-modules/` and the orchestrator extension — see `ui-modules/README.adoc`.
+
+== Dark mode only (slipstream)
+
+Sites that need dark mode on a *different* theme bundle (not Valentus chrome) should use link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] as an overlay — not this package.

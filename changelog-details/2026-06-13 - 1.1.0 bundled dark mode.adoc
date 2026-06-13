@@ -1,0 +1,7 @@
+= 1.1.0 — bundled dark mode in release ui-bundle
+:description: Changelog detail for valentus-theme 1.1.0
+:navtitle: 1.1.0 bundled dark mode
+
+* *Bundled dark mode:* Release `ui-bundle.zip` merges link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] v1.2.0 with Valentus `supplemental-ui`. Former `antora-dark-theme` consumers should pin Valentus instead.
+* *Partials:* `head-meta.hbs` and `footer-scripts.hbs` include FOUC script, `site-extra.css`, and `site-dark-mode.js`.
+* *Maintainers:* `pnpm dark-mode:sync` copies dark mode CSS/JS from `antora-dark-mode`; release workflow runs sync before bundling.

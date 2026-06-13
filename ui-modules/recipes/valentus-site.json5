@@ -3,7 +3,7 @@
   name: "Valentus doc site chrome",
   version: "1.0.0",
   type: "ui-recipe",
-  description: "Composed doc-site layout: mast, header, VCS icons, and body chrome. Pair with antora-dark-mode for dark styling.",
+  description: "Composed doc-site layout with bundled dark mode: mast, header, VCS icons, and body chrome.",
   modules: [
     "vcs-icons",
     "bc-mast",

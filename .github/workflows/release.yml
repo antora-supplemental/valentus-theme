@@ -59,9 +59,11 @@ jobs:
 
       - name: Build Antora UI Bundle
         run: |
-          curl -L -o default-ui-bundle.zip https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+          DARK_MODE_BUNDLE_URL="https://github.com/antora-supplemental/antora-dark-mode/releases/download/v1.2.0/ui-bundle.zip"
+          curl -L -o dark-mode-ui-bundle.zip "$DARK_MODE_BUNDLE_URL"
           mkdir -p build/ui-bundle
-          unzip default-ui-bundle.zip -d build/ui-bundle
+          unzip dark-mode-ui-bundle.zip -d build/ui-bundle
+          node scripts/sync-dark-mode.mjs
           cp -r supplemental-ui/* build/ui-bundle/
           cd build/ui-bundle
           zip -r ../../ui-bundle.zip .

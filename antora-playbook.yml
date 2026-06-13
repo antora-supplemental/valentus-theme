@@ -1,4 +1,6 @@
 # Valentus demo site (GitHub Pages)
+# Layered build (dark-mode base + supplemental) — same merge as release CI.
+# Consumers: pin valentus-theme ui-bundle.zip (see README / installation.adoc).
 site:
   title: Valentus Theme
   url: https://antora-supplemental.github.io/valentus-theme
@@ -12,7 +14,7 @@ content:
 
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/antora-dark-mode/releases/download/v1.1.0/ui-bundle.zip
+    url: https://github.com/antora-supplemental/antora-dark-mode/releases/download/v1.2.0/ui-bundle.zip
     snapshot: true
   supplemental_files: ./supplemental-ui
 

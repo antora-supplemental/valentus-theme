@@ -7,6 +7,14 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 == [Unreleased]
 
+== [1.1.0] - 2026-06-13
+
+* *Bundled dark mode:* Release `ui-bundle.zip` merges link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] with Valentus chrome. Successor install path for former `antora-dark-theme` consumers.
+* *Partials:* `head-meta.hbs` and `footer-scripts.hbs` include FOUC prevention, `site-extra.css`, and `site-dark-mode.js`.
+* *Maintainers:* `pnpm dark-mode:sync` vendors dark mode CSS/JS from `antora-dark-mode`; release CI runs sync before bundling.
+
+link:changelog-details/2026-06-13%20-%201.1.0%20bundled%20dark%20mode.adoc[Detailed notes — 2026-06-13]
+
 == [1.0.0] - 2026-06-09
 
 * Initial release: doc-site chrome split from `antora-dark-theme` into `valentus-theme` (mast, header, layout, VCS icons, UI modules orchestrator).

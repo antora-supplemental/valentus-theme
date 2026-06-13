@@ -1,4 +1,4 @@
-// Valentus UI module catalog — chrome and composed layout (no dark-mode; pair with antora-dark-mode).
+// Valentus UI module catalog — chrome, composed layout, and bundled dark mode assets in release ui-bundle.zip.
 {
   schema: "1.0",
   repository: "https://github.com/antora-supplemental/valentus-theme",
@@ -39,7 +39,7 @@
     {
       id: "dark-mode",
       repository: "https://github.com/antora-supplemental/antora-dark-mode",
-      description: "Dark mode CSS and toggle — layer antora-dark-mode supplemental or release bundle on top.",
+      description: "Bundled in valentus-theme ui-bundle.zip; use antora-dark-mode separately only for slipstream overlay on other themes.",
     },
   ],
 }

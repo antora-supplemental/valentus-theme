@@ -2,6 +2,9 @@
 build/
 public/
 .cache/
+ui-bundle.zip
+default-ui-bundle.zip
+dark-mode-ui-bundle.zip
 
 # Dependencies
 node_modules/
