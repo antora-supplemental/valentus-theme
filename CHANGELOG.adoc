@@ -7,11 +7,15 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 == [Unreleased]
 
-* *CI:* Fix Release workflow `matches()` guard, dynamic antora-dark-mode pin from `antora-playbook.yml`, `workflow_dispatch` re-publish.
+== [1.1.2] - 2026-07-24
+
+* *Header logo:* Brand-first dark mode — no unconditional invert on `.adt-header-logo`. Colored marks stay as authored; opt in with `site.keys.header_logo_tone: mono` for silhouette marks. Default `logo.svg` uses explicit fills.
+* See link:changelog-details/2026-07-24%20-%201.1.2%20brand-first%20header%20logo.adoc[Detailed notes — 2026-07-24].
 
 == [1.1.1] - 2026-06-13
 
 * *Dark-mode toggle:* Default `site.keys.dark_mode_navbar` to `light` so the theme toggle uses a dark icon on Valentus' light top bar; vendors `antora-dark-mode` v1.3.1 navbar-tone support.
+* *CI:* Fix Release workflow `matches()` guard, dynamic antora-dark-mode pin from `antora-playbook.yml`, `workflow_dispatch` re-publish.
 
 == [1.1.0] - 2026-06-13
 

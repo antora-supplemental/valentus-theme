@@ -41,6 +41,10 @@ The supplemental header and footer read optional playbook keys so you can brand 
 | `logo.svg`
 | Basename of the header mark under `img/` (for example `mybrand.svg` → `img/mybrand.svg`). Drop the SVG in supplemental or use a virtual `supplemental_files` entry.
 
+| `header_logo_tone`
+| `brand`
+| How the header logo is treated across themes. `brand` (default) — no CSS filter; use for colored marks that already have contrast on light and dark bars. `mono` — apply invert in dark mode for single-ink / silhouette marks that would otherwise disappear on the dark header.
+
 | `site_home_url`
 | `site.url`
 | URL for the logo link (opens in a new tab).
@@ -94,6 +98,8 @@ ui:
 ----
 
 Place `mybrand.svg` at `supplemental-ui-overrides/img/mybrand.svg`, or use xref:configuration.adoc#virtual-supplemental-files[virtual supplemental files] with `path: img/mybrand.svg`.
+
+Colored brand marks need no light/dark pair and no `header_logo_tone` key (default `brand`). For a single-ink silhouette that disappears on the dark header, set `header_logo_tone: mono`.
 
 [[virtual-supplemental-files]]
 == Virtual supplemental files

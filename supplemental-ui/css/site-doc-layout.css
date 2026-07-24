@@ -214,8 +214,9 @@ pre,
   object-fit: contain;
 }
 
-/* logo.svg uses currentColor; raster <img> does not inherit — default paint reads as dark on dark bar */
-html.dark-theme .adt-header-logo {
+/* Brand logos (default): no filter — colored marks stay as authored in light and dark.
+   Opt in with site.keys.header_logo_tone: mono for single-ink marks that need invert on the dark bar. */
+html.dark-theme .adt-header-logo--mono {
   filter: brightness(0) invert(1);
   opacity: 0.92;
 }

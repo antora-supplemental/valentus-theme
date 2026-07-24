@@ -2,7 +2,7 @@
   <nav class="navbar adt-site-navbar" aria-label="Site">
     <div class="navbar-brand adt-header-brand">
       <a class="adt-header-logo-item" href="{{{or (lookup site.keys 'site_home_url') site.url}}}" rel="noopener" target="_blank" title="{{{or (lookup site.keys 'site_home_label') 'Project home'}}}" aria-label="{{{or (lookup site.keys 'site_home_label') 'Project home'}}} (opens in new tab)">
-        <img class="adt-header-logo" src="{{{uiRootPath}}}/img/{{or (lookup site.keys 'header_logo') 'logo.svg'}}" width="34" height="34" alt="" />
+        <img class="adt-header-logo{{#if (eq (lookup site.keys 'header_logo_tone') 'mono')}} adt-header-logo--mono{{/if}}" src="{{{uiRootPath}}}/img/{{or (lookup site.keys 'header_logo') 'logo.svg'}}" width="34" height="34" alt="" />
       </a>
       <a class="navbar-item adt-header-title" href="{{{or site.url siteRootPath}}}">{{or (lookup site.keys 'header_doc_title') site.title}}</a>
     </div>

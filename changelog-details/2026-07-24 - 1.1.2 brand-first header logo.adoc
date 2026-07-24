@@ -1,0 +1,9 @@
+= 1.1.2 — brand-first header logo (no dark invert by default)
+
+::navtitle: 1.1.2 header logo tone
+
+* *Breaking assumption fix:* Dark mode no longer applies `filter: brightness(0) invert(1)` to every `.adt-header-logo`. That filter was for the old `currentColor` placeholder loaded via `<img>` and flattened colored brand marks (they looked blank or washed out).
+* *Default:* Brand / colored logos render as authored in light and dark. No light+dark asset pair required when the mark already has contrast.
+* *Opt-in:* `site.keys.header_logo_tone: mono` adds class `adt-header-logo--mono` and restores the invert filter for single-ink silhouette marks.
+* *Default asset:* Bundled `img/logo.svg` uses explicit slate + white fills (not `currentColor`) so the placeholder stays readable without CSS invert.
+* Configuration guide documents `header_logo_tone` (`brand` default, `mono` opt-in).
