@@ -310,7 +310,7 @@ footer.footer a {
 }
 
 .adt-header-search #search-field::after {
-  content: "⌘K";
+  content: "Ctrl+K";
   position: absolute;
   right: 0.55rem;
   top: 50%;
@@ -327,6 +327,9 @@ footer.footer a {
   opacity: 0.85;
 }
 
+html[data-adt-modkey="meta"] .adt-header-search #search-field::after {
+  content: "⌘K";
+}
 @media (pointer: coarse) {
   .adt-header-search #search-field::after {
     content: none;
