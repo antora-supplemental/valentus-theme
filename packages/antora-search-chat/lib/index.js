@@ -160,7 +160,7 @@ module.exports.register = function register (context = {}) {
       logger.info('disabled via enabled: false')
       return
     }
-    // Lets nav-menu.hbs prefer {{> adt-search-chat}} over the plain lunr field.
+    // Lets adt-tool-band.hbs prefer {{> adt-search-chat}} over the plain lunr field.
     process.env.SITE_SEARCH_CHAT = 'true'
     const hasLunr = (playbook.antora?.extensions || []).some((ext) => {
       const req = typeof ext === 'string' ? ext : String(ext?.require || '')

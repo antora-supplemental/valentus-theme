@@ -1,0 +1,22 @@
+{{!-- Full-width tool band above the 3-col row (nav | main | TOC). Search + read-width live here so
+     dropdowns are not clipped by nav-panel overflow and controls stay outside the column measure.
+     When SITE_SEARCH_CHAT is set (antora-search-chat extension), prefer the compound omnibox. --}}
+<div class="adt-tool-band">
+  {{#if env.SITE_SEARCH_PROVIDER}}
+  {{#if env.SITE_SEARCH_CHAT}}
+  {{> adt-search-chat}}
+  {{else}}
+  <div class="search adt-nav-search adt-tool-search">
+    <div id="search-field">
+      <input id="search-input" type="text" placeholder="Search" autocomplete="off" aria-label="Search">
+    </div>
+  </div>
+  {{/if}}
+  {{else}}
+  <div class="adt-tool-search-slot" aria-hidden="true"></div>
+  {{/if}}
+  <div class="adt-tool-band-center">
+    {{> adt-read-width}}
+  </div>
+  <div class="adt-tool-toc-slot" aria-hidden="true"></div>
+</div>

@@ -32,16 +32,17 @@
   --adt-header-bar-hover: var(--adt-accent-soft);
   /* Raster/SVG VCS marks (white in file): invert for light top bar. */
   --adt-header-vcs-icon-filter: brightness(0) opacity(0.92);
-  /* Top rails (nav | main | TOC peers under .body.adt-body):
-     - --adt-global-rail-top: shared top inset under the mast for all three columns.
-     - --adt-tool-band: height of left search / article read-width control row.
-     - --adt-tool-gap: space under that tool band before tree / title / TOC.
-     Tree, page title, and TOC share a common baseline below the tool band. */
+  /* Tool band sits above the 3-col row (.adt-shell > .adt-tool-band + .body.adt-body):
+     - --adt-global-rail-top: top inset under the mast for the tool band.
+     - --adt-tool-band: height of the search / read-width control row.
+     - --adt-tool-gap: space under the tool band before tree / title / TOC.
+     Columns share a common baseline (--adt-col-rail-top) below the band. */
   --adt-global-rail-top: 0.85rem;
   --adt-content-rail-top: 0;
   --adt-tool-band: 2.15rem;
   --adt-tool-gap: 0.65rem;
-  --adt-toc-rail-top: calc(var(--adt-global-rail-top) + var(--adt-tool-band) + var(--adt-tool-gap));
+  --adt-col-rail-top: 0;
+  --adt-toc-rail-top: var(--adt-col-rail-top);
   /* Horizontal rail: mast + left nav share an inset so home / component title line up. */
   --adt-mast-pad-h: 1.25rem;
   --adt-global-rail-hpad: var(--adt-mast-pad-h);
@@ -529,9 +530,9 @@ html.dark-theme .adt-doc-mast {
   min-width: 0;
 }
 
-/* Inset article + in-page TOC. Shared top rail with left search / right TOC. */
+/* Inset article + in-page TOC. Tool band is outside columns; peers share col rail. */
 .adt-article .content {
-  padding-top: var(--adt-global-rail-top);
+  padding-top: var(--adt-col-rail-top, 0);
   box-sizing: border-box;
 }
 
@@ -934,22 +935,26 @@ body.adt-body .nav .nav-panel-menu {
   overflow: visible;
 }
 
-/* Search sits in the tool band above the tree (aligns with article read-width). */
-.adt-nav-search {
+/* Search chrome: placement is .adt-tool-band (outside the 3-col row). */
+.adt-nav-search,
+.adt-tool-search {
   flex: 0 0 auto;
   position: relative;
   z-index: 6;
   box-sizing: border-box;
   width: 100%;
   min-height: var(--adt-tool-band);
-  padding: var(--adt-global-rail-top) var(--adt-global-rail-hpad) var(--adt-tool-gap);
   margin: 0;
+  padding: 0;
   background: transparent !important;
 }
 
 .adt-nav-search:hover,
 .adt-nav-search:focus,
-.adt-nav-search:focus-within {
+.adt-nav-search:focus-within,
+.adt-tool-search:hover,
+.adt-tool-search:focus,
+.adt-tool-search:focus-within {
   background: transparent !important;
 }
 
@@ -1087,12 +1092,86 @@ body {
   flex: 0 0 auto;
 }
 
+.adt-shell {
+  flex: 0 1 auto;
+  min-height: 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
 .body.adt-body {
   flex: 0 1 auto;
   min-height: 0;
   /* Cross-axis centering when max-width binds (see site-visual @1024) */
   width: 100%;
   box-sizing: border-box;
+  overflow: visible;
+}
+
+/* Tool band: search + read-width above nav | main | TOC (not inside columns). */
+.adt-tool-band {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 20;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: visible;
+  padding: var(--adt-global-rail-top) var(--adt-shell-pad, 1.75rem) var(--adt-tool-gap);
+}
+
+.adt-tool-search,
+.adt-tool-search-slot {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 22rem;
+  position: relative;
+  z-index: 21;
+  overflow: visible;
+}
+
+.adt-tool-band-center {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-inline-start: auto;
+}
+
+.adt-tool-toc-slot {
+  display: none;
+}
+
+@media screen and (min-width: 1024px) {
+  .adt-tool-band {
+    gap: var(--adt-col-gap);
+    padding-inline: 0;
+  }
+
+  .adt-tool-search,
+  .adt-tool-search-slot {
+    flex: 0 0 var(--adt-nav-width);
+    width: var(--adt-nav-width);
+    max-width: none;
+  }
+
+  .adt-tool-band-center {
+    flex: 0 1 auto;
+    width: var(--adt-doc-max);
+    max-width: var(--adt-doc-max);
+    min-width: 0;
+    margin-inline-start: 0;
+    transition: width 0.25s ease, max-width 0.25s ease;
+  }
+
+  .adt-tool-toc-slot {
+    display: block;
+    flex: 0 0 var(--adt-toc-width);
+    width: var(--adt-toc-width);
+  }
 }
 
 /* Footer region absorbs leftover viewport; copy stays top-aligned with padding. */

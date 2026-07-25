@@ -1,15 +1,4 @@
 <div class="nav-panel-menu is-active" data-panel="menu">
-  {{#if env.SITE_SEARCH_PROVIDER}}
-  {{#if env.SITE_SEARCH_CHAT}}
-  {{> adt-search-chat}}
-  {{else}}
-  <div class="search adt-nav-search">
-    <div id="search-field">
-      <input id="search-input" type="text" placeholder="Search" autocomplete="off" aria-label="Search">
-    </div>
-  </div>
-  {{/if}}
-  {{/if}}
   <nav class="nav-menu nav-tree-only adt-nav-tree-only" aria-label="In this section">
     <button class="nav-menu-toggle" aria-label="Toggle expand and collapse of all item groups" style="display: none"></button>
     {{#with @root.page.componentVersion}}

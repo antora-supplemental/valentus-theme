@@ -6,7 +6,9 @@
      Rejected: multiple boxes contextualized only by placement.
      Phase 1: compound markup/CSS stub (scope not wired to lunr yet); tabbed Ask is transitional.
      See ARCHITECTURE.adoc. --}}
-<div class="search adt-nav-search adt-search-chat" data-adt-search-chat data-ask-enabled="false">
+{{!-- Lives in .adt-tool-band (see adt-tool-band.hbs). adt-tool-search keeps column metrics. --}}
+<div class="search adt-nav-search adt-tool-search adt-search-chat" data-adt-search-chat data-ask-enabled="false">
+  {{!-- Transitional tabs: visually hidden in tool-band CSS; / and ? still switch modes. --}}
   <div class="adt-search-chat__tabs" role="tablist" aria-label="Search or Ask">
     <button
       type="button"

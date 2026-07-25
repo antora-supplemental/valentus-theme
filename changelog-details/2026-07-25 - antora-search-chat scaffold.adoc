@@ -25,16 +25,16 @@ Phase 1 of a Valentus-owned Antora extension that **wraps** `@antora/lunr-extens
 
 == UI
 
-Owns `.adt-nav-search` above the nav tree (coordinates with layout that moved search out of the header / outside 3-col). Keeps `#search-input` for lunr.
+Owns the left search slot in `.adt-tool-band` (`.adt-nav-search` / `.adt-tool-search`) via `adt-tool-band.hbs` when `SITE_SEARCH_CHAT` is set. Keeps `#search-input` for lunr. Transitional Search/Ask tabs are visually hidden in the tool band; `/` and `?` still switch modes.
 
 Compound hooks:: `.adt-search-compound` wraps `.adt-search-scope` + `.adt-search-input-wrap` (`#search-input` + `.adt-search-ph` overlay; shared border, inner vertical rule, split rounding).
 
 Keyboard:: `/` → Search mode (lexical); `?` (Shift+/) → Ask mode (same field when omnibox lands). Listener accepts `key === '?'` or `key === '/' && shiftKey`.
 
-Theme note:: Plain `#search-input` fallback (no extension) still says `Search` only; overlay ships in this package.
+Theme note:: Plain `#search-input` fallback (no extension / no `SITE_SEARCH_CHAT`) still says `Search` only; overlay ships in this package. `adt-tool-band.hbs` prefers `{{> adt-search-chat}}` when the extension is registered.
 
-Double-click select:: Antora UI default blocks multi-click selection inside `[data-panel=menu]`; this package `stopPropagation`s multi-click `mousedown` on `#search-field` / Ask form. Overlay uses `pointer-events: none`.
+Double-click select:: Antora UI default blocks multi-click selection inside `[data-panel=menu]`; tool-band search is outside that panel. This package still `stopPropagation`s multi-click `mousedown` on `#search-field` / Ask form for safety. Overlay uses `pointer-events: none`.
 
 == Playbooks
 
-Demo playbooks register `./packages/antora-search-chat` after lunr.
+Demo playbooks (`antora-playbook.yml`, local, visual-demo, ui-modules) register `./packages/antora-search-chat` after lunr. Ask defaults off (struck *or Ask*).
