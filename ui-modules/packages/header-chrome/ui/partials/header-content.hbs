@@ -11,6 +11,20 @@
       </a>
       <a class="navbar-item adt-header-title" href="{{{or site.url siteRootPath}}}">{{or site.keys.headerDocTitle site.title}}</a>
     </div>
+    {{!-- Site-wide search (command palette) sits in the top bar center — not tied to nav/doc column measure. --}}
+    {{#if env.SITE_SEARCH_PROVIDER}}
+    <div class="adt-navbar-search">
+      {{#if env.SITE_SEARCH_CHAT}}
+      {{> adt-search-chat}}
+      {{else}}
+      <div class="search adt-nav-search">
+        <div id="search-field">
+          <input id="search-input" type="text" placeholder="Search" autocomplete="off" aria-label="Search">
+        </div>
+      </div>
+      {{/if}}
+    </div>
+    {{/if}}
     <div id="topbar-nav" class="navbar-menu adt-topbar" role="navigation" aria-label="External links">
       <div class="navbar-end adt-header-actions">
         {{#if (and @root.page.origin @root.page.origin.webUrl)}}

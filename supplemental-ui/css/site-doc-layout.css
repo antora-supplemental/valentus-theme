@@ -34,9 +34,10 @@
   --adt-header-vcs-icon-filter: brightness(0) opacity(0.92);
   /* Tool band sits above the 3-col row (.adt-shell > .adt-tool-band + .body.adt-body):
      - --adt-global-rail-top: top inset under the mast for the tool band.
-     - --adt-tool-band: height of the search / read-width control row.
+     - --adt-tool-band: height of the read-width control row.
      - --adt-tool-gap: space under the tool band before tree / title / TOC.
-     Columns share a common baseline (--adt-col-rail-top) below the band. */
+     Columns share a common baseline (--adt-col-rail-top) below the band.
+     Site-wide search lives in .adt-site-navbar (own width, not column measure). */
   --adt-global-rail-top: 0.85rem;
   --adt-content-rail-top: 0;
   --adt-tool-band: 2.15rem;
@@ -145,6 +146,27 @@ pre,
   background: var(--adt-header-bar-bg) !important;
   color: inherit;
   border-bottom: 1px solid var(--adt-header-bar-border);
+}
+
+/* Site-wide search (command palette): true center of the top bar; own width (not nav/doc measure). */
+.adt-navbar-search {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9;
+  box-sizing: border-box;
+  width: min(36rem, calc(100vw - 14rem));
+  max-width: 36rem;
+  min-width: 16rem;
+  padding: 0;
+  overflow: visible;
+}
+
+.adt-navbar-search .adt-nav-search,
+.adt-navbar-search .adt-search-chat {
+  width: 100%;
+  max-width: none;
+  min-height: 2.15rem;
 }
 
 .header.adt-header .adt-topbar,
@@ -935,7 +957,7 @@ body.adt-body .nav .nav-panel-menu {
   overflow: visible;
 }
 
-/* Search chrome: placement is .adt-tool-band (outside the 3-col row). */
+/* Search chrome: placement is .adt-navbar-search in the site navbar. */
 .adt-nav-search,
 .adt-tool-search {
   flex: 0 0 auto;
@@ -943,7 +965,7 @@ body.adt-body .nav .nav-panel-menu {
   z-index: 6;
   box-sizing: border-box;
   width: 100%;
-  min-height: var(--adt-tool-band);
+  min-height: 2.15rem;
   margin: 0;
   padding: 0;
   background: transparent !important;
@@ -1077,7 +1099,7 @@ html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-
   height: 100% !important;
 }
 
-/* ——— Page shell: footer panel grows to viewport bottom on short pages ——— */
+/* ——— Page shell: content fills leftover viewport; footer stays natural height ——— */
 html {
   height: 100%;
 }
@@ -1092,16 +1114,20 @@ body {
   flex: 0 0 auto;
 }
 
+/* Outside the 3-col row: shell grows so short pages push the footer to the viewport bottom. */
 .adt-shell {
-  flex: 0 1 auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
   min-height: 0;
   width: 100%;
   box-sizing: border-box;
   overflow: visible;
 }
 
+/* 3-col group stretches within the shell (nav/main/TOC fill down to the footer). */
 .body.adt-body {
-  flex: 0 1 auto;
+  flex: 1 1 auto;
   min-height: 0;
   /* Cross-axis centering when max-width binds (see site-visual @1024) */
   width: 100%;
@@ -1109,7 +1135,7 @@ body {
   overflow: visible;
 }
 
-/* Tool band: search + read-width above nav | main | TOC (not inside columns). */
+/* Tool band: read-width centered over the article column (not search). */
 .adt-tool-band {
   display: flex;
   flex-direction: row;
@@ -1123,6 +1149,7 @@ body {
   padding: var(--adt-global-rail-top) var(--adt-shell-pad, 1.75rem) var(--adt-tool-gap);
 }
 
+.adt-tool-nav-slot,
 .adt-tool-search,
 .adt-tool-search-slot {
   flex: 1 1 auto;
@@ -1151,6 +1178,7 @@ body {
     padding-inline: 0;
   }
 
+  .adt-tool-nav-slot,
   .adt-tool-search,
   .adt-tool-search-slot {
     flex: 0 0 var(--adt-nav-width);
@@ -1174,13 +1202,9 @@ body {
   }
 }
 
-/* Footer region absorbs leftover viewport; copy stays top-aligned with padding. */
+/* Footer is outside .adt-shell / .adt-body; natural height only (does not grow). */
 footer.footer {
-  flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  flex: 0 0 auto;
   box-sizing: border-box;
   width: 100%;
   margin: 0;

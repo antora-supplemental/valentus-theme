@@ -212,6 +212,7 @@ a.adt-header-title {
   /*
    * Shell: .adt-shell > tool-band + .body.adt-body (nav | main | TOC peers).
    * Tool band is outside the 3-col row so search dropdowns are not clipped by nav overflow.
+   * Footer stays outside .adt-shell (sibling under body); shell flex-grows to pin it.
    * Width is intrinsic (panels + fixed --adt-col-gap + doc column); viewport-centered
    * via align-self + margin-inline:auto. Main shrink-wraps to --adt-doc-max (no flex grow).
    * Columns separated by gap only — no vertical rule between nav and content.
@@ -298,7 +299,7 @@ footer.footer a {
   color: var(--adt-accent) !important;
 }
 
-/* ——— Tool-band search (above 3-col row; not in header or nav column) ——— */
+/* ——— Navbar search (site-wide command; width independent of doc/nav columns) ——— */
 .adt-nav-search,
 .adt-tool-search {
   position: relative;
@@ -394,9 +395,10 @@ footer.footer a {
   }
 }
 
-/* Dropdown opens from tool-band search — overflow ancestors stay visible. */
+/* Dropdown opens from navbar search — overflow ancestors stay visible. */
 .adt-nav-search .search-result-dropdown-menu,
-.adt-tool-search .search-result-dropdown-menu {
+.adt-tool-search .search-result-dropdown-menu,
+.adt-navbar-search .search-result-dropdown-menu {
   left: 0;
   right: auto;
   z-index: 40;

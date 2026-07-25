@@ -16,6 +16,16 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+* *Fix / layout:* Sticky footer — `.adt-shell` / `.body.adt-body` fill leftover viewport (`min-height: 100vh` on `body` + flex grow on the shell); `footer.footer` stays natural height outside the 3-col group (no longer grows to absorb slack).
+
+== [2.0.1] - 2026-07-25
+
+Public label: *2.0.1+antora.3* (Antora 3).
+
+* *Fix / layout:* Move compound Search or Ask omnibox to the center of `.adt-site-navbar`; keep `adt-read-width` in `.adt-tool-band` over the doc column. Search width is independent of doc-resize / nav-column measure. Affirms that prior “search over nav / resize over doc” in the tool band was inverted for a command-palette search.
+* *Fix:* Scope dropdown contrast (`--adt-ink` on `--adt-elevated`, light + dark) and padding/min-width so “This component” is not clipped by the chevron.
+* See link:changelog-details/2026-07-25%20-%20search%20navbar%20read-width%20toolband.adoc[Detailed notes — 2026-07-25 search navbar + read-width tool band].
+
 == [2.0.0] - 2026-07-25
 
 Public label: *2.0.0+antora.3* (Antora 3).

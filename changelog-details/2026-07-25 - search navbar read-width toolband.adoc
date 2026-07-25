@@ -1,0 +1,17 @@
+= Detailed notes — 2026-07-25 search navbar + read-width tool band
+
+== Summary
+
+Correct placement for command-palette search vs page layout control after 2.0.0 shipped with both controls sharing `.adt-tool-band` (search sized to the nav column).
+
+== Placement
+
+* *Search* (compound omnibox + scope) → center of `.adt-site-navbar` (`.adt-navbar-search`). Own width (`min(36rem, …)`), not `--adt-nav-width` / `--adt-doc-max`.
+* *Read-width* → stays in `.adt-tool-band` center over the doc column.
+
+Prior “search over nav / resize over doc” in the tool band was inverted for a site-wide command-palette search.
+
+== Scope dropdown
+
+* Explicit `--adt-ink` / `--adt-elevated` (and dark-theme mirrors) so closed select and `option` list are not light-on-light.
+* Extra `padding-inline-end` + `min-width` so “This component” is not clipped by the custom chevron.

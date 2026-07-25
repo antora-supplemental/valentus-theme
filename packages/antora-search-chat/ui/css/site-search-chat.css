@@ -1,4 +1,4 @@
-/* Search / Ask control — owns .adt-nav-search / .adt-tool-search slot in the tool band. */
+/* Search / Ask control — owns the centered navbar search slot (.adt-navbar-search). */
 .adt-search-chat {
   display: flex;
   flex-direction: column;
@@ -9,13 +9,15 @@
   box-sizing: border-box;
 }
 
-/* Tool-band: one-row omnibox. Tabs are transitional; / and ? still switch modes. */
-.adt-tool-band .adt-search-chat {
+/* Navbar: one-row omnibox. Tabs are transitional; / and ? still switch modes. */
+.adt-site-navbar .adt-search-chat,
+.adt-navbar-search .adt-search-chat {
   gap: 0;
-  min-height: var(--adt-tool-band, 2.15rem);
+  min-height: 2.15rem;
 }
 
-.adt-tool-band .adt-search-chat__tabs {
+.adt-site-navbar .adt-search-chat__tabs,
+.adt-navbar-search .adt-search-chat__tabs {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -27,7 +29,8 @@
   border: 0;
 }
 
-.adt-tool-band .adt-search-chat__panel[data-adt-search-panel='ask']:not([hidden]) {
+.adt-site-navbar .adt-search-chat__panel[data-adt-search-panel='ask']:not([hidden]),
+.adt-navbar-search .adt-search-chat__panel[data-adt-search-panel='ask']:not([hidden]) {
   position: absolute;
   z-index: 20;
   top: calc(100% + 0.35rem);
@@ -35,12 +38,13 @@
   padding: 0.65rem;
   border: 1px solid color-mix(in srgb, var(--adt-accent, #0d9488) 28%, transparent);
   border-radius: 0.5rem;
-  background: var(--color-background, #fff);
+  background: var(--adt-elevated, var(--color-background, #fff));
   box-shadow: 0 0.35rem 1rem color-mix(in srgb, currentColor 12%, transparent);
 }
 
-html.dark-theme .adt-tool-band .adt-search-chat__panel[data-adt-search-panel='ask']:not([hidden]) {
-  background: var(--color-background, #1a1a1a);
+html.dark-theme .adt-site-navbar .adt-search-chat__panel[data-adt-search-panel='ask']:not([hidden]),
+html.dark-theme .adt-navbar-search .adt-search-chat__panel[data-adt-search-panel='ask']:not([hidden]) {
+  background: var(--adt-elevated, var(--color-background, #1a1a1a));
 }
 
 .adt-search-chat__tabs {
@@ -92,11 +96,12 @@ html.dark-theme .adt-tool-band .adt-search-chat__panel[data-adt-search-panel='as
   align-items: stretch;
   width: 100%;
   box-sizing: border-box;
-  min-height: var(--adt-tool-band, 2.15rem);
-  border: 1px solid color-mix(in srgb, var(--adt-accent, #0d9488) 28%, transparent);
+  min-height: 2.15rem;
+  border: 1px solid color-mix(in srgb, var(--adt-accent, #0d9488) 28%, var(--adt-border, #d9dee7));
   border-radius: 0.5rem;
-  background: transparent;
+  background: var(--adt-elevated, #fff);
   overflow: hidden;
+  color: var(--adt-ink, #141820);
 }
 
 .adt-search-compound:focus-within {
@@ -106,14 +111,15 @@ html.dark-theme .adt-tool-band .adt-search-chat__panel[data-adt-search-panel='as
 
 .adt-search-scope {
   flex: 0 0 auto;
-  max-width: 42%;
+  min-width: 9.5rem;
+  max-width: 12rem;
   margin: 0;
-  padding: 0 0.55rem 0 0.65rem;
+  padding: 0 1.65rem 0 0.65rem;
   border: 0;
   border-radius: 0;
-  border-inline-end: 1px solid color-mix(in srgb, currentColor 18%, transparent);
-  background: transparent;
-  color: inherit;
+  border-inline-end: 1px solid color-mix(in srgb, var(--adt-ink, #141820) 18%, transparent);
+  background-color: var(--adt-elevated, #fff);
+  color: var(--adt-ink, #141820);
   font: inherit;
   font-size: 0.75rem;
   font-weight: 500;
@@ -121,15 +127,31 @@ html.dark-theme .adt-tool-band .adt-search-chat__panel[data-adt-search-panel='as
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
-  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
-    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-image: linear-gradient(45deg, transparent 50%, var(--adt-ink, #141820) 50%),
+    linear-gradient(135deg, var(--adt-ink, #141820) 50%, transparent 50%);
   background-position:
-    calc(100% - 0.55rem) 55%,
-    calc(100% - 0.35rem) 55%;
+    calc(100% - 0.7rem) 55%,
+    calc(100% - 0.5rem) 55%;
   background-size: 0.28rem 0.28rem, 0.28rem 0.28rem;
   background-repeat: no-repeat;
-  padding-inline-end: 1.15rem;
-  opacity: 0.9;
+}
+
+.adt-search-scope option {
+  color: var(--adt-ink, #141820);
+  background-color: var(--adt-elevated, #fff);
+}
+
+html.dark-theme .adt-search-compound,
+html.dark-theme .adt-search-scope,
+html.dark-theme .adt-search-scope option {
+  background-color: var(--adt-elevated, #1a1a1a);
+  color: var(--adt-ink, #e8eaed);
+}
+
+html.dark-theme .adt-search-scope {
+  background-image: linear-gradient(45deg, transparent 50%, var(--adt-ink, #e8eaed) 50%),
+    linear-gradient(135deg, var(--adt-ink, #e8eaed) 50%, transparent 50%);
+  border-inline-end-color: color-mix(in srgb, var(--adt-ink, #e8eaed) 18%, transparent);
 }
 
 .adt-search-scope:focus {
@@ -150,7 +172,7 @@ html.dark-theme .adt-tool-band .adt-search-chat__panel[data-adt-search-panel='as
   align-items: stretch;
 }
 
-/* Beat theme .adt-nav-search / .adt-tool-search #search-input !important rules. */
+/* Beat theme .adt-nav-search #search-input !important rules. */
 .adt-search-compound #search-input {
   position: relative;
   z-index: 1;
@@ -164,7 +186,7 @@ html.dark-theme .adt-tool-band .adt-search-chat__panel[data-adt-search-panel='as
   border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
-  color: inherit !important;
+  color: var(--adt-ink, #141820) !important;
   font: inherit;
   font-size: 0.875rem;
   -webkit-user-select: text;
@@ -198,7 +220,7 @@ html.dark-theme .adt-tool-band .adt-search-chat__panel[data-adt-search-panel='as
   padding: 0;
   border: 0;
   pointer-events: none;
-  color: color-mix(in srgb, currentColor 48%, transparent);
+  color: color-mix(in srgb, var(--adt-ink, currentColor) 48%, transparent);
   font: inherit;
   font-size: 0.875rem;
   font-weight: 400;
@@ -217,10 +239,10 @@ html.dark-theme .adt-tool-band .adt-search-chat__panel[data-adt-search-panel='as
 
 /* Ask capability advertised but not configured / disabled. */
 .adt-search-ph-ask.is-disabled {
-  color: color-mix(in srgb, currentColor 38%, transparent);
+  color: color-mix(in srgb, var(--adt-ink, currentColor) 38%, transparent);
   text-decoration: line-through;
   text-decoration-thickness: 1px;
-  text-decoration-color: color-mix(in srgb, currentColor 42%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--adt-ink, currentColor) 42%, transparent);
 }
 
 .adt-search-chat__field:not(.adt-search-compound) #search-input {
@@ -272,8 +294,8 @@ html.dark-theme .adt-tool-band .adt-search-chat__panel[data-adt-search-panel='as
   padding: 0.45rem 0.6rem;
   border: 1px solid color-mix(in srgb, var(--adt-accent, #0d9488) 28%, transparent);
   border-radius: 0.35rem;
-  background: transparent;
-  color: inherit;
+  background: var(--adt-elevated, transparent);
+  color: var(--adt-ink, inherit);
   font: inherit;
   font-size: 0.875rem;
   resize: vertical;
