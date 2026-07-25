@@ -145,7 +145,7 @@ antora:
       snippet_length: 200
 ----
 
-The supplemental `header-content.hbs` renders the search field when the extension sets `SITE_SEARCH_PROVIDER`; `footer-scripts.hbs` already includes `search-scripts` under the same condition.
+The supplemental `adt-tool-band.hbs` (included from `body.hbs`) renders the search field when the extension sets `SITE_SEARCH_PROVIDER`; `footer-scripts.hbs` already includes `search-scripts` under the same condition.
 
 == Default Behavior
 

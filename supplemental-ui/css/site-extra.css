@@ -392,10 +392,11 @@ html.dark-theme .footer a {
   color: #f1f3f5;
 }
 
-/* Lunr search (@antora/lunr-extension) — field lives in left nav (.adt-nav-search) */
+/* Lunr search (@antora/lunr-extension) — field lives in .adt-tool-band (.adt-nav-search / .adt-tool-search) */
 .navbar .search,
 .adt-header-search,
-.adt-nav-search {
+.adt-nav-search,
+.adt-tool-search {
   position: relative;
   background: transparent !important;
 }
@@ -403,6 +404,9 @@ html.dark-theme .footer a {
 .adt-nav-search:hover,
 .adt-nav-search:focus,
 .adt-nav-search:focus-within,
+.adt-tool-search:hover,
+.adt-tool-search:focus,
+.adt-tool-search:focus-within,
 .navbar .search:hover,
 .navbar .search:focus,
 .navbar .search:focus-within {

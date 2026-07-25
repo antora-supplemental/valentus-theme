@@ -11,22 +11,24 @@ Session notes for branch `demo/visual-redesign`: layered visual system on Valent
 * *Code:* Dark panels in both themes with retuned highlight colors; always-visible source toolbox chrome.
 * *Gotcha — code panel target:* Style the panel on `.listingblock > .content`, not on `pre`. An absolutely positioned toolbox fights a rounded `pre` and clips or misaligns; rounding/background on the content wrapper keeps the toolbox inside the panel.
 * *Admonitions:* Left accent border + tinted fill (no floating Material-style pills as the main look).
-* *Search:* Lives above the left nav tree (`.adt-nav-search`), not in the header. Elevated field, accent focus ring only (no hover/focus fill flash). Plain `/` focuses search (ignored in inputs/textareas/selects/contenteditable); hint badge shows `/`. Replaces Ctrl/⌘K and `data-adt-modkey` FOUC.
+* *Search:* Lives in `.adt-tool-band` above the 3-col row (`.adt-nav-search` / `.adt-tool-search`), not in the header or left nav column. Elevated field, accent focus ring only (no hover/focus fill flash). Plain `/` focuses search (ignored in inputs/textareas/selects/contenteditable); hint badge shows `/`. Replaces Ctrl/⌘K and `data-adt-modkey` FOUC.
 * *Motion:* Short theme-toggle surface crossfade; sticky shadow transition.
 * *Files:* `site-visual.css` / `site-visual.js` (supplemental + `doc-layout` UI module). Override via `:root` / `html.dark-theme` custom properties without forking partials.
 
-== Layout (true 3-column peers)
+== Layout (shell + true 3-column peers)
 
+* Outer `.adt-shell` holds `.adt-tool-band` then `.body.adt-body`.
 * Peers under `.body.adt-body` are `nav | main | TOC` (TOC lifted out of nested `.content`).
 * Columns separated by spacing only — no vertical divider rule.
-* Body width is intrinsic (side panels + fixed `--adt-col-gap` + doc column); viewport-centered with `fit-content` + `align-self: center`.
+* Shell width is intrinsic (side panels + fixed `--adt-col-gap` + doc column); viewport-centered with `fit-content` + `align-self: center`.
 * Equal side rails via `--adt-side-width` (`16rem`) for both nav and TOC so the article is optically centered.
-* Shared tool-band rhythm: left search and article `adt-read-width` share `--adt-tool-band` / `--adt-tool-gap`; tree, title, and TOC start on the same baseline below that band.
+* Tool band: search (nav-width) + `adt-read-width` (centered over doc) + TOC spacer share `--adt-tool-band` / `--adt-tool-gap`; tree, title, and TOC start on a common baseline below that band (`--adt-col-rail-top`).
+* Gotcha — search clipping: do not put the Lunr field inside `.nav-panel-menu` (`overflow-y: auto`); keep it in `.adt-tool-band` with overflow-visible ancestors.
 
 == Read-width UI module
 
 * Standalone package `ui-modules/packages/read-width` registered in the recipe/registry.
-* Placeable partial `{{> adt-read-width}}`; demo places it above the article title.
+* Placeable partial `{{> adt-read-width}}`; demo places it in `.adt-tool-band` (centered over the article column), not inside `article.doc`.
 * Drives *doc width only* via `--adt-doc-max`:
 ** narrow `68ch`
 ** comfortable `82ch`
