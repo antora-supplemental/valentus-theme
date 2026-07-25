@@ -432,6 +432,16 @@ html.dark-theme .adt-doc-mast {
   overflow-y: auto !important;
 }
 
+/* Default UI sets overscroll-behavior: none (and -ms-scroll-chaining: none) on nav panels and
+   the TOC list. That traps the mouse wheel even when the panel has nothing left to scroll.
+   Restore scroll chaining so the page moves when the pointer is over a sidebar. */
+.nav-panel-menu,
+.nav-panel-explore .components,
+.toc.sidebar .toc-menu ul {
+  overscroll-behavior: auto !important;
+  -ms-scroll-chaining: chained !important;
+}
+
 /* Mobile overlay: account for the mast in addition to the main navbar */
 @media screen and (max-width: 1023.5px) {
   .nav-container {

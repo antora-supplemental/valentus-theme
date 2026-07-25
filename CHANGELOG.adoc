@@ -7,6 +7,9 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 == [Unreleased]
 
+* *Fix:* Mouse wheel over the left nav or in-page TOC scrolls the page again. Default UI sets `overscroll-behavior: none` on those panels, which trapped the wheel when the panel had nothing left to scroll; Valentus restores scroll chaining.
+* See link:changelog-details/2026-07-25%20-%20sidebar%20wheel%20scroll%20chaining.adoc[Detailed notes — 2026-07-25].
+
 == [1.1.2] - 2026-07-24
 
 * *Header logo:* Brand-first dark mode — no unconditional invert on `.adt-header-logo`. Colored marks stay as authored; opt in with `site.keys.header_logo_tone: mono` for silhouette marks. Default `logo.svg` uses explicit fills.

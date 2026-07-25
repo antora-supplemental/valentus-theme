@@ -889,10 +889,14 @@ html.dark-theme .videoblock {
   }
 }
 
-/* Bundle default uses overflow-y: scroll on nav panels; prefer scrollbar only when needed. */
+/* Bundle default uses overflow-y: scroll on nav panels; prefer scrollbar only when needed.
+   Also undo default UI overscroll-behavior: none so the page can scroll under the pointer. */
 .nav-panel-menu,
-.nav-panel-explore .components {
+.nav-panel-explore .components,
+.toc.sidebar .toc-menu ul {
   overflow-y: auto !important;
+  overscroll-behavior: auto !important;
+  -ms-scroll-chaining: chained !important;
 }
 
 /* Doc home: .openblock.cards + .exampleblock.tile

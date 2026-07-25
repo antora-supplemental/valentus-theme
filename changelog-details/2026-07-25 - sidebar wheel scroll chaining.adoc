@@ -1,0 +1,5 @@
+= Sidebar wheel scroll chaining
+
+* *Symptom:* With the pointer over the left nav tree or the sticky in-page TOC, the mouse wheel did nothing when that panel was not overflowing (or was already at its scroll edge). The main document did not move.
+* *Cause:* Antora Default UI sets `overscroll-behavior: none` (and `-ms-scroll-chaining: none`) on `.nav-panel-menu`, explore component lists, and `.toc.sidebar .toc-menu ul`. That disables scroll chaining into the page.
+* *Fix:* `site-doc-layout.css` and `site-extra.css` override those panels to `overscroll-behavior: auto` / `-ms-scroll-chaining: chained`. Independent sidebar scroll still works when content overflows; at the boundary (or when there is no overflow), the page scrolls.
