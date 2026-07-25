@@ -54,7 +54,8 @@
   --adt-content-rail-top: 0;
   --adt-tool-band: 2.15rem;
   --adt-tool-gap: 0.65rem;
-  --adt-toc-rail-top: calc(var(--adt-global-rail-top) + var(--adt-tool-band) + var(--adt-tool-gap));
+  --adt-col-rail-top: 0;
+  --adt-toc-rail-top: var(--adt-col-rail-top);
   --adt-mast-pad-h: 1.25rem;
 }
 
@@ -209,22 +210,41 @@ a.adt-header-title {
 
 @media screen and (min-width: 1024px) {
   /*
-   * True 3-column shell: .body.adt-body > nav | main | TOC (peers).
+   * Shell: .adt-shell > tool-band + .body.adt-body (nav | main | TOC peers).
+   * Tool band is outside the 3-col row so search dropdowns are not clipped by nav overflow.
    * Width is intrinsic (panels + fixed --adt-col-gap + doc column); viewport-centered
    * via align-self + margin-inline:auto. Main shrink-wraps to --adt-doc-max (no flex grow).
    * Columns separated by gap only — no vertical rule between nav and content.
    */
-  .body.adt-body {
+  .adt-shell {
     display: flex;
-    flex-direction: row;
-    align-items: stretch;
+    flex-direction: column;
     align-self: center;
-    gap: var(--adt-col-gap);
+    align-items: stretch;
     width: fit-content;
     max-width: 100%;
     margin-inline: auto;
     padding-inline: var(--adt-shell-pad);
     box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .adt-tool-band {
+    overflow: visible;
+  }
+
+  .body.adt-body {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    align-self: stretch;
+    gap: var(--adt-col-gap);
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: 0;
+    box-sizing: border-box;
+    overflow: visible;
   }
 
   .nav-container {
@@ -278,26 +298,34 @@ footer.footer a {
   color: var(--adt-accent) !important;
 }
 
-/* ——— Nav search (above tree; not in header) ——— */
-.adt-nav-search {
+/* ——— Tool-band search (above 3-col row; not in header or nav column) ——— */
+.adt-nav-search,
+.adt-tool-search {
   position: relative;
+  z-index: 21;
+  overflow: visible;
   background: transparent !important;
 }
 
 .adt-nav-search:hover,
 .adt-nav-search:focus,
-.adt-nav-search:focus-within {
+.adt-nav-search:focus-within,
+.adt-tool-search:hover,
+.adt-tool-search:focus,
+.adt-tool-search:focus-within {
   background: transparent !important;
 }
 
-.adt-nav-search #search-field {
+.adt-nav-search #search-field,
+.adt-tool-search #search-field {
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
 }
 
-.adt-nav-search #search-input {
+.adt-nav-search #search-input,
+.adt-tool-search #search-input {
   width: 100%;
   max-width: none;
   height: var(--adt-tool-band, 2.15rem);
@@ -312,22 +340,27 @@ footer.footer a {
 }
 
 .adt-nav-search #search-input:hover,
-.adt-nav-search #search-input:focus {
+.adt-nav-search #search-input:focus,
+.adt-tool-search #search-input:hover,
+.adt-tool-search #search-input:focus {
   background: var(--adt-elevated) !important;
 }
 
-.adt-nav-search #search-input::placeholder {
+.adt-nav-search #search-input::placeholder,
+.adt-tool-search #search-input::placeholder {
   color: var(--adt-ink-muted);
   opacity: 0.85;
 }
 
-.adt-nav-search #search-input:focus {
+.adt-nav-search #search-input:focus,
+.adt-tool-search #search-input:focus {
   outline: none;
   border-color: var(--adt-accent) !important;
   box-shadow: 0 0 0 3px var(--adt-accent-soft);
 }
 
-.adt-nav-search #search-field::after {
+.adt-nav-search #search-field::after,
+.adt-tool-search #search-field::after {
   content: "/";
   position: absolute;
   right: 0.45rem;
@@ -347,20 +380,24 @@ footer.footer a {
 }
 
 @media (pointer: coarse) {
-  .adt-nav-search #search-field::after {
+  .adt-nav-search #search-field::after,
+  .adt-tool-search #search-field::after {
     content: none;
     display: none;
   }
 
-  .adt-nav-search #search-input {
+  .adt-nav-search #search-input,
+  .adt-tool-search #search-input {
     padding-right: 0.75rem;
   }
 }
 
-/* Dropdown opens from left column — anchor left, not right like header search. */
-.adt-nav-search .search-result-dropdown-menu {
+/* Dropdown opens from tool-band search — overflow ancestors stay visible. */
+.adt-nav-search .search-result-dropdown-menu,
+.adt-tool-search .search-result-dropdown-menu {
   left: 0;
   right: auto;
+  z-index: 40;
   min-width: min(28rem, 70vw);
   max-width: min(36rem, 90vw);
 }

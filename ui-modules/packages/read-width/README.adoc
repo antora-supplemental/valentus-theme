@@ -24,11 +24,12 @@ Add `read-width` to your recipe or `modules` list, then place the partial wherev
 
 Common placements:
 
-* Above the article title (Valentus demo): in `article.hbs`, before `.adt-page-header`
+* Tool band above the 3-col row (Valentus demo): in `adt-tool-band.hbs`, centered over the article column
+* Above the article title: in `article.hbs`, before `.adt-page-header`
 * Header actions: inside `.adt-header-actions` / `.navbar-end`
 * Mast or toolbar: any chrome partial you own
 
-When placed as a direct child of `article.doc`, CSS centers the control above the title.
+When placed in `.adt-tool-band-center` (or as a direct child of `article.doc`), CSS sizes the control to the tool-band rhythm.
 
 == Supplemental-files path (no orchestrator)
 

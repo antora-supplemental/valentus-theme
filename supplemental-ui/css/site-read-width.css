@@ -1,5 +1,5 @@
 /* Reading width module — doc measure tokens + control chrome.
-   Place {{> adt-read-width}} anywhere; when a direct child of article.doc it centers above the title.
+   Place {{> adt-read-width}} anywhere; demo places it in .adt-tool-band (outside the 3-col row).
    data-adt-read-width only changes --adt-doc-max. Layout sizes main to the doc; --adt-col-gap stays fixed. */
 
 :root {
@@ -73,14 +73,19 @@ html[data-adt-read-width="wide"] {
   box-sizing: border-box;
 }
 
-/* Demo / article placement: centered above the page title; shares tool-band rhythm with nav search */
+/* Demo / tool-band placement: centered over the article column; shares --adt-tool-band height */
+.adt-tool-band-center > .adt-read-width,
 article.doc > .adt-read-width {
   display: flex;
   width: fit-content;
   max-width: 100%;
   min-height: var(--adt-tool-band, 2.15rem);
-  margin: 0 auto var(--adt-tool-gap, 0.65rem);
+  margin: 0;
   box-sizing: border-box;
+}
+
+article.doc > .adt-read-width {
+  margin: 0 auto var(--adt-tool-gap, 0.65rem);
 }
 
 .adt-read-width-btn {
