@@ -88,10 +88,10 @@ function appendFooterScript (uiCatalog, src) {
     ? foot.contents.toString('utf8')
     : String(foot.contents || '')
   const tag = `<script src="{{{uiRootPath}}}/${src}"></script>`
-  if (body.includes(src)) return
-  const marker = '{{!-- antora-search-chat:foot --}}'
-  if (body.includes(marker)) return
-  foot.contents = Buffer.from(`${body.trim()}\n${marker}\n${tag}\n`)
+  // Match this src specifically — a shared marker made the 2nd append a no-op
+  // (config.js injected, site-search-chat.js skipped → "/" shortcut dead).
+  if (body.includes(src) || body.includes(tag)) return
+  foot.contents = Buffer.from(`${body.trim()}\n${tag}\n`)
 }
 
 /**
@@ -107,22 +107,38 @@ function resolveAskEnabled (config) {
   return Boolean(backend) || local
 }
 
-/** Bake askEnabled into the partial so first paint has no FOUC on "or Ask". */
+/** Bake askEnabled into the partial so first paint has the right placeholder copy. */
 function applyAskEnabledToPartial (contents, askEnabled) {
   let html = Buffer.isBuffer(contents) ? contents.toString('utf8') : String(contents || '')
   html = html.replace(
     /data-ask-enabled="(?:true|false)"/,
     `data-ask-enabled="${askEnabled ? 'true' : 'false'}"`
   )
+  const phOffInner =
+    '<span class="adt-search-ph-main">Search</span><span class="adt-search-ph-note"> (AI mode not configured)</span>'
+  const phOnInner = '<span class="adt-search-ph-main">Search or Ask</span>'
   if (askEnabled) {
+    html = html.replace(/\s*data-ask-off\b/, '')
     html = html.replace(
-      /class="adt-search-ph-ask is-disabled"/g,
-      'class="adt-search-ph-ask"'
+      /(<span class="adt-search-ph"[^>]*data-adt-search-ph[^>]*>)[\s\S]*?(<\/span>\s*\n\s*<input)/,
+      `$1\n          ${phOnInner}\n        $2`
     )
-  } else if (!/class="adt-search-ph-ask is-disabled"/.test(html)) {
     html = html.replace(
-      /class="adt-search-ph-ask"/g,
-      'class="adt-search-ph-ask is-disabled"'
+      /(id="search-input"[\s\S]*?aria-label=")[^"]*(")/,
+      '$1Search or Ask$2'
+    )
+  } else {
+    html = html.replace(
+      /(<span class="adt-search-ph"[^>]*data-adt-search-ph)(?![^>]*data-ask-off)/,
+      '$1 data-ask-off'
+    )
+    html = html.replace(
+      /(<span class="adt-search-ph"[^>]*data-adt-search-ph[^>]*>)[\s\S]*?(<\/span>\s*\n\s*<input)/,
+      `$1\n          ${phOffInner}\n        $2`
+    )
+    html = html.replace(
+      /(id="search-input"[\s\S]*?aria-label=")[^"]*(")/,
+      '$1Search (AI mode not configured)$2'
     )
   }
   return Buffer.from(html)

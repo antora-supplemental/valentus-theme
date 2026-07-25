@@ -625,7 +625,10 @@ html.dark-theme .adt-doc-mast {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.25rem 0.4rem;
+  /* Row gap only when wrapping. No column-gap — Antora’s li::after "/" already
+     pads both sides; an extra gap shoved crumbs right of each slash center. */
+  row-gap: 0.25rem;
+  column-gap: 0;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -637,6 +640,20 @@ html.dark-theme .adt-doc-mast {
   display: flex;
   align-items: center;
   min-width: 0;
+}
+
+/* Own the separators so padding stays symmetric (optically center on "/"). */
+.adt-breadcrumbs > ul > li::after {
+  content: "/";
+  padding: 0 0.45rem;
+  font-weight: 400;
+  color: var(--adt-ink-muted, inherit);
+  pointer-events: none;
+}
+
+.adt-breadcrumbs > ul > li:last-of-type::after {
+  content: none;
+  padding: 0;
 }
 
 .adt-breadcrumb-masthead {
@@ -760,25 +777,35 @@ html.dark-theme .adt-breadcrumb-edit .adt-edit-vcs-img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
+  box-sizing: border-box;
+  width: 1.5rem;
+  height: 1.5rem;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  padding: 0;
+  border: 1px solid var(--adt-bc-kicker-border);
   border-radius: 0.2rem;
-  color: var(--adt-accent);
+  background: var(--adt-bc-kicker-bg);
+  color: var(--adt-bc-kicker-fg);
   text-decoration: none;
   vertical-align: middle;
 }
 
 .adt-breadcrumb-home-link:hover {
-  background: var(--adt-accent-soft);
+  border-color: color-mix(in srgb, var(--adt-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--adt-accent) 18%, var(--adt-bc-kicker-bg));
   text-decoration: none;
 }
 
 html.dark-theme .adt-breadcrumb-home-link {
-  color: var(--adt-accent);
+  color: var(--adt-bc-kicker-fg);
+  background: var(--adt-bc-kicker-bg);
+  border-color: var(--adt-bc-kicker-border);
 }
 
 html.dark-theme .adt-breadcrumb-home-link:hover {
-  background: var(--adt-accent-soft);
+  border-color: color-mix(in srgb, var(--adt-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--adt-accent) 18%, var(--adt-bc-kicker-bg));
 }
 
 .adt-breadcrumb-home-icon {
@@ -826,6 +853,28 @@ html.dark-theme .adt-breadcrumb-home-link:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   opacity: 1;
+  outline: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.adt-bc-kicker:hover {
+  border-color: color-mix(in srgb, var(--adt-accent) 45%, transparent);
+}
+
+/* Mouse click must not leave a UA / double ring; keyboard still gets a clean ring. */
+.adt-bc-kicker:focus {
+  outline: none;
+}
+
+.adt-bc-kicker:focus-visible {
+  outline: 2px solid var(--adt-accent);
+  outline-offset: 2px;
+}
+
+.adt-bc-kicker[aria-expanded='true'] {
+  outline: none;
+  border-color: var(--adt-accent);
+  background: color-mix(in srgb, var(--adt-accent) 18%, var(--adt-bc-kicker-bg));
 }
 
 .adt-bc-kicker-version {

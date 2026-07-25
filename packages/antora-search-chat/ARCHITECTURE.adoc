@@ -43,25 +43,27 @@ The control is a single input (omnibox). Modes are orthogonal state on that fiel
 | User opted in via shortcut, mode control, or explicit submit. Then run retrieval + optional generation (tier-0 local and/or remote).
 |===
 
-Placeholder copy:: *Search or Ask* (see <<_fake_placeholder_overlay>>).
+Placeholder copy:: *Search or Ask* when Ask is on; *Search* + muted *(AI mode not configured)* when off (see <<_fake_placeholder_overlay>>).
 
 Do not put a second search box in the tool band or nav column while this navbar slot is active.
 
 ==== Fake placeholder overlay
 
-Native `<input placeholder>` cannot style *part* of the string. The compound control uses an absolutely positioned overlay:
+Native `<input placeholder>` is a single unstyled string, so the compound control uses an absolutely positioned overlay (`.adt-search-ph`):
 
 ----
-<span class="adt-search-ph">Search <span class="adt-search-ph-ask">or Ask</span></span>
+<span class="adt-search-ph" data-adt-search-ph data-ask-off>
+  <span class="adt-search-ph-main">Search</span><span class="adt-search-ph-note"> (AI mode not configured)</span>
+</span>
 ----
 
 Behavior:
 
-* *Ask enabled* — both segments use the muted placeholder color (no strikethrough).
-* *Ask missing / disabled* — keep the full phrase, but mark `or Ask` dead: `.adt-search-ph-ask.is-disabled` (grey + line-through) so users see the capability exists but is not on.
+* *Ask enabled* — copy is *Search or Ask* (`.adt-search-ph-main` only).
+* *Ask missing / disabled* — *Search* in the normal placeholder color + *(AI mode not configured)* in a deader tint (`.adt-search-ph-note`).
 * Overlay hides when `#search-input` is focused or non-empty (`is-hidden` on `.adt-search-ph`).
 * Overlay *must* use `pointer-events: none` (and sit under the input via `z-index`) so clicks and double-click selection reach `#search-input`.
-* Native `placeholder` stays empty so it never fights the overlay; `aria-label="Search or Ask"` remains for a11y.
+* Native `placeholder` stays empty so it never fights the overlay; `aria-label` matches the visible meaning.
 * Double-click select: Antora UI default `site.js` calls `preventDefault` on multi-click `mousedown` inside `[data-panel=menu]`. This package stops that event at `#search-field` / Ask form so query text remains selectable.
 
 Ask-enabled resolution (build + runtime)::
@@ -70,7 +72,7 @@ Ask-enabled resolution (build + runtime)::
 . Else `true` when `backend_url` is non-empty *or* `local_assist: true`.
 . Else `false` (default for Search-only / stub without a backend).
 
-Optional theme mirror:: `site.keys.askEnabled` (Antora camelCases `ask_enabled` in the UI model). Themes that still render a plain `#search-input` can read this key to copy the overlay pattern; the packaged stub bakes `data-ask-enabled` and the `is-disabled` class at inject time from extension config.
+Optional theme mirror:: `site.keys.askEnabled` (Antora camelCases `ask_enabled` in the UI model). Themes that still render a plain `#search-input` can read this key to copy the overlay pattern; the packaged stub bakes `data-ask-enabled` and placeholder copy at inject time from extension config.
 
 === Scope control (one omnibox + filter)
 
@@ -120,7 +122,7 @@ Target shape::
 ----
 flowchart LR
   subgraph compound["`.adt-search-compound` — one pill / shared border"]
-    scope["`.adt-search-scope`\nScope ▾"]
+    scope["`.adt-search-scope-slot`\nScope ▾"]
     rule["inner |"]
     input["`#search-input`\nSearch or Ask"]
   end
@@ -132,7 +134,7 @@ Rules:
 * Dropdown flush against the input (shared outer border, *no gap*).
 * Rounded left corners on the scope (outer left of the compound); input takes the right side with matching right rounding.
 * Divide with a subtle *inner* vertical rule — not separate floating controls or a gap between boxes.
-* Class hooks: `.adt-search-compound` wraps `.adt-search-scope` + `.adt-search-input-wrap` (`#search-input` + `.adt-search-ph` overlay).
+* Class hooks: `.adt-search-compound` wraps `.adt-search-scope-slot` (full-height fill + `.adt-search-scope`) + `.adt-search-input-wrap` (`#search-input` + `.adt-search-ph` overlay).
 
 Phase 1 may ship a CSS/markup stub only (select may be non-functional). Wire scope → lunr filters in a later pass.
 
@@ -196,7 +198,7 @@ Layout owns placement; search-chat owns the control:
 * Slot: left nav, above the tree (`.adt-nav-search`), in a tool band *outside* the 3-col shell.
 * Keep `#search-input` so lunr and any residual layout focus helpers keep working (omnibox may reuse this id for the shared field).
 * Modes: *Search* | *Ask* on the same field — Search is default unless `default_mode: ask`.
-* Scope: conjoined dropdown on the *left edge* of the field (`.adt-search-compound` / `.adt-search-scope`) — *All* / *This component* / optional *This version*; defaults per <<_default_scope_recommendation>>.
+* Scope: conjoined dropdown on the *left edge* of the field (`.adt-search-compound` / `.adt-search-scope-slot`) — *All* / *This component* / optional *This version*; defaults per <<_default_scope_recommendation>>.
 * Hint badges: `/` for Search mode, `?` for Ask mode (same field).
 
 Phase 1 stub note:: The scaffold may still render tabbed Search/Ask panels; the compound scope+input markup/CSS may be present as a visual stub without live filtering. Treat transitional tabs as temporary; product target is the omnibox + conjoined scope above.
@@ -236,7 +238,7 @@ Playbook extension object (alongside `require`):
 
 | `ask_enabled`
 | boolean
-| Explicit Ask / AI omnibox affordance. When `true`, placeholder shows live *or Ask*; when `false` or unset without backend/local assist, *or Ask* is greyed + struck (`.adt-search-ph-ask.is-disabled`). Aliases: `askEnabled`.
+| Explicit Ask / AI omnibox affordance. When `true`, placeholder is *Search or Ask*; when `false` or unset without backend/local assist, *Search* + muted *(AI mode not configured)*. Aliases: `askEnabled`.
 
 | `default_mode`
 | `search` \| `ask`
@@ -268,10 +270,10 @@ Runtime payload (`window.__ADT_SEARCH_CHAT__`) includes `askEnabled`, `backendUr
 
 === Theme integration (plain `#search-input`)
 
-Valentus layout may still fall back to a plain lunr field (`placeholder="Search"`) when `SITE_SEARCH_CHAT` is unset. The fake *Search or Ask* overlay ships in this package (`adt-search-chat` partial + `site-search-chat.css` / `.js`). Themes that keep only `#search-input` should either:
+Valentus layout may still fall back to a plain lunr field (`placeholder="Search"`) when `SITE_SEARCH_CHAT` is unset. The fake placeholder overlay ships in this package (`adt-search-chat` partial + `site-search-chat.css` / `.js`). Themes that keep only `#search-input` should either:
 
 * Prefer `{{> adt-search-chat}}` when the extension is registered, or
-* Copy the `.adt-search-ph` / `.adt-search-ph-ask.is-disabled` pattern and drive it from `site.keys.askEnabled` / extension config.
+* Copy the `.adt-search-ph` overlay and drive Ask-on/off copy from `site.keys.askEnabled` / extension config.
 
 == Privacy and API keys
 

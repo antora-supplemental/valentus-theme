@@ -54,16 +54,16 @@ You only write snake_case in the playbook; the theme templates already use the c
 | How a *single* header logo is treated across themes (ignored when `header_logo_dark` is set). `brand` (default) — no CSS filter; use for colored marks that already have contrast on light and dark bars. `mono` — apply invert in dark mode for single-ink / silhouette marks that would otherwise disappear on the dark header.
 
 | `site_home_url`
-| `site.url`
-| URL for the logo link (opens in a new tab).
+| _(none)_ — falls back to this site’s start page (`relativize site.homeUrl`)
+| Optional external URL for the logo link (opens in a new tab). Do **not** set this to `site.url` unless you intentionally want production; omitting it keeps local preview on the current site.
 
 | `site_home_label`
-| `Project home`
+| `Home` (or `Project home` when `site_home_url` is set)
 | Accessible name for the logo link.
 
 | `header_doc_title`
 | `site.title`
-| Navbar text beside the logo (links to the docs home).
+| Navbar text beside the logo. Always links to this site’s start page via `relativize site.homeUrl` (portable; not absolute `site.url`).
 
 | `github_profile_url`
 | `https://github.com`

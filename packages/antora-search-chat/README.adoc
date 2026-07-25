@@ -18,7 +18,7 @@ antora:
       snippet_length: 200
     - require: ./packages/antora-search-chat
       # Optional — see ARCHITECTURE.adoc
-      # ask_enabled: true                 # force live "or Ask" (even without backend)
+      # ask_enabled: true                 # force "Search or Ask" (even without backend)
       # backend_url: https://search-api.example.com/v1/ask   # also enables Ask; no API keys here
       # default_mode: search
       # local_assist: false
@@ -26,15 +26,11 @@ antora:
 
 The extension injects UI into the left-nav search slot (`.adt-nav-search` / `#search-input`) so it coexists with layout work that moved search above the nav tree.
 
-== Placeholder UX (*Search or Ask*)
+== Placeholder UX
 
-Native `<input placeholder>` cannot style part of the string. The compound control uses a **fake placeholder overlay**:
-
-* Ask **on** (`ask_enabled: true`, or `backend_url` / `local_assist` set) — muted *Search or Ask*.
-* Ask **off** — same phrase, but *or Ask* is greyed + line-through (`.adt-search-ph-ask.is-disabled`).
+* Ask **on** (`ask_enabled: true`, or `backend_url` / `local_assist` set) — *Search or Ask*.
+* Ask **off** — *Search* plus a deader *(AI mode not configured)*.
 * Overlay hides when the field is focused or non-empty.
-
-Markup shape:: `Search <span class="adt-search-ph-ask …">or Ask</span>` inside `.adt-search-ph`.
 
 Optional site key:: `site.keys.askEnabled` — theme mirror if you wire a plain `#search-input` yourself. See ARCHITECTURE.
 
@@ -42,7 +38,7 @@ Optional site key:: `site.keys.askEnabled` — theme mirror if you wire a plain 
 
 * *One omnibox* — `/` and `?` set Search vs Ask mode on the **same** field (not two widgets).
 * *Scope control* — dropdown *built into* the left edge of the field (*All docs* / *This component* / optional *This version*). Not multiple boxes by placement.
-* *Compound UI* — one pill: `[ Scope ▾ | Search or Ask ]` (`.adt-search-compound` + `.adt-search-scope`); shared border, inner vertical rule, left/right rounding split across scope and input.
+* *Compound UI* — one pill: `[ Scope ▾ | Search or Ask ]` (`.adt-search-compound` + `.adt-search-scope-slot` / `.adt-search-scope`); shared border, inner vertical rule, full-height scope hit target.
 * *Default scope* — *Current component* on docs pages when detectable; *All* on home / when ambiguous (with a component list). See ARCHITECTURE.
 * *Lunr-first* — keyword results while typing in Search mode; Ask only on explicit mode / submit. Optional debounced question-detection may come later; it is not the default.
 * *Tier-0 local assist* (optional) — ultra-light on-device model for query rewrite / short answers over retrieved chunks; remote `backend_url` is an optional upgrade. Never put API keys in the playbook.

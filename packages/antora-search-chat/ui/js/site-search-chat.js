@@ -13,7 +13,8 @@
   var searchInput =
     root.querySelector('[data-adt-search-input]') || document.getElementById('search-input')
   var ph = root.querySelector('[data-adt-search-ph]')
-  var phAsk = ph && ph.querySelector('.adt-search-ph-ask')
+  var PH_ASK_ON = 'Search or Ask'
+  var PH_ASK_OFF_LABEL = 'Search (AI mode not configured)'
 
   function resolveAskEnabled () {
     if (typeof cfg.askEnabled === 'boolean') return cfg.askEnabled
@@ -27,8 +28,22 @@
 
   var askEnabled = resolveAskEnabled()
   root.setAttribute('data-ask-enabled', askEnabled ? 'true' : 'false')
-  if (phAsk) {
-    phAsk.classList.toggle('is-disabled', !askEnabled)
+
+  function syncPlaceholderCopy () {
+    if (ph) {
+      if (askEnabled) {
+        ph.removeAttribute('data-ask-off')
+        ph.innerHTML = '<span class="adt-search-ph-main">Search or Ask</span>'
+      } else {
+        ph.setAttribute('data-ask-off', '')
+        ph.innerHTML =
+          '<span class="adt-search-ph-main">Search</span>' +
+          '<span class="adt-search-ph-note"> (AI mode not configured)</span>'
+      }
+    }
+    if (searchInput) {
+      searchInput.setAttribute('aria-label', askEnabled ? PH_ASK_ON : PH_ASK_OFF_LABEL)
+    }
   }
 
   if (cfg.askPlaceholder && input) {
@@ -36,7 +51,7 @@
   }
 
   // Fake placeholder: hide when focused or non-empty (native placeholder cannot
-  // grey/strike only the "or Ask" segment).
+  // switch Ask-off vs Ask-on copy cleanly with partial styling).
   function syncSearchPlaceholder () {
     if (!ph || !searchInput) return
     // Keep native placeholder empty so it never fights the overlay.
@@ -47,6 +62,8 @@
       document.activeElement === searchInput || String(searchInput.value || '').length > 0
     ph.classList.toggle('is-hidden', hide)
   }
+
+  syncPlaceholderCopy()
 
   if (searchInput) {
     searchInput.addEventListener('focus', syncSearchPlaceholder)
