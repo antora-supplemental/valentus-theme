@@ -1,0 +1,51 @@
+= Visual redesign demo (teal tokens + type pairing)
+
+Session notes for branch `demo/visual-redesign`: layered visual system on Valentus chrome, true three-column layout, and a standalone read-width module — plus the gotchas that shaped the final CSS.
+
+== Visual system
+
+* *Tokens:* Cool paper canvas; teal accent (`--adt-accent`); shared chrome/nav/footer surfaces; designed dark palette (not a hex invert of Material blue).
+* *Type:* Plus Jakarta Sans for site title / H1–H2; Source Sans 3 for UI/body; IBM Plex Mono for code. Serif display was tried and dropped — modern sans only.
+* *Chrome:* Unified canvas-matched header + mast; sticky navbar shadow on scroll; quieter footer top rule.
+* *Nav / TOC:* Current-page highlight matches hover size (roomier accent tint). No left inset bar. Stroke caret/chevrons sized to the text line height with a tighter caret gap.
+* *Code:* Dark panels in both themes with retuned highlight colors; always-visible source toolbox chrome.
+* *Gotcha — code panel target:* Style the panel on `.listingblock > .content`, not on `pre`. An absolutely positioned toolbox fights a rounded `pre` and clips or misaligns; rounding/background on the content wrapper keeps the toolbox inside the panel.
+* *Admonitions:* Left accent border + tinted fill (no floating Material-style pills as the main look).
+* *Search:* Elevated field, accent focus ring, `⌘K` / `Ctrl+K` focus shortcut.
+* *Motion:* Short theme-toggle surface crossfade; sticky shadow transition.
+* *Files:* `site-visual.css` / `site-visual.js` (supplemental + `doc-layout` UI module). Override via `:root` / `html.dark-theme` custom properties without forking partials.
+
+== Layout (true 3-column peers)
+
+* Peers under `.body.adt-body` are `nav | main | TOC` (TOC lifted out of nested `.content`).
+* Columns separated by spacing only — no vertical divider rule.
+* Body width is intrinsic (side panels + fixed `--adt-col-gap` + doc column); viewport-centered with `fit-content` + `align-self: center`.
+* Wider left nav (`16.5rem`); article top air greater than nav; TOC sits below the H1 baseline.
+
+== Read-width UI module
+
+* Standalone package `ui-modules/packages/read-width` registered in the recipe/registry.
+* Placeable partial `{{> adt-read-width}}`; demo places it above the article title.
+* Drives *doc width only* via `--adt-doc-max`:
+** narrow `68ch`
+** comfortable `82ch`
+** wide `100ch`
+* `--adt-col-gap` stays a constant `2rem` so nav↔doc clearance does not grow when widening.
+* `localStorage` + FOUC helper (`adt-read-width-fouc.js` / `data-adt-read-width`).
+* Scripts: `pnpm build:visual-demo` / `pnpm serve:visual-demo`.
+
+== Gotchas (layout / width / scroll / worktree)
+
+* *Shell-max slack:* If `--adt-shell-max` (or the body) is larger than panels + gaps + doc, flex/grid free space makes the side panels “space out.” Derive shell max from the intrinsic sum so the shell shrink-wraps.
+* *Width transition both ways:* A jumped `flex-basis: var(--adt-doc-max)` made grow look smooth (via `max-width`) while shrink snapped. Prefer `flex: 0 1 auto` with explicit `width` / `max-width` so narrow↔comfortable↔wide animates in both directions.
+* *scrollbar-gutter: stable:* Without it, short pages that never show a vertical scrollbar shift horizontal alignment vs pages that do. Keep a stable gutter on the scrolling root.
+* *Antora worktree content source:* `content.sources` with `url: .` fails when the checkout is a linked git worktree (`.git` is a file). Use `antora-playbook-visual-demo.yml` (content from sibling normal clone `../valentus-theme`, UI from this worktree), or build from a non-worktree checkout.
+
+== Preview
+
+* Demo branch: `demo/visual-redesign`.
+* Playbook: `antora-playbook-visual-demo.yml`.
+
+== Docs fix (tables)
+
+* *Fix:* docs/modules/guide/pages/vcs-repo-logo.adoc was missing |=== open/close delimiters on two tables (provider domain map and files involved), so Antora rendered them as broken paragraph text. Restored proper table blocks with column specs.
