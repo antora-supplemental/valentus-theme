@@ -6,8 +6,9 @@ Phase 1 of a Valentus-owned Antora extension that **wraps** `@antora/lunr-extens
 
 == Product decisions (documented)
 
-* *One omnibox* — placeholder *Search or ask…*; `/` and `?` set Search vs Ask mode on the same field (not two widgets).
-* *Scope control* — one compound control: conjoined scope dropdown on the *left edge* of the field (`[ Scope ▾ | Search or ask… ]`). Not multiple boxes by placement.
+* *One omnibox* — placeholder *Search or Ask* (fake overlay; native placeholder cannot style a dead *or Ask*); `/` and `?` set Search vs Ask mode on the same field (not two widgets).
+* *Ask affordance* — when Ask is missing/disabled, keep the phrase but grey + strike *or Ask* (`.adt-search-ph-ask.is-disabled`). Enabled via `ask_enabled` or inferred from `backend_url` / `local_assist`.
+* *Scope control* — one compound control: conjoined scope dropdown on the *left edge* of the field (`[ Scope ▾ | Search or Ask ]`). Not multiple boxes by placement.
 * *Default scope* — *Current component* on docs pages when detectable; *All* on home / when ambiguous.
 * *Upstream* — propose multi-value facet / filter API on lunr-extension; Valentus wraps store metadata first.
 * *Layout* — compound control lives in the outer search band (outside 3-col) so scope/results are not clipped.
@@ -26,9 +27,11 @@ Phase 1 of a Valentus-owned Antora extension that **wraps** `@antora/lunr-extens
 
 Owns `.adt-nav-search` above the nav tree (coordinates with layout that moved search out of the header / outside 3-col). Keeps `#search-input` for lunr.
 
-Compound hooks:: `.adt-search-compound` wraps `.adt-search-scope` + `#search-input` (shared border, inner vertical rule, split rounding).
+Compound hooks:: `.adt-search-compound` wraps `.adt-search-scope` + `.adt-search-input-wrap` (`#search-input` + `.adt-search-ph` overlay; shared border, inner vertical rule, split rounding).
 
 Keyboard:: `/` → Search mode (lexical); `?` (Shift+/) → Ask mode (same field when omnibox lands). Listener accepts `key === '?'` or `key === '/' && shiftKey`.
+
+Theme note:: Plain `#search-input` fallback (no extension) still says `Search` only; overlay ships in this package.
 
 == Playbooks
 

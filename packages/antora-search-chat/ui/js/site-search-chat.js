@@ -10,9 +10,49 @@
   var form = root.querySelector('[data-adt-search-ask-form]')
   var input = root.querySelector('[data-adt-ask-input]')
   var result = root.querySelector('[data-adt-ask-result]')
+  var searchInput =
+    root.querySelector('[data-adt-search-input]') || document.getElementById('search-input')
+  var ph = root.querySelector('[data-adt-search-ph]')
+  var phAsk = ph && ph.querySelector('.adt-search-ph-ask')
+
+  function resolveAskEnabled () {
+    if (typeof cfg.askEnabled === 'boolean') return cfg.askEnabled
+    if (cfg.backendUrl) return true
+    if (cfg.localAssist) return true
+    var attr = root.getAttribute('data-ask-enabled')
+    if (attr === 'true') return true
+    if (attr === 'false') return false
+    return false
+  }
+
+  var askEnabled = resolveAskEnabled()
+  root.setAttribute('data-ask-enabled', askEnabled ? 'true' : 'false')
+  if (phAsk) {
+    phAsk.classList.toggle('is-disabled', !askEnabled)
+  }
 
   if (cfg.askPlaceholder && input) {
     input.setAttribute('placeholder', cfg.askPlaceholder)
+  }
+
+  // Fake placeholder: hide when focused or non-empty (native placeholder cannot
+  // grey/strike only the "or Ask" segment).
+  function syncSearchPlaceholder () {
+    if (!ph || !searchInput) return
+    // Keep native placeholder empty so it never fights the overlay.
+    if (searchInput.getAttribute('placeholder')) {
+      searchInput.setAttribute('placeholder', '')
+    }
+    var hide =
+      document.activeElement === searchInput || String(searchInput.value || '').length > 0
+    ph.classList.toggle('is-hidden', hide)
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('focus', syncSearchPlaceholder)
+    searchInput.addEventListener('blur', syncSearchPlaceholder)
+    searchInput.addEventListener('input', syncSearchPlaceholder)
+    syncSearchPlaceholder()
   }
 
   function activate (name) {
@@ -32,12 +72,10 @@
     })
     if (name === 'ask' && input) {
       input.focus()
-    } else {
-      var searchInput = document.getElementById('search-input')
-      if (name === 'search' && searchInput) {
-        searchInput.focus()
-        if (typeof searchInput.select === 'function') searchInput.select()
-      }
+    } else if (name === 'search' && searchInput) {
+      searchInput.focus()
+      if (typeof searchInput.select === 'function') searchInput.select()
+      syncSearchPlaceholder()
     }
   }
 
@@ -97,10 +135,19 @@
         return
       }
 
+      if (!askEnabled) {
+        showResult(
+          'Ask is not enabled on this site. Set ask_enabled: true and/or backend_url ' +
+            '(or local_assist) on the antora-search-chat extension. Use Search for keyword results.',
+          false
+        )
+        return
+      }
+
       var backendUrl = cfg.backendUrl || ''
       if (!backendUrl) {
         showResult(
-          'Ask is not connected yet (phase 1 stub). ' +
+          'Ask is enabled but no backend is connected yet (phase 1 stub). ' +
             'Set backend_url on the antora-search-chat extension when a Q&A API is available. ' +
             'Use the Search tab for keyword results from the lunr index.',
           false

@@ -1,12 +1,13 @@
 {{!-- Valentus search/chat slot — owns .adt-nav-search above the nav tree.
      Keeps #search-input for @antora/lunr-extension.
-     Product target: one omnibox ("Search or ask…") + conjoined scope on the left edge
-     [ Scope ▾ | Search or ask… ]; / and ? set mode on the same field.
+     Product target: one omnibox ("Search or Ask") + conjoined scope on the left edge
+     [ Scope ▾ | Search or Ask ]; / and ? set mode on the same field.
+     Fake placeholder overlay (native placeholder cannot style "or Ask" when Ask is off).
      Rejected: multiple boxes contextualized only by placement.
      Phase 1: compound markup/CSS stub (scope not wired to lunr yet); tabbed Ask is transitional.
      See ARCHITECTURE.adoc. --}}
-<div class="search adt-nav-search adt-search-chat" data-adt-search-chat>
-  <div class="adt-search-chat__tabs" role="tablist" aria-label="Search or ask">
+<div class="search adt-nav-search adt-search-chat" data-adt-search-chat data-ask-enabled="false">
+  <div class="adt-search-chat__tabs" role="tablist" aria-label="Search or Ask">
     <button
       type="button"
       class="adt-search-chat__tab is-active"
@@ -52,13 +53,20 @@
         <option value="all">All docs</option>
         <option value="version">This version</option>
       </select>
-      <input
-        id="search-input"
-        type="text"
-        placeholder="Search or ask…"
-        autocomplete="off"
-        aria-label="Search the docs"
-      >
+      <div class="adt-search-input-wrap">
+        {{!-- Fake placeholder: part of the string can be struck when Ask is off. --}}
+        <span class="adt-search-ph" aria-hidden="true" data-adt-search-ph>
+          Search <span class="adt-search-ph-ask is-disabled">or Ask</span>
+        </span>
+        <input
+          id="search-input"
+          type="text"
+          placeholder=""
+          autocomplete="off"
+          aria-label="Search or Ask"
+          data-adt-search-input
+        >
+      </div>
       <kbd class="adt-search-chat__field-hint" aria-hidden="true">/</kbd>
     </div>
   </div>

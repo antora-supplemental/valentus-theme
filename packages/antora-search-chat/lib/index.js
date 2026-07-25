@@ -94,11 +94,48 @@ function appendFooterScript (uiCatalog, src) {
   foot.contents = Buffer.from(`${body.trim()}\n${marker}\n${tag}\n`)
 }
 
+/**
+ * Whether Ask / AI is configured & enabled for omnibox placeholder UX.
+ * Explicit ask_enabled / askEnabled wins; otherwise true when backend_url or
+ * local_assist is set. site.keys.askEnabled is a theme-side mirror (see docs).
+ */
+function resolveAskEnabled (config) {
+  if (config.ask_enabled === false || config.askEnabled === false) return false
+  if (config.ask_enabled === true || config.askEnabled === true) return true
+  const backend = config.backend_url || config.backendUrl || ''
+  const local = config.local_assist === true || config.localAssist === true
+  return Boolean(backend) || local
+}
+
+/** Bake askEnabled into the partial so first paint has no FOUC on "or Ask". */
+function applyAskEnabledToPartial (contents, askEnabled) {
+  let html = Buffer.isBuffer(contents) ? contents.toString('utf8') : String(contents || '')
+  html = html.replace(
+    /data-ask-enabled="(?:true|false)"/,
+    `data-ask-enabled="${askEnabled ? 'true' : 'false'}"`
+  )
+  if (askEnabled) {
+    html = html.replace(
+      /class="adt-search-ph-ask is-disabled"/g,
+      'class="adt-search-ph-ask"'
+    )
+  } else if (!/class="adt-search-ph-ask is-disabled"/.test(html)) {
+    html = html.replace(
+      /class="adt-search-ph-ask"/g,
+      'class="adt-search-ph-ask is-disabled"'
+    )
+  }
+  return Buffer.from(html)
+}
+
 function injectRuntimeConfig (uiCatalog, uiOutputDir, config) {
+  const askEnabled = resolveAskEnabled(config)
   const payload = {
     backendUrl: config.backend_url || config.backendUrl || '',
     defaultTab: config.default_tab || config.defaultTab || 'search',
     askPlaceholder: config.ask_placeholder || config.askPlaceholder || 'Ask about this site…',
+    askEnabled,
+    localAssist: config.local_assist === true || config.localAssist === true,
   }
   const js = `window.__ADT_SEARCH_CHAT__ = ${JSON.stringify(payload)};\n`
   addOrReplaceAsset(
@@ -140,6 +177,9 @@ module.exports.register = function register (context = {}) {
     if (!config.backend_url && !config.backendUrl) {
       logger.info('Ask backend stubbed (set backend_url for phase 2)')
     }
+    logger.info(
+      `askEnabled=${resolveAskEnabled(config)} (ask_enabled / backend_url / local_assist)`
+    )
   })
 
   this.on('uiLoaded', ({ playbook, uiCatalog }) => {
@@ -148,11 +188,16 @@ module.exports.register = function register (context = {}) {
 
     const uiOutputDir = playbook.ui?.outputDir || '_'
 
+    const askEnabled = resolveAskEnabled(cfg)
+
     for (const rel of walkFiles(UI_ROOT)) {
       const full = path.join(UI_ROOT, rel)
-      const contents = fs.readFileSync(full)
+      let contents = fs.readFileSync(full)
       if (rel.startsWith('partials/') && rel.endsWith('.hbs')) {
         const stem = path.basename(rel, '.hbs')
+        if (stem === 'adt-search-chat') {
+          contents = applyAskEnabledToPartial(contents, askEnabled)
+        }
         addOrReplacePartial(uiCatalog, stem, rel, contents)
       } else {
         addOrReplaceAsset(uiCatalog, uiOutputDir, rel, contents)

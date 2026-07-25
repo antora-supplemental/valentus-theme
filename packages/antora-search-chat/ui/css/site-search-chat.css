@@ -103,9 +103,18 @@
   outline-offset: -2px;
 }
 
+/* Input + fake placeholder share one flex cell of the compound pill. */
+.adt-search-input-wrap {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: stretch;
+}
+
 .adt-search-compound #search-input {
   flex: 1 1 auto;
-  width: auto;
+  width: 100%;
   min-width: 0;
   height: auto;
   margin: 0;
@@ -124,6 +133,42 @@
   background: transparent;
   box-shadow: none;
   outline: none;
+}
+
+/* Native <input placeholder> cannot style part of the string — overlay instead. */
+.adt-search-ph {
+  position: absolute;
+  inset-inline-start: 0.65rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  pointer-events: none;
+  color: color-mix(in srgb, currentColor 48%, transparent);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.adt-search-ph.is-hidden {
+  visibility: hidden;
+}
+
+.adt-search-ph-ask {
+  color: inherit;
+}
+
+/* Ask capability advertised but not configured / disabled. */
+.adt-search-ph-ask.is-disabled {
+  color: color-mix(in srgb, currentColor 38%, transparent);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, currentColor 42%, transparent);
 }
 
 .adt-search-chat__field:not(.adt-search-compound) #search-input {
