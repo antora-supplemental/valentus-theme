@@ -396,15 +396,26 @@ footer.footer a {
   }
 }
 
-/* Dropdown opens from navbar search — overflow ancestors stay visible. */
+/* Dropdown opens from navbar search — overflow ancestors stay visible.
+   Lunr mounts .search-result-dropdown-menu on #search-input.parentNode
+   (search-ui.js), which is .adt-search-input-wrap — NOT #search-field.
+   overflow:hidden on the wrap (or compound) clips absolute results below the field. */
 .adt-nav-search .search-result-dropdown-menu,
 .adt-tool-search .search-result-dropdown-menu,
-.adt-navbar-search .search-result-dropdown-menu {
+.adt-navbar-search .search-result-dropdown-menu,
+.adt-search-compound .search-result-dropdown-menu,
+.adt-search-input-wrap .search-result-dropdown-menu {
   left: 0;
   right: auto;
   z-index: 40;
   min-width: min(28rem, 70vw);
   max-width: min(36rem, 90vw);
+}
+
+.adt-search-compound,
+.adt-search-input-wrap,
+.adt-navbar-search #search-field {
+  overflow: visible !important;
 }
 
 .header.adt-header .navbar .navbar-end .adt-header-icon-btn,
