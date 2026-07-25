@@ -28,6 +28,11 @@
       path: "packages/doc-layout",
       manifest: "ui-module.json5",
     },
+    {
+      id: "read-width",
+      path: "packages/read-width",
+      manifest: "ui-module.json5",
+    },
   ],
   recipes: [
     {

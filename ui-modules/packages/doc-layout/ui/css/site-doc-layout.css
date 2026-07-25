@@ -1,49 +1,82 @@
 /* antora-doc-layout: layered after antora default UI and site-extra.css (dark theme).
-   Source Sans 3, a doc mast (breadcrumbs) instead of a separate in-article toolbar,
-   and a sidebar with component label + page navigation tree. */
+   Source Sans 3 + Plus Jakarta Sans (headings), a doc mast (breadcrumbs) instead of a separate
+   in-article toolbar, and a sidebar with component label + page navigation tree. */
 
 :root {
   --adt-mast-h: 2.75rem;
   --adt-mast-total: calc(3.5rem + var(--adt-mast-h));
   --adt-font: "Source Sans 3", system-ui, "Segoe UI", sans-serif;
+  --adt-font-display: "Plus Jakarta Sans", var(--adt-font);
+  --adt-font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace;
+  /* Surfaces — site-visual.css may refine; keep sensible defaults if visual CSS is omitted */
+  --adt-canvas: #f3f5f8;
+  --adt-elevated: #ffffff;
+  --adt-ink: #141820;
+  --adt-ink-muted: #5a6270;
+  --adt-accent: #0f766e;
+  --adt-accent-hover: #0d9488;
+  --adt-accent-soft: rgba(15, 118, 110, 0.1);
+  --adt-border: #d9dee7;
+  --adt-chrome: var(--adt-canvas);
+  --adt-chrome-border: var(--adt-border);
   /* Component + version breadcrumb kickers (same color for both) */
-  --adt-bc-kicker-fg: #1976d2;
-  --adt-bc-kicker-bg: rgba(0, 0, 0, 0.04);
-  --adt-bc-kicker-border: #ddd;
+  --adt-bc-kicker-fg: var(--adt-accent);
+  --adt-bc-kicker-bg: var(--adt-accent-soft);
+  --adt-bc-kicker-border: color-mix(in srgb, var(--adt-accent) 28%, transparent);
   /* Top bar: all controls (logo hit-area, title, theme, org GitHub) share one line height */
   --adt-header-ctrl: 2.5rem;
-  /* Light theme (default): light header strip — not a black bar */
-  --adt-header-bar-bg: #f2f3f5;
-  --adt-header-bar-fg: #1a1a1a;
-  --adt-header-bar-border: #d8d8d8;
-  --adt-header-bar-hover: rgba(0, 0, 0, 0.07);
+  /* Light theme (default): chrome matches page canvas */
+  --adt-header-bar-bg: var(--adt-chrome);
+  --adt-header-bar-fg: var(--adt-ink);
+  --adt-header-bar-border: var(--adt-chrome-border);
+  --adt-header-bar-hover: var(--adt-accent-soft);
   /* Raster/SVG VCS marks (white in file): invert for light top bar. */
   --adt-header-vcs-icon-filter: brightness(0) opacity(0.92);
-  /* Top rails (nav is outside main; .content is main > .content):
-     - --adt-global-rail-top: shared baseline (nav + main row).
-     - --adt-content-rail-top: optional *extra* top padding for .content only (0 = nav and .content
-       stay aligned; theme hackers can offset the article/TOC without moving the left nav). */
-  --adt-global-rail-top: 1rem;
-  --adt-content-rail-top: 0rem;
-  /* Horizontal rail: one value for .adt-doc-mast, breadcrumb home hit-area, and left nav. Stock UI
-     uses calc(var(--toolbar-height) / 4) for the old in-article toolbar; the mast + sidebar must
-     share the *same* inset so the home icon, component title, and first tree column line up. */
-  --adt-mast-pad-h: 1rem;
+  /* Top rails (nav | main | TOC are peers under .body.adt-body):
+     - --adt-global-rail-top: nav baseline under the mast (denser than article).
+     - --adt-content-rail-top: *extra* top padding for .content (article owns more air).
+     - --adt-toc-rail-top: extra pad on TOC only so it starts below the H1 baseline. */
+  --adt-global-rail-top: 0.85rem;
+  --adt-content-rail-top: 0.65rem;
+  --adt-toc-rail-top: 2.4rem;
+  /* Horizontal rail: mast + left nav share an inset so home / component title line up. */
+  --adt-mast-pad-h: 1.25rem;
   --adt-global-rail-hpad: var(--adt-mast-pad-h);
+  /* Centered page shell + reading measure (site-visual applies the layout rules).
+     --adt-shell-max is a soft fallback; site-visual derives it from nav + gaps + doc + toc. */
+  --adt-shell-pad: 1.75rem;
+  --adt-nav-width: 16.5rem;
+  --adt-col-gap: 2rem;
+  --adt-toc-width: 12rem;
+  --adt-doc-max: 82ch;
+  --adt-shell-max: calc(
+    var(--adt-nav-width) + var(--adt-col-gap) + var(--adt-doc-max) + var(--adt-col-gap) + var(--adt-toc-width) +
+      2 * var(--adt-shell-pad)
+  );
   --adt-footer-pad-top: 1.5rem;
   --adt-footer-pad-h: 1.5rem;
   --adt-footer-pad-bottom: 1.5rem;
 }
 
 html.dark-theme {
-  --adt-bc-kicker-fg: #8ec5ff;
-  --adt-bc-kicker-bg: rgba(255, 255, 255, 0.06);
-  --adt-bc-kicker-border: rgba(255, 255, 255, 0.12);
+  --adt-canvas: #0b0e13;
+  --adt-elevated: #141a22;
+  --adt-ink: #e8ebf0;
+  --adt-ink-muted: #9aa3b2;
+  --adt-accent: #2dd4bf;
+  --adt-accent-hover: #5eead4;
+  --adt-accent-soft: rgba(45, 212, 191, 0.12);
+  --adt-border: rgba(255, 255, 255, 0.09);
+  --adt-chrome: var(--adt-canvas);
+  --adt-chrome-border: var(--adt-border);
+  --adt-bc-kicker-fg: var(--adt-accent);
+  --adt-bc-kicker-bg: var(--adt-accent-soft);
+  --adt-bc-kicker-border: color-mix(in srgb, var(--adt-accent) 35%, transparent);
   /* Dark header: keep white foreground on dark bar (GitHub mark stays white; no filter) */
-  --adt-header-bar-bg: #141517;
-  --adt-header-bar-fg: #f1f3f5;
-  --adt-header-bar-border: #2c2e33;
-  --adt-header-bar-hover: rgba(255, 255, 255, 0.1);
+  --adt-header-bar-bg: var(--adt-chrome);
+  --adt-header-bar-fg: var(--adt-ink);
+  --adt-header-bar-border: var(--adt-chrome-border);
+  --adt-header-bar-hover: var(--adt-accent-soft);
   --adt-header-vcs-icon-filter: none;
 }
 
@@ -76,8 +109,8 @@ kbd,
 pre,
 .spectrum,
 .doc .conum {
-  /* Keep a distinct monospace; Roboto still loads from the default bundle */
-  font-family: "Roboto Mono", ui-monospace, monospace;
+  /* Keep a distinct monospace; Roboto still loads from the default bundle as fallback */
+  font-family: var(--adt-font-mono);
 }
 
 /* ——— Top bar: light strip in “light” theme, dark strip in dark theme ——— */
@@ -426,14 +459,14 @@ a.adt-header-title:focus {
   position: sticky;
   top: 3.5rem;
   z-index: 3;
-  background: #f5f5f5;
-  border-bottom: 1px solid #e1e1e1;
+  background: var(--adt-chrome);
+  border-bottom: 1px solid var(--adt-chrome-border);
   box-sizing: border-box;
 }
 
 html.dark-theme .adt-doc-mast {
-  background: #1a1a1a;
-  border-bottom-color: rgba(255, 255, 255, 0.1);
+  background: var(--adt-chrome);
+  border-bottom-color: var(--adt-chrome-border);
 }
 
 .adt-doc-mast .nav-toggle {
@@ -528,13 +561,14 @@ html.dark-theme .adt-doc-mast {
 }
 
 /* ——— Content rail: TOC h3 (Antora’s fake height/flex) ——— */
+.body.adt-body > aside.toc.sidebar .toc-menu h3,
 .adt-article .content .toc .toc-menu h3 {
   display: block;
   height: auto;
   min-height: 0;
   flex-direction: unset;
   justify-content: unset;
-  /* Top inset is .content’s padding; only label↔list gap */
+  /* Top inset is TOC padding-top / .content’s padding; only label↔list gap */
   margin: 0;
   padding: 0 0 0.25rem 0;
 }
@@ -626,7 +660,7 @@ html.dark-theme .adt-doc-mast {
 }
 
 .adt-breadcrumb-trail .adt-breadcrumb-trail-link {
-  color: #1565c0;
+  color: var(--adt-accent);
   font-weight: 500;
   text-decoration: none;
 }
@@ -638,18 +672,18 @@ html.dark-theme .adt-doc-mast {
 .adt-breadcrumb-trail--current .adt-breadcrumb-trail-link,
 .adt-breadcrumb-trail--current .adt-breadcrumb-trail-text,
 .adt-breadcrumb-trail-text {
-  color: #212121;
+  color: var(--adt-ink);
   font-weight: 600;
 }
 
 html.dark-theme .adt-breadcrumb-trail .adt-breadcrumb-trail-link {
-  color: #4dabf7;
+  color: var(--adt-accent);
 }
 
 html.dark-theme .adt-breadcrumb-trail--current .adt-breadcrumb-trail-link,
 html.dark-theme .adt-breadcrumb-trail--current .adt-breadcrumb-trail-text,
 html.dark-theme .adt-breadcrumb-trail-text {
-  color: #e6e6e6;
+  color: var(--adt-ink);
 }
 
 /* “Edit” next to page trail (compact label vs. old in-article “Edit this page”) */
@@ -670,7 +704,7 @@ html.dark-theme .adt-breadcrumb-trail-text {
   font-size: 0.85rem;
   font-weight: 500;
   line-height: 1.2;
-  color: #1565c0;
+  color: var(--adt-accent);
   text-decoration: none;
   white-space: nowrap;
 }
@@ -680,7 +714,7 @@ html.dark-theme .adt-breadcrumb-trail-text {
 }
 
 html.dark-theme .adt-breadcrumb-edit .adt-edit-inline-link {
-  color: #4dabf7;
+  color: var(--adt-accent);
 }
 
 /* White VCS assets: dark silhouette on light mast; full color on dark mast */
@@ -731,22 +765,22 @@ html.dark-theme .adt-breadcrumb-edit .adt-edit-vcs-img {
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 0.2rem;
-  color: #1976d2;
+  color: var(--adt-accent);
   text-decoration: none;
   vertical-align: middle;
 }
 
 .adt-breadcrumb-home-link:hover {
-  background: rgba(0, 0, 0, 0.06);
+  background: var(--adt-accent-soft);
   text-decoration: none;
 }
 
 html.dark-theme .adt-breadcrumb-home-link {
-  color: #8ec5ff;
+  color: var(--adt-accent);
 }
 
 html.dark-theme .adt-breadcrumb-home-link:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--adt-accent-soft);
 }
 
 .adt-breadcrumb-home-icon {
@@ -755,13 +789,13 @@ html.dark-theme .adt-breadcrumb-home-link:hover {
 
 .adt-bc-sep {
   user-select: none;
-  color: #666;
+  color: var(--adt-ink-muted);
   font-weight: 500;
   padding: 0 0.1rem;
 }
 
 html.dark-theme .adt-bc-sep {
-  color: #7a7a7a;
+  color: var(--adt-ink-muted);
 }
 
 .adt-bc-cluster {
@@ -835,8 +869,8 @@ html.dark-theme .adt-bc-sep {
   flex-direction: column !important;
   columns: 1 !important;
   white-space: normal;
-  background: #fff;
-  border: 1px solid #ccc;
+  background: var(--adt-elevated);
+  border: 1px solid var(--adt-border);
   border-radius: 0.2rem;
   box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
@@ -884,8 +918,8 @@ html.dark-theme .adt-bc-sep {
 }
 
 html.dark-theme .adt-bc-dropdown {
-  background: #1a1a1a;
-  border-color: rgba(255, 255, 255, 0.12);
+  background: var(--adt-elevated);
+  border-color: var(--adt-border);
   box-shadow: 0 0.25rem 0.6rem rgba(0, 0, 0, 0.45);
 }
 
@@ -894,24 +928,24 @@ html.dark-theme .adt-bc-dropdown {
   padding: 0.4rem 0.65rem;
   font-size: 0.8rem;
   line-height: 1.2;
-  color: #191919;
+  color: var(--adt-ink);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 html.dark-theme .adt-bc-menu-item a {
-  color: #e6e6e6;
+  color: var(--adt-ink);
 }
 
 .adt-bc-menu-item a.is-current,
 .adt-bc-menu-item a.is-current:hover {
   font-weight: 600;
-  background: rgba(0, 0, 0, 0.08);
+  background: var(--adt-accent-soft);
 }
 
 html.dark-theme .adt-bc-menu-item a.is-current {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--adt-accent-soft);
 }
 
 .adt-bc-version-pill.is-missing {
@@ -945,7 +979,7 @@ nav.nav-menu.adt-nav-tree-only {
   font-weight: 600;
   line-height: 1.3;
   letter-spacing: 0.01em;
-  color: #2d2d2d;
+  color: var(--adt-ink);
 }
 
 /* ——— Sidebar: component root + tree; hide legacy explore ——— */
@@ -962,14 +996,13 @@ nav.nav-menu.adt-nav-tree-only {
 /* Dark nav link color (site-extra.css is overwritten by sync-valentus-theme.cjs) */
 html.dark-theme .nav .adt-nav-component-title,
 html.dark-theme .nav .adt-nav-component-title a {
-  color: #d7d8da;
+  color: var(--adt-ink);
 }
 
 /* Page tree: smaller + lighter + muted vs. component title.
-   — Antora draws the caret in a 1em×nav-line-height column; without matching left
-     padding on .nav-link/.nav-text, wrapped lines align to the li edge and sit left
-     of the first line. Reserve the same column on every row so folder labels, leaf
-     links, and multi-line text share one text origin. */
+   — Reserve a caret column with margin-left (outside the label box) so highlight
+     backgrounds/padding wrap the text glyphs; wrapped lines still share one
+     text origin. Extra rem gap keeps the toggle clear of the label. */
 nav.nav-menu.nav-tree-only .nav-item,
 nav.nav-menu.adt-nav-tree-only .nav-item {
   position: relative;
@@ -982,41 +1015,41 @@ nav.nav-menu.nav-tree-only .nav-item > .nav-text,
 nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text {
   display: block;
   box-sizing: border-box;
-  width: 100%;
-  max-width: 100%;
+  margin: 0 0 0 calc(0.85em + 0.55rem);
+  width: calc(100% - (0.85em + 0.55rem));
+  max-width: calc(100% - (0.85em + 0.55rem));
   min-height: 0;
-  margin: 0;
   text-indent: 0;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  padding: 0.12rem 0.35rem 0.12rem calc(var(--nav-line-height) * 1em + 0.2rem);
+  padding: 0.12rem 0.4rem;
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.35;
-  color: #6a6a6a;
+  color: var(--adt-ink-muted);
 }
 
 nav.nav-menu.nav-tree-only .nav-item.is-current-page > .nav-link,
 nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-link,
 nav.nav-menu.nav-tree-only .nav-item.is-current-page > .nav-link .nav-text,
 nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-link .nav-text {
-  font-weight: 500;
-  color: #1a1a1a;
+  font-weight: 600;
+  color: var(--adt-accent);
 }
 
 html.dark-theme nav.nav-menu.nav-tree-only .nav-item > .nav-link,
 html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item > .nav-link,
 html.dark-theme nav.nav-menu.nav-tree-only .nav-item > .nav-text,
 html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text {
-  color: #8f9194;
+  color: var(--adt-ink-muted);
 }
 
 html.dark-theme nav.nav-menu.nav-tree-only .nav-item.is-current-page > .nav-link,
 html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-link,
 html.dark-theme nav.nav-menu.nav-tree-only .nav-item.is-current-page > .nav-link .nav-text,
 html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-link .nav-text {
-  color: #d4d4d4;
-  font-weight: 500;
+  color: var(--adt-accent);
+  font-weight: 600;
 }
 
 .nav-panel-explore {
@@ -1064,6 +1097,9 @@ body {
 .body.adt-body {
   flex: 0 1 auto;
   min-height: 0;
+  /* Cross-axis centering when max-width binds (see site-visual @1024) */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Footer region absorbs leftover viewport; copy stays top-aligned with padding. */

@@ -1,0 +1,27 @@
+{
+  id: "read-width",
+  name: "Reading width control",
+  version: "1.0.0",
+  type: "ui-module",
+  description: "Optional reading-measure control (narrow / comfortable / wide). Provides partial adt-read-width for placement anywhere; persists via localStorage and data-adt-read-width.",
+  repository: "https://github.com/antora-supplemental/valentus-theme",
+  requires: [],
+  recommends: [],
+  conflicts: [],
+  slots: {
+    head: {
+      // Inlined early to avoid FOUC on article max-width
+      scripts: ["js/adt-read-width-fouc.js"],
+      stylesheets: ["css/site-read-width.css"],
+    },
+    foot: {
+      scripts: ["js/site-read-width.js"],
+    },
+  },
+  ui: {
+    partials: {
+      provide: ["adt-read-width"],
+      replace: [],
+    },
+  },
+}

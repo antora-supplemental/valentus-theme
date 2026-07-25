@@ -1,4 +1,7 @@
 <div class="body adt-body">
 {{> nav}}
 {{> main}}
+{{#unless (eq page.layout '404')}}
+{{> toc}}
+{{/unless}}
 </div>

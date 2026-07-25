@@ -1,0 +1,908 @@
+/* Valentus visual system — loads after site-extra + site-doc-layout.
+   Opinionated palette, type, chrome, nav/TOC, code, admonitions, search, motion.
+   Consumers override via :root / html.dark-theme custom properties. */
+
+:root {
+  /* Surfaces */
+  --adt-canvas: #f3f5f8;
+  --adt-elevated: #ffffff;
+  --adt-ink: #141820;
+  --adt-ink-muted: #5a6270;
+  --adt-accent: #0f766e;
+  --adt-accent-hover: #0d9488;
+  --adt-accent-soft: rgba(15, 118, 110, 0.1);
+  --adt-border: #d9dee7;
+  --adt-chrome: var(--adt-canvas);
+  --adt-chrome-border: var(--adt-border);
+  --adt-nav-bg: transparent;
+  --adt-code-bg: #151a24;
+  --adt-code-fg: #e8ecf2;
+  --adt-code-border: rgba(20, 24, 32, 0.35);
+  --adt-radius: 0.4rem;
+  --adt-radius-sm: 0.25rem;
+  --adt-shadow-float: 0 0.35rem 1rem rgba(20, 24, 32, 0.1);
+  --adt-shadow-sticky: 0 4px 16px rgba(20, 24, 32, 0.07);
+  --adt-font: "Source Sans 3", system-ui, "Segoe UI", sans-serif;
+  /* Plus Jakarta Sans — modern geometric sans used on many SaaS/docs UIs */
+  --adt-font-display: "Plus Jakarta Sans", var(--adt-font);
+  --adt-font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace;
+  --adt-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.25s ease, opacity 0.2s ease;
+
+  /* Bridge older layout tokens */
+  --adt-bc-kicker-fg: var(--adt-accent);
+  --adt-bc-kicker-bg: var(--adt-accent-soft);
+  --adt-bc-kicker-border: color-mix(in srgb, var(--adt-accent) 28%, transparent);
+  --adt-header-bar-bg: var(--adt-chrome);
+  --adt-header-bar-fg: var(--adt-ink);
+  --adt-header-bar-border: var(--adt-chrome-border);
+  --adt-header-bar-hover: var(--adt-accent-soft);
+
+  /* Layout shell: body is intrinsic (nav + gap + doc + gap + toc).
+     --adt-shell-max tracks that width for footer alignment; read-width only changes --adt-doc-max. */
+  --adt-shell-pad: 1.75rem;
+  --adt-col-gap: 2rem;
+  --adt-nav-width: 16.5rem;
+  --adt-toc-width: 12rem;
+  --adt-shell-max: calc(
+    var(--adt-nav-width) + var(--adt-col-gap) + var(--adt-doc-max) + var(--adt-col-gap) + var(--adt-toc-width) +
+      2 * var(--adt-shell-pad)
+  );
+  --adt-global-rail-top: 0.85rem;
+  --adt-content-rail-top: 0.65rem;
+  --adt-toc-rail-top: 2.4rem;
+  --adt-mast-pad-h: 1.25rem;
+}
+
+html.dark-theme {
+  --adt-canvas: #0b0e13;
+  --adt-elevated: #141a22;
+  --adt-ink: #e8ebf0;
+  --adt-ink-muted: #9aa3b2;
+  --adt-accent: #2dd4bf;
+  --adt-accent-hover: #5eead4;
+  --adt-accent-soft: rgba(45, 212, 191, 0.12);
+  --adt-border: rgba(255, 255, 255, 0.09);
+  --adt-chrome: var(--adt-canvas);
+  --adt-chrome-border: var(--adt-border);
+  --adt-nav-bg: transparent;
+  --adt-code-bg: #080b10;
+  --adt-code-fg: #e8ecf2;
+  --adt-code-border: rgba(255, 255, 255, 0.08);
+  --adt-shadow-float: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.45);
+  --adt-shadow-sticky: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --adt-header-vcs-icon-filter: none;
+}
+
+/* ——— Page canvas & type ——— */
+html {
+  color-scheme: light;
+  background-color: var(--adt-canvas);
+  /* Reserve scrollbar lane so short/long pages share the same content width.
+     Prefer gutter over overflow-y: scroll (always-on bar); older browsers just skip this. */
+  scrollbar-gutter: stable;
+}
+
+html.dark-theme {
+  color-scheme: dark;
+}
+
+html,
+html body {
+  background-color: var(--adt-canvas) !important;
+  color: var(--adt-ink);
+  transition: var(--adt-transition);
+}
+
+body,
+button,
+input,
+select,
+optgroup,
+textarea,
+.navbar,
+.navbar-item,
+.breadcrumbs,
+.doc,
+footer.footer {
+  font-family: var(--adt-font) !important;
+}
+
+code,
+kbd,
+pre,
+.spectrum,
+.doc .conum,
+.doc .source-toolbox {
+  font-family: var(--adt-font-mono) !important;
+}
+
+a.adt-header-title,
+.doc h1,
+.doc h1.page,
+.doc .adt-page-title,
+.doc h2 {
+  font-family: var(--adt-font-display) !important;
+  letter-spacing: -0.015em;
+}
+
+a.adt-header-title {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.doc h1,
+.doc h1.page,
+.doc .adt-page-title {
+  font-weight: 700;
+  color: var(--adt-ink) !important;
+}
+
+.doc h2:not(.discrete) {
+  font-weight: 650;
+  color: var(--adt-ink) !important;
+  border-bottom: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 0.15rem 0 0 !important;
+  box-shadow: inset 0 -1px 0 var(--adt-border);
+}
+
+.doc h3,
+.doc h4,
+.doc h5,
+.doc h6 {
+  font-family: var(--adt-font) !important;
+  font-weight: 700;
+  color: var(--adt-ink) !important;
+}
+
+.doc {
+  color: var(--adt-ink) !important;
+  line-height: 1.65;
+}
+
+.doc p,
+.doc li {
+  color: color-mix(in srgb, var(--adt-ink) 92%, var(--adt-ink-muted));
+}
+
+.doc a {
+  color: var(--adt-accent) !important;
+  text-underline-offset: 0.12em;
+}
+
+.doc a:hover,
+.doc a:focus {
+  color: var(--adt-accent-hover) !important;
+}
+
+/* ——— Unified chrome ——— */
+.adt-site-navbar {
+  background: var(--adt-chrome) !important;
+  border-bottom-color: var(--adt-chrome-border) !important;
+  transition: var(--adt-transition);
+}
+
+.adt-site-navbar.is-scrolled {
+  box-shadow: var(--adt-shadow-sticky);
+}
+
+.adt-doc-mast {
+  background: var(--adt-chrome) !important;
+  border-bottom: 1px solid var(--adt-chrome-border) !important;
+}
+
+.nav,
+.nav-panel-menu,
+.nav-panel-explore,
+.toolbar {
+  background: var(--adt-nav-bg) !important;
+  border-color: var(--adt-border) !important;
+  color: var(--adt-ink-muted) !important;
+  box-shadow: none !important;
+}
+
+@media screen and (min-width: 1024px) {
+  /*
+   * True 3-column shell: .body.adt-body > nav | main | TOC (peers).
+   * Width is intrinsic (panels + fixed --adt-col-gap + doc column); viewport-centered
+   * via align-self + margin-inline:auto. Main shrink-wraps to --adt-doc-max (no flex grow).
+   * Columns separated by gap only — no vertical rule between nav and content.
+   */
+  .body.adt-body {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    align-self: center;
+    gap: var(--adt-col-gap);
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--adt-shell-pad);
+    box-sizing: border-box;
+  }
+
+  .nav-container {
+    width: var(--adt-nav-width) !important;
+    flex: 0 0 var(--adt-nav-width) !important;
+    border-right: none !important;
+    box-shadow: none !important;
+  }
+
+  main.adt-article {
+    /* flex-basis: auto so width/max-width transitions drive both grow and shrink */
+    flex: 0 1 auto;
+    width: var(--adt-doc-max);
+    max-width: var(--adt-doc-max);
+    min-width: 0;
+    transition: width 0.25s ease, max-width 0.25s ease;
+  }
+
+  /* TOC is a body peer now — not nested in main > .content */
+  main.adt-article > .content {
+    display: block;
+  }
+
+  .body.adt-body > aside.toc.sidebar {
+    flex: 0 0 var(--adt-toc-width) !important;
+    width: var(--adt-toc-width) !important;
+    order: 0 !important;
+    padding-top: var(--adt-toc-rail-top);
+    padding-right: 0.35rem;
+    box-sizing: border-box;
+  }
+
+  footer.footer {
+    align-self: center;
+    width: 100%;
+    max-width: var(--adt-shell-max);
+    margin-inline: auto;
+    padding-left: calc(var(--adt-shell-pad) + var(--adt-footer-pad-h, 1.5rem));
+    padding-right: calc(var(--adt-shell-pad) + var(--adt-footer-pad-h, 1.5rem));
+    box-sizing: border-box;
+  }
+}
+
+footer.footer {
+  background: var(--adt-chrome) !important;
+  color: var(--adt-ink-muted) !important;
+  border-top: 1px solid var(--adt-border);
+}
+
+footer.footer a {
+  color: var(--adt-accent) !important;
+}
+
+/* ——— Header search ——— */
+.adt-header-search {
+  position: relative;
+}
+
+.adt-header-search #search-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.adt-header-search #search-input {
+  width: 12.5rem;
+  max-width: 32vw;
+  height: 2.15rem;
+  padding: 0 2.4rem 0 0.75rem;
+  border: 1px solid var(--adt-border) !important;
+  border-radius: var(--adt-radius) !important;
+  background: var(--adt-elevated) !important;
+  color: var(--adt-ink) !important;
+  font-size: 0.875rem;
+  transition: var(--adt-transition);
+}
+
+.adt-header-search #search-input::placeholder {
+  color: var(--adt-ink-muted);
+  opacity: 0.85;
+}
+
+.adt-header-search #search-input:focus {
+  outline: none;
+  border-color: var(--adt-accent) !important;
+  box-shadow: 0 0 0 3px var(--adt-accent-soft);
+}
+
+.adt-header-search #search-field::after {
+  content: "⌘K";
+  position: absolute;
+  right: 0.55rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--adt-ink-muted);
+  border: 1px solid var(--adt-border);
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.3rem;
+  pointer-events: none;
+  line-height: 1.2;
+  opacity: 0.85;
+}
+
+@media (pointer: coarse) {
+  .adt-header-search #search-field::after {
+    content: none;
+    display: none;
+  }
+
+  .adt-header-search #search-input {
+    padding-right: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .adt-header-search #search-input {
+    width: 7.5rem;
+  }
+
+  .adt-header-search #search-field::after {
+    content: none;
+    display: none;
+  }
+
+  .adt-header-search #search-input {
+    padding-right: 0.75rem;
+  }
+}
+
+.header.adt-header .navbar .navbar-end .adt-header-icon-btn,
+.header.adt-header .navbar .navbar-end .theme-toggle.adt-header-icon-btn {
+  border-radius: var(--adt-radius-sm) !important;
+  transition: var(--adt-transition);
+}
+
+.adt-header-logo-item {
+  border-radius: var(--adt-radius-sm);
+  transition: var(--adt-transition);
+}
+
+/* Theme toggle: soft crossfade of page surfaces */
+html.adt-theme-animating,
+html.adt-theme-animating body,
+html.adt-theme-animating .adt-site-navbar,
+html.adt-theme-animating .adt-doc-mast,
+html.adt-theme-animating .nav,
+html.adt-theme-animating footer.footer,
+html.adt-theme-animating .doc {
+  transition: background-color 0.28s ease, color 0.28s ease, border-color 0.28s ease,
+    box-shadow 0.28s ease !important;
+}
+
+/* ——— Breadcrumbs / mast accents ——— */
+.adt-breadcrumb-trail .adt-breadcrumb-trail-link,
+.adt-breadcrumb-edit .adt-edit-inline-link,
+.adt-breadcrumb-home-link {
+  color: var(--adt-accent) !important;
+}
+
+.adt-breadcrumb-trail--current .adt-breadcrumb-trail-link,
+.adt-breadcrumb-trail--current .adt-breadcrumb-trail-text,
+.adt-breadcrumb-trail-text {
+  color: var(--adt-ink) !important;
+}
+
+.adt-bc-sep {
+  color: var(--adt-ink-muted) !important;
+  opacity: 0.7;
+}
+
+.adt-bc-kicker {
+  border-radius: var(--adt-radius-sm);
+}
+
+.adt-bc-dropdown {
+  background: var(--adt-elevated) !important;
+  border: 1px solid var(--adt-border) !important;
+  border-radius: var(--adt-radius) !important;
+  box-shadow: var(--adt-shadow-float) !important;
+}
+
+.adt-bc-menu-item a {
+  color: var(--adt-ink) !important;
+}
+
+.adt-bc-menu-item a.is-current,
+.adt-bc-menu-item a.is-current:hover {
+  background: var(--adt-accent-soft) !important;
+  color: var(--adt-accent) !important;
+}
+
+.adt-nav-component-title {
+  color: var(--adt-ink) !important;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+
+/* ——— Nav & TOC active states ———
+   Caret column is margin (outside the highlight box). Same padding for
+   normal / hover / current so soft-fill never breaks tree vertical rhythm;
+   current differs by accent color + weight only. */
+nav.nav-menu.nav-tree-only .nav-item > .nav-link,
+nav.nav-menu.adt-nav-tree-only .nav-item > .nav-link,
+nav.nav-menu.nav-tree-only .nav-item > .nav-text,
+nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text {
+  color: var(--adt-ink-muted) !important;
+  border-radius: var(--adt-radius-sm);
+  /* Extra rem beyond the caret glyph so toggle and label don’t kiss */
+  margin-left: calc(0.85em + 0.55rem) !important;
+  width: calc(100% - (0.85em + 0.55rem)) !important;
+  max-width: calc(100% - (0.85em + 0.55rem)) !important;
+  padding: 0.12rem 0.4rem !important;
+  transition: var(--adt-transition);
+}
+
+nav.nav-menu.nav-tree-only .nav-item > .nav-link:hover,
+nav.nav-menu.adt-nav-tree-only .nav-item > .nav-link:hover {
+  color: var(--adt-ink) !important;
+  background: var(--adt-accent-soft);
+  text-decoration: none;
+}
+
+/* Soft-fill only on the link/label box — not nested .nav-text (that hugged glyphs).
+   Same padding as hover (inherited from base row); accent + weight mark current. */
+nav.nav-menu.nav-tree-only .nav-item.is-current-page > .nav-link,
+nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-link {
+  color: var(--adt-accent) !important;
+  font-weight: 600 !important;
+  background: var(--adt-accent-soft);
+}
+
+nav.nav-menu.nav-tree-only .nav-item.is-current-page > .nav-link .nav-text,
+nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-link .nav-text {
+  color: var(--adt-accent) !important;
+  font-weight: 600 !important;
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Nav expanders: stroke chevron sized to the text line, aligned with label padding */
+nav.nav-menu.nav-tree-only .nav-item-toggle,
+nav.nav-menu.adt-nav-tree-only .nav-item-toggle {
+  position: absolute;
+  left: 0.15rem;
+  top: 0.2rem;
+  width: 0.8em;
+  height: 0.8em;
+  margin: 0 !important;
+  padding: 0;
+  border: none;
+  outline: none;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--adt-ink-muted);
+  background-color: currentColor !important;
+  background-image: none !important;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 3.5L11 8L6 12.5' stroke='black' stroke-width='1.85' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 3.5L11 8L6 12.5' stroke='black' stroke-width='1.85' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  opacity: 0.9;
+  transform: none;
+  transform-origin: 50% 50%;
+  transition: transform 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+nav.nav-menu.nav-tree-only .nav-item-toggle:hover,
+nav.nav-menu.adt-nav-tree-only .nav-item-toggle:hover {
+  color: var(--adt-ink);
+  opacity: 1;
+}
+
+nav.nav-menu.nav-tree-only .nav-item.is-active > .nav-item-toggle,
+nav.nav-menu.adt-nav-tree-only .nav-item.is-active > .nav-item-toggle {
+  transform: rotate(90deg);
+}
+
+html.dark-theme nav.nav-menu.nav-tree-only .nav-item-toggle,
+html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item-toggle {
+  color: var(--adt-ink-muted);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 3.5L11 8L6 12.5' stroke='black' stroke-width='1.85' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 3.5L11 8L6 12.5' stroke='black' stroke-width='1.85' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.toc .toc-menu h3 {
+  color: var(--adt-ink) !important;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 0.72rem !important;
+}
+
+.toc .toc-menu a {
+  color: var(--adt-ink-muted) !important;
+  border-left: 2px solid var(--adt-border) !important;
+  border-radius: 0 var(--adt-radius-sm) var(--adt-radius-sm) 0;
+  transition: var(--adt-transition);
+}
+
+.toc .toc-menu a:hover {
+  color: var(--adt-accent) !important;
+  background: var(--adt-accent-soft);
+}
+
+.toc .toc-menu a.is-active {
+  border-left-color: var(--adt-accent) !important;
+  color: var(--adt-ink) !important;
+  background: var(--adt-accent-soft);
+  font-weight: 600;
+}
+
+.sidebar.toc .toc-menu a:focus {
+  background: var(--adt-accent-soft);
+}
+
+/* ——— Code blocks (dark panels in both themes) ———
+   Panel is .listingblock > .content so lang + copy chrome stay inside the radius.
+   Antora appends .source-toolbox after <pre>; keep it absolute inset (top bar)
+   and reserve padding on the code so it never expands height outside the panel. */
+.doc .listingblock,
+.doc .literalblock {
+  background: transparent !important;
+}
+
+.doc .listingblock > .content,
+.doc .literalblock > .content {
+  position: relative;
+  background: var(--adt-code-bg) !important;
+  border: 1px solid var(--adt-code-border) !important;
+  border-radius: var(--adt-radius) !important;
+  overflow: hidden;
+}
+
+.doc .listingblock pre:not(.highlight),
+.doc .literalblock pre,
+.doc pre.highlight > code {
+  background: transparent !important;
+  color: var(--adt-code-fg) !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 1rem 1.1rem !important;
+}
+
+/* Room for the absolute top toolbar when present */
+.doc .listingblock > .content:has(> .source-toolbox) pre:not(.highlight),
+.doc .listingblock > .content:has(> .source-toolbox) pre.highlight > code {
+  padding-top: 2.35rem !important;
+}
+
+.doc .listingblock .source-toolbox {
+  visibility: visible !important;
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: 0 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0.4rem 0.75rem;
+  color: color-mix(in srgb, var(--adt-code-fg) 72%, transparent) !important;
+  background: color-mix(in srgb, var(--adt-code-bg) 82%, #000) !important;
+  border: none;
+  border-bottom: 1px solid var(--adt-code-border);
+  border-radius: 0;
+  font-family: var(--adt-font-mono) !important;
+  z-index: 1;
+}
+
+.doc .listingblock .source-toolbox > :not(:last-child)::after {
+  content: none;
+}
+
+.doc .listingblock .source-toolbox .copy-button {
+  position: relative;
+  width: auto;
+  height: auto;
+  min-width: 1.1em;
+  min-height: 1.1em;
+  padding: 0.1rem;
+}
+
+.doc .listingblock .source-toolbox .copy-toast {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 50%;
+  margin-top: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.doc .listingblock .source-toolbox .copy-toast::after {
+  left: 50%;
+  transform: rotate(-90deg) translateX(50%) translateY(50%);
+}
+
+.doc p code,
+.doc thead code,
+.doc .colist > table code {
+  color: var(--adt-ink) !important;
+  background: var(--adt-accent-soft) !important;
+  border: 1px solid color-mix(in srgb, var(--adt-accent) 22%, transparent);
+  border-radius: var(--adt-radius-sm);
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+}
+
+.doc kbd {
+  background: var(--adt-elevated) !important;
+  border: 1px solid var(--adt-border) !important;
+  border-radius: var(--adt-radius-sm) !important;
+  box-shadow: 0 1px 0 var(--adt-border) !important;
+  color: var(--adt-ink) !important;
+}
+
+/* Syntax colors tuned for dark code panels */
+.doc .hljs-comment,
+.doc .hljs-quote {
+  color: #8b95a8 !important;
+  font-style: italic;
+}
+
+.doc .hljs-keyword,
+.doc .hljs-selector-tag,
+.doc .hljs-subst {
+  color: #7dd3c7 !important;
+  font-weight: 500;
+}
+
+.doc .hljs-string,
+.doc .hljs-doctag {
+  color: #f0b27a !important;
+}
+
+.doc .hljs-number,
+.doc .hljs-literal,
+.doc .hljs-variable,
+.doc .hljs-template-variable,
+.doc .hljs-tag .hljs-attr {
+  color: #9db7ff !important;
+}
+
+.doc .hljs-title,
+.doc .hljs-section,
+.doc .hljs-selector-id {
+  color: #e8ecf2 !important;
+  font-weight: 600;
+}
+
+.doc .hljs-type,
+.doc .hljs-class .hljs-title {
+  color: #f9a8d4 !important;
+}
+
+.doc .hljs-built_in,
+.doc .hljs-builtin-name {
+  color: #67e8f9 !important;
+}
+
+.doc .hljs-meta {
+  color: #94a3b8 !important;
+}
+
+/* ——— Admonitions: left accent + tinted fill ——— */
+.doc .admonitionblock {
+  margin: 1.35rem 0 0;
+}
+
+.doc .admonitionblock > table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.doc .admonitionblock td.content {
+  background: var(--adt-elevated) !important;
+  border: 1px solid var(--adt-border) !important;
+  border-left-width: 3px !important;
+  border-radius: var(--adt-radius) !important;
+  padding: 0.95rem 1rem 0.85rem !important;
+  color: var(--adt-ink) !important;
+}
+
+.doc .admonitionblock td.icon {
+  position: static !important;
+  transform: none !important;
+  padding: 0 0 0.4rem 0 !important;
+  line-height: 1.2;
+  width: auto;
+}
+
+.doc .admonitionblock td.icon i {
+  border-radius: var(--adt-radius-sm) !important;
+  height: auto !important;
+  min-height: 1.35rem;
+  padding: 0.15rem 0.45rem !important;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.doc .admonitionblock.note td.content {
+  border-left-color: #2563eb !important;
+  background: color-mix(in srgb, #2563eb 7%, var(--adt-elevated)) !important;
+}
+
+.doc .admonitionblock.tip td.content {
+  border-left-color: #059669 !important;
+  background: color-mix(in srgb, #059669 8%, var(--adt-elevated)) !important;
+}
+
+.doc .admonitionblock.important td.content {
+  border-left-color: #dc2626 !important;
+  background: color-mix(in srgb, #dc2626 8%, var(--adt-elevated)) !important;
+}
+
+.doc .admonitionblock.warning td.content {
+  border-left-color: #d97706 !important;
+  background: color-mix(in srgb, #d97706 9%, var(--adt-elevated)) !important;
+}
+
+.doc .admonitionblock.caution td.content {
+  border-left-color: #be185d !important;
+  background: color-mix(in srgb, #be185d 8%, var(--adt-elevated)) !important;
+}
+
+/* Stack icon above content on narrow: keep table but restyle cells as block-ish */
+.doc .admonitionblock > table,
+.doc .admonitionblock > table > tbody,
+.doc .admonitionblock > table > tbody > tr {
+  display: block;
+  width: 100%;
+}
+
+.doc .admonitionblock td.icon,
+.doc .admonitionblock td.content {
+  display: block;
+  width: 100% !important;
+}
+
+/* ——— Other content blocks ——— */
+.doc .sidebarblock {
+  background: var(--adt-elevated) !important;
+  border: 1px solid var(--adt-border) !important;
+  border-radius: var(--adt-radius) !important;
+  padding: 1rem 1.25rem !important;
+}
+
+.doc .exampleblock > .content,
+.doc details.result > .content {
+  background: var(--adt-elevated) !important;
+  border: 1px solid var(--adt-border) !important;
+  border-radius: var(--adt-radius) !important;
+}
+
+.doc .quoteblock,
+.doc .verseblock {
+  background: var(--adt-elevated) !important;
+  border-left: 3px solid var(--adt-accent) !important;
+  color: var(--adt-ink-muted) !important;
+  border-radius: 0 var(--adt-radius) var(--adt-radius) 0;
+}
+
+.doc table.tableblock,
+.doc table.tableblock > * > tr > * {
+  border-color: var(--adt-border) !important;
+}
+
+.doc table.stripes-all > tbody > tr,
+.doc table.stripes-even > tbody > tr:nth-of-type(2n),
+.doc table.stripes-odd > tbody > tr:nth-of-type(odd),
+.doc table.stripes-hover > tbody > tr:hover {
+  background: var(--adt-accent-soft) !important;
+}
+
+nav.pagination {
+  border-top: 1px solid var(--adt-border) !important;
+}
+
+nav.pagination a {
+  color: var(--adt-accent) !important;
+}
+
+/* ——— Dark mode: tame site-extra hardcodes ——— */
+html.dark-theme a {
+  color: var(--adt-accent) !important;
+}
+
+html.dark-theme a:hover,
+html.dark-theme a:focus {
+  color: var(--adt-accent-hover) !important;
+}
+
+html.dark-theme .navbar,
+html.dark-theme .navbar .navbar-menu {
+  background-color: var(--adt-chrome) !important;
+  color: var(--adt-ink) !important;
+  border-color: var(--adt-border) !important;
+}
+
+html.dark-theme .content,
+html.dark-theme .doc,
+html.dark-theme .doc h1,
+html.dark-theme .doc h2,
+html.dark-theme .doc h3,
+html.dark-theme .doc h4,
+html.dark-theme .doc h5,
+html.dark-theme .doc h6,
+html.dark-theme .doc .title,
+html.dark-theme .doc .heading {
+  color: var(--adt-ink) !important;
+}
+
+html.dark-theme .nav .title,
+html.dark-theme .nav .title a,
+html.dark-theme .nav .nav-link,
+html.dark-theme .nav .nav-text,
+html.dark-theme .toc.sidebar,
+html.dark-theme .toc.sidebar a {
+  color: var(--adt-ink-muted) !important;
+}
+
+html.dark-theme .admonitionblock,
+html.dark-theme .exampleblock:not(.tile),
+html.dark-theme .sidebarblock,
+html.dark-theme .quoteblock,
+html.dark-theme .openblock:not(.cards),
+html.dark-theme .tableblock,
+html.dark-theme .doc .sidebarblock,
+html.dark-theme .doc .sidebarblock > .content,
+html.dark-theme .doc .exampleblock:not(.tile),
+html.dark-theme .doc .exampleblock:not(.tile) > .content {
+  background-color: var(--adt-elevated) !important;
+  background: var(--adt-elevated) !important;
+  border-color: var(--adt-border) !important;
+}
+
+/* Keep listing/literal panels on --adt-code-bg (not elevated); neutralize site-extra */
+html.dark-theme .doc .listingblock,
+html.dark-theme .doc .literalblock {
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+html.dark-theme .doc .listingblock > .content,
+html.dark-theme .doc .literalblock > .content {
+  background: var(--adt-code-bg) !important;
+  border-color: var(--adt-code-border) !important;
+}
+
+html.dark-theme .doc .listingblock pre:not(.highlight),
+html.dark-theme .doc .literalblock pre,
+html.dark-theme .doc pre.highlight > code,
+html.dark-theme .doc .listingblock pre,
+html.dark-theme .doc .listingblock pre.highlight,
+html.dark-theme .doc .listingblock pre.highlight code {
+  background: transparent !important;
+  color: var(--adt-code-fg) !important;
+}
+
+html.dark-theme .doc .sect1,
+html.dark-theme .doc .sect2,
+html.dark-theme .doc .sect3,
+html.dark-theme .doc .sect4 {
+  border-color: var(--adt-border) !important;
+}
+
+/* Scrollbars */
+@media (pointer: fine) {
+  @supports (scrollbar-width: thin) {
+    html {
+      scrollbar-color: color-mix(in srgb, var(--adt-ink-muted) 55%, transparent) var(--adt-canvas);
+    }
+  }
+}

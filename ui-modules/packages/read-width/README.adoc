@@ -1,0 +1,39 @@
+= read-width UI module
+
+Reusable **reading width** control for Valentus / Antora supplemental UI.
+
+== What it provides
+
+* Partial `adt-read-width` — segmented control (narrow / comfortable / wide)
+* `css/site-read-width.css` — sets `--adt-doc-max` tiers + control chrome; sizes `main` to the doc
+* `js/adt-read-width-fouc.js` — early `data-adt-read-width` from `localStorage` (orchestrator inlines in `<head>`)
+* `js/site-read-width.js` — click handling + `aria-pressed` sync
+
+Doc measure (desktop): narrow `68ch` / comfortable `82ch` / wide `100ch`.
+Column gaps (`--adt-col-gap`): constant `2rem` (nav↔doc / doc↔TOC do not grow when the measure widens).
+The body row is intrinsic width (nav + gap + doc + gap + toc), viewport-centered; panels move only because the doc column changed.
+
+== Install (orchestrator)
+
+Add `read-width` to your recipe or `modules` list, then place the partial wherever you want the control:
+
+[source,handlebars]
+----
+{{> adt-read-width}}
+----
+
+Common placements:
+
+* Above the article title (Valentus demo): in `article.hbs`, before `.adt-page-header`
+* Header actions: inside `.adt-header-actions` / `.navbar-end`
+* Mast or toolbar: any chrome partial you own
+
+When placed as a direct child of `article.doc`, CSS centers the control above the title.
+
+== Supplemental-files path (no orchestrator)
+
+1. Copy `ui/css/site-read-width.css`, `ui/js/site-read-width.js`, and `ui/partials/adt-read-width.hbs` into your supplemental UI tree.
+2. Link the stylesheet from `head-meta` (after layout CSS).
+3. Inline or port the FOUC snippet from `adt-read-width-fouc.js` into an early `<script>` in `head-meta`.
+4. Load `site-read-width.js` from `footer-scripts`.
+5. Include `{{> adt-read-width}}` in the desired partial.

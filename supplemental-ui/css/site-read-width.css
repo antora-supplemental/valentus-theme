@@ -1,0 +1,126 @@
+/* Reading width module — doc measure tokens + control chrome.
+   Place {{> adt-read-width}} anywhere; when a direct child of article.doc it centers above the title.
+   data-adt-read-width only changes --adt-doc-max. Layout sizes main to the doc; --adt-col-gap stays fixed. */
+
+:root {
+  /* Constant nav↔doc / doc↔TOC gap (does not scale with reading width) */
+  --adt-col-gap: 2rem;
+  --adt-doc-max: 82ch;
+  --adt-read-width-radius: 0.4rem;
+  --adt-read-width-radius-sm: 0.25rem;
+  --adt-read-width-border: var(--adt-border, #d9dee7);
+  --adt-read-width-bg: var(--adt-elevated, #fff);
+  --adt-read-width-fg: var(--adt-ink-muted, #5a6270);
+  --adt-read-width-fg-active: var(--adt-accent, #0f766e);
+  --adt-read-width-soft: var(--adt-accent-soft, rgba(15, 118, 110, 0.1));
+  --adt-read-width-ink: var(--adt-ink, #141820);
+  --adt-read-width-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+html[data-adt-read-width="narrow"] {
+  --adt-doc-max: 68ch;
+}
+
+html[data-adt-read-width="comfortable"],
+html:not([data-adt-read-width]) {
+  --adt-doc-max: 82ch;
+}
+
+html[data-adt-read-width="wide"] {
+  --adt-doc-max: 100ch;
+}
+
+@media screen and (min-width: 1024px) {
+  /*
+   * Center column tracks --adt-doc-max. Side panels stay at fixed widths with a
+   * constant --adt-col-gap; widening the doc moves panels outward only because
+   * the content column grew — no flex slack between nav and the text.
+   *
+   * flex-basis: auto (not var(--adt-doc-max)): the flex base size follows the
+   * transitioning `width`. A jumped flex-basis made shrink snap while grow still
+   * looked smooth via max-width.
+   */
+  main.adt-article {
+    flex: 0 1 auto;
+    width: var(--adt-doc-max);
+    max-width: var(--adt-doc-max);
+    min-width: 0;
+    transition: width 0.25s ease, max-width 0.25s ease;
+  }
+
+  .doc {
+    max-width: 100% !important;
+    width: 100%;
+    margin-inline: 0 !important;
+  }
+
+  footer.footer {
+    transition: max-width 0.25s ease, width 0.25s ease;
+  }
+}
+
+/* Control — placement-agnostic */
+.adt-read-width {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.15rem;
+  border: 1px solid var(--adt-read-width-border);
+  border-radius: var(--adt-read-width-radius);
+  background: var(--adt-read-width-bg);
+  box-sizing: border-box;
+}
+
+/* Demo / article placement: centered above the page title */
+article.doc > .adt-read-width {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 0.85rem;
+}
+
+.adt-read-width-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  padding: 0;
+  border: none;
+  border-radius: var(--adt-read-width-radius-sm);
+  background: transparent;
+  color: var(--adt-read-width-fg);
+  cursor: pointer;
+  transition: var(--adt-read-width-transition);
+}
+
+.adt-read-width-btn:hover {
+  color: var(--adt-read-width-ink);
+  background: var(--adt-read-width-soft);
+}
+
+.adt-read-width-btn[aria-pressed="true"] {
+  color: var(--adt-read-width-fg-active);
+  background: var(--adt-read-width-soft);
+}
+
+.adt-read-width-btn:focus {
+  outline: none;
+}
+
+.adt-read-width-btn:focus-visible {
+  outline: 2px solid var(--adt-read-width-fg-active);
+  outline-offset: 1px;
+}
+
+.adt-read-width-btn svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+}
