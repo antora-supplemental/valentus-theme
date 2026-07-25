@@ -7,6 +7,8 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 == [Unreleased]
 
+* *Fix:* Double-click / triple-click can select text in `#search-input` again when search sits under `.nav-panel-menu`. Antora UI default `site.js` calls `preventDefault` on multi-click `mousedown` in the nav panel (to avoid selecting nav labels); Valentus stops that event at `#search-field`. Also set `user-select: text` on the search input.
+* See link:changelog-details/2026-07-25%20-%20search%20dblclick%20select.adoc[Detailed notes — 2026-07-25 search dblclick select].
 * *Polish:* Breadcrumb trail weights — ancestors `400`, current crumb `500` (kickers unchanged); hide the vertical `|` between component/version kickers (`.adt-bc-sep`).
 * *Demo:* Visual redesign — teal design tokens; Plus Jakarta Sans + Source Sans 3 + IBM Plex Mono (no serif); true 3-column shell (`nav | main | TOC` peers, gap-only separation, centered shrink-wrap); roomier nav current=hover highlights and text-height stroke chevrons (no left inset bar); dark code panels on `.listingblock > .content`.
 * *Polish:* Search + `adt-read-width` live in a full-width `.adt-tool-band` above the 3-col row (not inside nav / `article.doc`); equal `--adt-side-width` for nav/TOC; no muddy hover fill on the search field. Fixes search results clipped by left-column overflow.

@@ -30,6 +30,17 @@
     true
   )
 
+  // Antora UI default site.js (nav panel): mousedown with detail > 1 → preventDefault
+  // so double-clicking nav labels does not select text. When #search-input lives inside
+  // [data-panel=menu], that also blocks selecting the query. Stop multi-click mousedown
+  // from bubbling out of the search field (tool-band search is already outside the panel).
+  const searchField = document.getElementById('search-field')
+  if (searchField) {
+    searchField.addEventListener('mousedown', (e) => {
+      if (e.detail > 1) e.stopPropagation()
+    })
+  }
+
   // Focus search with /
   document.addEventListener('keydown', (e) => {
     if (e.key !== '/') return
