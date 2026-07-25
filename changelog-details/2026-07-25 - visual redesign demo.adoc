@@ -45,3 +45,7 @@ Session notes for branch `demo/visual-redesign`: layered visual system on Valent
 
 * Demo branch: `demo/visual-redesign`.
 * Playbook: `antora-playbook-visual-demo.yml`.
+
+== Docs fix (tables)
+
+* *Fix:* docs/modules/guide/pages/vcs-repo-logo.adoc was missing |=== open/close delimiters on two tables (provider domain map and files involved), so Antora rendered them as broken paragraph text. Restored proper table blocks with column specs.
