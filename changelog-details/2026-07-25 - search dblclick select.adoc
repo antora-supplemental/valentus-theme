@@ -1,0 +1,29 @@
+= 2026-07-25 — Search input double-click select
+
+== Summary
+
+Double-click (and triple-click) on `#search-input` can fail to select query text when the field lives inside Antora's `.nav-panel-menu`.
+
+== Root cause (Valentus layout + Antora UI default)
+
+Antora UI default `site.js` (nav panel handler) does roughly:
+
+----
+navPanelMenu.addEventListener('mousedown', (e) => {
+  if (e.detail > 1) e.preventDefault()
+})
+----
+
+That prevents accidental text selection when double-clicking nav labels. It also blocks selection inside any form control nested under `[data-panel=menu]`.
+
+Not caused by `@antora/lunr-extension` `search-ui.js` (`confineEvent` only `stopPropagation` on `click`; result-item `mousedown` `preventDefault` is limited to result rows).
+
+== Fix (Valentus)
+
+* `site-visual.js` — on `#search-field`, `mousedown` with `detail > 1` → `stopPropagation()` so the panel handler never sees multi-clicks from the search control.
+* `site-visual.css` — explicit `user-select: text` on the tool-band / nav search input.
+* Tool-band layout (search outside the 3-col / nav panel) already avoids the panel handler for the default demo; the JS fix covers search still placed inside the panel (and future slots).
+
+== Upstream notes (optional MR)
+
+Prefer exempting form controls in antora-ui-default nav.js, e.g. skip `preventDefault` when `e.target.closest('input, textarea, select, [contenteditable]')`. Valentus does not block on that MR.

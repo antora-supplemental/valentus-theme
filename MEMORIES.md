@@ -2,6 +2,10 @@
 
 Durable facts for agents working in this repository.
 
+## Antora nav panel blocks multi-click select (uses: 1)
+
+Antora UI default `site.js` (nav panel): `mousedown` with `detail > 1` → `preventDefault()` so double-clicking nav labels does not select text. Any `#search-input` (or other form control) nested under `[data-panel=menu]` cannot select-on-dblclick unless Valentus stops propagation at `#search-field` (see `site-visual.js` / `site-search-chat.js`). Not a lunr `search-ui.js` bug (`confineEvent` only stops click propagation). Tool-band search outside the panel avoids the handler entirely.
+
 ## Antora `site.keys` camelCase (uses: 1)
 
 Playbook YAML uses snake_case (`header_logo_dark`, `dark_mode_navbar`).
@@ -12,7 +16,7 @@ Handlebars partials must read the camelCase form. Snake_case `lookup` silently m
 
 Visual redesign demo lives in sibling worktree
 `Z:\code\github.com\antora-supplemental\valentus-theme-visual-redesign`
-on branch `demo/visual-redesign`. Main checkout stays on `main`.
+(often on `feature/antora-search-chat` or demo branches). Main checkout stays on `main` / fix branches.
 
 ## Antora rejects linked worktrees as content sources (uses: 1)
 
