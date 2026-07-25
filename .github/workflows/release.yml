@@ -3,8 +3,8 @@ name: Release
 on:
   push:
     tags:
-      # Full semver only — rolling aliases (v1, v1.0) have fewer dots and are skipped.
-      - "v*.*.*"
+      # Pure semver only — dual-axis discoverability tags (vX.Y.Z+antora.N) must not re-trigger.
+      - "v[0-9]+.[0-9]+.[0-9]+"
   workflow_dispatch:
     inputs:
       version:
@@ -20,6 +20,9 @@ env:
 
 jobs:
   release:
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'push' && !contains(github.ref_name, '+'))
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,6 +30,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ env.RELEASE_TAG }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -44,25 +48,42 @@ jobs:
         run: |
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
           TAG_VERSION="${RELEASE_VERSION#v}"
+          TAG_VERSION="${TAG_VERSION%%+*}"
           if [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
             echo "Error: package.json version ($PACKAGE_VERSION) does not match tag version ($TAG_VERSION)"
             exit 1
           fi
 
+      - name: Resolve dual-axis release label
+        id: label
+        run: |
+          VERSION="${RELEASE_VERSION#v}"
+          VERSION="${VERSION%%+*}"
+          ANTORA_MAJOR="${ANTORA_MAJOR:-3}"
+          LABEL="${VERSION}+antora.${ANTORA_MAJOR}"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "label=${LABEL}" >> "$GITHUB_OUTPUT"
+          echo "antora=${ANTORA_MAJOR}" >> "$GITHUB_OUTPUT"
+        env:
+          ANTORA_MAJOR: "3"
+
       - name: Generate changelog for release
         id: changelog
         run: |
-          VERSION="${RELEASE_VERSION#v}"
+          VERSION="${{ steps.label.outputs.version }}"
+          LABEL="${{ steps.label.outputs.label }}"
           if [ -f "CHANGELOG.adoc" ]; then
             NOTES=$(awk -v v="$VERSION" '
               $0 ~ "^== \\[" v "\\]" {flag=1; next}
               flag && /^== \[/ {exit}
               flag {print}' CHANGELOG.adoc)
             if [ -z "$NOTES" ]; then
-              NOTES="Release v$VERSION"
+              NOTES="Release **${LABEL}** (git tag \`v${VERSION}\`)."
+            else
+              NOTES=$(printf 'Public label: **%s** (git tag `v%s`).\n\n%s' "$LABEL" "$VERSION" "$NOTES")
             fi
           else
-            NOTES="Release v$VERSION"
+            NOTES="Release **${LABEL}** (git tag \`v${VERSION}\`)."
           fi
           echo "$NOTES" > release_notes.md
 
@@ -97,7 +118,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.RELEASE_TAG }}
-          name: ${{ env.RELEASE_TAG }}
+          name: ${{ steps.label.outputs.label }}
           body_path: release_notes.md
           files: ui-bundle.zip
           overwrite_files: true
@@ -112,10 +133,23 @@ jobs:
       - name: Update rolling release lines
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ env.RELEASE_VERSION }}
+          VERSION: ${{ steps.label.outputs.version }}
+          ANTORA_MAJOR: ${{ steps.label.outputs.antora }}
           RELEASE_SHA: ${{ steps.rel.outputs.sha }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: node .github/scripts/post-release.mjs "${VERSION#v}" ui-bundle.zip
+        run: node .github/scripts/post-release.mjs "${VERSION}" ui-bundle.zip
+
+      - name: Optional dual-axis discoverability tag
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          LABEL_TAG="v${{ steps.label.outputs.label }}"
+          if git rev-parse "$LABEL_TAG" >/dev/null 2>&1; then
+            echo "Tag $LABEL_TAG already exists"
+          else
+            git tag -a "$LABEL_TAG" -m "${{ steps.label.outputs.label }}" "${{ steps.rel.outputs.sha }}"
+            git push origin "$LABEL_TAG"
+          fi
 
       - name: Commit supported-lines.json on main
         env:

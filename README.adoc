@@ -8,13 +8,17 @@ Successor to the former `antora-dark-theme` monolithic package — use the Valen
 
 **Changelog:** link:CHANGELOG.adoc[CHANGELOG.adoc] and link:changelog-details/[`changelog-details/`].
 
+**Versioning:** Public labels are `VALENTUS_SEMVER+antora.N` (example *2.0.0+antora.3*).
+Valentus major tracks breaking chrome for theme modders; `+antora.N` tracks the Antora framework major.
+Git tags stay pure semver (`v2.0.0`); pin URLs use those tags. Details: `docs/modules/guide/pages/version-pinning.adoc` and `supported-lines.json`.
+
 == Quick start
 
 [source,yaml]
 ----
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1/ui-bundle.zip
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v2/ui-bundle.zip
     snapshot: true
   supplemental_files: ./supplemental-ui-overrides   # optional branding only
 ----

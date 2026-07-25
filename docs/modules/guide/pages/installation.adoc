@@ -19,11 +19,11 @@ Successor to the former `antora-dark-theme` package — migrate playbook URLs to
 ----
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1/ui-bundle.zip
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v2/ui-bundle.zip
     snapshot: true
 ----
 
-For floating, line-pin, or Renovate strategies see xref:version-pinning.adoc[Version Pinning].
+For floating, line-pin, dual-axis labels (`2.0.0+antora.3`), or Renovate strategies see xref:version-pinning.adoc[Version Pinning].
 
 . Optional branding—*one* override directory:
 +
@@ -39,7 +39,8 @@ For floating, line-pin, or Renovate strategies see xref:version-pinning.adoc[Ver
 antora antora-playbook.yml
 ----
 
-Pin `releases/download/v1/ui-bundle.zip` (rolling line) or an exact `vX.Y.Z` in CI when you need bitwise stability.
+Pin `releases/download/v2/ui-bundle.zip` (rolling Valentus major 2) or an exact `vX.Y.Z` in CI when you need bitwise stability.
+Stay on `v1` until you migrate supplemental overlays for the 2.x redesign.
 
 [[migrate-from-antora-dark-theme]]
 == Migrate from `antora-dark-theme`
@@ -59,7 +60,7 @@ With:
 ----
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v1/ui-bundle.zip
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v2/ui-bundle.zip
     snapshot: true
 ----
 

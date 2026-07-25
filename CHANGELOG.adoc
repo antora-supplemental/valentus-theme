@@ -5,15 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on https://keepachangelog.com/en/1.1.0/[Keep a Changelog],
 and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Versioning].
 
+== Version identity (dual-axis)
+
+Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
+
+* *Valentus semver* (`MAJOR.MINOR.PATCH`) — chrome/partial/CSS contract for theme modders. Lives in `package.json` and git tags `vX.Y.Z`.
+* *`+antora.N`* — Antora *framework* major this release targets. Does **not** bump Valentus major by itself.
+* Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
+* Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
+
 == [Unreleased]
 
+== [2.0.0] - 2026-07-25
+
+Public label: *2.0.0+antora.3* (Antora 3).
+
+*BREAKING* for theme modders (Valentus major): visual redesign and layout chrome contract — tokens, fonts, true 3-column shell, tool-band, nav/TOC styling. Sites with supplemental partial/CSS overlays that assume 1.x structure need a migration pass.
+
+* *Versioning:* Adopt dual-axis labels `VALENTUS_SEMVER+antora.N` so Valentus breaking changes and Antora framework majores stay independent. See xref:guide:version-pinning.adoc[Version Pinning] and `supported-lines.json`.
 * *Feature:* Scaffold `@antora-supplemental/antora-search-chat` — wraps `@antora/lunr-extension` (no fork). Product target: one omnibox (*Search or Ask*) + *conjoined* scope control (`[ Scope ▾ | field ]`) in `.adt-tool-band`; lunr-first; optional tier-0 + remote `backend_url` (no API keys). Ask defaults off → struck *or Ask*. Phase 1: compound CSS/markup stub; Ask tabs transitional. See `packages/antora-search-chat/ARCHITECTURE.adoc`.
 * *Feature:* Search/Ask omnibox fake placeholder — *Search or Ask*; when Ask is off, *or Ask* is greyed + struck (`.adt-search-ph-ask.is-disabled`). Driven by `ask_enabled` / `backend_url` / `local_assist`.
 * See link:changelog-details/2026-07-25%20-%20antora-search-chat%20scaffold.adoc[Detailed notes — 2026-07-25 antora-search-chat scaffold].
 * *Fix:* Double-click / triple-click can select text in `#search-input` again when search sits under `.nav-panel-menu`. Antora UI default `site.js` calls `preventDefault` on multi-click `mousedown` in the nav panel (to avoid selecting nav labels); Valentus stops that event at `#search-field`. Also set `user-select: text` on the search input. Tool-band search is outside the panel; search-chat keeps the same guard when present.
 * See link:changelog-details/2026-07-25%20-%20search%20dblclick%20select.adoc[Detailed notes — 2026-07-25 search dblclick select].
 * *Polish:* Breadcrumb trail weights — ancestors `400`, current crumb `500` (kickers unchanged); hide the vertical `|` between component/version kickers (`.adt-bc-sep`).
-* *Demo:* Visual redesign — teal design tokens; Plus Jakarta Sans + Source Sans 3 + IBM Plex Mono (no serif); true 3-column shell (`nav | main | TOC` peers, gap-only separation, centered shrink-wrap); roomier nav current=hover highlights and text-height stroke chevrons (no left inset bar); dark code panels on `.listingblock > .content`.
+* *Demo / breaking chrome:* Visual redesign — teal design tokens; Plus Jakarta Sans + Source Sans 3 + IBM Plex Mono (no serif); true 3-column shell (`nav | main | TOC` peers, gap-only separation, centered shrink-wrap); roomier nav current=hover highlights and text-height stroke chevrons (no left inset bar); dark code panels on `.listingblock > .content`.
 * *Polish:* Search + `adt-read-width` live in a full-width `.adt-tool-band` above the 3-col row (not inside nav / `article.doc`); equal `--adt-side-width` for nav/TOC; no muddy hover fill on the search field. Fixes search results clipped by left-column overflow.
 * *Change:* Search focus shortcut is plain `/` (skips when typing in inputs); field hint shows `/`. Removed platform modkey FOUC (`data-adt-modkey` / `⌘K` / `Ctrl+K`).
 * *Feature:* Standalone `read-width` UI module (`adt-read-width`) — placeable partial; demo sits in the tool band over the article column. Tiers set `--adt-doc-max` only (`68ch` / `82ch` / `100ch`) with constant `--adt-col-gap` (`2rem`); shell shrink-wraps around panels + doc.
@@ -24,9 +40,11 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 * See link:changelog-details/2026-07-25%20-%20sidebar%20wheel%20scroll%20chaining.adoc[Detailed notes — 2026-07-25].
 * *Fix:* Move search + read-width outside the 3-col group into `.adt-tool-band` so Lunr results are not clipped by `.nav-panel-menu` overflow.
 * See link:changelog-details/2026-07-25%20-%20tool-band-outside-columns.adoc[Detailed notes — 2026-07-25 tool band outside columns].
-
+* See link:changelog-details/2026-07-25%20-%202.0.0%20dual-axis%20versioning.adoc[Detailed notes — 2026-07-25 dual-axis versioning].
 
 == [1.1.2] - 2026-07-24
+
+Public label (retroactive): *1.1.2+antora.3*. Git tag remains `v1.1.2`.
 
 * *Header logo:* Brand-first dark mode — no unconditional invert on `.adt-header-logo`. Colored marks stay as authored; opt in with `site.keys.header_logo_tone: mono` for silhouette marks.
 * *Header logo:* Optional light/dark asset pair via `site.keys.header_logo_dark` (CSS swap on `html.dark-theme`). Valentus ships an anatomical heart outline (`logo.svg` / `logo-dark.svg`) and enables the pair on demo playbooks.
@@ -36,10 +54,14 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 == [1.1.1] - 2026-06-13
 
+Public label (retroactive): *1.1.1+antora.3*. Git tag remains `v1.1.1`.
+
 * *Dark-mode toggle:* Default `site.keys.dark_mode_navbar` to `light` so the theme toggle uses a dark icon on Valentus' light top bar; vendors `antora-dark-mode` v1.3.1 navbar-tone support.
 * *CI:* Fix Release workflow `matches()` guard, dynamic antora-dark-mode pin from `antora-playbook.yml`, `workflow_dispatch` re-publish.
 
 == [1.1.0] - 2026-06-13
+
+Public label (retroactive): *1.1.0+antora.3*. Git tag remains `v1.1.0`.
 
 * *Bundled dark mode:* Release `ui-bundle.zip` merges link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] with Valentus chrome. Successor install path for former `antora-dark-theme` consumers.
 * *Partials:* `head-meta.hbs` and `footer-scripts.hbs` include FOUC prevention, `site-extra.css`, and `site-dark-mode.js`.
@@ -48,6 +70,8 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 link:changelog-details/2026-06-13%20-%201.1.0%20bundled%20dark%20mode.adoc[Detailed notes — 2026-06-13]
 
 == [1.0.0] - 2026-06-09
+
+Public label (retroactive): *1.0.0+antora.3*. Git tag remains `v1.0.0`.
 
 * Initial release: doc-site chrome split from `antora-dark-theme` into `valentus-theme` (mast, header, layout, VCS icons, UI modules orchestrator).
 * Pair with link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] for dark styling and the theme toggle.
