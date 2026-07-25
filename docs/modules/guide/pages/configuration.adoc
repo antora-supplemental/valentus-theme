@@ -145,7 +145,15 @@ antora:
       snippet_length: 200
 ----
 
-The supplemental `header-content.hbs` renders the search field when the extension sets `SITE_SEARCH_PROVIDER`; `footer-scripts.hbs` already includes `search-scripts` under the same condition.
+The supplemental nav (`nav-menu.hbs`) renders the search field above the left nav tree when the extension sets `SITE_SEARCH_PROVIDER`; `footer-scripts.hbs` already includes `search-scripts` under the same condition.
+
+Optional: register `./packages/antora-search-chat` *after* lunr to wrap the field with Search / Ask tabs (Ask stubbed until `backend_url` is set — never put API keys in the playbook). See that package's `ARCHITECTURE.adoc`.
+
+[source,yaml]
+----
+    - require: ./packages/antora-search-chat
+      # backend_url: https://search-api.example.com/v1/ask
+----
 
 == Default Behavior
 

@@ -1,0 +1,128 @@
+= Architecture: antora-search-chat
+
+Status:: Phase 1 scaffold (docs + stub UI). RAG/LLM backends are designed here but not implemented.
+
+== Goals
+
+* Add an **Ask** (AI Q&A) mode beside classic **Search**, without forking `@antora/lunr-extension`.
+* Keep lunr as the offline keyword engine; add a pluggable server for grounded answers later.
+* Own the left-nav search slot (`.adt-nav-search`) that Valentus layout already uses above the nav tree.
+
+== Wrap vs fork
+
+[cols="1,3"]
+|===
+| Choice | Rationale
+
+| *Wrap (preferred)*
+| Lunr stays an upstream Antora extension. We consume `search-index.js` / lunr artifacts and UI hooks (`#search-input`, `SITE_SEARCH_PROVIDER`, `search-scripts`). Upstream fixes and index options keep working.
+
+| *Fork (avoid)*
+| Would duplicate index generation, drift from `@antora/lunr-extension`, and force re-merging every lunr release. Only justified if we must change index build itself.
+|===
+
+This package is a *compose* layer: playbook loads lunr, then `antora-search-chat`. Chat never replaces lunr's index build.
+
+== Data flow (target)
+
+----
+Antora build
+  ├─ @antora/lunr-extension
+  │    └─ emits search-index.js (+ lunr client via search-scripts)
+  └─ antora-search-chat
+       ├─ injects Ask/Search UI (partial + CSS/JS)
+       └─ (later) optional RAG corpus export for a backend
+
+Browser
+  ├─ Search tab → existing lunr UI over search-index.js (unchanged)
+  └─ Ask tab → POST question to configured backend_url
+                 ├─ backend may call lunr-equivalent retrieval and/or vector RAG
+                 └─ returns answer + citations (page URLs / headings)
+----
+
+Phase 1 stops at the Ask stub (no network call unless `backend_url` is set; then a fetch stub surfaces errors clearly).
+
+== UI slot
+
+Layout owns placement; search-chat owns the control:
+
+* Slot: left nav, above the tree (`.adt-nav-search`).
+* Focus shortcut: plain `/` (layout); we keep `#search-input` so existing focus helpers and lunr continue to work.
+* Tabs: *Search* | *Ask* — Search is default unless `default_tab: ask`.
+
+Do not put a second search box in the header while this slot is active.
+
+== Configuration keys
+
+Playbook extension object (alongside `require`):
+
+[cols="1,1,3"]
+|===
+| Key | Type | Meaning
+
+| `backend_url`
+| string (URL)
+| Ask endpoint. Omit or empty = stub mode (no API calls). Never put API keys here.
+
+| `default_tab`
+| `search` \| `ask`
+| Initial tab. Default: `search`.
+
+| `ask_placeholder`
+| string
+| Placeholder for the Ask field. Default: `Ask about this site…`.
+
+| `enabled`
+| boolean
+| Antora standard; set `false` to disable without removing the entry.
+
+| `ui`
+| boolean
+| Inject CSS/JS/partial. Default: `true`.
+|===
+
+Site keys (optional, future):
+
+* `site.keys.search_chat_backend` — mirror of `backend_url` for UI-only consumers (still no secrets).
+
+== Privacy and API keys
+
+* *Never* commit API keys, bearer tokens, or provider credentials to the playbook, UI bundle, or this package.
+* Browser → backend should use a *server you control*. That server holds provider keys and applies rate limits / auth.
+* Questions and page snippets may leave the user's machine when Ask is used; document that for site operators.
+* Lunr *Search* mode stays fully client-side / offline when the site is static-hosted.
+
+== Phases
+
+[cols="1,2,2"]
+|===
+| Phase | Deliverable | Done when
+
+| *1 — Scaffold* (this pass)
+| Package + ARCHITECTURE + stub Ask/Search tabs; loads beside lunr
+| Playbook can require the extension; UI tabs render; Search still uses lunr
+
+| *2 — Pluggable backend*
+| Client POSTs `{ question, context? }` to `backend_url`; renders answer + citation list
+| Operators can point at any compatible HTTP API
+
+| *3 — RAG pipeline*
+| Build-time (or publish-time) embedding/index of site content; backend retrieves + generates
+| Answers cite real pages; index refresh documented
+|===
+
+== Recommended next steps for RAG (phase 3)
+
+Embedding store options (pick by ops model):
+
+* *Static + edge:* Precompute embeddings at build; ship a compact vector file or host on object storage; query from a small Worker/Lambda. Good for public docs, low ops.
+* *Managed vector DB:* Pinecone, Weaviate Cloud, Qdrant Cloud, pgvector on existing Postgres. Good when the corpus is large or updated outside Antora builds.
+* *Local/dev:* Chroma or LanceDB on the API host for prototyping; not ideal as the sole production store for multi-region static sites.
+
+Retrieval sketch:
+
+. Chunk AsciiDoc/HTML pages at build (heading-aware chunks align with lunr `index_by_heading`).
+. Embed chunks; store `{ id, url, title, heading, text, embedding }`.
+. At Ask time: embed question → top-k chunks → optional lunr keyword boost → LLM with citations only from retrieved chunks.
+
+Keep lunr for the Search tab and as a hybrid retriever signal; do not delete the lunr index when RAG lands.

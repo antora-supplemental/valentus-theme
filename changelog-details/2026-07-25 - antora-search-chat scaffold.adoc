@@ -1,0 +1,21 @@
+= 2026-07-25 — antora-search-chat scaffold
+
+== Summary
+
+Phase 1 of a Valentus-owned Antora extension that **wraps** `@antora/lunr-extension` with a Search / Ask control (AI Q&A later). Lunr is not forked.
+
+== Package
+
+`packages/antora-search-chat`
+
+* `ARCHITECTURE.adoc` — wrap vs fork, lunr + RAG data flow, config keys, privacy, phases
+* `lib/index.js` — Antora extension; injects UI beside lunr; sets `SITE_SEARCH_CHAT`
+* Stub Ask tab + pluggable `backend_url` (no secrets; no LLM yet)
+
+== UI
+
+Owns `.adt-nav-search` above the nav tree (coordinates with layout that moved search out of the header and uses `/` focus). Keeps `#search-input` for lunr.
+
+== Playbooks
+
+Demo playbooks register `./packages/antora-search-chat` after lunr.

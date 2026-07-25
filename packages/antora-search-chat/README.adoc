@@ -1,0 +1,29 @@
+= antora-search-chat
+
+Valentus Antora extension that **wraps** https://gitlab.com/antora/antora-lunr-extension[`@antora/lunr-extension`] with a Search / Ask control — not a fork of lunr.
+
+Status:: Phase 1 scaffold (stub Ask UI + pluggable backend config). No production LLM/RAG yet.
+
+== Quick start
+
+Register **after** lunr in the playbook:
+
+[source,yaml]
+----
+antora:
+  extensions:
+    - require: "@antora/lunr-extension"
+      index_latest_only: true
+      index_by_heading: true
+      snippet_length: 200
+    - require: ./packages/antora-search-chat
+      # Optional — see ARCHITECTURE.adoc
+      # backend_url: https://search-api.example.com/v1/ask
+      # default_tab: search
+----
+
+The extension injects UI into the left-nav search slot (`.adt-nav-search` / `#search-input`) so it coexists with layout work that moved search above the nav tree and uses `/` as the focus shortcut.
+
+== Docs
+
+* link:ARCHITECTURE.adoc[ARCHITECTURE.adoc] — wrap vs fork, data flow, config keys, privacy, phases

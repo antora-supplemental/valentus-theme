@@ -1,0 +1,69 @@
+{{!-- Valentus search/chat slot — owns .adt-nav-search above the nav tree.
+     Keeps #search-input for @antora/lunr-extension + / focus shortcut. --}}
+<div class="search adt-nav-search adt-search-chat" data-adt-search-chat>
+  <div class="adt-search-chat__tabs" role="tablist" aria-label="Search or ask">
+    <button
+      type="button"
+      class="adt-search-chat__tab is-active"
+      role="tab"
+      id="adt-search-tab-search"
+      aria-selected="true"
+      aria-controls="adt-search-panel-search"
+      data-adt-search-tab="search"
+    >Search</button>
+    <button
+      type="button"
+      class="adt-search-chat__tab"
+      role="tab"
+      id="adt-search-tab-ask"
+      aria-selected="false"
+      aria-controls="adt-search-panel-ask"
+      data-adt-search-tab="ask"
+    >Ask</button>
+  </div>
+
+  <div
+    class="adt-search-chat__panel is-active"
+    role="tabpanel"
+    id="adt-search-panel-search"
+    aria-labelledby="adt-search-tab-search"
+    data-adt-search-panel="search"
+  >
+    <div id="search-field">
+      <input
+        id="search-input"
+        type="text"
+        placeholder="Search"
+        autocomplete="off"
+        aria-label="Search"
+      >
+    </div>
+  </div>
+
+  <div
+    class="adt-search-chat__panel"
+    role="tabpanel"
+    id="adt-search-panel-ask"
+    aria-labelledby="adt-search-tab-ask"
+    data-adt-search-panel="ask"
+    hidden
+  >
+    <form class="adt-search-chat__ask-form" data-adt-search-ask-form>
+      <label class="adt-search-chat__ask-label visually-hidden" for="adt-ask-input">Ask</label>
+      <textarea
+        id="adt-ask-input"
+        class="adt-search-chat__ask-input"
+        rows="2"
+        placeholder="Ask about this site…"
+        data-adt-ask-input
+      ></textarea>
+      <button type="submit" class="adt-search-chat__ask-submit">Ask</button>
+    </form>
+    <div
+      class="adt-search-chat__ask-result"
+      data-adt-ask-result
+      hidden
+      aria-live="polite"
+    ></div>
+  </div>
+</div>

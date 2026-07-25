@@ -7,6 +7,8 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 == [Unreleased]
 
+* *Feature:* Scaffold `@antora-supplemental/antora-search-chat` — wraps `@antora/lunr-extension` (no fork) with a Search / Ask UI in the left-nav slot; Ask backend stubbed for later RAG. See `packages/antora-search-chat/ARCHITECTURE.adoc`.
+* See link:changelog-details/2026-07-25%20-%20antora-search-chat%20scaffold.adoc[Detailed notes — 2026-07-25 antora-search-chat scaffold].
 * *Polish:* Breadcrumb trail weights — ancestors `400`, current crumb `500` (kickers unchanged); hide the vertical `|` between component/version kickers (`.adt-bc-sep`).
 * *Demo:* Visual redesign — teal design tokens; Plus Jakarta Sans + Source Sans 3 + IBM Plex Mono (no serif); true 3-column shell (`nav | main | TOC` peers, gap-only separation, centered shrink-wrap); roomier nav current=hover highlights and text-height stroke chevrons (no left inset bar); dark code panels on `.listingblock > .content`.
 * *Polish:* Search moved above the left nav tree (header is brand + actions only); equal `--adt-side-width` for nav/TOC; shared tool-band rhythm with `adt-read-width`; no muddy hover fill on the search field.
