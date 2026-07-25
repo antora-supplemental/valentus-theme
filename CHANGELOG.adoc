@@ -7,10 +7,12 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 == [Unreleased]
 
+* *Polish:* Breadcrumb trail weights — ancestors `400`, current crumb `500` (kickers unchanged); hide the vertical `|` between component/version kickers (`.adt-bc-sep`).
 * *Demo:* Visual redesign — teal design tokens; Plus Jakarta Sans + Source Sans 3 + IBM Plex Mono (no serif); true 3-column shell (`nav | main | TOC` peers, gap-only separation, centered shrink-wrap); roomier nav current=hover highlights and text-height stroke chevrons (no left inset bar); dark code panels on `.listingblock > .content`.
+* *Fix:* Search shortcut hint uses platform modkey (`data-adt-modkey`: `Ctrl+K` default / Windows/Linux, `⌘K` on macOS) instead of hardcoding `⌘K`.
 * *Feature:* Standalone `read-width` UI module (`adt-read-width`) — placeable partial; demo sits above the article title. Tiers set `--adt-doc-max` only (`68ch` / `82ch` / `100ch`) with constant `--adt-col-gap` (`2rem`); shell shrink-wraps around panels + doc.
 * *Gotchas (layout/width):* Avoid shell-max slack (panels “space out”); width transition needs explicit `width`/`max-width` both ways (jumped `flex-basis` snapped on shrink); `scrollbar-gutter: stable` prevents short-page alignment shift; Antora `content.sources` `url: .` fails in a linked worktree — use `antora-playbook-visual-demo.yml`.
-* *Fix:* Restore missing AsciiDoc table delimiters (|===) in cs-repo-logo.adoc so provider and files-involved tables render.
+* *Fix:* Restore missing AsciiDoc table delimiters (|===) in vcs-repo-logo.adoc so provider and files-involved tables render.
 * See link:changelog-details/2026-07-25%20-%20visual%20redesign%20demo.adoc[Detailed notes — 2026-07-25 visual redesign].
 * *Fix:* Mouse wheel over the left nav or in-page TOC scrolls the page again. Default UI sets `overscroll-behavior: none` on those panels, which trapped the wheel when the panel had nothing left to scroll; Valentus restores scroll chaining.
 * See link:changelog-details/2026-07-25%20-%20sidebar%20wheel%20scroll%20chaining.adoc[Detailed notes — 2026-07-25].
