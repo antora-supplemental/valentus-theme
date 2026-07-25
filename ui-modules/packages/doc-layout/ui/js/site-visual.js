@@ -30,10 +30,20 @@
     true
   )
 
-  // Focus search with ⌘/Ctrl+K
+  // Focus search with /
   document.addEventListener('keydown', (e) => {
-    if (!(e.key === 'k' || e.key === 'K')) return
-    if (!(e.metaKey || e.ctrlKey)) return
+    if (e.key !== '/') return
+    if (e.metaKey || e.ctrlKey || e.altKey) return
+    const t = e.target
+    if (
+      t instanceof HTMLElement &&
+      (t.isContentEditable ||
+        t.tagName === 'INPUT' ||
+        t.tagName === 'TEXTAREA' ||
+        t.tagName === 'SELECT')
+    ) {
+      return
+    }
     const input = document.getElementById('search-input')
     if (!input || input.disabled) return
     e.preventDefault()
