@@ -4,12 +4,12 @@ Status:: Phase 1 scaffold (docs + stub UI). Omnibox product target is documented
 
 == Goals
 
-* One **omnibox** in the left-nav search slot: a single field labeled *Search or Ask*, not two widgets.
+* One **omnibox** in the site top bar: a single field labeled *Search or Ask*, not two widgets.
 * **Scope control** on that same control (dropdown left of the field) — not multiple search boxes by placement.
 * Keep lunr as the default, offline keyword engine; **Ask** only on explicit mode or submit (no speculative AI on every keystroke by default).
 * Optional **tier-0** on-device ultra-light model for query rewrite / short answers over retrieved chunks; remote API as an optional upgrade. Never put API keys in the playbook.
 * Wrap `@antora/lunr-extension` — do not fork it.
-* Own the left-nav search slot (`.adt-nav-search`) that Valentus layout already uses above the nav tree; the band must stay outside the 3-col shell so scope/results are not clipped.
+* Own the centered navbar search slot (`.adt-navbar-search` / `.adt-nav-search`). Page read-width stays in `.adt-tool-band` over the doc column. Search width is independent of `--adt-doc-max` / nav column measure.
 
 == Wrap vs fork
 
@@ -45,7 +45,7 @@ The control is a single input (omnibox). Modes are orthogonal state on that fiel
 
 Placeholder copy:: *Search or Ask* (see <<_fake_placeholder_overlay>>).
 
-Do not put a second search box in the header while this slot is active.
+Do not put a second search box in the tool band or nav column while this navbar slot is active.
 
 ==== Fake placeholder overlay
 
@@ -142,7 +142,7 @@ Lunr's UI today is weak for multi-value facets (often a single checkbox-style fi
 
 ==== Layout coordination
 
-The search band (omnibox + scope + results) must sit *outside* the 3-column doc shell so the dropdown and result panel are not clipped by column overflow. Coordinate with layout work that places the tool band outside `nav | main | TOC` (see related tool-band / visual redesign branches). The *compound* control (`.adt-search-compound`) lives in that outer search band. Search-chat owns the control; layout owns the unclipped slot.
+The omnibox (compound scope + field + results) lives in `.adt-site-navbar` (`.adt-navbar-search`) as a site-wide command palette. Its width is independent of `--adt-doc-max` and the nav column. Page read-width stays in `.adt-tool-band` centered over the doc column. Prior “search over nav / resize over doc” in the tool band inverted that model for a command-palette search — corrected in 2.0.1. Search-chat owns the control; layout owns the unclipped navbar slot.
 
 === No speculative AI on keystrokes
 
