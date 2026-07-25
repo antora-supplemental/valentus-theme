@@ -7,6 +7,10 @@ Phase 1 of a Valentus-owned Antora extension that **wraps** `@antora/lunr-extens
 == Product decisions (documented)
 
 * *One omnibox* — placeholder *Search or ask…*; `/` and `?` set Search vs Ask mode on the same field (not two widgets).
+* *Scope control* — one compound control: conjoined scope dropdown on the *left edge* of the field (`[ Scope ▾ | Search or ask… ]`). Not multiple boxes by placement.
+* *Default scope* — *Current component* on docs pages when detectable; *All* on home / when ambiguous.
+* *Upstream* — propose multi-value facet / filter API on lunr-extension; Valentus wraps store metadata first.
+* *Layout* — compound control lives in the outer search band (outside 3-col) so scope/results are not clipped.
 * *Lunr-first* — keyword results on keystrokes in Search mode; Ask only on explicit mode / submit. No speculative AI on every keystroke by default; optional debounced question-detection may come later.
 * *Tier-0 local assist* (optional) — ultra-light on-device model for query rewrite / short answers over retrieved chunks; remote API via `backend_url` is an optional upgrade. No API keys in the playbook.
 
@@ -14,13 +18,15 @@ Phase 1 of a Valentus-owned Antora extension that **wraps** `@antora/lunr-extens
 
 `packages/antora-search-chat`
 
-* `ARCHITECTURE.adoc` — wrap vs fork, omnibox + tiers, lunr + RAG data flow, config keys, privacy, phases
+* `ARCHITECTURE.adoc` — wrap vs fork, omnibox + compound scope (ASCII/mermaid), tiers, lunr + RAG data flow, config keys, privacy, phases
 * `lib/index.js` — Antora extension; injects UI beside lunr; sets `SITE_SEARCH_CHAT`
-* Stub Ask path + pluggable `backend_url` (no secrets; no LLM yet). Phase 1 UI may still show separate Search/Ask panels; omnibox is the documented target.
+* Stub Ask path + pluggable `backend_url` (no secrets; no LLM yet). Compound scope markup/CSS is a visual stub (not wired to lunr filters yet); tabbed Ask panels remain transitional.
 
 == UI
 
-Owns `.adt-nav-search` above the nav tree (coordinates with layout that moved search out of the header). Keeps `#search-input` for lunr.
+Owns `.adt-nav-search` above the nav tree (coordinates with layout that moved search out of the header / outside 3-col). Keeps `#search-input` for lunr.
+
+Compound hooks:: `.adt-search-compound` wraps `.adt-search-scope` + `#search-input` (shared border, inner vertical rule, split rounding).
 
 Keyboard:: `/` → Search mode (lexical); `?` (Shift+/) → Ask mode (same field when omnibox lands). Listener accepts `key === '?'` or `key === '/' && shiftKey`.
 

@@ -28,8 +28,13 @@ The extension injects UI into the left-nav search slot (`.adt-nav-search` / `#se
 == Product shape (target)
 
 * *One omnibox* — `/` and `?` set Search vs Ask mode on the **same** field (not two widgets).
+* *Scope control* — dropdown *built into* the left edge of the field (*All docs* / *This component* / optional *This version*). Not multiple boxes by placement.
+* *Compound UI* — one pill: `[ Scope ▾ | Search or ask… ]` (`.adt-search-compound` + `.adt-search-scope`); shared border, inner vertical rule, left/right rounding split across scope and input.
+* *Default scope* — *Current component* on docs pages when detectable; *All* on home / when ambiguous (with a component list). See ARCHITECTURE.
 * *Lunr-first* — keyword results while typing in Search mode; Ask only on explicit mode / submit. Optional debounced question-detection may come later; it is not the default.
 * *Tier-0 local assist* (optional) — ultra-light on-device model for query rewrite / short answers over retrieved chunks; remote `backend_url` is an optional upgrade. Never put API keys in the playbook.
+* *Upstream* — propose multi-value facet / filter API on lunr-extension; Valentus dropdown wraps store metadata first.
+* *Layout* — compound control lives in the outer search band (outside the 3-col shell) so scope + results are not clipped.
 
 Keyboard (when not typing in a field)::
 
@@ -38,8 +43,8 @@ Keyboard (when not typing in a field)::
 
 Hint badges show `/` and `?`. See ARCHITECTURE for the `key === '?'` vs `key === '/' && shiftKey` caveat.
 
-Phase 1 stub may still show separate Search/Ask panels; treat that as transitional.
+Phase 1 stub may still show separate Search/Ask panels; compound scope markup/CSS may be visual-only until filters wire up. Product target is omnibox + conjoined scope.
 
 == Docs
 
-* link:ARCHITECTURE.adoc[ARCHITECTURE.adoc] — wrap vs fork, omnibox + tiers, data flow, shortcuts, config keys, privacy, phases, RAG notes
+* link:ARCHITECTURE.adoc[ARCHITECTURE.adoc] — wrap vs fork, omnibox + compound scope, tiers, data flow, shortcuts, config keys, privacy, phases, RAG notes

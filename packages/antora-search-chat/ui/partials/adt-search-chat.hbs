@@ -1,7 +1,10 @@
 {{!-- Valentus search/chat slot — owns .adt-nav-search above the nav tree.
      Keeps #search-input for @antora/lunr-extension.
-     Product target: one omnibox ("Search or ask…"); / and ? set mode on the same field.
-     Phase 1 stub: separate Search/Ask panels (transitional). See ARCHITECTURE.adoc. --}}
+     Product target: one omnibox ("Search or ask…") + conjoined scope on the left edge
+     [ Scope ▾ | Search or ask… ]; / and ? set mode on the same field.
+     Rejected: multiple boxes contextualized only by placement.
+     Phase 1: compound markup/CSS stub (scope not wired to lunr yet); tabbed Ask is transitional.
+     See ARCHITECTURE.adoc. --}}
 <div class="search adt-nav-search adt-search-chat" data-adt-search-chat>
   <div class="adt-search-chat__tabs" role="tablist" aria-label="Search or ask">
     <button
@@ -37,11 +40,22 @@
     aria-labelledby="adt-search-tab-search"
     data-adt-search-panel="search"
   >
-    <div id="search-field" class="adt-search-chat__field">
+    <div id="search-field" class="adt-search-chat__field adt-search-compound">
+      <label class="visually-hidden" for="adt-search-scope">Search scope</label>
+      <select
+        id="adt-search-scope"
+        class="adt-search-scope"
+        data-adt-search-scope
+        aria-label="Search scope"
+      >
+        <option value="component" selected>This component</option>
+        <option value="all">All docs</option>
+        <option value="version">This version</option>
+      </select>
       <input
         id="search-input"
         type="text"
-        placeholder="Search"
+        placeholder="Search or ask…"
         autocomplete="off"
         aria-label="Search the docs"
       >
