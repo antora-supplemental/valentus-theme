@@ -1,5 +1,6 @@
 {{!-- Valentus search/chat slot — owns .adt-nav-search above the nav tree.
-     Keeps #search-input for @antora/lunr-extension + / focus shortcut. --}}
+     Keeps #search-input for @antora/lunr-extension.
+     Shortcuts: / → Search, ? (Shift+/) → Ask. --}}
 <div class="search adt-nav-search adt-search-chat" data-adt-search-chat>
   <div class="adt-search-chat__tabs" role="tablist" aria-label="Search or ask">
     <button
@@ -10,7 +11,10 @@
       aria-selected="true"
       aria-controls="adt-search-panel-search"
       data-adt-search-tab="search"
-    >Search</button>
+    >
+      <span class="adt-search-chat__tab-label">Search</span>
+      <kbd class="adt-search-chat__hint" title="Focus search">/</kbd>
+    </button>
     <button
       type="button"
       class="adt-search-chat__tab"
@@ -19,7 +23,10 @@
       aria-selected="false"
       aria-controls="adt-search-panel-ask"
       data-adt-search-tab="ask"
-    >Ask</button>
+    >
+      <span class="adt-search-chat__tab-label">Ask</span>
+      <kbd class="adt-search-chat__hint" title="Focus ask">?</kbd>
+    </button>
   </div>
 
   <div
@@ -29,14 +36,15 @@
     aria-labelledby="adt-search-tab-search"
     data-adt-search-panel="search"
   >
-    <div id="search-field">
+    <div id="search-field" class="adt-search-chat__field">
       <input
         id="search-input"
         type="text"
         placeholder="Search"
         autocomplete="off"
-        aria-label="Search"
+        aria-label="Search the docs"
       >
+      <kbd class="adt-search-chat__field-hint" aria-hidden="true">/</kbd>
     </div>
   </div>
 
@@ -50,13 +58,17 @@
   >
     <form class="adt-search-chat__ask-form" data-adt-search-ask-form>
       <label class="adt-search-chat__ask-label visually-hidden" for="adt-ask-input">Ask</label>
-      <textarea
-        id="adt-ask-input"
-        class="adt-search-chat__ask-input"
-        rows="2"
-        placeholder="Ask about this site…"
-        data-adt-ask-input
-      ></textarea>
+      <div class="adt-search-chat__field adt-search-chat__field--ask">
+        <textarea
+          id="adt-ask-input"
+          class="adt-search-chat__ask-input"
+          rows="2"
+          placeholder="Ask about this site…"
+          data-adt-ask-input
+          aria-label="Ask a question about this site"
+        ></textarea>
+        <kbd class="adt-search-chat__field-hint" aria-hidden="true">?</kbd>
+      </div>
       <button type="submit" class="adt-search-chat__ask-submit">Ask</button>
     </form>
     <div

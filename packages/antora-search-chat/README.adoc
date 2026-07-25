@@ -22,8 +22,15 @@ antora:
       # default_tab: search
 ----
 
-The extension injects UI into the left-nav search slot (`.adt-nav-search` / `#search-input`) so it coexists with layout work that moved search above the nav tree and uses `/` as the focus shortcut.
+The extension injects UI into the left-nav search slot (`.adt-nav-search` / `#search-input`) so it coexists with layout work that moved search above the nav tree.
+
+Keyboard (when not typing in a field)::
+
+* `/` — classic lexical *Search* (lunr)
+* `?` (Shift+/) — *Ask* / answer a question
+
+Hint badges on the tabs show `/` and `?`. See ARCHITECTURE for the `key === '?'` vs `key === '/' && shiftKey` caveat.
 
 == Docs
 
-* link:ARCHITECTURE.adoc[ARCHITECTURE.adoc] — wrap vs fork, data flow, config keys, privacy, phases
+* link:ARCHITECTURE.adoc[ARCHITECTURE.adoc] — wrap vs fork, data flow, shortcuts, config keys, privacy, phases

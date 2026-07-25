@@ -47,10 +47,32 @@ Phase 1 stops at the Ask stub (no network call unless `backend_url` is set; then
 Layout owns placement; search-chat owns the control:
 
 * Slot: left nav, above the tree (`.adt-nav-search`).
-* Focus shortcut: plain `/` (layout); we keep `#search-input` so existing focus helpers and lunr continue to work.
+* Keep `#search-input` so lunr and any residual layout focus helpers keep working.
 * Tabs: *Search* | *Ask* — Search is default unless `default_tab: ask`.
+* Hint badges: `/` on Search, `?` on Ask.
 
 Do not put a second search box in the header while this slot is active.
+
+=== Keyboard shortcuts
+
+When focus is *not* in an `input` / `textarea` / `select` / `contenteditable`:
+
+[cols="1,2,3"]
+|===
+| Key | Mode | Notes
+
+| `/`
+| Search (lexical / lunr)
+| Same meaning as the layout-wide search focus already shipped. Search-chat activates the Search tab and focuses `#search-input`.
+
+| `?` (Shift+/ )
+| Ask (AI Q&A)
+| Symbolic “answer a question”. Activates the Ask tab and focuses the ask field.
+|===
+
+*Keyboard caveat:* Listen for `key === '?'` *or* (`key === '/'` && `shiftKey`). Some layouts emit `?` directly; others keep `/` with Shift. Ignore when `metaKey` / `ctrlKey` / `altKey` are held.
+
+When `[data-adt-search-chat]` is present, layout `site-visual.js` should *not* also handle `/` (search-chat owns both shortcuts).
 
 == Configuration keys
 

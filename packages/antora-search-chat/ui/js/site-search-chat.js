@@ -34,7 +34,10 @@
       input.focus()
     } else {
       var searchInput = document.getElementById('search-input')
-      if (name === 'search' && searchInput) searchInput.focus()
+      if (name === 'search' && searchInput) {
+        searchInput.focus()
+        if (typeof searchInput.select === 'function') searchInput.select()
+      }
     }
   }
 
@@ -47,6 +50,36 @@
   if (cfg.defaultTab === 'ask') {
     activate('ask')
   }
+
+  function isTypingTarget (t) {
+    return (
+      t instanceof HTMLElement &&
+      (t.isContentEditable ||
+        t.tagName === 'INPUT' ||
+        t.tagName === 'TEXTAREA' ||
+        t.tagName === 'SELECT')
+    )
+  }
+
+  // / → Search (lexical); ? (Shift+/) → Ask
+  // Layout caveat: some keyboards report key === '?', others key === '/' + shiftKey.
+  document.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return
+    if (isTypingTarget(e.target)) return
+
+    var isAsk = e.key === '?' || (e.key === '/' && e.shiftKey)
+    var isSearch = e.key === '/' && !e.shiftKey
+
+    if (isAsk) {
+      e.preventDefault()
+      activate('ask')
+      return
+    }
+    if (isSearch) {
+      e.preventDefault()
+      activate('search')
+    }
+  })
 
   function showResult (text, isError) {
     if (!result) return

@@ -14,7 +14,9 @@ Phase 1 of a Valentus-owned Antora extension that **wraps** `@antora/lunr-extens
 
 == UI
 
-Owns `.adt-nav-search` above the nav tree (coordinates with layout that moved search out of the header and uses `/` focus). Keeps `#search-input` for lunr.
+Owns `.adt-nav-search` above the nav tree (coordinates with layout that moved search out of the header). Keeps `#search-input` for lunr.
+
+Keyboard:: `/` → Search (lexical); `?` (Shift+/) → Ask. Hint badges on tabs. Listener accepts `key === '?'` or `key === '/' && shiftKey`.
 
 == Playbooks
 

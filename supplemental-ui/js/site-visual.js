@@ -30,8 +30,9 @@
     true
   )
 
-  // Focus search with /
+  // Focus search with / (defer when search-chat owns / and ?)
   document.addEventListener('keydown', (e) => {
+    if (document.querySelector('[data-adt-search-chat]')) return
     if (e.key !== '/') return
     if (e.metaKey || e.ctrlKey || e.altKey) return
     const t = e.target

@@ -11,6 +11,10 @@
 }
 
 .adt-search-chat__tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
   flex: 1 1 auto;
   margin: 0;
   padding: 0.35rem 0.5rem;
@@ -22,6 +26,47 @@
   font-size: 0.8rem;
   font-weight: 500;
   cursor: pointer;
+}
+
+.adt-search-chat__hint,
+.adt-search-chat__field-hint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.15rem;
+  padding: 0.05rem 0.3rem;
+  border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+  border-radius: 0.25rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1.2;
+  opacity: 0.75;
+}
+
+.adt-search-chat__field {
+  position: relative;
+}
+
+.adt-search-chat__field #search-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding-inline-end: 1.75rem;
+}
+
+.adt-search-chat__field-hint {
+  position: absolute;
+  top: 0.45rem;
+  inset-inline-end: 0.45rem;
+  pointer-events: none;
+}
+
+.adt-search-chat__field--ask .adt-search-chat__field-hint {
+  top: 0.5rem;
+}
+
+.adt-search-chat__field--ask .adt-search-chat__ask-input {
+  padding-inline-end: 1.75rem;
 }
 
 .adt-search-chat__tab.is-active {
