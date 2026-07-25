@@ -16,6 +16,8 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+* *Change:* Consume `@antora-supplemental/antora-search-chat` from https://github.com/antora-supplemental/antora-search-chat[the standalone package] (git dep); remove in-tree `packages/antora-search-chat/` so Valentus is not a second source of truth.
+* *Fix:* Lunr search results invisible — `.adt-search-compound` (`#search-field`) used `overflow: hidden` for pill corner clipping, which clipped `.search-result-dropdown-menu` (lunr appends it as an absolutely positioned child). Clip chrome on `.adt-search-scope-slot` / `.adt-search-input-wrap` instead (fix lives in the standalone package).
 * *Fix / layout:* Sticky footer — `.adt-shell` / `.body.adt-body` fill leftover viewport (`min-height: 100vh` on `body` + flex grow on the shell); `footer.footer` stays natural height outside the 3-col group (no longer grows to absorb slack).
 * *Fix / layout:* Footer is full-bleed chrome — no longer `max-width: var(--adt-shell-max)`, so it does not resize with read-width / the 3-column shell.
 * *Fix / polish:* Search scope + breadcrumb kickers — drop the double focus ring on click (inset `:focus-visible` stacked on compound `:focus-within` / UA outline); soft accent fill and keyboard-only rings instead.

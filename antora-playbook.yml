@@ -34,8 +34,8 @@ antora:
       index_latest_only: true
       index_by_heading: true
       snippet_length: 200
-    # Wrap lunr with Search/Ask UI (phase 1 stub — no API keys; see packages/antora-search-chat)
-    - require: ./packages/antora-search-chat
+    # Wrap lunr with Search/Ask UI (phase 1 stub — no API keys; see @antora-supplemental/antora-search-chat)
+    - require: "@antora-supplemental/antora-search-chat"
 
 asciidoc:
   extensions:

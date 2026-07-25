@@ -32,7 +32,7 @@ antora:
       index_latest_only: true
       index_by_heading: true
       snippet_length: 200
-    - require: ./packages/antora-search-chat
+    - require: "@antora-supplemental/antora-search-chat"
 
 asciidoc:
   extensions:
