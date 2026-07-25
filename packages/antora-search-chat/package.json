@@ -1,0 +1,30 @@
+{
+  "name": "@antora-supplemental/antora-search-chat",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Valentus Antora extension: wraps @antora/lunr-extension with a Search/Ask omnibox (lunr-first; optional local tier-0 + remote backend). Does not fork lunr.",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "keywords": [
+    "antora",
+    "antora-extension",
+    "lunr",
+    "search",
+    "rag",
+    "valentus"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antora-supplemental/valentus-theme.git",
+    "directory": "packages/antora-search-chat"
+  },
+  "peerDependencies": {
+    "@antora/lunr-extension": ">=1.0.0-alpha.12"
+  },
+  "files": [
+    "lib/**/*",
+    "ui/**/*",
+    "ARCHITECTURE.adoc",
+    "README.adoc"
+  ]
+}

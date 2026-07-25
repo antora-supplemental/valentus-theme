@@ -21,7 +21,8 @@
   "author": "Ryan Johnson (https://github.com/AMDphreak)",
   "files": [
     "supplemental-ui/**/*",
-    "ui-modules/**/*"
+    "ui-modules/**/*",
+    "packages/antora-search-chat/**/*"
   ],
   "scripts": {
     "build": "antora antora-playbook.yml",

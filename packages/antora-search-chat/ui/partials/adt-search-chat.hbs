@@ -1,0 +1,106 @@
+{{!-- Valentus search/chat slot — owns .adt-nav-search above the nav tree.
+     Keeps #search-input for @antora/lunr-extension.
+     Product target: one omnibox ("Search or Ask") + conjoined scope on the left edge
+     [ Scope ▾ | Search or Ask ]; / and ? set mode on the same field.
+     Fake placeholder overlay (native placeholder cannot style "or Ask" when Ask is off).
+     Rejected: multiple boxes contextualized only by placement.
+     Phase 1: compound markup/CSS stub (scope not wired to lunr yet); tabbed Ask is transitional.
+     See ARCHITECTURE.adoc. --}}
+{{!-- Lives in .adt-tool-band (see adt-tool-band.hbs). adt-tool-search keeps column metrics. --}}
+<div class="search adt-nav-search adt-tool-search adt-search-chat" data-adt-search-chat data-ask-enabled="false">
+  {{!-- Transitional tabs: visually hidden in tool-band CSS; / and ? still switch modes. --}}
+  <div class="adt-search-chat__tabs" role="tablist" aria-label="Search or Ask">
+    <button
+      type="button"
+      class="adt-search-chat__tab is-active"
+      role="tab"
+      id="adt-search-tab-search"
+      aria-selected="true"
+      aria-controls="adt-search-panel-search"
+      data-adt-search-tab="search"
+    >
+      <span class="adt-search-chat__tab-label">Search</span>
+      <kbd class="adt-search-chat__hint" title="Focus search">/</kbd>
+    </button>
+    <button
+      type="button"
+      class="adt-search-chat__tab"
+      role="tab"
+      id="adt-search-tab-ask"
+      aria-selected="false"
+      aria-controls="adt-search-panel-ask"
+      data-adt-search-tab="ask"
+    >
+      <span class="adt-search-chat__tab-label">Ask</span>
+      <kbd class="adt-search-chat__hint" title="Focus ask">?</kbd>
+    </button>
+  </div>
+
+  <div
+    class="adt-search-chat__panel is-active"
+    role="tabpanel"
+    id="adt-search-panel-search"
+    aria-labelledby="adt-search-tab-search"
+    data-adt-search-panel="search"
+  >
+    <div id="search-field" class="adt-search-chat__field adt-search-compound">
+      <label class="visually-hidden" for="adt-search-scope">Search scope</label>
+      <select
+        id="adt-search-scope"
+        class="adt-search-scope"
+        data-adt-search-scope
+        aria-label="Search scope"
+      >
+        <option value="component" selected>This component</option>
+        <option value="all">All docs</option>
+        <option value="version">This version</option>
+      </select>
+      <div class="adt-search-input-wrap">
+        {{!-- Fake placeholder: part of the string can be struck when Ask is off. --}}
+        <span class="adt-search-ph" aria-hidden="true" data-adt-search-ph>
+          Search <span class="adt-search-ph-ask is-disabled">or Ask</span>
+        </span>
+        <input
+          id="search-input"
+          type="text"
+          placeholder=""
+          autocomplete="off"
+          aria-label="Search or Ask"
+          data-adt-search-input
+        >
+      </div>
+      <kbd class="adt-search-chat__field-hint" aria-hidden="true">/</kbd>
+    </div>
+  </div>
+
+  <div
+    class="adt-search-chat__panel"
+    role="tabpanel"
+    id="adt-search-panel-ask"
+    aria-labelledby="adt-search-tab-ask"
+    data-adt-search-panel="ask"
+    hidden
+  >
+    <form class="adt-search-chat__ask-form" data-adt-search-ask-form>
+      <label class="adt-search-chat__ask-label visually-hidden" for="adt-ask-input">Ask</label>
+      <div class="adt-search-chat__field adt-search-chat__field--ask">
+        <textarea
+          id="adt-ask-input"
+          class="adt-search-chat__ask-input"
+          rows="2"
+          placeholder="Ask about this site…"
+          data-adt-ask-input
+          aria-label="Ask a question about this site"
+        ></textarea>
+        <kbd class="adt-search-chat__field-hint" aria-hidden="true">?</kbd>
+      </div>
+      <button type="submit" class="adt-search-chat__ask-submit">Ask</button>
+    </form>
+    <div
+      class="adt-search-chat__ask-result"
+      data-adt-ask-result
+      hidden
+      aria-live="polite"
+    ></div>
+  </div>
+</div>
