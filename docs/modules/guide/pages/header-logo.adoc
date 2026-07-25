@@ -1,0 +1,125 @@
+= Header logo strategies
+:navtitle: Header Logo
+:description: Three ways to brand the Valentus header — light/dark asset pairs, single-file colored marks, and mono silhouettes — and how the demo site exercises them without two logos in the chrome.
+
+The site header shows **one** logo at a time.
+Valentus itself uses an anatomical heart *outline*, so the live demo opts into a light/dark asset pair (`header_logo` + `header_logo_dark`).
+That exercises theme-swap logic without putting a second brand mark beside the first.
+
+Single-file strategies (*brand* and *mono*) are shown below as **fixture previews** on mocked header strips — not as competing chrome logos.
+Toggle the real theme control to confirm the live outline pair; use the mocks to compare brand and mono contrast.
+
+== Choose a strategy
+
+[cols="1,2,2", options="header"]
+|===
+| Strategy | When to use | Playbook keys
+
+| *Pair*
+| Outline or single-ink art that needs different strokes on light vs dark bars
+| `header_logo` + `header_logo_dark` (tone ignored)
+
+| *Brand*
+| Colored mark that already has contrast on both bars
+| `header_logo` only (default tone `brand`)
+
+| *Mono*
+| Single-ink silhouette that must invert on the dark bar
+| `header_logo` + `header_logo_tone: mono`
+|===
+
+Do not combine pair and mono for the same mark: pair mode swaps authored assets; mono applies a CSS invert to one asset.
+
+== Live demo: pair (Valentus mark)
+
+This documentation site sets:
+
+[source,yaml]
+----
+site:
+  keys:
+    header_logo: logo.svg
+    header_logo_dark: logo-dark.svg
+----
+
+The header renders two `<img>` elements and CSS shows one per `html.dark-theme` state.
+Use the theme toggle: the outline heart should stay visible on both the light and dark top bars.
+
+== Fixtures: brand and mono (not in chrome)
+
+The mocks below reuse the same anatomical silhouette as filled fixtures so you can judge contrast without changing the live header.
+
+[.adt-logo-fixture-grid]
+====
+[.adt-logo-fixture]
+--
+[.adt-logo-fixture-label]#Brand — light bar#
+
+[.adt-logo-fixture-bar.adt-logo-fixture-bar--light]
+image::logo-strategy-brand.svg[Brand mark on light bar, 48, 48]
+--
+
+[.adt-logo-fixture]
+--
+[.adt-logo-fixture-label]#Brand — dark bar#
+
+[.adt-logo-fixture-bar.adt-logo-fixture-bar--dark]
+image::logo-strategy-brand.svg[Brand mark on dark bar, 48, 48]
+--
+
+[.adt-logo-fixture]
+--
+[.adt-logo-fixture-label]#Mono — light bar (as authored)#
+
+[.adt-logo-fixture-bar.adt-logo-fixture-bar--light]
+image::logo-strategy-mono.svg[Mono mark on light bar, 48, 48]
+--
+
+[.adt-logo-fixture]
+--
+[.adt-logo-fixture-label]#Mono — dark bar (needs invert)#
+
+[.adt-logo-fixture-bar.adt-logo-fixture-bar--dark]
+image::logo-strategy-mono.svg[Mono mark on dark bar without invert, 48, 48]
+--
+
+[.adt-logo-fixture]
+--
+[.adt-logo-fixture-label]#Mono — dark bar + invert#
+
+[.adt-logo-fixture-bar.adt-logo-fixture-bar--dark.adt-logo-fixture-bar--mono-fixed]
+image::logo-strategy-mono.svg[Mono mark on dark bar with invert, 48, 48]
+--
+====
+
+The “needs invert” dark-bar mono preview is *intentionally* low-contrast.
+The neighboring tile applies the same filter as `header_logo_tone: mono` so you can see the fix without changing the live chrome.
+Brand example playbook:
+
+[source,yaml]
+----
+site:
+  keys:
+    header_logo: mybrand.svg
+    # header_logo_tone defaults to brand — no filter, no dark asset
+----
+
+Mono example playbook:
+
+[source,yaml]
+----
+site:
+  keys:
+    header_logo: mysilhouette.svg
+    header_logo_tone: mono
+----
+
+== Why not two logos in the header?
+
+Putting brand and pair marks side by side would:
+
+* Confuse site identity (Valentus has one mark).
+* Invalidate the “one logo slot” layout test.
+* Mix strategies so a contrast failure looks like a chrome bug.
+
+Fixtures on this page keep the live chrome honest while still documenting brand and mono.

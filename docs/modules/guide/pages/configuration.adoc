@@ -33,17 +33,25 @@ Pin strategy (exact vs. `latest` vs. rolling `v1.0` / Renovate): xref:version-pi
 
 The supplemental header and footer read optional playbook keys so you can brand the site without forking partials.
 
+Playbook YAML uses snake_case (`header_logo_dark`).
+Antora camelCases those names in the UI model (`site.keys.headerLogoDark`).
+You only write snake_case in the playbook; the theme templates already use the camelCase form.
+
 [cols="2,3,3", options="header"]
 |===
 | Key | Default | Purpose
 
 | `header_logo`
 | `logo.svg`
-| Basename of the header mark under `img/` (for example `mybrand.svg` → `img/mybrand.svg`). Drop the SVG in supplemental or use a virtual `supplemental_files` entry.
+| Basename of the header mark under `img/` (for example `mybrand.svg` → `img/mybrand.svg`). Drop the SVG in supplemental or use a virtual `supplemental_files` entry. Used on the light bar (and as the only mark when `header_logo_dark` is unset).
+
+| `header_logo_dark`
+| _(none)_
+| Optional dark-bar basename (for example `logo-dark.svg`). When set, the header swaps the two `<img>` assets with CSS (`html.dark-theme`) — no invert filter. Use for outline / single-ink marks that need authored light and dark strokes.
 
 | `header_logo_tone`
 | `brand`
-| How the header logo is treated across themes. `brand` (default) — no CSS filter; use for colored marks that already have contrast on light and dark bars. `mono` — apply invert in dark mode for single-ink / silhouette marks that would otherwise disappear on the dark header.
+| How a *single* header logo is treated across themes (ignored when `header_logo_dark` is set). `brand` (default) — no CSS filter; use for colored marks that already have contrast on light and dark bars. `mono` — apply invert in dark mode for single-ink / silhouette marks that would otherwise disappear on the dark header.
 
 | `site_home_url`
 | `site.url`
@@ -99,7 +107,13 @@ ui:
 
 Place `mybrand.svg` at `supplemental-ui-overrides/img/mybrand.svg`, or use xref:configuration.adoc#virtual-supplemental-files[virtual supplemental files] with `path: img/mybrand.svg`.
 
-Colored brand marks need no light/dark pair and no `header_logo_tone` key (default `brand`). For a single-ink silhouette that disappears on the dark header, set `header_logo_tone: mono`.
+Pick one strategy (do not combine pair + mono on the same mark):
+
+* *Pair* — outline / ink marks: set `header_logo` + `header_logo_dark` (Valentus demo uses this).
+* *Brand* — colored single file: omit `header_logo_dark`; leave tone at default `brand`.
+* *Mono* — single-ink silhouette: omit `header_logo_dark`; set `header_logo_tone: mono`.
+
+See xref:header-logo.adoc[Header logo strategies] for mocked light/dark previews of brand and mono (without a second logo in the live chrome).
 
 [[virtual-supplemental-files]]
 == Virtual supplemental files

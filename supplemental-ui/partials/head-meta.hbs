@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{{uiRootPath}}}/css/site-extra.css">
-<meta name="dm-navbar" content="{{or (lookup site.keys 'dark_mode_navbar') 'light'}}">
+<meta name="dm-navbar" content="{{or site.keys.darkModeNavbar 'light'}}">
 <script>
 (function () {
   const dmNavbar = document.querySelector('meta[name="dm-navbar"]')

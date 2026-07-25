@@ -1,10 +1,15 @@
 <header class="header adt-header">
   <nav class="navbar adt-site-navbar" aria-label="Site">
     <div class="navbar-brand adt-header-brand">
-      <a class="adt-header-logo-item" href="{{{or (lookup site.keys 'site_home_url') site.url}}}" rel="noopener" target="_blank" title="{{{or (lookup site.keys 'site_home_label') 'Project home'}}}" aria-label="{{{or (lookup site.keys 'site_home_label') 'Project home'}}} (opens in new tab)">
-        <img class="adt-header-logo{{#if (eq (lookup site.keys 'header_logo_tone') 'mono')}} adt-header-logo--mono{{/if}}" src="{{{uiRootPath}}}/img/{{or (lookup site.keys 'header_logo') 'logo.svg'}}" width="34" height="34" alt="" />
+      <a class="adt-header-logo-item" href="{{{or site.keys.siteHomeUrl site.url}}}" rel="noopener" target="_blank" title="{{{or site.keys.siteHomeLabel 'Project home'}}}" aria-label="{{{or site.keys.siteHomeLabel 'Project home'}}} (opens in new tab)">
+        {{#if site.keys.headerLogoDark}}
+        <img class="adt-header-logo adt-header-logo--for-light" src="{{{uiRootPath}}}/img/{{or site.keys.headerLogo 'logo.svg'}}" width="34" height="34" alt="" />
+        <img class="adt-header-logo adt-header-logo--for-dark" src="{{{uiRootPath}}}/img/{{site.keys.headerLogoDark}}" width="34" height="34" alt="" />
+        {{else}}
+        <img class="adt-header-logo{{#if (eq site.keys.headerLogoTone 'mono')}} adt-header-logo--mono{{/if}}" src="{{{uiRootPath}}}/img/{{or site.keys.headerLogo 'logo.svg'}}" width="34" height="34" alt="" />
+        {{/if}}
       </a>
-      <a class="navbar-item adt-header-title" href="{{{or site.url siteRootPath}}}">{{or (lookup site.keys 'header_doc_title') site.title}}</a>
+      <a class="navbar-item adt-header-title" href="{{{or site.url siteRootPath}}}">{{or site.keys.headerDocTitle site.title}}</a>
     </div>
     <div id="topbar-nav" class="navbar-menu adt-topbar" role="navigation" aria-label="External links">
       <div class="navbar-end adt-header-actions">
@@ -20,7 +25,7 @@
           <img class="adt-header-vcs-img" src="{{{uiRootPath}}}/img/vcs/repo.svg" width="24" height="24" alt="" />
         </a>
         {{else}}
-        <a class="navbar-item adt-header-icon-btn adt-header-vcs" href="{{{or (lookup site.keys 'github_profile_url') 'https://github.com'}}}" rel="noopener" target="_blank" title="Source host" aria-label="Source host (opens in new tab)">
+        <a class="navbar-item adt-header-icon-btn adt-header-vcs" href="{{{or site.keys.githubProfileUrl 'https://github.com'}}}" rel="noopener" target="_blank" title="Source host" aria-label="Source host (opens in new tab)">
           <img class="adt-header-vcs-img" src="{{{uiRootPath}}}/img/vcs/github.svg" width="24" height="24" alt="" />
         </a>
         {{/if}}

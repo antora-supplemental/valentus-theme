@@ -3,6 +3,10 @@ site:
   title: Valentus Theme (UI Modules)
   url: https://antora-supplemental.github.io/valentus-theme
   start_page: valentus-theme:guide:index.adoc
+  keys:
+    dark_mode_navbar: light
+    header_logo: logo.svg
+    header_logo_dark: logo-dark.svg
 
 content:
   sources:

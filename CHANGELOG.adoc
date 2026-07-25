@@ -12,7 +12,10 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 == [1.1.2] - 2026-07-24
 
-* *Header logo:* Brand-first dark mode — no unconditional invert on `.adt-header-logo`. Colored marks stay as authored; opt in with `site.keys.header_logo_tone: mono` for silhouette marks. Default `logo.svg` uses explicit fills.
+* *Header logo:* Brand-first dark mode — no unconditional invert on `.adt-header-logo`. Colored marks stay as authored; opt in with `site.keys.header_logo_tone: mono` for silhouette marks.
+* *Header logo:* Optional light/dark asset pair via `site.keys.header_logo_dark` (CSS swap on `html.dark-theme`). Valentus ships an anatomical heart outline (`logo.svg` / `logo-dark.svg`) and enables the pair on demo playbooks.
+* *Fix:* UI partials read camelCased `site.keys` (`headerLogoDark`, `darkModeNavbar`, …). Snake_case lookups never matched Antora's UI model, so playbook branding keys were ignored.
+* *Docs:* Guide page `header-logo.adoc` with brand/mono fixture mocks so single-file strategies are documented without a second logo in the live chrome.
 * See link:changelog-details/2026-07-24%20-%201.1.2%20brand-first%20header%20logo.adoc[Detailed notes — 2026-07-24].
 
 == [1.1.1] - 2026-06-13

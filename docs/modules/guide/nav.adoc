@@ -2,6 +2,7 @@
 * xref:index.adoc[Getting Started]
 * xref:installation.adoc[Installation]
 * xref:configuration.adoc[Configuration]
+* xref:header-logo.adoc[Header Logo]
 * xref:version-pinning.adoc[Version Pinning]
 * xref:customization.adoc[Customization]
 * xref:vcs-repo-logo.adoc[VCS Repo Logo]
