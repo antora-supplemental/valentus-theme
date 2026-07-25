@@ -383,15 +383,19 @@ html.adt-theme-animating .doc {
   color: var(--adt-accent) !important;
 }
 
+.adt-breadcrumb-trail .adt-breadcrumb-trail-link {
+  font-weight: 400 !important;
+}
+
 .adt-breadcrumb-trail--current .adt-breadcrumb-trail-link,
 .adt-breadcrumb-trail--current .adt-breadcrumb-trail-text,
 .adt-breadcrumb-trail-text {
   color: var(--adt-ink) !important;
+  font-weight: 500 !important;
 }
 
 .adt-bc-sep {
-  color: var(--adt-ink-muted) !important;
-  opacity: 0.7;
+  display: none !important;
 }
 
 .adt-bc-kicker {

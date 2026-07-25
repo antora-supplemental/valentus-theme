@@ -11,7 +11,7 @@ Session notes for branch `demo/visual-redesign`: layered visual system on Valent
 * *Code:* Dark panels in both themes with retuned highlight colors; always-visible source toolbox chrome.
 * *Gotcha — code panel target:* Style the panel on `.listingblock > .content`, not on `pre`. An absolutely positioned toolbox fights a rounded `pre` and clips or misaligns; rounding/background on the content wrapper keeps the toolbox inside the panel.
 * *Admonitions:* Left accent border + tinted fill (no floating Material-style pills as the main look).
-* *Search:* Elevated field, accent focus ring, `⌘K` / `Ctrl+K` focus shortcut.
+* *Search:* Elevated field, accent focus ring, `⌘K` / `Ctrl+K` focus shortcut. Hint label follows OS via `data-adt-modkey` (FOUC in `head-meta` / `adt-modkey-fouc.js`; default `Ctrl+K`).
 * *Motion:* Short theme-toggle surface crossfade; sticky shadow transition.
 * *Files:* `site-visual.css` / `site-visual.js` (supplemental + `doc-layout` UI module). Override via `:root` / `html.dark-theme` custom properties without forking partials.
 
@@ -40,6 +40,12 @@ Session notes for branch `demo/visual-redesign`: layered visual system on Valent
 * *Width transition both ways:* A jumped `flex-basis: var(--adt-doc-max)` made grow look smooth (via `max-width`) while shrink snapped. Prefer `flex: 0 1 auto` with explicit `width` / `max-width` so narrow↔comfortable↔wide animates in both directions.
 * *scrollbar-gutter: stable:* Without it, short pages that never show a vertical scrollbar shift horizontal alignment vs pages that do. Keep a stable gutter on the scrolling root.
 * *Antora worktree content source:* `content.sources` with `url: .` fails when the checkout is a linked git worktree (`.git` is a file). Use `antora-playbook-visual-demo.yml` (content from sibling normal clone `../valentus-theme`, UI from this worktree), or build from a non-worktree checkout.
+
+== Breadcrumb mast polish
+
+* Trail ancestors use `font-weight: 400`; current crumb at most `500` (not bold). Component/version kickers stay as controls.
+* Hide `.adt-bc-sep` (`|` between kickers) via CSS; page-trail `/` separators unchanged.
+* Synced in `supplemental-ui` and `ui-modules/packages/doc-layout`.
 
 == Preview
 

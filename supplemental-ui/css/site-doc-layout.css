@@ -661,7 +661,7 @@ html.dark-theme .adt-doc-mast {
 
 .adt-breadcrumb-trail .adt-breadcrumb-trail-link {
   color: var(--adt-accent);
-  font-weight: 500;
+  font-weight: 400;
   text-decoration: none;
 }
 
@@ -673,7 +673,7 @@ html.dark-theme .adt-doc-mast {
 .adt-breadcrumb-trail--current .adt-breadcrumb-trail-text,
 .adt-breadcrumb-trail-text {
   color: var(--adt-ink);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 html.dark-theme .adt-breadcrumb-trail .adt-breadcrumb-trail-link {
@@ -787,15 +787,9 @@ html.dark-theme .adt-breadcrumb-home-link:hover {
   display: block;
 }
 
+/* Vertical | between component/version kickers — hidden; trail still uses / separators */
 .adt-bc-sep {
-  user-select: none;
-  color: var(--adt-ink-muted);
-  font-weight: 500;
-  padding: 0 0.1rem;
-}
-
-html.dark-theme .adt-bc-sep {
-  color: var(--adt-ink-muted);
+  display: none;
 }
 
 .adt-bc-cluster {
