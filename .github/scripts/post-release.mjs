@@ -1,15 +1,18 @@
 #!/usr/bin/env node
 /**
  * After a semver release (vX.Y.Z), update rolling line aliases (vX, vX.Y) and
- * supported-lines.json. Rolling releases are marked prerelease and never "latest".
+ * supported-lines.json (schema 2, dual-axis labels VALENTUS_SEMVER+antora.N).
+ * Rolling releases are marked prerelease and never "latest".
  */
 import { execSync } from "node:child_process";
-import { mkdtempSync, unlinkSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 const REPO = process.env.GITHUB_REPOSITORY || "antora-supplemental/valentus-theme";
 const BASE = `https://github.com/${REPO}/releases/download`;
+/** Antora framework major for this release line (override with ANTORA_MAJOR). */
+const ANTORA_MAJOR = String(process.env.ANTORA_MAJOR || "3");
 
 function sh(cmd, opts = {}) {
   const result = execSync(cmd, {
@@ -29,7 +32,7 @@ function shQuiet(cmd) {
 }
 
 function parseVersion(tag) {
-  return tag.replace(/^v/, "");
+  return tag.replace(/^v/, "").split("+")[0];
 }
 
 function compareSemver(a, b) {
@@ -42,9 +45,13 @@ function compareSemver(a, b) {
   return 0;
 }
 
+function isPureSemverTag(tag) {
+  return /^v\d+\.\d+\.\d+$/.test(tag);
+}
+
 function allVersionTags() {
   const out = shQuiet('git tag -l "v[0-9]*.[0-9]*.[0-9]*"');
-  return out ? out.split("\n").filter(Boolean) : [];
+  return out ? out.split("\n").filter(isPureSemverTag) : [];
 }
 
 function highestInLine(tags, major, minor = null) {
@@ -71,6 +78,24 @@ function minorLinesFromTags(tags, majorOnly = null) {
   });
 }
 
+function publicLabel(version, antora = ANTORA_MAJOR) {
+  return `${parseVersion(version)}+antora.${antora}`;
+}
+
+function lineEntry(tagName, version, antora = ANTORA_MAJOR) {
+  const semver = parseVersion(version);
+  const [valentus] = semver.split(".");
+  return {
+    tag: tagName,
+    valentus: String(valentus),
+    antora: String(antora),
+    version: semver,
+    label: publicLabel(semver, antora),
+    current: semver,
+    url: `${BASE}/${tagName}/ui-bundle.zip`,
+  };
+}
+
 function updateRollingRelease(tagName, commitSha, assetPath, title, notes) {
   shQuiet(`gh release delete ${tagName} --yes --cleanup-tag -R ${REPO}`);
   const notesFile = join(tmpdir(), `adt-release-notes-${tagName}.md`);
@@ -85,8 +110,9 @@ function updateRollingRelease(tagName, commitSha, assetPath, title, notes) {
 }
 
 function rollingNotes(major, minor, currentVersion) {
+  const label = publicLabel(currentVersion);
   return [
-    `Rolling release alias for the latest **v${major}.${minor}.x** patch (currently **v${currentVersion}**).`,
+    `Rolling release alias for the latest **v${major}.${minor}.x** patch (currently **${label}**, tag \`v${currentVersion}\`).`,
     "",
     "This Git tag and release move when a new patch ships within the line. They are marked prerelease so `releases/latest` still tracks normal semver releases.",
     "",
@@ -97,18 +123,28 @@ function rollingNotes(major, minor, currentVersion) {
 }
 
 function majorRollingNotes(major, currentVersion) {
+  const label = publicLabel(currentVersion);
   return [
-    `Rolling release alias for the latest **v${major}.x.x** release (currently **v${currentVersion}**).`,
+    `Rolling release alias for the latest **v${major}.x.x** release (currently **${label}**, tag \`v${currentVersion}\`).`,
     "",
-    "This Git tag and release move when a new minor or patch ships within the v1 major line. Marked prerelease so `releases/latest` still tracks normal semver releases.",
+    `This Git tag and release move when a new minor or patch ships within the Valentus v${major} major line. Marked prerelease so \`releases/latest\` still tracks normal semver releases.`,
     "",
     `Pin in your playbook: \`${BASE}/v${major}/ui-bundle.zip\``,
     "",
-    "Prefer `v{major}.{minor}` when you want to stay on one minor line (for example `v1.0` for v1.0.x patches only).",
+    `Prefer \`v${major}.{minor}\` when you want to stay on one minor line (for example \`v${major}.0\` for v${major}.0.x patches only).`,
   ].join("\n");
 }
 
-const version = process.env.VERSION?.replace(/^v/, "") || process.argv[2];
+function readExistingSupported() {
+  if (!existsSync("supported-lines.json")) return null;
+  try {
+    return JSON.parse(readFileSync("supported-lines.json", "utf8"));
+  } catch {
+    return null;
+  }
+}
+
+const version = process.env.VERSION?.replace(/^v/, "").split("+")[0] || process.argv[2];
 const sha =
   process.env.RELEASE_SHA ||
   shQuiet(`git rev-list -n 1 "v${version}"`) ||
@@ -127,7 +163,9 @@ const lineTag = `v${major}.${minor}`;
 const lineHighest = highestInLine(tags, major, minor);
 const lineHighestVersion = parseVersion(lineHighest);
 
-console.log(`Post-release for v${version} (line ${major}.${minor} → ${lineHighestVersion})`);
+console.log(
+  `Post-release for v${version} label ${publicLabel(version)} (line ${major}.${minor} → ${lineHighestVersion})`,
+);
 
 updateRollingRelease(
   lineTag,
@@ -177,31 +215,45 @@ for (const line of minorLinesFromTags(tags, major)) {
   );
 }
 
-const lines = {};
+const prev = readExistingSupported();
+const lines = { ...(prev?.lines || {}) };
+
 for (const line of minorLinesFromTags(tags, major)) {
   const [ma, mi] = line.split(".").map(Number);
   const highest = highestInLine(tags, ma, mi);
   const current = parseVersion(highest);
-  lines[line] = {
-    tag: `v${ma}.${mi}`,
-    current,
-    url: `${BASE}/v${ma}.${mi}/ui-bundle.zip`,
-  };
+  lines[line] = lineEntry(`v${ma}.${mi}`, current);
 }
 
-const latest = highestMajorVersion;
+lines[String(major)] = lineEntry(`v${major}`, highestMajorVersion);
+
+const historical = { ...(prev?.historical_labels || {}) };
+for (const tag of tags) {
+  const semver = parseVersion(tag);
+  if (!(semver in historical)) {
+    // Default: all known Valentus tags to date target Antora 3 unless already mapped.
+    historical[semver] = publicLabel(semver, "3");
+  }
+}
+historical[version] = publicLabel(version);
+
+const latestAcross = tags.map(parseVersion).sort(compareSemver).at(-1) || highestMajorVersion;
+const latestLabel =
+  latestAcross === version
+    ? publicLabel(version)
+    : historical[latestAcross] || publicLabel(latestAcross, lines[String(latestAcross.split(".")[0])]?.antora || "3");
+
 const supported = {
-  schema: 1,
+  schema: 2,
   updated: new Date().toISOString(),
-  latest,
-  lines: {
-    [String(major)]: {
-      tag: `v${major}`,
-      current: latest,
-      url: `${BASE}/v${major}/ui-bundle.zip`,
-    },
-    ...lines,
-  },
+  scheme: "VALENTUS_SEMVER+antora.N",
+  latest: latestAcross,
+  latest_label: latestLabel,
+  latest_antora: String(latestAcross === version ? ANTORA_MAJOR : lines[String(latestAcross.split(".")[0])]?.antora || "3"),
+  lines,
+  historical_labels: historical,
+  notes:
+    "Git tags remain pure semver (vX.Y.Z). Public labels append +antora.N. Historical 1.x tags were not renamed; labels are documentary.",
 };
 
 writeFileSync("supported-lines.json", `${JSON.stringify(supported, null, 2)}\n`);

@@ -1,0 +1,24 @@
+= 2.0.0 — dual-axis versioning (`VALENTUS_SEMVER+antora.N`)
+:navtitle: 2.0.0 dual-axis versioning
+
+== Summary
+
+Valentus public version labels are now two independent axes:
+
+* *Valentus semver* — `MAJOR.MINOR.PATCH` in `package.json` and git tags `vX.Y.Z`. Bump major when chrome/partial/CSS contracts break for people extending Valentus (this release).
+* *Antora compatibility suffix* — `+antora.N` where N is the Antora *framework* major. Currently `+antora.3`. Appears in changelog headings, GitHub Release titles, `supported-lines.json`, and optional discoverability tags.
+
+Full label for this release: *2.0.0+antora.3*.
+
+== Why not one major?
+
+A visual redesign that breaks theme modders is a Valentus major even when Antora stays on 3.
+When Antora 4 support lands later, the Antora axis moves in `+antora.4` without forcing a Valentus major unless Valentus APIs also break for Antora 4.
+
+== Retroactive 1.x
+
+All historical 1.x releases targeted Antora 3. Documented as `1.x.y+antora.3`. Existing git tags and download URLs (`v1.1.2`, …) were left unchanged so pins keep working.
+
+== Machine-readable map
+
+See `supported-lines.json` (`schema: 2`) — `label`, `valentus`, `antora`, and `historical_labels`.
