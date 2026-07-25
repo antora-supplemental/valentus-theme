@@ -392,7 +392,7 @@ html.dark-theme .footer a {
   color: #f1f3f5;
 }
 
-/* Lunr search (@antora/lunr-extension) — field lives in .adt-tool-band (.adt-nav-search / .adt-tool-search) */
+/* Lunr search (@antora/lunr-extension) — field lives in .adt-navbar-search (.adt-nav-search) */
 .navbar .search,
 .adt-header-search,
 .adt-nav-search,
