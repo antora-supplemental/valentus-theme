@@ -16,6 +16,8 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+* *Polish:* Breadcrumb component/version kickers (`.adt-bc-kicker`) — small muted stroke chevron after the label (same family as nav expanders); flips when `aria-expanded`.
+* *Fix:* Search scope caret — defective dual CSS-gradient “triangle” (tongue tip) replaced in standalone `@antora-supplemental/antora-search-chat` with a stroke SVG mask on `.adt-search-scope-slot::after` (reinstall/bump the git dep to pick up).
 * *Change:* Consume `@antora-supplemental/antora-search-chat` from https://github.com/antora-supplemental/antora-search-chat[the standalone package] (git dep); remove in-tree `packages/antora-search-chat/` so Valentus is not a second source of truth.
 * *Fix:* Lunr search results invisible after compound markup — `@antora/lunr-extension` `search-ui.js` appends `.search-result-dropdown-menu` to `#search-input.parentNode` (`.adt-search-input-wrap`), not to `#search-field`. A prior change set `.adt-search-compound { overflow: visible }` but left `.adt-search-input-wrap { overflow: hidden }` for pill clipping, which still hid all results. Theme override + package: keep compound *and* input-wrap `overflow: visible`; clip only `.adt-search-scope-slot`.
 * *Fix / layout:* Sticky footer — `.adt-shell` / `.body.adt-body` fill leftover viewport (`min-height: 100vh` on `body` + flex grow on the shell); `footer.footer` stays natural height outside the 3-col group (no longer grows to absorb slack).
