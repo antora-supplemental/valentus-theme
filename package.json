@@ -1,6 +1,6 @@
 {
   "name": "valentus-theme",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Valentus — composed Antora doc-site chrome with bundled dark mode (mast, header, layout, toggle).",
   "private": true,
   "keywords": [
