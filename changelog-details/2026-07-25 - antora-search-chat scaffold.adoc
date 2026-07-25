@@ -2,21 +2,27 @@
 
 == Summary
 
-Phase 1 of a Valentus-owned Antora extension that **wraps** `@antora/lunr-extension` with a Search / Ask control (AI Q&A later). Lunr is not forked.
+Phase 1 of a Valentus-owned Antora extension that **wraps** `@antora/lunr-extension` with Search / Ask (AI Q&A later). Lunr is not forked.
+
+== Product decisions (documented)
+
+* *One omnibox* — placeholder *Search or ask…*; `/` and `?` set Search vs Ask mode on the same field (not two widgets).
+* *Lunr-first* — keyword results on keystrokes in Search mode; Ask only on explicit mode / submit. No speculative AI on every keystroke by default; optional debounced question-detection may come later.
+* *Tier-0 local assist* (optional) — ultra-light on-device model for query rewrite / short answers over retrieved chunks; remote API via `backend_url` is an optional upgrade. No API keys in the playbook.
 
 == Package
 
 `packages/antora-search-chat`
 
-* `ARCHITECTURE.adoc` — wrap vs fork, lunr + RAG data flow, config keys, privacy, phases
+* `ARCHITECTURE.adoc` — wrap vs fork, omnibox + tiers, lunr + RAG data flow, config keys, privacy, phases
 * `lib/index.js` — Antora extension; injects UI beside lunr; sets `SITE_SEARCH_CHAT`
-* Stub Ask tab + pluggable `backend_url` (no secrets; no LLM yet)
+* Stub Ask path + pluggable `backend_url` (no secrets; no LLM yet). Phase 1 UI may still show separate Search/Ask panels; omnibox is the documented target.
 
 == UI
 
 Owns `.adt-nav-search` above the nav tree (coordinates with layout that moved search out of the header). Keeps `#search-input` for lunr.
 
-Keyboard:: `/` → Search (lexical); `?` (Shift+/) → Ask. Hint badges on tabs. Listener accepts `key === '?'` or `key === '/' && shiftKey`.
+Keyboard:: `/` → Search mode (lexical); `?` (Shift+/) → Ask mode (same field when omnibox lands). Listener accepts `key === '?'` or `key === '/' && shiftKey`.
 
 == Playbooks
 

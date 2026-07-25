@@ -110,8 +110,8 @@ function injectRuntimeConfig (uiCatalog, uiOutputDir, config) {
 }
 
 /**
- * Antora extension: enhance lunr search UI with Search / Ask tabs.
- * Does not fork or replace @antora/lunr-extension index generation.
+ * Antora extension: enhance lunr with a Search / Ask omnibox (product target).
+ * Phase 1 stub may still use tabbed panels. Does not fork lunr index generation.
  */
 module.exports.register = function register (context = {}) {
   const logger = this.getLogger(PACKAGE_ID)

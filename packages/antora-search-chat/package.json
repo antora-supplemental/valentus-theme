@@ -2,7 +2,7 @@
   "name": "@antora-supplemental/antora-search-chat",
   "version": "0.1.0",
   "private": true,
-  "description": "Valentus Antora extension: wraps @antora/lunr-extension with a Search / Ask (AI Q&A) UI and a pluggable backend hook. Does not fork lunr.",
+  "description": "Valentus Antora extension: wraps @antora/lunr-extension with a Search/Ask omnibox (lunr-first; optional local tier-0 + remote backend). Does not fork lunr.",
   "main": "lib/index.js",
   "license": "MIT",
   "keywords": [

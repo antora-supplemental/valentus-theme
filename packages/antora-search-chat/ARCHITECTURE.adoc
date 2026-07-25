@@ -1,11 +1,13 @@
 = Architecture: antora-search-chat
 
-Status:: Phase 1 scaffold (docs + stub UI). RAG/LLM backends are designed here but not implemented.
+Status:: Phase 1 scaffold (docs + stub UI). Omnibox product target is documented here; the stub may still show separate Search/Ask panels until a follow-up UI pass. RAG/LLM backends are designed here but not implemented.
 
 == Goals
 
-* Add an **Ask** (AI Q&A) mode beside classic **Search**, without forking `@antora/lunr-extension`.
-* Keep lunr as the offline keyword engine; add a pluggable server for grounded answers later.
+* One **omnibox** in the left-nav search slot: a single field labeled *Search or ask…*, not two widgets.
+* Keep lunr as the default, offline keyword engine; **Ask** only on explicit mode or submit (no speculative AI on every keystroke by default).
+* Optional **tier-0** on-device ultra-light model for query rewrite / short answers over retrieved chunks; remote API as an optional upgrade. Never put API keys in the playbook.
+* Wrap `@antora/lunr-extension` — do not fork it.
 * Own the left-nav search slot (`.adt-nav-search`) that Valentus layout already uses above the nav tree.
 
 == Wrap vs fork
@@ -23,6 +25,53 @@ Status:: Phase 1 scaffold (docs + stub UI). RAG/LLM backends are designed here b
 
 This package is a *compose* layer: playbook loads lunr, then `antora-search-chat`. Chat never replaces lunr's index build.
 
+== Product decisions (omnibox + AI)
+
+=== One field, two modes
+
+The control is a single input (omnibox). Modes are orthogonal state on that field — not separate Search and Ask boxes.
+
+[cols="1,3"]
+|===
+| Mode | Behavior
+
+| *Search* (default)
+| Lunr-first keyword results as the user types (existing lunr UI). No network, no model.
+
+| *Ask*
+| User opted in via shortcut, mode control, or explicit submit. Then run retrieval + optional generation (tier-0 local and/or remote).
+|===
+
+Placeholder copy:: `Search or ask…`
+
+Do not put a second search box in the header while this slot is active.
+
+=== No speculative AI on keystrokes
+
+Default path is **lunr-first**:
+
+* Typing in Search mode only drives the lunr index (same as today).
+* Ask runs on *explicit* mode entry and/or submit — not on every keypress.
+* Optional later: *debounced question-detection* (heuristics / tiny classifier) that *suggests* switching to Ask or offers an Ask affordance. That path stays opt-in and must not fire remote or heavy local inference on every keystroke by default.
+
+=== Model tiers (no secrets in playbook)
+
+[cols="1,2,2"]
+|===
+| Tier | Role | Where it runs
+
+| *0 — Local ultra-light* (optional)
+| Query rewrite, ranking hints, or short answers grounded on retrieved chunks (lunr hits / later RAG chunks)
+| On-device or same-origin worker the operator ships; no playbook API keys
+
+| *1 — Remote API* (optional upgrade)
+| Full Q&A / RAG generation when the operator hosts a backend
+| Server you control via `backend_url`; provider keys stay on that server only
+|===
+
+* Playbook may set `backend_url` (public endpoint URL only). *Never* API keys, bearer tokens, or provider credentials in the playbook, UI bundle, or this package.
+* Sites can ship Search-only (lunr), Search + tier-0, Search + remote, or all three — remote is never required for basic Ask UX if tier-0 is enough.
+
 == Data flow (target)
 
 ----
@@ -30,28 +79,28 @@ Antora build
   ├─ @antora/lunr-extension
   │    └─ emits search-index.js (+ lunr client via search-scripts)
   └─ antora-search-chat
-       ├─ injects Ask/Search UI (partial + CSS/JS)
+       ├─ injects omnibox UI (partial + CSS/JS)
        └─ (later) optional RAG corpus export for a backend
 
-Browser
-  ├─ Search tab → existing lunr UI over search-index.js (unchanged)
-  └─ Ask tab → POST question to configured backend_url
-                 ├─ backend may call lunr-equivalent retrieval and/or vector RAG
-                 └─ returns answer + citations (page URLs / headings)
+Browser (one field)
+  ├─ Search mode → lunr over search-index.js (keystroke-driven; offline)
+  └─ Ask mode / submit → retrieve chunks (lunr and/or RAG)
+                 ├─ optional tier-0 local model (rewrite / short answer)
+                 └─ optional POST to backend_url (remote generation + citations)
 ----
 
-Phase 1 stops at the Ask stub (no network call unless `backend_url` is set; then a fetch stub surfaces errors clearly).
+Phase 1 stops at a stub Ask path (no network call unless `backend_url` is set; then a fetch stub surfaces errors clearly). Tier-0 is not shipped yet.
 
 == UI slot
 
 Layout owns placement; search-chat owns the control:
 
 * Slot: left nav, above the tree (`.adt-nav-search`).
-* Keep `#search-input` so lunr and any residual layout focus helpers keep working.
-* Tabs: *Search* | *Ask* — Search is default unless `default_tab: ask`.
-* Hint badges: `/` on Search, `?` on Ask.
+* Keep `#search-input` so lunr and any residual layout focus helpers keep working (omnibox may reuse this id for the shared field).
+* Modes: *Search* | *Ask* on the same field — Search is default unless `default_mode: ask`.
+* Hint badges: `/` for Search mode, `?` for Ask mode (same field).
 
-Do not put a second search box in the header while this slot is active.
+Phase 1 stub note:: The scaffold may still render tabbed Search/Ask panels. Treat that as transitional; product target is the omnibox above.
 
 === Keyboard shortcuts
 
@@ -63,11 +112,11 @@ When focus is *not* in an `input` / `textarea` / `select` / `contenteditable`:
 
 | `/`
 | Search (lexical / lunr)
-| Same meaning as the layout-wide search focus already shipped. Search-chat activates the Search tab and focuses `#search-input`.
+| Same meaning as the layout-wide search focus already shipped. Focuses the omnibox and sets Search mode.
 
 | `?` (Shift+/ )
-| Ask (AI Q&A)
-| Symbolic “answer a question”. Activates the Ask tab and focuses the ask field.
+| Ask (Q&A)
+| Symbolic “answer a question”. Focuses the *same* omnibox and sets Ask mode.
 |===
 
 *Keyboard caveat:* Listen for `key === '?'` *or* (`key === '/'` && `shiftKey`). Some layouts emit `?` directly; others keep `/` with Shift. Ignore when `metaKey` / `ctrlKey` / `altKey` are held.
@@ -84,15 +133,19 @@ Playbook extension object (alongside `require`):
 
 | `backend_url`
 | string (URL)
-| Ask endpoint. Omit or empty = stub mode (no API calls). Never put API keys here.
+| Optional remote Ask endpoint (tier 1). Omit or empty = no remote calls. Never put API keys here.
 
-| `default_tab`
+| `default_mode`
 | `search` \| `ask`
-| Initial tab. Default: `search`.
+| Initial omnibox mode. Default: `search`. (Stub may still accept `default_tab` as an alias.)
 
-| `ask_placeholder`
+| `placeholder`
 | string
-| Placeholder for the Ask field. Default: `Ask about this site…`.
+| Omnibox placeholder. Default: `Search or ask…`. (Stub may still accept `ask_placeholder`.)
+
+| `local_assist`
+| boolean
+| Opt in to tier-0 local assist when a model/runtime is available. Default: off until shipped.
 
 | `enabled`
 | boolean
@@ -110,9 +163,10 @@ Site keys (optional, future):
 == Privacy and API keys
 
 * *Never* commit API keys, bearer tokens, or provider credentials to the playbook, UI bundle, or this package.
-* Browser → backend should use a *server you control*. That server holds provider keys and applies rate limits / auth.
-* Questions and page snippets may leave the user's machine when Ask is used; document that for site operators.
+* Browser → remote backend should use a *server you control*. That server holds provider keys and applies rate limits / auth.
+* Questions and page snippets may leave the user's machine when remote Ask is used; document that for site operators.
 * Lunr *Search* mode stays fully client-side / offline when the site is static-hosted.
+* Tier-0 local assist keeps inference on-device (or on a same-origin asset the operator ships); still document that retrieved page text is fed to the local model.
 
 == Phases
 
@@ -121,15 +175,15 @@ Site keys (optional, future):
 | Phase | Deliverable | Done when
 
 | *1 — Scaffold* (this pass)
-| Package + ARCHITECTURE + stub Ask/Search tabs; loads beside lunr
-| Playbook can require the extension; UI tabs render; Search still uses lunr
+| Package + ARCHITECTURE + stub UI; loads beside lunr
+| Playbook can require the extension; UI renders; Search still uses lunr; docs describe omnibox + tiers
 
-| *2 — Pluggable backend*
-| Client POSTs `{ question, context? }` to `backend_url`; renders answer + citation list
-| Operators can point at any compatible HTTP API
+| *2 — Omnibox + pluggable backends*
+| One field with Search/Ask modes; lunr-first keystrokes; Ask on mode/submit; optional `backend_url` POST `{ question, context? }`; optional tier-0 hook
+| Operators can use Search alone, add local assist, and/or point at a compatible HTTP API — no keys in playbook
 
 | *3 — RAG pipeline*
-| Build-time (or publish-time) embedding/index of site content; backend retrieves + generates
+| Build-time (or publish-time) embedding/index of site content; backend (and/or local) retrieves + generates
 | Answers cite real pages; index refresh documented
 |===
 
@@ -145,6 +199,6 @@ Retrieval sketch:
 
 . Chunk AsciiDoc/HTML pages at build (heading-aware chunks align with lunr `index_by_heading`).
 . Embed chunks; store `{ id, url, title, heading, text, embedding }`.
-. At Ask time: embed question → top-k chunks → optional lunr keyword boost → LLM with citations only from retrieved chunks.
+. At Ask time: embed question → top-k chunks → optional lunr keyword boost → tier-0 and/or remote LLM with citations only from retrieved chunks.
 
-Keep lunr for the Search tab and as a hybrid retriever signal; do not delete the lunr index when RAG lands.
+Keep lunr for Search mode and as a hybrid retriever signal; do not delete the lunr index when RAG lands.

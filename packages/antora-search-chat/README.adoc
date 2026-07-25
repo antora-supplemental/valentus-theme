@@ -1,8 +1,8 @@
 = antora-search-chat
 
-Valentus Antora extension that **wraps** https://gitlab.com/antora/antora-lunr-extension[`@antora/lunr-extension`] with a Search / Ask control — not a fork of lunr.
+Valentus Antora extension that **wraps** https://gitlab.com/antora/antora-lunr-extension[`@antora/lunr-extension`] with a Search / Ask omnibox — not a fork of lunr.
 
-Status:: Phase 1 scaffold (stub Ask UI + pluggable backend config). No production LLM/RAG yet.
+Status:: Phase 1 scaffold (stub UI + pluggable backend config). Product target is one field (*Search or ask…*); Ask is explicit (not AI-on-every-keystroke). No production LLM/RAG yet.
 
 == Quick start
 
@@ -18,19 +18,28 @@ antora:
       snippet_length: 200
     - require: ./packages/antora-search-chat
       # Optional — see ARCHITECTURE.adoc
-      # backend_url: https://search-api.example.com/v1/ask
-      # default_tab: search
+      # backend_url: https://search-api.example.com/v1/ask   # remote upgrade only; no API keys here
+      # default_mode: search
+      # local_assist: false
 ----
 
 The extension injects UI into the left-nav search slot (`.adt-nav-search` / `#search-input`) so it coexists with layout work that moved search above the nav tree.
 
+== Product shape (target)
+
+* *One omnibox* — `/` and `?` set Search vs Ask mode on the **same** field (not two widgets).
+* *Lunr-first* — keyword results while typing in Search mode; Ask only on explicit mode / submit. Optional debounced question-detection may come later; it is not the default.
+* *Tier-0 local assist* (optional) — ultra-light on-device model for query rewrite / short answers over retrieved chunks; remote `backend_url` is an optional upgrade. Never put API keys in the playbook.
+
 Keyboard (when not typing in a field)::
 
-* `/` — classic lexical *Search* (lunr)
-* `?` (Shift+/) — *Ask* / answer a question
+* `/` — *Search* mode (lunr)
+* `?` (Shift+/) — *Ask* mode on the same field
 
-Hint badges on the tabs show `/` and `?`. See ARCHITECTURE for the `key === '?'` vs `key === '/' && shiftKey` caveat.
+Hint badges show `/` and `?`. See ARCHITECTURE for the `key === '?'` vs `key === '/' && shiftKey` caveat.
+
+Phase 1 stub may still show separate Search/Ask panels; treat that as transitional.
 
 == Docs
 
-* link:ARCHITECTURE.adoc[ARCHITECTURE.adoc] — wrap vs fork, data flow, shortcuts, config keys, privacy, phases
+* link:ARCHITECTURE.adoc[ARCHITECTURE.adoc] — wrap vs fork, omnibox + tiers, data flow, shortcuts, config keys, privacy, phases, RAG notes
