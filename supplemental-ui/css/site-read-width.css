@@ -53,10 +53,6 @@ html[data-adt-read-width="wide"] {
     width: 100%;
     margin-inline: 0 !important;
   }
-
-  footer.footer {
-    transition: max-width 0.25s ease, width 0.25s ease;
-  }
 }
 
 /* Control — placement-agnostic */

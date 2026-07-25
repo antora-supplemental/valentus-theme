@@ -39,7 +39,8 @@
   --adt-header-bar-hover: var(--adt-accent-soft);
 
   /* Layout shell: body is intrinsic (nav + gap + doc + gap + toc).
-     --adt-shell-max tracks that width for footer alignment; read-width only changes --adt-doc-max.
+     --adt-shell-max caps the shell; read-width only changes --adt-doc-max.
+     Footer is full-bleed chrome (not tied to shell / read-width).
      Nav and TOC share --adt-side-width for optical centering of the article. */
   --adt-shell-pad: 1.75rem;
   --adt-col-gap: 2rem;
@@ -279,10 +280,10 @@ a.adt-header-title {
   }
 
   footer.footer {
-    align-self: center;
+    align-self: stretch;
     width: 100%;
-    max-width: var(--adt-shell-max);
-    margin-inline: auto;
+    max-width: none;
+    margin-inline: 0;
     padding-left: calc(var(--adt-shell-pad) + var(--adt-footer-pad-h, 1.5rem));
     padding-right: calc(var(--adt-shell-pad) + var(--adt-footer-pad-h, 1.5rem));
     box-sizing: border-box;
