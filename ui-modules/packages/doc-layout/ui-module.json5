@@ -10,7 +10,6 @@
   conflicts: [],
   slots: {
     head: {
-      scripts: ["js/adt-modkey-fouc.js"],
       stylesheets: ["css/site-doc-layout.css", "css/site-visual.css"],
     },
     foot: {

@@ -32,22 +32,27 @@
   --adt-header-bar-hover: var(--adt-accent-soft);
   /* Raster/SVG VCS marks (white in file): invert for light top bar. */
   --adt-header-vcs-icon-filter: brightness(0) opacity(0.92);
-  /* Top rails (nav | main | TOC are peers under .body.adt-body):
-     - --adt-global-rail-top: nav baseline under the mast (denser than article).
-     - --adt-content-rail-top: *extra* top padding for .content (article owns more air).
-     - --adt-toc-rail-top: extra pad on TOC only so it starts below the H1 baseline. */
+  /* Top rails (nav | main | TOC peers under .body.adt-body):
+     - --adt-global-rail-top: shared top inset under the mast for all three columns.
+     - --adt-tool-band: height of left search / article read-width control row.
+     - --adt-tool-gap: space under that tool band before tree / title / TOC.
+     Tree, page title, and TOC share a common baseline below the tool band. */
   --adt-global-rail-top: 0.85rem;
-  --adt-content-rail-top: 0.65rem;
-  --adt-toc-rail-top: 2.4rem;
+  --adt-content-rail-top: 0;
+  --adt-tool-band: 2.15rem;
+  --adt-tool-gap: 0.65rem;
+  --adt-toc-rail-top: calc(var(--adt-global-rail-top) + var(--adt-tool-band) + var(--adt-tool-gap));
   /* Horizontal rail: mast + left nav share an inset so home / component title line up. */
   --adt-mast-pad-h: 1.25rem;
   --adt-global-rail-hpad: var(--adt-mast-pad-h);
   /* Centered page shell + reading measure (site-visual applies the layout rules).
-     --adt-shell-max is a soft fallback; site-visual derives it from nav + gaps + doc + toc. */
+     --adt-shell-max is a soft fallback; site-visual derives it from nav + gaps + doc + toc.
+     Nav and TOC share --adt-side-width so the article sits optically centered. */
   --adt-shell-pad: 1.75rem;
-  --adt-nav-width: 16.5rem;
+  --adt-side-width: 16rem;
+  --adt-nav-width: var(--adt-side-width);
   --adt-col-gap: 2rem;
-  --adt-toc-width: 12rem;
+  --adt-toc-width: var(--adt-side-width);
   --adt-doc-max: 82ch;
   --adt-shell-max: calc(
     var(--adt-nav-width) + var(--adt-col-gap) + var(--adt-doc-max) + var(--adt-col-gap) + var(--adt-toc-width) +
@@ -147,36 +152,6 @@ pre,
   flex-wrap: nowrap;
   align-items: center;
   margin-left: auto;
-}
-
-.adt-header-search {
-  padding: 0 0.25rem;
-  flex-shrink: 1;
-  min-width: 0;
-}
-
-.adt-header-search #search-input {
-  width: 10rem;
-  max-width: 28vw;
-  border-color: var(--adt-header-bar-border);
-  background: var(--adt-header-bar-bg);
-  color: var(--adt-header-bar-fg);
-}
-
-.adt-header-search #search-input::placeholder {
-  color: var(--adt-header-bar-fg);
-  opacity: 0.55;
-}
-
-.adt-header-search #search-input:focus {
-  outline-color: var(--adt-bc-kicker-fg);
-}
-
-@media screen and (max-width: 768px) {
-  .adt-header-search #search-input {
-    width: 7rem;
-    max-width: 40vw;
-  }
 }
 
 .adt-header-actions {
@@ -554,9 +529,9 @@ html.dark-theme .adt-doc-mast {
   min-width: 0;
 }
 
-/* Inset article + in-page TOC. padding-top = global + optional content-only rail. */
+/* Inset article + in-page TOC. Shared top rail with left search / right TOC. */
 .adt-article .content {
-  padding-top: calc(var(--adt-global-rail-top) + var(--adt-content-rail-top));
+  padding-top: var(--adt-global-rail-top);
   box-sizing: border-box;
 }
 
@@ -951,9 +926,31 @@ html.dark-theme .adt-bc-menu-item a.is-current {
    The base ui-bundle’s .nav-menu still sets padding: … calc(toolbar-height/4); dark-theme or load
    order can restore that, so this rule is !important. Panel wrappers must not add a second inset. ——— */
 body.adt-body .nav .nav-panel-menu {
+  display: flex;
+  flex-direction: column;
   padding-left: 0;
   padding-right: 0;
   box-sizing: border-box;
+  overflow: visible;
+}
+
+/* Search sits in the tool band above the tree (aligns with article read-width). */
+.adt-nav-search {
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 6;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--adt-tool-band);
+  padding: var(--adt-global-rail-top) var(--adt-global-rail-hpad) var(--adt-tool-gap);
+  margin: 0;
+  background: transparent !important;
+}
+
+.adt-nav-search:hover,
+.adt-nav-search:focus,
+.adt-nav-search:focus-within {
+  background: transparent !important;
 }
 
 body.adt-body .nav nav.nav-menu.nav-tree-only,
@@ -961,8 +958,10 @@ body.adt-body .nav nav.nav-menu.adt-nav-tree-only,
 nav.nav-menu.nav-tree-only,
 nav.nav-menu.adt-nav-tree-only {
   box-sizing: border-box;
-  padding: var(--adt-global-rail-top) var(--adt-global-rail-hpad) 0.5rem
-    var(--adt-global-rail-hpad) !important;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 var(--adt-global-rail-hpad) 0.5rem var(--adt-global-rail-hpad) !important;
 }
 
 /* Component label is <p class="adt-nav-component-title"> — not a heading; avoids .nav-menu h3.title / .doc h3. */

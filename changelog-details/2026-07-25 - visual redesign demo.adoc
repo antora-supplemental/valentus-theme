@@ -11,7 +11,7 @@ Session notes for branch `demo/visual-redesign`: layered visual system on Valent
 * *Code:* Dark panels in both themes with retuned highlight colors; always-visible source toolbox chrome.
 * *Gotcha — code panel target:* Style the panel on `.listingblock > .content`, not on `pre`. An absolutely positioned toolbox fights a rounded `pre` and clips or misaligns; rounding/background on the content wrapper keeps the toolbox inside the panel.
 * *Admonitions:* Left accent border + tinted fill (no floating Material-style pills as the main look).
-* *Search:* Elevated field, accent focus ring, `⌘K` / `Ctrl+K` focus shortcut. Hint label follows OS via `data-adt-modkey` (FOUC in `head-meta` / `adt-modkey-fouc.js`; default `Ctrl+K`).
+* *Search:* Lives above the left nav tree (`.adt-nav-search`), not in the header. Elevated field, accent focus ring only (no hover/focus fill flash). Plain `/` focuses search (ignored in inputs/textareas/selects/contenteditable); hint badge shows `/`. Replaces Ctrl/⌘K and `data-adt-modkey` FOUC.
 * *Motion:* Short theme-toggle surface crossfade; sticky shadow transition.
 * *Files:* `site-visual.css` / `site-visual.js` (supplemental + `doc-layout` UI module). Override via `:root` / `html.dark-theme` custom properties without forking partials.
 
@@ -20,7 +20,8 @@ Session notes for branch `demo/visual-redesign`: layered visual system on Valent
 * Peers under `.body.adt-body` are `nav | main | TOC` (TOC lifted out of nested `.content`).
 * Columns separated by spacing only — no vertical divider rule.
 * Body width is intrinsic (side panels + fixed `--adt-col-gap` + doc column); viewport-centered with `fit-content` + `align-self: center`.
-* Wider left nav (`16.5rem`); article top air greater than nav; TOC sits below the H1 baseline.
+* Equal side rails via `--adt-side-width` (`16rem`) for both nav and TOC so the article is optically centered.
+* Shared tool-band rhythm: left search and article `adt-read-width` share `--adt-tool-band` / `--adt-tool-gap`; tree, title, and TOC start on the same baseline below that band.
 
 == Read-width UI module
 

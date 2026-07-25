@@ -73,12 +73,14 @@ html[data-adt-read-width="wide"] {
   box-sizing: border-box;
 }
 
-/* Demo / article placement: centered above the page title */
+/* Demo / article placement: centered above the page title; shares tool-band rhythm with nav search */
 article.doc > .adt-read-width {
   display: flex;
   width: fit-content;
   max-width: 100%;
-  margin: 0 auto 0.85rem;
+  min-height: var(--adt-tool-band, 2.15rem);
+  margin: 0 auto var(--adt-tool-gap, 0.65rem);
+  box-sizing: border-box;
 }
 
 .adt-read-width-btn {

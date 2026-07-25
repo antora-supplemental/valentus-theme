@@ -39,18 +39,22 @@
   --adt-header-bar-hover: var(--adt-accent-soft);
 
   /* Layout shell: body is intrinsic (nav + gap + doc + gap + toc).
-     --adt-shell-max tracks that width for footer alignment; read-width only changes --adt-doc-max. */
+     --adt-shell-max tracks that width for footer alignment; read-width only changes --adt-doc-max.
+     Nav and TOC share --adt-side-width for optical centering of the article. */
   --adt-shell-pad: 1.75rem;
   --adt-col-gap: 2rem;
-  --adt-nav-width: 16.5rem;
-  --adt-toc-width: 12rem;
+  --adt-side-width: 16rem;
+  --adt-nav-width: var(--adt-side-width);
+  --adt-toc-width: var(--adt-side-width);
   --adt-shell-max: calc(
     var(--adt-nav-width) + var(--adt-col-gap) + var(--adt-doc-max) + var(--adt-col-gap) + var(--adt-toc-width) +
       2 * var(--adt-shell-pad)
   );
   --adt-global-rail-top: 0.85rem;
-  --adt-content-rail-top: 0.65rem;
-  --adt-toc-rail-top: 2.4rem;
+  --adt-content-rail-top: 0;
+  --adt-tool-band: 2.15rem;
+  --adt-tool-gap: 0.65rem;
+  --adt-toc-rail-top: calc(var(--adt-global-rail-top) + var(--adt-tool-band) + var(--adt-tool-gap));
   --adt-mast-pad-h: 1.25rem;
 }
 
@@ -274,86 +278,91 @@ footer.footer a {
   color: var(--adt-accent) !important;
 }
 
-/* ——— Header search ——— */
-.adt-header-search {
+/* ——— Nav search (above tree; not in header) ——— */
+.adt-nav-search {
   position: relative;
+  background: transparent !important;
 }
 
-.adt-header-search #search-field {
+.adt-nav-search:hover,
+.adt-nav-search:focus,
+.adt-nav-search:focus-within {
+  background: transparent !important;
+}
+
+.adt-nav-search #search-field {
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
-.adt-header-search #search-input {
-  width: 12.5rem;
-  max-width: 32vw;
-  height: 2.15rem;
-  padding: 0 2.4rem 0 0.75rem;
+.adt-nav-search #search-input {
+  width: 100%;
+  max-width: none;
+  height: var(--adt-tool-band, 2.15rem);
+  padding: 0 1.85rem 0 0.75rem;
   border: 1px solid var(--adt-border) !important;
   border-radius: var(--adt-radius) !important;
   background: var(--adt-elevated) !important;
   color: var(--adt-ink) !important;
   font-size: 0.875rem;
-  transition: var(--adt-transition);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
 }
 
-.adt-header-search #search-input::placeholder {
+.adt-nav-search #search-input:hover,
+.adt-nav-search #search-input:focus {
+  background: var(--adt-elevated) !important;
+}
+
+.adt-nav-search #search-input::placeholder {
   color: var(--adt-ink-muted);
   opacity: 0.85;
 }
 
-.adt-header-search #search-input:focus {
+.adt-nav-search #search-input:focus {
   outline: none;
   border-color: var(--adt-accent) !important;
   box-shadow: 0 0 0 3px var(--adt-accent-soft);
 }
 
-.adt-header-search #search-field::after {
-  content: "Ctrl+K";
+.adt-nav-search #search-field::after {
+  content: "/";
   position: absolute;
-  right: 0.55rem;
+  right: 0.45rem;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  font-family: var(--adt-font-mono);
+  letter-spacing: 0;
   color: var(--adt-ink-muted);
   border: 1px solid var(--adt-border);
   border-radius: 0.25rem;
-  padding: 0.1rem 0.3rem;
+  padding: 0.08rem 0.35rem;
   pointer-events: none;
   line-height: 1.2;
   opacity: 0.85;
 }
 
-html[data-adt-modkey="meta"] .adt-header-search #search-field::after {
-  content: "⌘K";
-}
 @media (pointer: coarse) {
-  .adt-header-search #search-field::after {
+  .adt-nav-search #search-field::after {
     content: none;
     display: none;
   }
 
-  .adt-header-search #search-input {
+  .adt-nav-search #search-input {
     padding-right: 0.75rem;
   }
 }
 
-@media screen and (max-width: 768px) {
-  .adt-header-search #search-input {
-    width: 7.5rem;
-  }
-
-  .adt-header-search #search-field::after {
-    content: none;
-    display: none;
-  }
-
-  .adt-header-search #search-input {
-    padding-right: 0.75rem;
-  }
+/* Dropdown opens from left column — anchor left, not right like header search. */
+.adt-nav-search .search-result-dropdown-menu {
+  left: 0;
+  right: auto;
+  min-width: min(28rem, 70vw);
+  max-width: min(36rem, 90vw);
 }
 
 .header.adt-header .navbar .navbar-end .adt-header-icon-btn,
