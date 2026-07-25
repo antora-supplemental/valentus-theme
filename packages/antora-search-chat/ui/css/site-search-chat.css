@@ -113,6 +113,8 @@
 }
 
 .adt-search-compound #search-input {
+  position: relative;
+  z-index: 1;
   flex: 1 1 auto;
   width: 100%;
   min-width: 0;
@@ -126,6 +128,8 @@
   color: inherit;
   font: inherit;
   font-size: 0.875rem;
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 .adt-search-compound #search-input:hover,
@@ -135,13 +139,14 @@
   outline: none;
 }
 
-/* Native <input placeholder> cannot style part of the string — overlay instead. */
+/* Native <input placeholder> cannot style part of the string — overlay instead.
+   pointer-events: none is required so clicks/dblclick reach #search-input. */
 .adt-search-ph {
   position: absolute;
   inset-inline-start: 0.65rem;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1;
+  z-index: 0;
   margin: 0;
   padding: 0;
   border: 0;

@@ -33,6 +33,8 @@ Keyboard:: `/` → Search mode (lexical); `?` (Shift+/) → Ask mode (same field
 
 Theme note:: Plain `#search-input` fallback (no extension) still says `Search` only; overlay ships in this package.
 
+Double-click select:: Antora UI default blocks multi-click selection inside `[data-panel=menu]`; this package `stopPropagation`s multi-click `mousedown` on `#search-field` / Ask form. Overlay uses `pointer-events: none`.
+
 == Playbooks
 
 Demo playbooks register `./packages/antora-search-chat` after lunr.

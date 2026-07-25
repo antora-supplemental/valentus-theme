@@ -60,7 +60,9 @@ Behavior:
 * *Ask enabled* — both segments use the muted placeholder color (no strikethrough).
 * *Ask missing / disabled* — keep the full phrase, but mark `or Ask` dead: `.adt-search-ph-ask.is-disabled` (grey + line-through) so users see the capability exists but is not on.
 * Overlay hides when `#search-input` is focused or non-empty (`is-hidden` on `.adt-search-ph`).
+* Overlay *must* use `pointer-events: none` (and sit under the input via `z-index`) so clicks and double-click selection reach `#search-input`.
 * Native `placeholder` stays empty so it never fights the overlay; `aria-label="Search or Ask"` remains for a11y.
+* Double-click select: Antora UI default `site.js` calls `preventDefault` on multi-click `mousedown` inside `[data-panel=menu]`. This package stops that event at `#search-field` / Ask form so query text remains selectable.
 
 Ask-enabled resolution (build + runtime)::
 

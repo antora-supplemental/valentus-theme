@@ -7,6 +7,7 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 
 == [Unreleased]
 
+* *Fix:* Double-click / triple-click select on `#search-input` / Ask fields when search lives under `.nav-panel-menu` — stop Antora UI default multi-click `mousedown` `preventDefault` at the field; keep `.adt-search-ph` at `pointer-events: none` with input above.
 * *Feature:* Search/Ask omnibox fake placeholder — *Search or Ask*; when Ask is off, *or Ask* is greyed + struck (`.adt-search-ph-ask.is-disabled`). Driven by `ask_enabled` / `backend_url` / `local_assist`. See `packages/antora-search-chat`.
 * *Feature:* Scaffold `@antora-supplemental/antora-search-chat` — wraps `@antora/lunr-extension` (no fork). Product target: one omnibox (*Search or Ask*) + *conjoined* scope control (`[ Scope ▾ | field ]`); lunr-first; optional tier-0 + remote `backend_url` (no API keys). Phase 1: compound CSS/markup stub; Ask tabs transitional. See `packages/antora-search-chat/ARCHITECTURE.adoc`.
 * See link:changelog-details/2026-07-25%20-%20antora-search-chat%20scaffold.adoc[Detailed notes — 2026-07-25 antora-search-chat scaffold].

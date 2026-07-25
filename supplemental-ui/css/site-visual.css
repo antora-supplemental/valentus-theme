@@ -309,6 +309,8 @@ footer.footer a {
   font-size: 0.875rem;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   box-sizing: border-box;
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 .adt-nav-search #search-input:hover,

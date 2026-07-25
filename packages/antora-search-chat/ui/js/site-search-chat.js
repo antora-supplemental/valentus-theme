@@ -55,6 +55,16 @@
     syncSearchPlaceholder()
   }
 
+  // Antora UI default site.js: nav-panel-menu mousedown with detail > 1 → preventDefault
+  // (avoid selecting nav labels). Search/Ask live under that panel in this partial, so
+  // stop multi-click mousedown from bubbling so dblclick can select field text.
+  ;[root.querySelector('#search-field'), form].forEach(function (el) {
+    if (!el) return
+    el.addEventListener('mousedown', function (e) {
+      if (e.detail > 1) e.stopPropagation()
+    })
+  })
+
   function activate (name) {
     tabs.forEach(function (tab) {
       var on = tab.getAttribute('data-adt-search-tab') === name
