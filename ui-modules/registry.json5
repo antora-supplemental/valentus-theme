@@ -33,6 +33,11 @@
       path: "packages/read-width",
       manifest: "ui-module.json5",
     },
+    {
+      id: "font-size",
+      path: "packages/font-size",
+      manifest: "ui-module.json5",
+    },
   ],
   recipes: [
     {

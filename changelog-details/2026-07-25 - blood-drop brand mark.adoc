@@ -1,0 +1,9 @@
+= Blood-drop brand mark
+
+::navtitle: Blood-drop brand mark
+
+* *Change:* Default Valentus header mark is a solid filled red blood drop (`#C62828`) in `viewBox="0 0 48 48"`, not an anatomical heart outline.
+* *Assets:* Same path in `supplemental-ui/img/logo.svg`, `supplemental-ui/img/logo-dark.svg`, and the matching `ui-modules/packages/header-chrome/ui/img/` copies. Fixture SVGs under `docs/modules/guide/images/` use the drop silhouette for brand (crimson) and mono (dark ink) mocks.
+* *Playbooks:* Demo sites set `header_logo: logo.svg` only (brand strategy). Pair mode remains supported; `logo-dark.svg` stays shipped as the same red drop for overrides that still set `header_logo_dark`.
+* *Render:* Navbar still loads the mark via `<img>` (`header-content.hbs`), width/height 34 — not inline SVG. No favicon asset in this repo.
+* *Docs:* `header-logo.adoc` describes the live brand mark; pair/mono stay fixture-documented.

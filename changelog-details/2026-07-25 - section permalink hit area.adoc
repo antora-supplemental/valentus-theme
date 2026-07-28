@@ -1,0 +1,6 @@
+= Section permalink hover hit area
+
+* *Symptom:* The § section link beside a heading only appeared after hovering the title text, then sliding left onto the icon. Hovering the empty gutter next to the title (or entering that spot from above/below/left) left the icon hidden.
+* *Cause:* Antora UI Default styles `.doc hN .anchor` with `visibility: hidden` and reveals it on `hN:hover`. `visibility: hidden` removes the element from hit-testing, and the absolute icon uses `margin-left: -1.5ex`, so it sits slightly outside the heading content edge — a dead zone until the title text is hovered first. Default CSS also had no `:focus` / `:focus-visible` reveal.
+* *Fix:* In `site-doc-layout.css`, keep the Antora absolute placement but switch hide/show to `opacity`, pad the anchor so the invisible target covers the left gutter (and a little vertical slack), and show on heading hover, anchor hover, and keyboard focus. Headings get `position: relative` for a stable containing block.
+* *Files:* `site-doc-layout.css` in `supplemental-ui` and `ui-modules/packages/doc-layout`.

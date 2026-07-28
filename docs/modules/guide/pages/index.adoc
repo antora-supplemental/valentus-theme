@@ -6,6 +6,11 @@ Valentus is debranded doc-site chrome for Antora 3.x: sticky header, breadcrumb 
 
 The release `ui-bundle.zip` includes dark mode (successor to the former `antora-dark-theme` package).
 
+== Why Valentus
+
+Beyond branding, Valentus ships ergonomics that stock Default UI / Lunr often miss (permalink hit area, sidebar scroll chaining, unclipped search, mobile font-size, Search or Ask omnibox, and more).
+See xref:value-proposition.adoc[Value Proposition & Upstream Fixes] for the checklist and upstream GitLab trackers.
+
 == Install
 
 See xref:installation.adoc[Installation] and xref:ui-modules.adoc[UI Modules].

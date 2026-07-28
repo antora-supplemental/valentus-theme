@@ -1,7 +1,12 @@
 <header class="header adt-header">
   <nav class="navbar adt-site-navbar" aria-label="Site">
     <div class="navbar-brand adt-header-brand">
-      <a class="adt-header-logo-item" href="{{{or site.keys.siteHomeUrl site.url}}}" rel="noopener" target="_blank" title="{{{or site.keys.siteHomeLabel 'Project home'}}}" aria-label="{{{or site.keys.siteHomeLabel 'Project home'}}} (opens in new tab)">
+      {{!-- Logo: explicit site_home_url → external project home; otherwise this site’s start page (portable). Never fall back to absolute site.url. --}}
+      {{#if site.keys.siteHomeUrl}}
+      <a class="adt-header-logo-item" href="{{{site.keys.siteHomeUrl}}}" rel="noopener" target="_blank" title="{{{or site.keys.siteHomeLabel 'Project home'}}}" aria-label="{{{or site.keys.siteHomeLabel 'Project home'}}} (opens in new tab)">
+      {{else}}
+      <a class="adt-header-logo-item" href="{{{relativize site.homeUrl}}}" title="{{{or site.keys.siteHomeLabel 'Home'}}}" aria-label="{{{or site.keys.siteHomeLabel 'Home'}}}">
+      {{/if}}
         {{#if site.keys.headerLogoDark}}
         <img class="adt-header-logo adt-header-logo--for-light" src="{{{uiRootPath}}}/img/{{or site.keys.headerLogo 'logo.svg'}}" width="34" height="34" alt="" />
         <img class="adt-header-logo adt-header-logo--for-dark" src="{{{uiRootPath}}}/img/{{site.keys.headerLogoDark}}" width="34" height="34" alt="" />
@@ -9,7 +14,7 @@
         <img class="adt-header-logo{{#if (eq site.keys.headerLogoTone 'mono')}} adt-header-logo--mono{{/if}}" src="{{{uiRootPath}}}/img/{{or site.keys.headerLogo 'logo.svg'}}" width="34" height="34" alt="" />
         {{/if}}
       </a>
-      <a class="navbar-item adt-header-title" href="{{{or site.url siteRootPath}}}">{{or site.keys.headerDocTitle site.title}}</a>
+      <a class="navbar-item adt-header-title" href="{{{relativize site.homeUrl}}}">{{or site.keys.headerDocTitle site.title}}</a>
     </div>
     {{!-- Site-wide search (command palette) sits in the top bar center — not tied to nav/doc column measure. --}}
     {{#if env.SITE_SEARCH_PROVIDER}}

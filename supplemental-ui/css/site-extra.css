@@ -392,26 +392,10 @@ html.dark-theme .footer a {
   color: #f1f3f5;
 }
 
-/* Lunr search (@antora/lunr-extension) — field lives in .adt-navbar-search (.adt-nav-search) */
+/* Lunr search (@antora/lunr-extension) */
 .navbar .search,
-.adt-header-search,
-.adt-nav-search,
-.adt-tool-search {
+.adt-header-search {
   position: relative;
-  background: transparent !important;
-}
-
-.adt-nav-search:hover,
-.adt-nav-search:focus,
-.adt-nav-search:focus-within,
-.adt-tool-search:hover,
-.adt-tool-search:focus,
-.adt-tool-search:focus-within,
-.navbar .search:hover,
-.navbar .search:focus,
-.navbar .search:focus-within {
-  background: transparent !important;
-  background-color: transparent !important;
 }
 
 #search-field {
@@ -542,12 +526,7 @@ html.dark-theme .theme-toggle:hover {
   background-color: #2c2e33;
 }
 
-/* Hide default Download button until JS replaces it (prevents flash on load) */
-.navbar .navbar-end a.button.is-primary[href="#"] {
-  visibility: hidden;
-}
-
-/* VCS repo logo (replaces nonfunctional Download button) — true 1:1 square, compact */
+/* VCS repo logo (valentus-theme replaces Download) — true 1:1 square, compact */
 .navbar .vcs-repo-logo {
   padding: 0 0.5rem 0 0;
   display: flex;
@@ -873,28 +852,30 @@ html.dark-theme .videoblock {
   padding-left: calc(var(--nav-line-height) * 1em + 0.15em);
 }
 
-/* In-flow left nav: fill the column next to main, tree scrolls only when content overflows. */
+/* Sticky left nav: keep viewport-height column so the project switcher stays at the
+   bottom of the visible nav tree (in-flow stretch pushed it to the document bottom). */
 @media screen and (min-width: 1024px) {
   .nav-container {
-    display: flex !important;
-    flex-direction: column !important;
-    align-self: stretch !important;
+    align-self: flex-start !important;
     min-height: 0 !important;
   }
 
   .nav {
-    position: static !important;
+    position: sticky !important;
+    top: var(--navbar-height) !important;
+    height: var(--nav-height--desktop) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+  }
+
+  .nav .panels {
     display: flex !important;
     flex-direction: column !important;
     flex: 1 1 auto !important;
     min-height: 0 !important;
-    height: auto !important;
-  }
-
-  .nav .panels {
-    flex: 1 1 auto !important;
-    min-height: 0 !important;
-    height: auto !important;
+    height: 100% !important;
+    position: relative !important;
   }
 
   .nav-panel-menu {
@@ -903,16 +884,27 @@ html.dark-theme .videoblock {
     height: auto !important;
     overflow-y: auto !important;
   }
+
+  /* Project switcher drawer: flex footer within the sticky nav column. */
+  .nav-panel-explore {
+    position: static !important;
+    flex: 0 0 auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+  }
+
+  .nav-panel-explore:not(:first-child) {
+    max-height: var(--nav-panel-explore-height) !important;
+  }
 }
 
-/* Bundle default uses overflow-y: scroll on nav panels; prefer scrollbar only when needed.
-   Also undo default UI overscroll-behavior: none so the page can scroll under the pointer. */
+/* Bundle default uses overflow-y: scroll on nav panels; prefer scrollbar only when needed. */
 .nav-panel-menu,
-.nav-panel-explore .components,
-.toc.sidebar .toc-menu ul {
+.nav-panel-explore .components {
   overflow-y: auto !important;
-  overscroll-behavior: auto !important;
-  -ms-scroll-chaining: chained !important;
 }
 
 /* Doc home: .openblock.cards + .exampleblock.tile

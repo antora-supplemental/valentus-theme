@@ -6,7 +6,7 @@
   description: "Body/nav/article layout, site-doc-layout.css, and footer chrome for the debranded doc site pattern.",
   repository: "https://github.com/antora-supplemental/valentus-theme",
   requires: ["header-chrome"],
-  recommends: ["dark-mode", "read-width"],
+  recommends: ["dark-mode", "read-width", "font-size"],
   conflicts: [],
   slots: {
     head: {

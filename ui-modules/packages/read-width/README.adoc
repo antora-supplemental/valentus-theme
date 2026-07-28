@@ -9,7 +9,8 @@ Reusable **reading width** control for Valentus / Antora supplemental UI.
 * `js/adt-read-width-fouc.js` — early `data-adt-read-width` from `localStorage` (orchestrator inlines in `<head>`)
 * `js/site-read-width.js` — click handling + `aria-pressed` sync
 
-Doc measure (desktop): narrow `68ch` / comfortable `82ch` / wide `100ch`.
+Doc measure (desktop ≥`1024px`): narrow `68ch` / comfortable `82ch` / wide `100ch`.
+Below `1024px` the control is hidden (measure has no effect); pair with the `font-size` module for condensed reading.
 Column gaps (`--adt-col-gap`): constant `2rem` (nav↔doc / doc↔TOC do not grow when the measure widens).
 The body row is intrinsic width (nav + gap + doc + gap + toc), viewport-centered; panels move only because the doc column changed.
 
