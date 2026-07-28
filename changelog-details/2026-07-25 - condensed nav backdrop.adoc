@@ -1,0 +1,6 @@
+= Condensed nav drawer backdrop
+
+* *Symptom:* Below 1024px (hamburger / condensed nav), opening the nav tree showed link text over a blank/transparent panel with the main article still visible underneath.
+* *Cause:* The visual system sets `--adt-nav-bg: transparent` (light and dark) so the desktop side column blends with the page canvas. `.nav` / `.nav-panel-menu` use that token with `!important`. In condensed mode the same elements are an overlay, so transparency let page content show through.
+* *Fix:* In `@media (max-width: 1023.5px)`, set `--adt-nav-bg: var(--adt-elevated)` on `html` (theme-aware white / dark elevated) and give `.nav-container` the same fill. Desktop (≥1024px) keeps transparent nav.
+* *Files:* `site-visual.css` in `supplemental-ui` and `ui-modules/packages/doc-layout`.

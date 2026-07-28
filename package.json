@@ -36,7 +36,7 @@
     "dark-mode:sync": "node scripts/sync-dark-mode.mjs"
   },
   "devDependencies": {
-    "@antora-supplemental/antora-search-chat": "github:antora-supplemental/antora-search-chat",
+    "@antora-supplemental/antora-search-chat": "github:antora-supplemental/antora-search-chat#a6e23a0",
     "@antora/lunr-extension": "1.0.0-alpha.12",
     "@asciidoctor/tabs": "^1.0.0-beta.6",
     "antora": "^3.1.14",

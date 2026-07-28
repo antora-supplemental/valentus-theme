@@ -8,6 +8,8 @@ Successor to the former `antora-dark-theme` monolithic package — use the Valen
 
 **Changelog:** link:CHANGELOG.adoc[CHANGELOG.adoc] and link:changelog-details/[`changelog-details/`].
 
+**Value proposition / upstream fixes:** `docs/modules/guide/pages/value-proposition.adoc` — UX debt Valentus softens relative to Antora Default UI / Lunr, with GitLab trackers, for pitching this theme as a richer default.
+
 **Versioning:** Public labels are `VALENTUS_SEMVER+antora.N` (example *2.0.0+antora.3*).
 Valentus major tracks breaking chrome for theme modders; `+antora.N` tracks the Antora framework major.
 Git tags stay pure semver (`v2.0.0`); pin URLs use those tags. Details: `docs/modules/guide/pages/version-pinning.adoc` and `supported-lines.json`.

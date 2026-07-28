@@ -1,0 +1,27 @@
+{
+  id: "font-size",
+  name: "Reading font size control",
+  version: "1.0.0",
+  type: "ui-module",
+  description: "Optional text-size control for condensed / mobile viewports (small / medium / large). Provides partial adt-font-size; persists via localStorage and data-adt-font-size. Complements read-width (desktop measure).",
+  repository: "https://github.com/antora-supplemental/valentus-theme",
+  requires: [],
+  recommends: ["read-width"],
+  conflicts: [],
+  slots: {
+    head: {
+      // Inlined early to avoid FOUC on article font size
+      scripts: ["js/adt-font-size-fouc.js"],
+      stylesheets: ["css/site-font-size.css"],
+    },
+    foot: {
+      scripts: ["js/site-font-size.js"],
+    },
+  },
+  ui: {
+    partials: {
+      provide: ["adt-font-size"],
+      replace: [],
+    },
+  },
+}

@@ -1,0 +1,34 @@
+= font-size UI module
+
+Reusable **reading font size** control for Valentus / Antora supplemental UI.
+Complements the desktop `read-width` measure control: below the condensed breakpoint (`1024px`), width is meaningless and this control takes its place in the tool band.
+
+== What it provides
+
+* Partial `adt-font-size` — segmented control (small / medium / large)
+* `css/site-font-size.css` — sets `--adt-doc-font-size` on `article.doc` + control chrome (visible only below `1024px`)
+* `js/adt-font-size-fouc.js` — early `data-adt-font-size` from `localStorage` (orchestrator inlines in `<head>`)
+* `js/site-font-size.js` — click handling + `aria-pressed` sync
+
+Text scale: small `0.875rem` / medium `1rem` / large `1.125rem`.
+Preference key: `localStorage['adt-font-size']` → `html[data-adt-font-size]`.
+
+== Install (orchestrator)
+
+Add `font-size` to your recipe or `modules` list, then place the partial next to read-width:
+
+[source,handlebars]
+----
+{{> adt-read-width}}
+{{> adt-font-size}}
+----
+
+Demo placement: `.adt-tool-band-center` in `adt-tool-band.hbs`.
+
+== Supplemental-files path (no orchestrator)
+
+1. Copy `ui/css/site-font-size.css`, `ui/js/site-font-size.js`, and `ui/partials/adt-font-size.hbs` into your supplemental UI tree.
+2. Link the stylesheet from `head-meta` (after layout CSS).
+3. Inline or port the FOUC snippet from `adt-font-size-fouc.js` into an early `<script>` in `head-meta`.
+4. Load `site-font-size.js` from `footer-scripts`.
+5. Include `{{> adt-font-size}}` beside `{{> adt-read-width}}`.

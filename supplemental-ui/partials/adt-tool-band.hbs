@@ -1,10 +1,12 @@
 {{!-- Full-width tool band above the 3-col row (nav | main | TOC).
-     Read-width stays centered over the doc column (page-layout control).
+     Desktop (≥1024): read-width centered over the doc column.
+     Condensed (<1024): font-size replaces width (width is a no-op).
      Site-wide search lives in .adt-site-navbar (see header-content.hbs). --}}
 <div class="adt-tool-band">
   <div class="adt-tool-nav-slot" aria-hidden="true"></div>
   <div class="adt-tool-band-center">
     {{> adt-read-width}}
+    {{> adt-font-size}}
   </div>
   <div class="adt-tool-toc-slot" aria-hidden="true"></div>
 </div>

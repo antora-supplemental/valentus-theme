@@ -3,11 +3,10 @@
 :description: Three ways to brand the Valentus header — light/dark asset pairs, single-file colored marks, and mono silhouettes — and how the demo site exercises them without two logos in the chrome.
 
 The site header shows **one** logo at a time.
-Valentus itself uses an anatomical heart *outline*, so the live demo opts into a light/dark asset pair (`header_logo` + `header_logo_dark`).
-That exercises theme-swap logic without putting a second brand mark beside the first.
+Valentus itself uses a solid red blood-drop *brand* mark (`logo.svg`), so the live demo uses a single asset that already has contrast on light and dark bars (no pair, no invert).
 
-Single-file strategies (*brand* and *mono*) are shown below as **fixture previews** on mocked header strips — not as competing chrome logos.
-Toggle the real theme control to confirm the live outline pair; use the mocks to compare brand and mono contrast.
+Pair and mono strategies are shown below as **fixture previews** on mocked header strips — not as competing chrome logos.
+Toggle the real theme control to confirm the live brand mark; use the mocks to compare pair and mono contrast.
 
 == Choose a strategy
 
@@ -30,9 +29,22 @@ Toggle the real theme control to confirm the live outline pair; use the mocks to
 
 Do not combine pair and mono for the same mark: pair mode swaps authored assets; mono applies a CSS invert to one asset.
 
-== Live demo: pair (Valentus mark)
+== Live demo: brand (Valentus mark)
 
 This documentation site sets:
+
+[source,yaml]
+----
+site:
+  keys:
+    header_logo: logo.svg
+    # header_logo_tone defaults to brand — no filter, no dark asset
+----
+
+The header renders one `<img>` element; the solid red drop stays visible on both the light and dark top bars.
+Use the theme toggle to confirm.
+
+Pair example (when you need authored light/dark strokes):
 
 [source,yaml]
 ----
@@ -42,12 +54,11 @@ site:
     header_logo_dark: logo-dark.svg
 ----
 
-The header renders two `<img>` elements and CSS shows one per `html.dark-theme` state.
-Use the theme toggle: the outline heart should stay visible on both the light and dark top bars.
+Bundled `logo-dark.svg` matches the brand drop today; replace it with a light-ink outline if you opt into pair mode for a different mark.
 
 == Fixtures: brand and mono (not in chrome)
 
-The mocks below reuse the same anatomical silhouette as filled fixtures so you can judge contrast without changing the live header.
+The mocks below reuse the same blood-drop silhouette as filled fixtures so you can judge contrast without changing the live header.
 
 [.adt-logo-fixture-grid]
 ====

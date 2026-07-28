@@ -1,0 +1,76 @@
+= Value Proposition & Upstream Fixes
+:navtitle: Value Proposition
+:description: Why Valentus — UX fixes that originate in Antora Default UI / lunr, and Valentus-only chrome.
+
+Valentus is composed Antora doc-site chrome with bundled dark mode.
+Part of its value as a candidate *default* UI is that it already ships practical fixes for long-standing Default UI and Lunr pain — not only brand polish.
+
+This page lists those items for pitching and for tracking upstream reports.
+Implementation lives in Valentus (and https://github.com/antora-supplemental/antora-search-chat[`antora-search-chat`] where noted); prefer fixing upstream when maintainers accept the change.
+
+Related PR (ongoing chrome/search polish): https://github.com/antora-supplemental/valentus-theme/pull/11
+
+== Upstream problems Valentus already softens
+
+For each row: the stock behavior, what Valentus does, and the upstream tracker.
+
+[cols="2,2,2,2"]
+|===
+| Problem | Origin | Valentus fix | Upstream
+
+| Section permalink (`§`) only appears when hovering heading *text*, not the row / left gutter
+| Default UI `.doc hN:hover .anchor` + absolutely positioned icon outside the text box
+| Widen heading / permalink hover hit area so the link reveals for the full row
+| https://gitlab.com/antora/antora-ui-default/-/work_items/243[#243]
+
+| Mouse wheel over nav or TOC does nothing when that panel is not overflowing
+| Default UI `overscroll-behavior: none` on `.nav-panel-menu`, explore lists, TOC
+| Restore scroll chaining (`overscroll-behavior: auto`)
+| https://gitlab.com/antora/antora-ui-default/-/work_items/244[#244]
+
+| Lunr search results invisible / clipped under nav or pill `overflow`
+| Lunr appends `.search-result-dropdown-menu` to `#search-input.parentNode`; `.nav-panel-menu { overflow-y: scroll }` and theme `overflow: hidden` on pill wraps clip it
+| Move search out of the scrolling nav column (tool band / navbar); keep compound + input-wrap `overflow: visible` (clip only scope slot)
+| Lunr: https://gitlab.com/antora/antora-lunr-extension/-/work_items/88[#88]; UI: https://gitlab.com/antora/antora-ui-default/-/work_items/245[#245]; facets: https://gitlab.com/antora/antora-lunr-extension/-/work_items/87[#87]
+
+| Double-click cannot select text in search when field sits under `.nav-panel-menu`
+| Default UI `site.js` `preventDefault` on multi-click `mousedown` in the nav panel
+| Stop propagation at `#search-field`; prefer tool-band / navbar placement outside the panel
+| https://gitlab.com/antora/antora-ui-default/-/issues/242[#242]
+
+| Condensed (mobile) nav drawer shows page content through a transparent panel
+| Valentus desktop tokens set nav background transparent for a flush side column; same token applied to the overlay drawer
+| Opaque `--adt-nav-bg` / elevated fill below 1024px; desktop stays transparent
+| Valentus-only (Default UI `--nav-background` is already opaque panel color)
+
+| Search field overlaps site title at high zoom / narrow width
+| Valentus brand-first navbar + centered omnibox layout
+| Flex middle slot; collapse to search-icon popover; title ellipsizes
+| Valentus layout (related Default UI mobile chrome: https://gitlab.com/antora/antora-ui-default/-/issues/141[#141])
+|===
+
+== Valentus-only product chrome (not upstream bugs)
+
+These are intentional differentiators — useful when proposing Valentus as a richer default, not as Default UI patches.
+
+* *Read-width control (desktop)* — tiers set `--adt-doc-max` with a shrink-wrapping 3-column shell.
+* *Font-size switcher (condensed)* — read-width is weak on mobile; Valentus swaps in a small/medium/large text control in the tool band.
+* *Breadcrumb mast* — component/version kickers with stroke chevrons, home control, edit affordances.
+* *Search or Ask omnibox* — https://github.com/antora-supplemental/antora-search-chat[`antora-search-chat`] wraps `@antora/lunr-extension` (no fork): conjoined scope select, dual-tone placeholders, optional Ask backends.
+* *Dual-tone scope labels* — closed control shows muted current component/version names from the Antora page model; menu options like *This component — \{title\}*. Complements lunr facet work (https://gitlab.com/antora/antora-lunr-extension/-/work_items/87[#87]) without waiting on it.
+* *Scope caret polish* — reliable SVG-mask caret instead of fragile CSS-gradient triangles (search-chat).
+* *Bundled dark mode* — https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] merged into the release bundle.
+* *Brand-first header logo* — tone strategies (`brand` / `mono`), optional light/dark asset pair.
+* *UI modules* — composable chrome packages + orchestrator (see xref:ui-modules.adoc[UI Modules]).
+
+== How to use this list
+
+* *Site authors* — treat Valentus as “Default UI + these ergonomics already applied.”
+* *Upstream contributors* — prefer landing the linked GitLab issues in `antora-ui-default` / `antora-lunr-extension`, then thin Valentus overrides.
+* *Antora maintainers evaluating a new default UI* — this page is the short checklist of shipped UX debt paydown plus product chrome.
+
+== See also
+
+* xref:how-it-works.adoc[How It Works]
+* xref:customization.adoc[Customization]
+* link:../../../CHANGELOG.adoc[CHANGELOG] and `changelog-details/`

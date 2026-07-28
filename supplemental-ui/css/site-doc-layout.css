@@ -129,11 +129,14 @@ pre,
   background: transparent;
 }
 
-/* Sticky first row: must be solid so page content does not show through on scroll. */
+/* Sticky first row: must be solid so page content does not show through on scroll.
+   z-index must beat .adt-tool-band (20): Lunr .search-result-dropdown-menu and the
+   Ask panel live inside this sticky stacking context, so a low navbar z-index traps
+   overlays under the read-width tool band. */
 .adt-site-navbar {
   position: sticky;
   top: 0;
-  z-index: 8;
+  z-index: 30;
   width: 100%;
   min-height: 3.5rem;
   display: flex;
@@ -148,18 +151,33 @@ pre,
   border-bottom: 1px solid var(--adt-header-bar-border);
 }
 
-/* Site-wide search (command palette): true center of the top bar; own width (not nav/doc measure). */
+/* Brand may shrink; title ellipsizes so search/actions never overlap it. */
+.adt-site-navbar .adt-header-brand {
+  flex: 0 1 auto;
+  max-width: min(40%, 22rem);
+}
+
+/* Site-wide search (command palette): flex middle slot — not absolute center.
+   Absolute centering + min-width caused brand/title overlap at high zoom / narrow widths.
+   search-chat JS toggles .is-collapsed → icon; popover drops under the toggle. */
 .adt-navbar-search {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   z-index: 9;
+  flex: 1 1 auto;
   box-sizing: border-box;
-  width: min(36rem, calc(100vw - 14rem));
+  width: auto;
   max-width: 36rem;
-  min-width: 16rem;
+  min-width: 0;
+  margin-inline: auto;
   padding: 0;
   overflow: visible;
+}
+
+.adt-navbar-search.is-collapsed {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+  margin-inline: 0 0.25rem;
 }
 
 .adt-navbar-search .adt-nav-search,
@@ -167,6 +185,10 @@ pre,
   width: 100%;
   max-width: none;
   min-height: 2.15rem;
+}
+
+.adt-navbar-search.is-collapsed .adt-search-chat {
+  width: auto;
 }
 
 .header.adt-header .adt-topbar,
@@ -321,11 +343,17 @@ a.adt-header-title,
   font-size: 1.15rem;
   letter-spacing: 0.01em;
   padding: 0 0.4rem 0 0.15rem;
+  min-width: 0;
+  max-width: 100%;
+  height: var(--adt-header-ctrl);
   min-height: var(--adt-header-ctrl);
-  display: flex;
-  align-items: center;
+  line-height: var(--adt-header-ctrl);
+  display: block;
   text-decoration: none;
   box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 a.adt-header-title:hover,
@@ -611,6 +639,68 @@ html.dark-theme .adt-doc-mast {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
+}
+
+/* ——— Section permalinks (§) ———
+   Antora UI Default hides `.anchor` with `visibility: hidden`, which removes the
+   icon from hit-testing. The glyph also sits at `margin-left: -1.5ex` (slightly
+   outside the heading content edge), so the gutter beside the title is a dead
+   zone until you first hover the title text, then slide left onto the link.
+   Use opacity instead, keep the box hit-testable, and pad the target so approach
+   from the left / above / below into that gutter still reveals the link. */
+.doc h1,
+.doc h2,
+.doc h3,
+.doc h4,
+.doc h5,
+.doc h6 {
+  position: relative;
+}
+
+.doc h1 .anchor,
+.doc h2 .anchor,
+.doc h3 .anchor,
+.doc h4 .anchor,
+.doc h5 .anchor,
+.doc h6 .anchor {
+  visibility: visible;
+  opacity: 0;
+  /* Keep Antora’s absolute + negative-margin placement; pad the hit box. */
+  padding: 0.45em 0.3em 0.45em 0.7em;
+  margin-left: calc(-1.5ex - 0.7em);
+  margin-top: -0.35em;
+  box-sizing: content-box;
+  color: var(--adt-ink-muted, #5b6472);
+  text-decoration: none !important;
+  z-index: 1;
+}
+
+.doc h1:hover .anchor,
+.doc h2:hover .anchor,
+.doc h3:hover .anchor,
+.doc h4:hover .anchor,
+.doc h5:hover .anchor,
+.doc h6:hover .anchor,
+.doc h1 .anchor:hover,
+.doc h2 .anchor:hover,
+.doc h3 .anchor:hover,
+.doc h4 .anchor:hover,
+.doc h5 .anchor:hover,
+.doc h6 .anchor:hover,
+.doc h1 .anchor:focus,
+.doc h2 .anchor:focus,
+.doc h3 .anchor:focus,
+.doc h4 .anchor:focus,
+.doc h5 .anchor:focus,
+.doc h6 .anchor:focus,
+.doc h1 .anchor:focus-visible,
+.doc h2 .anchor:focus-visible,
+.doc h3 .anchor:focus-visible,
+.doc h4 .anchor:focus-visible,
+.doc h5 .anchor:focus-visible,
+.doc h6 .anchor:focus-visible {
+  opacity: 1;
+  color: var(--adt-accent, #0d6e6e) !important;
 }
 
 /* ——— Breadcrumb row in mast ——— */

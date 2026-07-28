@@ -1,0 +1,129 @@
+/* Reading font-size module — doc text scale + condensed-viewport control.
+   Place {{> adt-font-size}} in .adt-tool-band-center (alongside adt-read-width).
+   Desktop (≥1024px) keeps read-width; this control shows only below that breakpoint.
+   data-adt-font-size sets --adt-doc-font-size on the article. */
+
+:root {
+  --adt-doc-font-size: 1rem;
+  --adt-font-size-radius: 0.4rem;
+  --adt-font-size-radius-sm: 0.25rem;
+  --adt-font-size-border: var(--adt-border, #d9dee7);
+  --adt-font-size-bg: var(--adt-elevated, #fff);
+  --adt-font-size-fg: var(--adt-ink-muted, #5a6270);
+  --adt-font-size-fg-active: var(--adt-accent, #0f766e);
+  --adt-font-size-soft: var(--adt-accent-soft, rgba(15, 118, 110, 0.1));
+  --adt-font-size-ink: var(--adt-ink, #141820);
+  --adt-font-size-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+html[data-adt-font-size="small"] {
+  --adt-doc-font-size: 0.875rem;
+}
+
+html[data-adt-font-size="medium"],
+html:not([data-adt-font-size]) {
+  --adt-doc-font-size: 1rem;
+}
+
+html[data-adt-font-size="large"] {
+  --adt-doc-font-size: 1.125rem;
+}
+
+article.doc {
+  font-size: var(--adt-doc-font-size);
+}
+
+/* Control — hidden on desktop where read-width owns the tool band */
+.adt-font-size {
+  display: none;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.15rem;
+  border: 1px solid var(--adt-font-size-border);
+  border-radius: var(--adt-font-size-radius);
+  background: var(--adt-font-size-bg);
+  box-sizing: border-box;
+}
+
+.adt-font-size-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  padding: 0;
+  border: none;
+  border-radius: var(--adt-font-size-radius-sm);
+  background: transparent;
+  color: var(--adt-font-size-fg);
+  cursor: pointer;
+  transition: var(--adt-font-size-transition);
+}
+
+.adt-font-size-btn:hover {
+  color: var(--adt-font-size-ink);
+  background: var(--adt-font-size-soft);
+}
+
+.adt-font-size-btn[aria-pressed="true"] {
+  color: var(--adt-font-size-fg-active);
+  background: var(--adt-font-size-soft);
+}
+
+.adt-font-size-btn:focus {
+  outline: none;
+}
+
+.adt-font-size-btn:focus-visible {
+  outline: 2px solid var(--adt-font-size-fg-active);
+  outline-offset: 1px;
+}
+
+.adt-font-size-glyph {
+  font-family: var(--adt-font-display, "Plus Jakarta Sans", system-ui, sans-serif);
+  font-weight: 600;
+  line-height: 1;
+  display: block;
+}
+
+.adt-font-size-glyph--sm {
+  font-size: 0.7rem;
+}
+
+.adt-font-size-glyph--md {
+  font-size: 0.85rem;
+}
+
+.adt-font-size-glyph--lg {
+  font-size: 1.05rem;
+}
+
+/* Condensed / mobile: show font-size; center over content (no far-right remnant). */
+@media screen and (max-width: 1023.5px) {
+  .adt-font-size {
+    display: inline-flex;
+  }
+
+  .adt-tool-band-center > .adt-font-size {
+    display: flex;
+    width: fit-content;
+    max-width: 100%;
+    min-height: var(--adt-tool-band, 2.15rem);
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  .adt-tool-nav-slot {
+    display: none;
+  }
+
+  .adt-tool-band-center {
+    flex: 1 1 auto;
+    margin-inline-start: 0;
+    justify-content: center;
+    width: 100%;
+    max-width: none;
+  }
+}

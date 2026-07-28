@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@antora-supplemental/antora-search-chat':
-        specifier: github:antora-supplemental/antora-search-chat
-        version: https://codeload.github.com/antora-supplemental/antora-search-chat/tar.gz/ad96d8eed10e3cd67e6cfa0f938ac993a977148a(@antora/lunr-extension@1.0.0-alpha.12)
+        specifier: github:antora-supplemental/antora-search-chat#a6e23a0
+        version: https://codeload.github.com/antora-supplemental/antora-search-chat/tar.gz/a6e23a089182cb3e59f245ca653a783dca1e4289(@antora/lunr-extension@1.0.0-alpha.12)
       '@antora/lunr-extension':
         specifier: 1.0.0-alpha.12
         version: 1.0.0-alpha.12
@@ -35,9 +35,9 @@ importers:
 
 packages:
 
-  '@antora-supplemental/antora-search-chat@https://codeload.github.com/antora-supplemental/antora-search-chat/tar.gz/ad96d8eed10e3cd67e6cfa0f938ac993a977148a':
-    resolution: {tarball: https://codeload.github.com/antora-supplemental/antora-search-chat/tar.gz/ad96d8eed10e3cd67e6cfa0f938ac993a977148a}
-    version: 0.1.0
+  '@antora-supplemental/antora-search-chat@https://codeload.github.com/antora-supplemental/antora-search-chat/tar.gz/a6e23a089182cb3e59f245ca653a783dca1e4289':
+    resolution: {tarball: https://codeload.github.com/antora-supplemental/antora-search-chat/tar.gz/a6e23a089182cb3e59f245ca653a783dca1e4289}
+    version: 0.1.2
     engines: {node: '>=18'}
     peerDependencies:
       '@antora/lunr-extension': '>=1.0.0-alpha.12'
@@ -1208,7 +1208,7 @@ packages:
 
 snapshots:
 
-  '@antora-supplemental/antora-search-chat@https://codeload.github.com/antora-supplemental/antora-search-chat/tar.gz/ad96d8eed10e3cd67e6cfa0f938ac993a977148a(@antora/lunr-extension@1.0.0-alpha.12)':
+  '@antora-supplemental/antora-search-chat@https://codeload.github.com/antora-supplemental/antora-search-chat/tar.gz/a6e23a089182cb3e59f245ca653a783dca1e4289(@antora/lunr-extension@1.0.0-alpha.12)':
     dependencies:
       '@antora/lunr-extension': 1.0.0-alpha.12
 

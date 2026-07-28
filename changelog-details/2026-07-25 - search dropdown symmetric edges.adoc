@@ -1,0 +1,17 @@
+= Detailed notes — 2026-07-25 search dropdown symmetric edges
+
+== Summary
+
+Lunr’s `.search-result-dropdown-menu` is appended to `#search-input.parentNode` (`.adt-search-input-wrap`), not `#search-field` / `.adt-search-compound`. Theme overrides that forced `left: 0; right: auto` therefore aligned the panel to the *input cell only*: a large empty band under the scope on the left, and a flush/tight right edge against the pill.
+
+== Fix
+
+* `.adt-search-compound` is a size query container (`container-type: inline-size`).
+* Dropdown: `left: auto; right: 0; width/min/max: 100cqi` so the panel spans the full compound width (grows left under the scope).
+* Wrap/compound stay `overflow: visible` so the leftward span and vertical escape still work.
+* Plain (non-compound) search keeps the older `left: 0` + `min-width: min(28rem, 70vw)` rules.
+
+== Packages
+
+* Standalone `@antora-supplemental/antora-search-chat` **0.1.2** — owns the compound alignment rules in `site-search-chat.css`.
+* Valentus `site-visual.css` (supplemental + doc-layout ui-module) — stops forcing `left: 0` on compound menus; mirrors `100cqi` rules.

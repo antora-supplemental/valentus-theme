@@ -127,3 +127,15 @@ article.doc > .adt-read-width {
   stroke-width: 1.75;
   stroke-linecap: round;
 }
+
+/* Below the 3-col / doc-measure breakpoint, width control is a no-op — hide it. */
+@media screen and (max-width: 1023.5px) {
+  .adt-read-width {
+    display: none !important;
+  }
+
+  /* Collapse the tool band when only (hidden) read-width is present. */
+  .adt-tool-band:has(.adt-read-width):not(:has(.adt-font-size)) {
+    display: none;
+  }
+}

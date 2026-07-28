@@ -209,6 +209,19 @@ a.adt-header-title {
   box-shadow: none !important;
 }
 
+/* Condensed / mobile drawer: --adt-nav-bg is transparent on desktop so the
+   nav blends with the canvas. Below 1024px the nav overlays the article, so
+   it needs an opaque fill (light + dark) or page text shows through. */
+@media screen and (max-width: 1023.5px) {
+  html {
+    --adt-nav-bg: var(--adt-elevated);
+  }
+
+  .nav-container {
+    background: var(--adt-nav-bg) !important;
+  }
+}
+
 @media screen and (min-width: 1024px) {
   /*
    * Shell: .adt-shell > tool-band + .body.adt-body (nav | main | TOC peers).
@@ -399,12 +412,15 @@ footer.footer a {
 /* Dropdown opens from navbar search — overflow ancestors stay visible.
    Lunr mounts .search-result-dropdown-menu on #search-input.parentNode
    (search-ui.js), which is .adt-search-input-wrap — NOT #search-field.
-   overflow:hidden on the wrap (or compound) clips absolute results below the field. */
+   overflow:hidden on the wrap (or compound) clips absolute results below the field.
+   Clip typed text on #search-input itself (search-chat CSS), not the wrap.
+
+   Plain (non-compound) field: left-align under the input.
+   Compound: antora-search-chat owns edge alignment (right:0 + width:100cqi so the
+   panel matches the full pill — do not force left:0 here or the right edge goes tight). */
 .adt-nav-search .search-result-dropdown-menu,
 .adt-tool-search .search-result-dropdown-menu,
-.adt-navbar-search .search-result-dropdown-menu,
-.adt-search-compound .search-result-dropdown-menu,
-.adt-search-input-wrap .search-result-dropdown-menu {
+.adt-navbar-search .search-result-dropdown-menu {
   left: 0;
   right: auto;
   z-index: 40;
@@ -412,10 +428,28 @@ footer.footer a {
   max-width: min(36rem, 90vw);
 }
 
+.adt-search-compound .search-result-dropdown-menu,
+.adt-search-input-wrap > .search-result-dropdown-menu {
+  left: auto;
+  right: 0;
+  z-index: 40;
+  width: 100cqi;
+  min-width: 100cqi;
+  max-width: 100cqi;
+  box-sizing: border-box;
+}
+
 .adt-search-compound,
 .adt-search-input-wrap,
 .adt-navbar-search #search-field {
   overflow: visible !important;
+}
+
+/* Collapsed search popover: results stay inside the compound/popover width. */
+.adt-search-chat.is-collapsed .search-result-dropdown-menu {
+  width: 100cqi;
+  min-width: 100cqi;
+  max-width: 100cqi;
 }
 
 .header.adt-header .navbar .navbar-end .adt-header-icon-btn,

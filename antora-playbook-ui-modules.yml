@@ -6,7 +6,6 @@ site:
   keys:
     dark_mode_navbar: light
     header_logo: logo.svg
-    header_logo_dark: logo-dark.svg
 
 content:
   sources:

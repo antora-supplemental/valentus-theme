@@ -1,0 +1,8 @@
+= Condensed font-size switcher (hide read-width)
+
+* *Symptom:* Below 1024px / at high zoom, `.adt-read-width` sat far-right in the tool band (empty nav slot + `margin-inline-start: auto`) and did nothing — doc measure only applies at `min-width: 1024px`.
+* *Fix:* Hide `.adt-read-width` at `max-width: 1023.5px` (same condensed breakpoint as nav overlay / 3-col shell). Collapse the tool band when only (hidden) read-width is present.
+* *Feature:* New `font-size` UI module — segmented control (small / medium / large) in `.adt-tool-band-center`, visible only below 1024px, centered (nav spacer hidden). Scales `article.doc` via `--adt-doc-font-size` (`0.875rem` / `1rem` / `1.125rem`).
+* *Persistence:* `localStorage['adt-font-size']` → `html[data-adt-font-size]`; FOUC script mirrors read-width. Tokens reuse `--adt-border` / `--adt-elevated` / `--adt-accent*` (light + dark).
+* *Desktop:* Read-width unchanged; font-size control stays `display: none` at ≥1024px.
+* *Files:* `ui-modules/packages/font-size/*`, mirrored under `supplemental-ui`; tool-band partial; `site-read-width.css` hide rule; registry / `valentus-site` recipe.

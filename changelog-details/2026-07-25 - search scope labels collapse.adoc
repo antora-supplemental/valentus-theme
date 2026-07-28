@@ -1,0 +1,30 @@
+= Detailed notes — 2026-07-25 search scope labels + collapse
+
+== Summary
+
+Navbar search feedback pass: unambiguous scope labels, no brand/title overlap at high zoom, and clipped typed text without hiding lunr results.
+
+== Scope labels
+
+* Closed control: dual-tone face (`.adt-search-scope-face`) — primary *Component* / *Version* / *All docs* + muted current name/version.
+* Menu options: *This component — {title}*, *This version — {display}*, *All docs*.
+* Context from Antora UI model: `page.component.name` / `.title`, `page.version`, `page.componentVersion.displayVersion` as `data-*` on `[data-adt-search-chat]`.
+* Native `<select>` closed text is transparent; face paints the label. Chevron styling unchanged.
+
+== Collapse-to-icon
+
+* Valentus: `.adt-navbar-search` is a flex middle slot (no absolute center + large `min-width`).
+* Brand title ellipsizes; leftover middle width is measured in `site-search-chat.js`.
+* Below ~280px available → `.is-collapsed`: search icon toggle; open popover holds full compound + Ask + lunr results.
+* `/` / `?` open the popover; Escape / outside click closes it.
+
+== Input clipping
+
+* `#search-input { overflow: hidden }` — typed text stays in bounds.
+* `.adt-search-input-wrap` / compound stay `overflow: visible` so lunr’s dropdown (mounted on the wrap) still escapes.
+* Dual-tone `.adt-search-ph` overlay also ellipsizes within the input cell.
+
+== Packages
+
+* Standalone `@antora-supplemental/antora-search-chat` **0.1.1**.
+* Valentus preview: `file:../antora-search-chat` (revert to git dep when published/pushed).
