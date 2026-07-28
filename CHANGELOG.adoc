@@ -16,6 +16,10 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+== [2.0.2] - 2026-07-28
+
+Public label: *2.0.2+antora.3* (Antora 3).
+
 * *Docs:* Guide page xref:guide:value-proposition.adoc[Value Proposition & Upstream Fixes] — triage of Default UI / Lunr pain vs Valentus-only chrome, with GitLab trackers, for pitching Valentus as a richer default UI.
 * *Fix:* Lunr search results dropdown — left/right edges now match the full compound pill (scope + input). Was `left: 0` on `.adt-search-input-wrap` only, so the panel sat under the input cell (large left gap under the scope, tight right). Package + theme: `right: 0` + `width: 100cqi` (`@antora-supplemental/antora-search-chat` 0.1.2). See link:changelog-details/2026-07-25%20-%20search%20dropdown%20symmetric%20edges.adoc[Detailed notes — 2026-07-25 search dropdown symmetric edges].
 * *Fix:* Section permalinks (`.anchor` / § beside headings) — hover hit area covers the gutter beside the title and approaches from outside the heading text (no longer `visibility: hidden` dead zone). Keyboard `:focus` / `:focus-visible` still reveals the link. See link:changelog-details/2026-07-25%20-%20section%20permalink%20hit%20area.adoc[Detailed notes — 2026-07-25 section permalink hit area].
