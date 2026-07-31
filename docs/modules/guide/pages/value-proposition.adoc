@@ -47,6 +47,31 @@ For each row: the stock behavior, what Valentus does, and the upstream tracker.
 | Valentus brand-first navbar + centered omnibox layout
 | Flex middle slot; collapse to search-icon popover; title ellipsizes
 | Valentus layout (related Default UI mobile chrome: https://gitlab.com/antora/antora-ui-default/-/issues/141[#141])
+
+| In-page TOC scroll-spy inactive on short pages; end of page lights many/all entries
+| Default UI `02-on-this-page.js` compares viewport tops to `article.offsetTop`; end branch from https://gitlab.com/antora/antora-ui-default/-/work_items/122[#122] marks all still-visible headings
+| Prefer upstream (no Valentus override yet); pick up via Default UI / convenience bundle once https://gitlab.com/antora/antora-ui-default/-/merge_requests/212[!212] merges
+| https://gitlab.com/antora/antora-ui-default/-/work_items/246[#246] · MR https://gitlab.com/antora/antora-ui-default/-/merge_requests/212[!212]
+
+| Wrapped nav labels drift left of the expand caret; leaf vs folder rows misaligned at the same depth
+| Default UI toggle is absolutely positioned without a consistent label column on `.nav-item`
+| Same idea in supplemental nav CSS (`position: relative` on `.nav-item` + shared `padding-left` on `.nav-link` / `.nav-text`) until Default UI lands it
+| https://gitlab.com/antora/antora-ui-default/-/merge_requests/210[!210]
+
+| Footer sits under short content instead of the viewport bottom
+| Default UI does not flex-grow the body column between header and footer
+| Valentus shell: `min-height` + flex grow on `.adt-shell` / `.body.adt-body` so `footer.footer` stays at the viewport bottom
+| https://gitlab.com/antora/antora-ui-default/-/merge_requests/211[!211]
+
+| TOC “On this page” heading and article title use different top spacing, so supplemental themes cannot share one rail inset token
+| Default UI hard-codes TOC heading box model separately from `.doc > h1.page`
+| Prefer upstream shared margin token (`--doc-content-rail-inset-top`); Valentus/dark-mode style TOC heading locally until Default UI accepts it
+| Fork branch `fix/toc-heading-rail-inset` on the GitLab Default UI fork (not yet an upstream MR)
+
+| Dark mode in Default UI itself
+| Stock Default UI is light-only
+| *Ship today via supplemental packages* — Valentus (bundled) or `antora-dark-mode` (overlay). Upstream proposal https://gitlab.com/antora/antora-ui-default/-/merge_requests/207[!207] remains open; prefer the org packages over waiting on merge, and prefer proposing Valentus as a richer *default* rather than merging the old monolithic experiment into Default UI as-is
+| https://gitlab.com/antora/antora-ui-default/-/merge_requests/207[!207]
 |===
 
 == Valentus-only product chrome (not upstream bugs)
@@ -62,6 +87,7 @@ These are intentional differentiators — useful when proposing Valentus as a ri
 * *Bundled dark mode* — https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] merged into the release bundle.
 * *Brand-first header logo* — tone strategies (`brand` / `mono`), optional light/dark asset pair.
 * *UI modules* — composable chrome packages + orchestrator (see xref:ui-modules.adoc[UI Modules]).
+* *Fragment jump offset without `.toolbar`* — Default UI `03-fragment-jumper.js` subtracts `.toolbar` height; Valentus replaced the toolbar with sticky navbar + doc mast, so hash/TOC jump offset should use that chrome (Valentus-local until upstream gains a toolbar-less fallback).
 
 == How to use this list
 

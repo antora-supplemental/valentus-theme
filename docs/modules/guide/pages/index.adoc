@@ -5,6 +5,9 @@
 Valentus is debranded doc-site chrome for Antora 3.x: sticky header, breadcrumb mast with component/version pickers, sidebar layout, VCS provider icons, and the dark mode toggle.
 
 The release `ui-bundle.zip` includes dark mode (successor to the former `antora-dark-theme` package).
+Sites that need *dark mode only* on another theme should use link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] — not this package as an overlay on itself.
+
+Org product map: link:https://antora-supplemental.github.io/docs/docs/theme-products.html[Theme products^].
 
 == Why Valentus
 

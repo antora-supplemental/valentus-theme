@@ -5,6 +5,8 @@
 Composed Antora doc-site chrome with **bundled dark mode**: breadcrumb mast, header, layout, VCS icons, and the theme toggle.
 
 Successor to the former `antora-dark-theme` monolithic package — use the Valentus release `ui-bundle.zip` for the full stack.
+Dark-mode-only sites (other themes / Default UI): link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode].
+Product map: link:https://antora-supplemental.github.io/docs/docs/theme-products.html[Theme products^].
 
 **Changelog:** link:CHANGELOG.adoc[CHANGELOG.adoc] and link:changelog-details/[`changelog-details/`].
 

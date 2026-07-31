@@ -66,6 +66,10 @@ ui:
 
 Remove `antora-dark-theme` from `package.json` if present; use the release bundle URL or `pnpm add -D valentus-theme` for supplemental vendoring.
 
+Canonical homes are the **antora-supplemental** org repositories (`valentus-theme`, `antora-dark-mode`).
+Personal forks of the old `antora-dark-theme` name are obsolete — do not pin them.
+Dark-mode-only migration copy: link:https://antora-supplemental.github.io/antora-dark-mode/antora-dark-mode/guide/legacy-names.html[Legacy names & migration^].
+
 [[overrides-on-bundle]]
 === Overrides
 
