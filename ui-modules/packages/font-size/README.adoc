@@ -6,11 +6,11 @@ Complements the desktop `read-width` measure control: below the condensed breakp
 == What it provides
 
 * Partial `adt-font-size` — segmented control (small / medium / large)
-* `css/site-font-size.css` — sets `--adt-doc-font-size` on `article.doc` + control chrome (visible only below `1024px`)
+* `css/site-font-size.css` — scales `.doc` via `zoom` (rem headings too) with `font-size` fallback; control chrome visible only below `1024px` (`display: none !important` on desktop)
 * `js/adt-font-size-fouc.js` — early `data-adt-font-size` from `localStorage` (orchestrator inlines in `<head>`)
 * `js/site-font-size.js` — click handling + `aria-pressed` sync
 
-Text scale: small `0.875rem` / medium `1rem` / large `1.125rem`.
+Text scale: small `0.875` / medium `1` / large `1.2` (`--adt-doc-zoom`); fallback font-size `0.8125rem` / `0.94444rem` / `1.125rem`.
 Preference key: `localStorage['adt-font-size']` → `html[data-adt-font-size]`.
 
 == Install (orchestrator)

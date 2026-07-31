@@ -1,10 +1,11 @@
 /* Reading font-size module — doc text scale + condensed-viewport control.
    Place {{> adt-font-size}} in .adt-tool-band-center (alongside adt-read-width).
    Desktop (≥1024px) keeps read-width; this control shows only below that breakpoint.
-   data-adt-font-size sets --adt-doc-font-size on the article. */
+   data-adt-font-size scales article.doc (zoom + font-size fallback). */
 
 :root {
-  --adt-doc-font-size: 1rem;
+  --adt-doc-font-size: 0.94444rem;
+  --adt-doc-zoom: 1;
   --adt-font-size-radius: 0.4rem;
   --adt-font-size-radius-sm: 0.25rem;
   --adt-font-size-border: var(--adt-border, #d9dee7);
@@ -17,25 +18,37 @@
 }
 
 html[data-adt-font-size="small"] {
-  --adt-doc-font-size: 0.875rem;
+  --adt-doc-font-size: 0.8125rem;
+  --adt-doc-zoom: 0.875;
 }
 
 html[data-adt-font-size="medium"],
 html:not([data-adt-font-size]) {
-  --adt-doc-font-size: 1rem;
+  --adt-doc-font-size: 0.94444rem;
+  --adt-doc-zoom: 1;
 }
 
 html[data-adt-font-size="large"] {
   --adt-doc-font-size: 1.125rem;
+  --adt-doc-zoom: 1.2;
 }
 
-article.doc {
-  font-size: var(--adt-doc-font-size);
+/* font-size scales inherited/em text; zoom (when supported) also scales rem headings. */
+.doc {
+  font-size: var(--adt-doc-font-size) !important;
 }
 
-/* Control — hidden on desktop where read-width owns the tool band */
+@supports (zoom: 1) {
+  .doc {
+    /* Keep Default UI body baseline; zoom alone drives small/medium/large. */
+    font-size: 0.94444rem !important;
+    zoom: var(--adt-doc-zoom);
+  }
+}
+
+/* Control — visible in condensed viewports; desktop hide mirrors read-width (!important). */
 .adt-font-size {
-  display: none;
+  display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
@@ -44,6 +57,15 @@ article.doc {
   border: 1px solid var(--adt-font-size-border);
   border-radius: var(--adt-font-size-radius);
   background: var(--adt-font-size-bg);
+  box-sizing: border-box;
+}
+
+.adt-tool-band-center > .adt-font-size {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  min-height: var(--adt-tool-band, 2.15rem);
+  margin: 0;
   box-sizing: border-box;
 }
 
@@ -100,21 +122,15 @@ article.doc {
   font-size: 1.05rem;
 }
 
-/* Condensed / mobile: show font-size; center over content (no far-right remnant). */
-@media screen and (max-width: 1023.5px) {
+/* Desktop: read-width owns the tool band — force-hide text size. */
+@media screen and (min-width: 1024px) {
   .adt-font-size {
-    display: inline-flex;
+    display: none !important;
   }
+}
 
-  .adt-tool-band-center > .adt-font-size {
-    display: flex;
-    width: fit-content;
-    max-width: 100%;
-    min-height: var(--adt-tool-band, 2.15rem);
-    margin: 0;
-    box-sizing: border-box;
-  }
-
+/* Condensed / mobile: center over content (no far-right remnant). */
+@media screen and (max-width: 1023.5px) {
   .adt-tool-nav-slot {
     display: none;
   }

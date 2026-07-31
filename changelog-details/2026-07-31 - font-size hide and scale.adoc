@@ -1,0 +1,6 @@
+= Fix condensed font-size control (hide + scale)
+
+* *Bug:* Text-size switcher could sit beside read-width on wide viewports, and tapping A/A/A did not visibly change doc text (Default UI headings use `rem`, so only changing `.doc` `font-size` left most type unchanged).
+* *Fix — hide:* Show `.adt-font-size` by default; force `display: none !important` at `min-width: 1024px` (same mutual-exclusion pattern as read-width’s condensed hide).
+* *Fix — scale:* Drive size with `--adt-doc-zoom` on `.doc` when `zoom` is supported (scales rem headings too); keep `--adt-doc-font-size` + `!important` as fallback. Steps: `0.875` / `1` / `1.2`.
+* *Files:* `ui-modules/packages/font-size/ui/css/site-font-size.css` + `supplemental-ui` mirror.
