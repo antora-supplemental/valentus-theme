@@ -1,10 +1,9 @@
 /**
- * Valentus visual polish: sticky header shadow + theme crossfade cue.
- * Reading width lives in the read-width module (site-read-width.js).
+ * Valentus visual polish: sticky header shadow + search UX helpers.
+ * Root light↔dark transition lives in antora-dark-mode (View Transitions +
+ * html.adt-theme-animating fallback). Reading width: site-read-width.js.
  */
 (function () {
-  const root = document.documentElement
-
   const nav = document.querySelector('.adt-site-navbar')
   if (nav) {
     const onScroll = () => {
@@ -13,22 +12,6 @@
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
   }
-
-  const markAnimating = () => {
-    root.classList.add('adt-theme-animating')
-    window.clearTimeout(markAnimating._t)
-    markAnimating._t = window.setTimeout(() => {
-      root.classList.remove('adt-theme-animating')
-    }, 320)
-  }
-
-  document.addEventListener(
-    'click',
-    (e) => {
-      if (e.target.closest('.theme-toggle')) markAnimating()
-    },
-    true
-  )
 
   // Antora UI default site.js (nav panel): mousedown with detail > 1 → preventDefault
   // so double-clicking nav labels does not select text. When #search-input lives inside

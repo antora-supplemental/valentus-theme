@@ -478,31 +478,8 @@ footer.footer a {
   transition: var(--adt-transition);
 }
 
-/* Theme toggle: soft crossfade of page surfaces + chrome children that paint
-   their own elevated fills (search omnibox) or inherit header ink. */
-html.adt-theme-animating,
-html.adt-theme-animating body,
-html.adt-theme-animating .adt-site-navbar,
-html.adt-theme-animating .adt-doc-mast,
-html.adt-theme-animating .nav,
-html.adt-theme-animating footer.footer,
-html.adt-theme-animating .doc,
-html.adt-theme-animating .header.adt-header .navbar-menu.adt-topbar,
-html.adt-theme-animating .header.adt-header .adt-header-actions,
-html.adt-theme-animating .adt-search-compound,
-html.adt-theme-animating .adt-search-scope-slot,
-html.adt-theme-animating .adt-search-chat__toggle,
-html.adt-theme-animating .adt-nav-search #search-input,
-html.adt-theme-animating .adt-tool-search #search-input,
-html.adt-theme-animating .header.adt-header .navbar .navbar-end .adt-header-icon-btn,
-html.adt-theme-animating .header.adt-header .navbar .navbar-end .theme-toggle.adt-header-icon-btn {
-  transition: background-color 0.28s ease, color 0.28s ease, border-color 0.28s ease,
-    box-shadow 0.28s ease !important;
-}
-
-html.adt-theme-animating .adt-header-vcs .adt-header-vcs-img {
-  transition: filter 0.28s ease !important;
-}
+/* Root theme crossfade (html.adt-theme-animating / View Transitions) ships in
+   antora-dark-mode site-extra.css — not a Valentus per-widget selector list. */
 
 /* ——— Breadcrumbs / mast accents ——— */
 .adt-breadcrumb-trail .adt-breadcrumb-trail-link,

@@ -19,6 +19,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * *Docs:* xref:guide:value-proposition.adoc[Value Proposition & Upstream Fixes] — add Default UI MRs/branches for nav label alignment (!210), sticky footer (!211), TOC heading rail inset, and dark-mode proposal (!207) with “ship via Valentus / antora-dark-mode today” guidance.
 * *Docs:* Installation migrate-from-`antora-dark-theme` notes canonical org repos and points at the dark-mode legacy-names guide; Getting Started / README link the org Theme products map.
 
+== [2.0.5] - 2026-08-01
+
+Public label: *2.0.5+antora.3* (Antora 3).
+
+* *Fix / chore:* Root light↔dark theme transition now lives in vendored antora-dark-mode ≥ 1.4.0 (View Transitions + universal `html.adt-theme-animating` fallback). Removed Valentus per-widget `adt-theme-animating` selector list and click-capture cue from `site-visual.js`. Keeps transparent header paint so dark-mode’s solid `.navbar-menu` fill never flashes. See link:changelog-details/2026-08-01%20-%20root%20theme%20transition%20sync.adoc[Detailed notes — 2026-08-01 root theme transition sync].
+
 == [2.0.4] - 2026-08-01
 
 Public label: *2.0.4+antora.3* (Antora 3).

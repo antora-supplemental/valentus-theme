@@ -1,0 +1,6 @@
+= 2026-08-01 — Root theme transition sync
+
+* *Vendors* link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] *1.4.0* (`pnpm dark-mode:sync`) for platform View Transitions + `html.adt-theme-animating` universal paint fallback.
+* *Removed* Valentus-only band-aid: click-capture `adt-theme-animating` in `site-visual.js` and the long per-surface selector list in `site-visual.css`.
+* *Kept* intentional chrome polish that is not a theme-toggle animation: transparent `.navbar-menu.adt-topbar` / `.adt-header-actions` paint, VCS mark `filter` transition, hover transitions via `--adt-transition`.
+* Playbook pins point at `antora-dark-mode` `v1.4.0` release bundle.

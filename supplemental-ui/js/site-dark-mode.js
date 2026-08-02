@@ -4,10 +4,19 @@
   const SYSTEM_SNAPSHOT_KEY = "antora-theme-system-snapshot";
   const html = document.documentElement;
   const darkThemeClass = "dark-theme";
+  /** Temporary class while the class-based theme crossfade runs (VT fallback). */
+  const themeAnimatingClass = "adt-theme-animating";
+  const themeAnimMs = 300;
   const systemMq = window.matchMedia("(prefers-color-scheme: dark)");
+  const reducedMotionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let themeAnimTimer;
 
   function systemPreferenceLabel() {
     return systemMq.matches ? "dark" : "light";
+  }
+
+  function prefersReducedMotion() {
+    return reducedMotionMq.matches;
   }
 
   function captureSystemSnapshot() {
@@ -31,7 +40,32 @@
     return "system";
   }
 
-  function applyVisibleTheme() {
+  /**
+   * Platform theme paint: View Transitions when available, else a short universal
+   * CSS transition via html.adt-theme-animating. Skipped when reduced motion.
+   */
+  function runThemePaint(updateFn, animate) {
+    if (!animate || prefersReducedMotion()) {
+      updateFn();
+      return;
+    }
+    if (typeof document.startViewTransition === "function") {
+      document.startViewTransition(() => {
+        updateFn();
+      });
+      return;
+    }
+    html.classList.add(themeAnimatingClass);
+    // Ensure the browser applies the animating transition before the class flip.
+    void html.offsetWidth;
+    updateFn();
+    window.clearTimeout(themeAnimTimer);
+    themeAnimTimer = window.setTimeout(() => {
+      html.classList.remove(themeAnimatingClass);
+    }, themeAnimMs);
+  }
+
+  function applyVisibleTheme(animate) {
     const mode = getMode();
     let useDark;
     if (mode === "system") {
@@ -39,15 +73,17 @@
     } else {
       useDark = mode === "dark";
     }
-    if (useDark) {
-      html.classList.add(darkThemeClass);
-    } else {
-      html.classList.remove(darkThemeClass);
-    }
-    updateToggleLabel();
+    runThemePaint(() => {
+      if (useDark) {
+        html.classList.add(darkThemeClass);
+      } else {
+        html.classList.remove(darkThemeClass);
+      }
+      updateToggleLabel();
+    }, Boolean(animate));
   }
 
-  function setMode(next) {
+  function setMode(next, animate) {
     if (next === "system") {
       localStorage.setItem(MODE_KEY, "system");
       clearSystemSnapshot();
@@ -55,7 +91,7 @@
       localStorage.setItem(MODE_KEY, next);
       captureSystemSnapshot();
     }
-    applyVisibleTheme();
+    applyVisibleTheme(animate !== false);
   }
 
   function expireOverrideIfSystemChanged() {
@@ -67,14 +103,14 @@
       return;
     }
     if (snapshot !== systemPreferenceLabel()) {
-      setMode("system");
+      setMode("system", true);
     }
   }
 
   function onSystemThemeChange() {
     const mode = getMode();
     if (mode === "system") {
-      applyVisibleTheme();
+      applyVisibleTheme(true);
       return;
     }
     expireOverrideIfSystemChanged();
@@ -82,7 +118,7 @@
 
   function applyInitialTheme() {
     expireOverrideIfSystemChanged();
-    applyVisibleTheme();
+    applyVisibleTheme(false);
     if (typeof systemMq.addEventListener === "function") {
       systemMq.addEventListener("change", onSystemThemeChange);
     } else {
@@ -115,7 +151,7 @@
   }
 
   function toggleTheme() {
-    setMode(isDark() ? "light" : "dark");
+    setMode(isDark() ? "light" : "dark", true);
     const toggle = document.getElementById("theme-toggle");
     if (toggle) toggle.blur();
   }
