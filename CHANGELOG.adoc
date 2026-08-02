@@ -19,6 +19,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * *Docs:* xref:guide:value-proposition.adoc[Value Proposition & Upstream Fixes] — add Default UI MRs/branches for nav label alignment (!210), sticky footer (!211), TOC heading rail inset, and dark-mode proposal (!207) with “ship via Valentus / antora-dark-mode today” guidance.
 * *Docs:* Installation migrate-from-`antora-dark-theme` notes canonical org repos and points at the dark-mode legacy-names guide; Getting Started / README link the org Theme products map.
 
+== [2.0.4] - 2026-08-01
+
+Public label: *2.0.4+antora.3* (Antora 3).
+
+* *Fix:* Light↔dark theme crossfade — header end-controls strip (GitHub + theme toggle) and search omnibox no longer snap while the navbar fades. Transparent `.navbar-menu` / `.adt-header-actions` paint + `filter` transition on the VCS mark; `adt-theme-animating` covers search compound chrome. Pair with `@antora-supplemental/antora-search-chat` ≥ 0.1.3 for the opaque pill transition. See link:changelog-details/2026-08-01%20-%20theme%20transition%20header%20search.adoc[Detailed notes — 2026-08-01 theme transition header + search].
+
 == [2.0.3] - 2026-07-31
 
 Public label: *2.0.3+antora.3* (Antora 3).

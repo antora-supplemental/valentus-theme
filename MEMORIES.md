@@ -2,6 +2,17 @@
 
 Durable facts for agents working in this repository.
 
+## Valentus consumer sites (uses: 1)
+
+Docs hubs that pin Valentus `ui-bundle.zip` (prefer rolling `.../releases/download/v2/ui-bundle.zip` + `snapshot: true`):
+
+* `FoodTruckNerdz/docs` — also `site/release_info.json` label
+* `antora-supplemental/docs`
+* `openshellorg/docs`
+* `dev-centr/docs`
+
+After a Valentus patch release: update any exact pins / `release_info` label, then `gh workflow run` (or push) so Antora re-fetches the rolling `v2` asset. `antora-dark-mode` only documents the Valentus URL in guides (not a live pin for its own site).
+
 ## Antora nav panel blocks multi-click select (uses: 1)
 
 Antora UI default `site.js` (nav panel): `mousedown` with `detail > 1` → `preventDefault()` so double-clicking nav labels does not select text. Any `#search-input` (or other form control) nested under `[data-panel=menu]` cannot select-on-dblclick unless Valentus stops propagation at `#search-field` (see `site-visual.js` / `site-search-chat.js`). Not a lunr `search-ui.js` bug (`confineEvent` only stops click propagation). Tool-band search outside the panel avoids the handler entirely.

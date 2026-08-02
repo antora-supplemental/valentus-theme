@@ -1,6 +1,6 @@
 {
   "name": "valentus-theme",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Valentus — composed Antora doc-site chrome with bundled dark mode (mast, header, layout, toggle).",
   "private": true,
   "keywords": [
@@ -36,7 +36,7 @@
     "dark-mode:sync": "node scripts/sync-dark-mode.mjs"
   },
   "devDependencies": {
-    "@antora-supplemental/antora-search-chat": "github:antora-supplemental/antora-search-chat#a6e23a0",
+    "@antora-supplemental/antora-search-chat": "github:antora-supplemental/antora-search-chat#beea395",
     "@antora/lunr-extension": "1.0.0-alpha.12",
     "@asciidoctor/tabs": "^1.0.0-beta.6",
     "antora": "^3.1.14",

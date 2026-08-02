@@ -350,7 +350,7 @@ footer.footer a {
   background: var(--adt-elevated) !important;
   color: var(--adt-ink) !important;
   font-size: 0.875rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   box-sizing: border-box;
   -webkit-user-select: text;
   user-select: text;
@@ -458,21 +458,50 @@ footer.footer a {
   transition: var(--adt-transition);
 }
 
+/* End-controls strip + brand stay in lockstep with the sticky navbar fade.
+   Keep paint transparent so antora-dark-mode’s solid .navbar-menu fill never
+   flashes a different shade while --adt-chrome transitions. */
+.header.adt-header .navbar-menu.adt-topbar,
+.header.adt-header .adt-topbar .navbar-end,
+.header.adt-header .adt-header-actions {
+  background: transparent !important;
+  transition: var(--adt-transition);
+}
+
+.adt-header-vcs .adt-header-vcs-img,
+.adt-header-icon-btn.adt-header-vcs .adt-header-vcs-img {
+  transition: filter 0.28s ease;
+}
+
 .adt-header-logo-item {
   border-radius: var(--adt-radius-sm);
   transition: var(--adt-transition);
 }
 
-/* Theme toggle: soft crossfade of page surfaces */
+/* Theme toggle: soft crossfade of page surfaces + chrome children that paint
+   their own elevated fills (search omnibox) or inherit header ink. */
 html.adt-theme-animating,
 html.adt-theme-animating body,
 html.adt-theme-animating .adt-site-navbar,
 html.adt-theme-animating .adt-doc-mast,
 html.adt-theme-animating .nav,
 html.adt-theme-animating footer.footer,
-html.adt-theme-animating .doc {
+html.adt-theme-animating .doc,
+html.adt-theme-animating .header.adt-header .navbar-menu.adt-topbar,
+html.adt-theme-animating .header.adt-header .adt-header-actions,
+html.adt-theme-animating .adt-search-compound,
+html.adt-theme-animating .adt-search-scope-slot,
+html.adt-theme-animating .adt-search-chat__toggle,
+html.adt-theme-animating .adt-nav-search #search-input,
+html.adt-theme-animating .adt-tool-search #search-input,
+html.adt-theme-animating .header.adt-header .navbar .navbar-end .adt-header-icon-btn,
+html.adt-theme-animating .header.adt-header .navbar .navbar-end .theme-toggle.adt-header-icon-btn {
   transition: background-color 0.28s ease, color 0.28s ease, border-color 0.28s ease,
     box-shadow 0.28s ease !important;
+}
+
+html.adt-theme-animating .adt-header-vcs .adt-header-vcs-img {
+  transition: filter 0.28s ease !important;
 }
 
 /* ——— Breadcrumbs / mast accents ——— */

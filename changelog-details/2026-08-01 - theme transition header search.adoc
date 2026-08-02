@@ -1,0 +1,6 @@
+= Fix light↔dark theme crossfade (header + search)
+
+* *Bug:* During theme toggle, the sticky navbar chrome faded via `--adt-chrome`, but header end-controls (VCS mark + theme toggle) and the opaque Search/Ask omnibox snapped to the new palette.
+* *Fix — header:* Keep `.navbar-menu.adt-topbar` / `.adt-header-actions` paint transparent so antora-dark-mode’s solid menu fill never flashes; transition VCS mark `filter` with `adt-theme-animating`.
+* *Fix — search:* Extend `html.adt-theme-animating` coverage to compound chrome / scope / toggles / nav+tool search inputs; search inputs also transition background/color/border. Opaque pill transitions ship in `@antora-supplemental/antora-search-chat` 0.1.3.
+* *Files:* `ui-modules/packages/doc-layout/ui/css/site-visual.css` + `supplemental-ui` mirror; pin `antora-search-chat#beea395`.
