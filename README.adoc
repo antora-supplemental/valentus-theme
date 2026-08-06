@@ -1,12 +1,40 @@
-= Valentus Theme
-:toc:
+ifndef::env-github[:icons: font]
+:toc: preamble
+:toclevels: 2
+:sectanchors:
 :icons: font
+endif::[]
+
+ifndef::env-github[]
+image:https://img.shields.io/github/contributors/antora-supplemental/valentus-theme.svg?style=for-the-badge[Contributors,link=https://github.com/antora-supplemental/valentus-theme/graphs/contributors]
+image:https://img.shields.io/github/forks/antora-supplemental/valentus-theme.svg?style=for-the-badge[Forks,link=https://github.com/antora-supplemental/valentus-theme/network/members]
+image:https://img.shields.io/github/stars/antora-supplemental/valentus-theme.svg?style=for-the-badge[Stars,link=https://github.com/antora-supplemental/valentus-theme/stargazers]
+image:https://img.shields.io/github/issues/antora-supplemental/valentus-theme.svg?style=for-the-badge[Issues,link=https://github.com/antora-supplemental/valentus-theme/issues]
+image:https://img.shields.io/github/license/antora-supplemental/valentus-theme.svg?style=for-the-badge[License,link=https://github.com/antora-supplemental/valentus-theme/blob/main/LICENSE]
+endif::[]
+
+ifdef::env-github[]
+image:https://img.shields.io/github/contributors/antora-supplemental/valentus-theme.svg?style=for-the-badge[Contributors]
+image:https://img.shields.io/github/forks/antora-supplemental/valentus-theme.svg?style=for-the-badge[Forks]
+image:https://img.shields.io/github/stars/antora-supplemental/valentus-theme.svg?style=for-the-badge[Stars]
+image:https://img.shields.io/github/issues/antora-supplemental/valentus-theme.svg?style=for-the-badge[Issues]
+image:https://img.shields.io/github/license/antora-supplemental/valentus-theme.svg?style=for-the-badge[License]
+endif::[]
+
+= Valentus Theme
+
+Composed Antora doc-site chrome (pair with antora-dark-mode).
+
+link:https://antora-supplemental.github.io/valentus-theme/[View demo] ·
+link:https://antora-supplemental.github.io/docs/docs/theme-products.html[Theme products] ·
+link:https://github.com/antora-supplemental/valentus-theme/issues[Report Bug]
+
+== About The Project
 
 Composed Antora doc-site chrome with **bundled dark mode**: breadcrumb mast, header, layout, VCS icons, and the theme toggle.
 
 Successor to the former `antora-dark-theme` monolithic package — use the Valentus release `ui-bundle.zip` for the full stack.
 Dark-mode-only sites (other themes / Default UI): link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode].
-Product map: link:https://antora-supplemental.github.io/docs/docs/theme-products.html[Theme products^].
 
 **Changelog:** link:CHANGELOG.adoc[CHANGELOG.adoc] and link:changelog-details/[`changelog-details/`].
 
@@ -16,7 +44,7 @@ Product map: link:https://antora-supplemental.github.io/docs/docs/theme-products
 Valentus major tracks breaking chrome for theme modders; `+antora.N` tracks the Antora framework major.
 Git tags stay pure semver (`v2.0.0`); pin URLs use those tags. Details: `docs/modules/guide/pages/version-pinning.adoc` and `supported-lines.json`.
 
-== Quick start
+== Installation
 
 [source,yaml]
 ----
@@ -40,7 +68,9 @@ ui:
 
 The `supplemental-ui/` tree vendors dark mode assets (`site-extra.css`, `site-dark-mode.js`). Run `pnpm dark-mode:sync` after updating `antora-dark-mode`.
 
-== Demo
+== Usage
+
+=== Demo
 
 https://antora-supplemental.github.io/valentus-theme[GitHub Pages demo] (published from `main` via GitHub Actions).
 
@@ -53,10 +83,21 @@ pnpm dark-mode:sync
 pnpm build:local
 ----
 
-== UI modules
+=== UI modules
 
 Composable chrome via `ui-modules/` and the orchestrator extension — see `ui-modules/README.adoc`.
 
-== Dark mode only (slipstream)
+=== Dark mode only (slipstream)
 
 Sites that need dark mode on a *different* theme bundle (not Valentus chrome) should use link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] as an overlay — not this package.
+
+== License
+
+See link:LICENSE[].
+
+== Contact
+
+Antora Supplemental — support@antora-supplemental.org
+
+* Project: https://github.com/antora-supplemental/valentus-theme
+* Site: https://antora-supplemental.org
