@@ -5,21 +5,12 @@ ifndef::env-github[:icons: font]
 :icons: font
 endif::[]
 
-ifndef::env-github[]
+[[readme-top]]
 image:https://img.shields.io/github/contributors/antora-supplemental/valentus-theme.svg?style=for-the-badge[Contributors,link=https://github.com/antora-supplemental/valentus-theme/graphs/contributors]
 image:https://img.shields.io/github/forks/antora-supplemental/valentus-theme.svg?style=for-the-badge[Forks,link=https://github.com/antora-supplemental/valentus-theme/network/members]
 image:https://img.shields.io/github/stars/antora-supplemental/valentus-theme.svg?style=for-the-badge[Stars,link=https://github.com/antora-supplemental/valentus-theme/stargazers]
 image:https://img.shields.io/github/issues/antora-supplemental/valentus-theme.svg?style=for-the-badge[Issues,link=https://github.com/antora-supplemental/valentus-theme/issues]
 image:https://img.shields.io/github/license/antora-supplemental/valentus-theme.svg?style=for-the-badge[License,link=https://github.com/antora-supplemental/valentus-theme/blob/main/LICENSE]
-endif::[]
-
-ifdef::env-github[]
-image:https://img.shields.io/github/contributors/antora-supplemental/valentus-theme.svg?style=for-the-badge[Contributors]
-image:https://img.shields.io/github/forks/antora-supplemental/valentus-theme.svg?style=for-the-badge[Forks]
-image:https://img.shields.io/github/stars/antora-supplemental/valentus-theme.svg?style=for-the-badge[Stars]
-image:https://img.shields.io/github/issues/antora-supplemental/valentus-theme.svg?style=for-the-badge[Issues]
-image:https://img.shields.io/github/license/antora-supplemental/valentus-theme.svg?style=for-the-badge[License]
-endif::[]
 
 = Valentus Theme
 
@@ -43,6 +34,8 @@ Dark-mode-only sites (other themes / Default UI): link:https://github.com/antora
 **Versioning:** Public labels are `VALENTUS_SEMVER+antora.N` (example *2.0.0+antora.3*).
 Valentus major tracks breaking chrome for theme modders; `+antora.N` tracks the Antora framework major.
 Git tags stay pure semver (`v2.0.0`); pin URLs use those tags. Details: `docs/modules/guide/pages/version-pinning.adoc` and `supported-lines.json`.
+
+link:#readme-top[back to top]
 
 == Installation
 
@@ -68,6 +61,8 @@ ui:
 
 The `supplemental-ui/` tree vendors dark mode assets (`site-extra.css`, `site-dark-mode.js`). Run `pnpm dark-mode:sync` after updating `antora-dark-mode`.
 
+link:#readme-top[back to top]
+
 == Usage
 
 === Demo
@@ -91,9 +86,13 @@ Composable chrome via `ui-modules/` and the orchestrator extension — see `ui-m
 
 Sites that need dark mode on a *different* theme bundle (not Valentus chrome) should use link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] as an overlay — not this package.
 
+link:#readme-top[back to top]
+
 == License
 
 See link:LICENSE[].
+
+link:#readme-top[back to top]
 
 == Contact
 
@@ -101,3 +100,5 @@ Antora Supplemental — support@antora-supplemental.org
 
 * Project: https://github.com/antora-supplemental/valentus-theme
 * Site: https://antora-supplemental.org
+
+link:#readme-top[back to top]
