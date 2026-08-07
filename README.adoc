@@ -5,7 +5,55 @@ ifndef::env-github[:icons: font]
 :icons: font
 endif::[]
 
-[[readme-top]]
+ifdef::env-github[]
+++++
+<a id="readme-top"></a>
+<div align="center">
+<a href="https://github.com/antora-supplemental/valentus-theme/graphs/contributors"><img src="https://img.shields.io/github/contributors/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="Contributors"></a>
+<a href="https://github.com/antora-supplemental/valentus-theme/network/members"><img src="https://img.shields.io/github/forks/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="Forks"></a>
+<a href="https://github.com/antora-supplemental/valentus-theme/stargazers"><img src="https://img.shields.io/github/stars/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="Stars"></a>
+<a href="https://github.com/antora-supplemental/valentus-theme/issues"><img src="https://img.shields.io/github/issues/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="Issues"></a>
+<a href="https://github.com/antora-supplemental/valentus-theme/blob/main/LICENSE"><img src="https://img.shields.io/github/license/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="License"></a>
+<br />
+<h3 align="center">Valentus Theme</h3>
+<p align="center">
+Composed Antora doc-site chrome (pair with antora-dark-mode).<br />
+<a href="https://antora-supplemental.github.io/docs/docs/theme-products.html"><strong>Theme products ·</strong></a>
+<br /><br />
+<a href="https://antora-supplemental.github.io/valentus-theme/">View demo</a>
+&middot;
+<a href="https://github.com/antora-supplemental/valentus-theme/issues">Report Bug</a>
+</p>
+</div>
+++++
+endif::[]
+
+ifndef::env-github[]
+
+ifdef::env-github[]
+++++
+<a id="readme-top"></a>
+<div align="center">
+<a href="https://github.com/antora-supplemental/valentus-theme/graphs/contributors"><img src="https://img.shields.io/github/contributors/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="Contributors"></a>
+<a href="https://github.com/antora-supplemental/valentus-theme/network/members"><img src="https://img.shields.io/github/forks/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="Forks"></a>
+<a href="https://github.com/antora-supplemental/valentus-theme/stargazers"><img src="https://img.shields.io/github/stars/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="Stars"></a>
+<a href="https://github.com/antora-supplemental/valentus-theme/issues"><img src="https://img.shields.io/github/issues/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="Issues"></a>
+<a href="https://github.com/antora-supplemental/valentus-theme/blob/main/LICENSE"><img src="https://img.shields.io/github/license/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="License"></a>
+<br />
+<h3 align="center">Valentus Theme</h3>
+<p align="center">
+Composed Antora doc-site chrome (pair with antora-dark-mode).<br />
+<a href="https://antora-supplemental.github.io/docs/docs/theme-products.html"><strong>Theme products ·</strong></a>
+<br /><br />
+<a href="https://antora-supplemental.github.io/valentus-theme/">View demo</a>
+&middot;
+<a href="https://github.com/antora-supplemental/valentus-theme/issues">Report Bug</a>
+</p>
+</div>
+++++
+endif::[]
+
+ifndef::env-github[]
 image:https://img.shields.io/github/contributors/antora-supplemental/valentus-theme.svg?style=for-the-badge[Contributors,link=https://github.com/antora-supplemental/valentus-theme/graphs/contributors]
 image:https://img.shields.io/github/forks/antora-supplemental/valentus-theme.svg?style=for-the-badge[Forks,link=https://github.com/antora-supplemental/valentus-theme/network/members]
 image:https://img.shields.io/github/stars/antora-supplemental/valentus-theme.svg?style=for-the-badge[Stars,link=https://github.com/antora-supplemental/valentus-theme/stargazers]
@@ -19,6 +67,7 @@ Composed Antora doc-site chrome (pair with antora-dark-mode).
 link:https://antora-supplemental.github.io/valentus-theme/[View demo] ·
 link:https://antora-supplemental.github.io/docs/docs/theme-products.html[Theme products] ·
 link:https://github.com/antora-supplemental/valentus-theme/issues[Report Bug]
+endif::[]
 
 == About The Project
 
@@ -35,8 +84,9 @@ Dark-mode-only sites (other themes / Default UI): link:https://github.com/antora
 Valentus major tracks breaking chrome for theme modders; `+antora.N` tracks the Antora framework major.
 Git tags stay pure semver (`v2.0.0`); pin URLs use those tags. Details: `docs/modules/guide/pages/version-pinning.adoc` and `supported-lines.json`.
 
-link:#readme-top[back to top]
-
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
 == Installation
 
 [source,yaml]
@@ -63,8 +113,9 @@ ui:
 
 The `supplemental-ui/` tree vendors dark mode assets (`site-extra.css`, `site-dark-mode.js`). Run `pnpm dark-mode:sync` after updating `antora-dark-mode`.
 
-link:#readme-top[back to top]
-
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
 == Usage
 
 === Demo
@@ -88,14 +139,16 @@ Composable chrome via `ui-modules/` and the orchestrator extension — see `ui-m
 
 Sites that need dark mode on a *different* theme bundle (not Valentus chrome) should use link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] as an overlay — not this package.
 
-link:#readme-top[back to top]
-
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
 == License
 
 See link:LICENSE[].
 
-link:#readme-top[back to top]
-
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
 == Contact
 
 Antora Supplemental — support@antora-supplemental.org
@@ -103,4 +156,6 @@ Antora Supplemental — support@antora-supplemental.org
 * Project: https://github.com/antora-supplemental/valentus-theme
 * Site: https://antora-supplemental.org
 
-link:#readme-top[back to top]
+++++
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+++++
