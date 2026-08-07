@@ -48,6 +48,8 @@ ui:
   supplemental_files: ./supplemental-ui-overrides   # optional branding only
 ----
 
+Add the GitHub topic `valentus-theme` on your playbook repository so dependents stay rediscoverable (`gh search repos --topic valentus-theme`). Guide: `docs/modules/guide/pages/github-topics.adoc`.
+
 Optional overlay from git instead of the release bundle:
 
 [source,yaml]

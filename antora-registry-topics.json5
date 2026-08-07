@@ -1,9 +1,25 @@
 // Valentus — composed Antora doc-site chrome.
+// githubTopics: gallery/capability topics + product identity (`valentus-theme`).
+// Dependents (playbook repos) should ALSO carry the product topic — see
+// docs/modules/guide/pages/github-topics.adoc and knownDependents below.
 {
   repository: "https://github.com/antora-supplemental/valentus-theme",
   githubTopics: [
     "antora-theme",
+    "antora-light-theme",
+    "antora-dark-theme",
     "antora-extension",
     "antora-ui",
+    "valentus-theme",
+  ],
+  // Product topic dependents should add (same string as repo name).
+  productTopic: "valentus-theme",
+  // Known playbook repos that pin Valentus ui-bundle (seed list; keep current).
+  knownDependents: [
+    "https://github.com/antora-supplemental/docs",
+    "https://github.com/dev-centr/docs",
+    "https://github.com/FoodTruckNerdz/docs",
+    "https://github.com/HCI-Nerdz/docs",
+    "https://github.com/openshellorg/docs",
   ],
 }

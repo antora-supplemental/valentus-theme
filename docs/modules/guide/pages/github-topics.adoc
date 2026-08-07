@@ -1,0 +1,63 @@
+= GitHub Topics (Dependents)
+:navtitle: GitHub Topics
+:description: Tag sites that use Valentus with the valentus-theme GitHub topic so dependents stay rediscoverable.
+
+Sites that pin the Valentus `ui-bundle.zip` (or vendor Valentus `supplemental-ui`) should add the GitHub *repository topic* `valentus-theme`.
+That is separate from gallery classification topics (`antora-theme`, `antora-light-theme`, …).
+
+== Why
+
+GitHub Search (`topic:valentus-theme`) is the fastest way to find every docs playbook that depends on this theme when chasing regressions (for example font-size chrome, `head-meta` overlays, or rolling `v2` pins).
+
+Without the product topic, dependents only show up via brittle code search for the release URL.
+
+== What to set (consumers)
+
+On the repository that owns the Antora playbook:
+
+. Open *About* → *Topics* (or `Settings` → general topics).
+. Add **`valentus-theme`** (exact repo/product name, kebab-case).
+. Optionally add `antora-docs` / `antora-site` if you want broad Antora site discovery.
+
+CLI (merge-safe — fetches existing topics first):
+
+[source,bash]
+----
+REPO=owner/docs-repo   # playbook repo
+TOPIC=valentus-theme
+EXISTING=$(gh api "repos/$REPO/topics" -H "Accept: application/vnd.github.mercy-preview+json" --jq '.names')
+# merge TOPIC into EXISTING, then:
+gh api -X PUT "repos/$REPO/topics" \
+  -H "Accept: application/vnd.github.mercy-preview+json" \
+  --input - <<< '{"names":["valentus-theme", /* …keep prior topics… */]}'
+----
+
+Or use the registry helper once you have `antora-registry-topics.json5` / dependent lists: see the Antora Extensions Registry contributing guide (*Product dependency topics*).
+
+== Theme repository itself
+
+The `antora-supplemental/valentus-theme` repo carries:
+
+* **Product identity:** `valentus-theme`
+* **Gallery / capability:** `antora-theme`, `antora-light-theme`, `antora-dark-theme` (and related UI topics)
+
+`antora-registry-topics.json5` at the repo root lists the intended set for `scripts/apply-registry-topics.mjs` in the extensions registry.
+
+== Rediscovery
+
+[source,bash]
+----
+gh search repos --topic valentus-theme
+# or
+gh api "search/repositories?q=topic:valentus-theme"
+----
+
+== Convention (all themes)
+
+Any published Antora UI theme should document the same rule:
+
+* Theme **product** topic = GitHub repository name (for example `valentus-theme`, `architexture-theme`).
+* **Dependents** (playbook repos) must add that product topic when they adopt the theme.
+* Gallery filters keep using capability topics (`antora-theme`, appearance tags) — do not replace those with the product name alone on the theme repo.
+
+See also: link:https://github.com/antora-supplemental/antora-extensions-registry/blob/main/docs/modules/ROOT/pages/contributing.adoc[Registry contributing — GitHub Topics^].

@@ -42,6 +42,8 @@ antora antora-playbook.yml
 Pin `releases/download/v2/ui-bundle.zip` (rolling Valentus major 2) or an exact `vX.Y.Z` in CI when you need bitwise stability.
 Stay on `v1` until you migrate supplemental overlays for the 2.x redesign.
 
+After you adopt the bundle, add the GitHub repository topic `valentus-theme` on the playbook repo so dependents stay rediscoverable — see xref:github-topics.adoc[GitHub Topics].
+
 [[migrate-from-antora-dark-theme]]
 == Migrate from `antora-dark-theme`
 
