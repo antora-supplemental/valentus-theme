@@ -533,6 +533,11 @@ html.dark-theme .theme-toggle:hover {
  * Fallback: temporary html.adt-theme-animating for ~300ms with a universal
  * paint transition so extension chrome that follows tokens / html.dark-theme
  * crossfades without per-widget transition rules.
+ *
+ * During View Transitions, html.adt-theme-vt suppresses competing CSS
+ * transitions (e.g. Valentus --adt-transition at 0.2s) so chrome does not
+ * finish ahead of the 0.28s root snapshot crossfade.
+ *
  * Extensions should style via CSS variables or html.dark-theme — do not invent
  * their own light↔dark toggle animation.
  */
@@ -550,6 +555,17 @@ html.dark-theme .theme-toggle:hover {
       box-shadow 0.28s ease,
       filter 0.28s ease,
       opacity 0.28s ease !important;
+  }
+
+  html.adt-theme-vt,
+  html.adt-theme-vt *,
+  html.adt-theme-vt *::before,
+  html.adt-theme-vt *::after,
+  html:active-view-transition,
+  html:active-view-transition *,
+  html:active-view-transition *::before,
+  html:active-view-transition *::after {
+    transition: none !important;
   }
 
   ::view-transition-old(root),

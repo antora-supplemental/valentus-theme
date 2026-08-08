@@ -1,0 +1,5 @@
+= 2026-08-08 — Theme transition VT suppress
+
+* *Vendors* antora-dark-mode fix: during View Transitions, suppress per-widget CSS paint transitions (`html.adt-theme-vt` + `:active-view-transition`) so Valentus `--adt-transition` (0.2s) chrome / search inputs do not finish ahead of the 0.28s root snapshot crossfade.
+* *Kept* hover transitions via `--adt-transition`; they only pause while the theme VT is active.
+* Sync: `pnpm dark-mode:sync` (site-extra.css + site-dark-mode.js).

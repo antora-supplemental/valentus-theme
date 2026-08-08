@@ -16,6 +16,7 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+* *Fix:* Theme toggle timing — sync antora-dark-mode VT suppress (`html.adt-theme-vt` / `:active-view-transition` → `transition: none`) so Valentus `--adt-transition` (0.2s) chrome no longer finishes ahead of the 0.28s root crossfade. See link:changelog-details/2026-08-08%20-%20theme%20transition%20vt%20suppress.adoc[Detailed notes].
 * *Docs / convention:* GitHub *product dependency topics* — playbook repos that pin Valentus must add topic `valentus-theme` for rediscovery (`topic:valentus-theme`). Guide xref:guide:github-topics.adoc[GitHub Topics]; `antora-registry-topics.json5` lists `productTopic` + `knownDependents`.
 * *Docs:* xref:guide:value-proposition.adoc[Value Proposition & Upstream Fixes] — add Default UI MRs/branches for nav label alignment (!210), sticky footer (!211), TOC heading rail inset, and dark-mode proposal (!207) with “ship via Valentus / antora-dark-mode today” guidance.
 * *Docs:* Installation migrate-from-`antora-dark-theme` notes canonical org repos and points at the dark-mode legacy-names guide; Getting Started / README link the org Theme products map.

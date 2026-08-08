@@ -6,6 +6,8 @@
   const darkThemeClass = "dark-theme";
   /** Temporary class while the class-based theme crossfade runs (VT fallback). */
   const themeAnimatingClass = "adt-theme-animating";
+  /** Temporary class during View Transitions — kills competing CSS paint transitions. */
+  const themeVtClass = "adt-theme-vt";
   const themeAnimMs = 300;
   const systemMq = window.matchMedia("(prefers-color-scheme: dark)");
   const reducedMotionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -40,9 +42,15 @@
     return "system";
   }
 
+  function clearThemeVtClass() {
+    html.classList.remove(themeVtClass);
+  }
+
   /**
    * Platform theme paint: View Transitions when available, else a short universal
    * CSS transition via html.adt-theme-animating. Skipped when reduced motion.
+   * VT path also sets html.adt-theme-vt so per-widget paint transitions cannot
+   * race the root snapshot crossfade.
    */
   function runThemePaint(updateFn, animate) {
     if (!animate || prefersReducedMotion()) {
@@ -50,9 +58,16 @@
       return;
     }
     if (typeof document.startViewTransition === "function") {
-      document.startViewTransition(() => {
+      html.classList.add(themeVtClass);
+      const transition = document.startViewTransition(() => {
         updateFn();
       });
+      if (transition && transition.finished && typeof transition.finished.finally === "function") {
+        transition.finished.finally(clearThemeVtClass);
+      } else {
+        window.clearTimeout(themeAnimTimer);
+        themeAnimTimer = window.setTimeout(clearThemeVtClass, themeAnimMs);
+      }
       return;
     }
     html.classList.add(themeAnimatingClass);
