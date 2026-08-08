@@ -16,12 +16,18 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
-* *Fix:* Inline ``code`` in admonition ``td.content`` (often bare, no ``<p>``) gets the same border/radius chrome as ``.doc p code``.
-* *Fix:* TIP admonition accent restored to Antora default green `#41af46` (`--adt-admonition-tip`), not emerald/teal `#059669`. See link:changelog-details/2026-08-08%20-%20tip%20admonition%20green.adoc[Detailed notes].
-* *Fix:* Admonitions — bordered card wraps TIP/NOTE label + body (type tint on `table`). Corrects 2.0.6 content-only card that left TIP outside the border. See link:changelog-details/2026-08-08%20-%20admonition%20card%20wraps%20tip%20label.adoc[Detailed notes].
 * *Docs / convention:* GitHub *product dependency topics* — playbook repos that pin Valentus must add topic `valentus-theme` for rediscovery (`topic:valentus-theme`). Guide xref:guide:github-topics.adoc[GitHub Topics]; `antora-registry-topics.json5` lists `productTopic` + `knownDependents`.
 * *Docs:* xref:guide:value-proposition.adoc[Value Proposition & Upstream Fixes] — add Default UI MRs/branches for nav label alignment (!210), sticky footer (!211), TOC heading rail inset, and dark-mode proposal (!207) with “ship via Valentus / antora-dark-mode today” guidance.
 * *Docs:* Installation migrate-from-`antora-dark-theme` notes canonical org repos and points at the dark-mode legacy-names guide; Getting Started / README link the org Theme products map.
+
+== [2.0.8] - 2026-08-08
+
+Public label: *2.0.8+antora.3* (Antora 3).
+
+* *Fix / chore:* Sync antora-dark-mode **1.4.3** (admonition card wrap, tip green tint, inline ``td``/``dt``/``dd`` code chrome). Playbook pins updated to `v1.4.3`.
+* *Fix:* Admonitions — bordered card wraps TIP/NOTE label + body (type tint on `table`). Corrects 2.0.6 content-only card that left TIP outside the border. See link:changelog-details/2026-08-08%20-%20admonition%20card%20wraps%20tip%20label.adoc[Detailed notes].
+* *Fix:* TIP admonition accent restored to Antora default green `#41af46` (`--adt-admonition-tip`), not emerald/teal `#059669`. See link:changelog-details/2026-08-08%20-%20tip%20admonition%20green.adoc[Detailed notes].
+* *Fix:* Inline ``code`` in admonition ``td.content`` (often bare, no ``<p>``) gets the same border/radius chrome as ``.doc p code``.
 
 == [2.0.7] - 2026-08-08
 
