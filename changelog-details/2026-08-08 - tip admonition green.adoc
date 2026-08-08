@@ -1,0 +1,3 @@
+﻿= 2026-08-08 — Tip admonition green (#41af46)
+
+TIP card border/tint uses Antora default `.icon-tip` green `#41af46` via `--adt-admonition-tip`, not emerald `#059669` / brand teal. Keeps the TIP pill and card accent the same green family.

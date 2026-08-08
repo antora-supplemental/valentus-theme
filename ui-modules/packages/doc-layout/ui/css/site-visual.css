@@ -11,6 +11,12 @@
   --adt-accent: #0f766e;
   --adt-accent-hover: #0d9488;
   --adt-accent-soft: rgba(15, 118, 110, 0.1);
+  /* Admonition accents — tip matches Antora default `.icon-tip` (#41af46), not brand teal */
+  --adt-admonition-tip: #41af46;
+  --adt-admonition-note: #2563eb;
+  --adt-admonition-important: #dc2626;
+  --adt-admonition-warning: #d97706;
+  --adt-admonition-caution: #be185d;
   --adt-border: #d9dee7;
   --adt-chrome: var(--adt-canvas);
   --adt-chrome-border: var(--adt-border);
@@ -857,28 +863,28 @@ html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item-toggle {
 }
 
 .doc .admonitionblock.note > table {
-  border-left-color: #2563eb !important;
-  background: color-mix(in srgb, #2563eb 7%, var(--adt-elevated)) !important;
+  border-left-color: var(--adt-admonition-note) !important;
+  background: color-mix(in srgb, var(--adt-admonition-note) 7%, var(--adt-elevated)) !important;
 }
 
 .doc .admonitionblock.tip > table {
-  border-left-color: #059669 !important;
-  background: color-mix(in srgb, #059669 8%, var(--adt-elevated)) !important;
+  border-left-color: var(--adt-admonition-tip) !important;
+  background: color-mix(in srgb, var(--adt-admonition-tip) 8%, var(--adt-elevated)) !important;
 }
 
 .doc .admonitionblock.important > table {
-  border-left-color: #dc2626 !important;
-  background: color-mix(in srgb, #dc2626 8%, var(--adt-elevated)) !important;
+  border-left-color: var(--adt-admonition-important) !important;
+  background: color-mix(in srgb, var(--adt-admonition-important) 8%, var(--adt-elevated)) !important;
 }
 
 .doc .admonitionblock.warning > table {
-  border-left-color: #d97706 !important;
-  background: color-mix(in srgb, #d97706 9%, var(--adt-elevated)) !important;
+  border-left-color: var(--adt-admonition-warning) !important;
+  background: color-mix(in srgb, var(--adt-admonition-warning) 9%, var(--adt-elevated)) !important;
 }
 
 .doc .admonitionblock.caution > table {
-  border-left-color: #be185d !important;
-  background: color-mix(in srgb, #be185d 8%, var(--adt-elevated)) !important;
+  border-left-color: var(--adt-admonition-caution) !important;
+  background: color-mix(in srgb, var(--adt-admonition-caution) 8%, var(--adt-elevated)) !important;
 }
 
 /* ——— Other content blocks ——— */
@@ -993,28 +999,28 @@ html.dark-theme .doc .admonitionblock > table {
 }
 
 html.dark-theme .doc .admonitionblock.note > table {
-  border-left-color: #2563eb !important;
-  background: color-mix(in srgb, #2563eb 12%, var(--adt-elevated)) !important;
+  border-left-color: var(--adt-admonition-note) !important;
+  background: color-mix(in srgb, var(--adt-admonition-note) 12%, var(--adt-elevated)) !important;
 }
 
 html.dark-theme .doc .admonitionblock.tip > table {
-  border-left-color: #059669 !important;
-  background: color-mix(in srgb, #059669 12%, var(--adt-elevated)) !important;
+  border-left-color: var(--adt-admonition-tip) !important;
+  background: color-mix(in srgb, var(--adt-admonition-tip) 12%, var(--adt-elevated)) !important;
 }
 
 html.dark-theme .doc .admonitionblock.important > table {
-  border-left-color: #dc2626 !important;
-  background: color-mix(in srgb, #dc2626 12%, var(--adt-elevated)) !important;
+  border-left-color: var(--adt-admonition-important) !important;
+  background: color-mix(in srgb, var(--adt-admonition-important) 12%, var(--adt-elevated)) !important;
 }
 
 html.dark-theme .doc .admonitionblock.warning > table {
-  border-left-color: #d97706 !important;
-  background: color-mix(in srgb, #d97706 12%, var(--adt-elevated)) !important;
+  border-left-color: var(--adt-admonition-warning) !important;
+  background: color-mix(in srgb, var(--adt-admonition-warning) 12%, var(--adt-elevated)) !important;
 }
 
 html.dark-theme .doc .admonitionblock.caution > table {
-  border-left-color: #be185d !important;
-  background: color-mix(in srgb, #be185d 12%, var(--adt-elevated)) !important;
+  border-left-color: var(--adt-admonition-caution) !important;
+  background: color-mix(in srgb, var(--adt-admonition-caution) 12%, var(--adt-elevated)) !important;
 }
 
 /* Keep listing/literal panels on --adt-code-bg (not elevated); neutralize site-extra */
