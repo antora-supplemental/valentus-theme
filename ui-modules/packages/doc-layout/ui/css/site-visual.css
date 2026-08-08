@@ -977,6 +977,42 @@ html.dark-theme .doc .exampleblock:not(.tile) > .content {
   border-color: var(--adt-border) !important;
 }
 
+/* Admonitions: neutralize site-extra table/icon washes; card is td.content only */
+html.dark-theme .doc .admonitionblock,
+html.dark-theme .doc .admonitionblock > table,
+html.dark-theme .doc .admonitionblock > table > tbody,
+html.dark-theme .doc .admonitionblock > table > tbody > tr,
+html.dark-theme .doc .admonitionblock td.icon {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+html.dark-theme .doc .admonitionblock.note > table > tbody > tr > td.content {
+  border-left-color: #2563eb !important;
+  background: color-mix(in srgb, #2563eb 12%, var(--adt-elevated)) !important;
+}
+
+html.dark-theme .doc .admonitionblock.tip > table > tbody > tr > td.content {
+  border-left-color: #059669 !important;
+  background: color-mix(in srgb, #059669 12%, var(--adt-elevated)) !important;
+}
+
+html.dark-theme .doc .admonitionblock.important > table > tbody > tr > td.content {
+  border-left-color: #dc2626 !important;
+  background: color-mix(in srgb, #dc2626 12%, var(--adt-elevated)) !important;
+}
+
+html.dark-theme .doc .admonitionblock.warning > table > tbody > tr > td.content {
+  border-left-color: #d97706 !important;
+  background: color-mix(in srgb, #d97706 12%, var(--adt-elevated)) !important;
+}
+
+html.dark-theme .doc .admonitionblock.caution > table > tbody > tr > td.content {
+  border-left-color: #be185d !important;
+  background: color-mix(in srgb, #be185d 12%, var(--adt-elevated)) !important;
+}
+
 /* Keep listing/literal panels on --adt-code-bg (not elevated); neutralize site-extra */
 html.dark-theme .doc .listingblock,
 html.dark-theme .doc .literalblock {

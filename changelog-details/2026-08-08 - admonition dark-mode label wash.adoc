@@ -1,0 +1,7 @@
+= 2026-08-08 — Admonition dark-mode label wash
+
+== Fixed
+
+Synced antora-dark-mode admonition fix (tint `td.content` only) and hardened
+`site-visual.css` dark overrides so TIP/NOTE labels sit above the card without a
+green (or other type) wash behind them.
