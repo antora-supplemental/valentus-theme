@@ -225,17 +225,18 @@ html.dark-theme .doc .openblock>.title {
   color: #ffffff;
 }
 
-/* Admonition blocks — only the content cell is the card; keep icon/label clear */
+/* Admonition blocks — Valentus wraps TIP/NOTE in one table card; tint the table,
+   not individual cells (cell washes put the label outside the border). */
 html.dark-theme .doc .admonitionblock,
-html.dark-theme .doc .admonitionblock > table,
 html.dark-theme .doc .admonitionblock > table > tbody,
 html.dark-theme .doc .admonitionblock > table > tbody > tr,
-html.dark-theme .doc .admonitionblock > table > tbody > tr > td.icon {
+html.dark-theme .doc .admonitionblock > table > tbody > tr > td.icon,
+html.dark-theme .doc .admonitionblock > table > tbody > tr > td.content {
   background-color: transparent !important;
   background: transparent !important;
 }
 
-html.dark-theme .doc .admonitionblock > table > tbody > tr > td.content {
+html.dark-theme .doc .admonitionblock > table {
   background-color: #25262b !important;
   background: #25262b !important;
 }
@@ -248,28 +249,28 @@ html.dark-theme .doc .admonitionblock .title {
   color: #ffffff;
 }
 
-/* Specific admonition types: tint content only (not the TIP/NOTE label cell) */
-html.dark-theme .doc .admonitionblock.tip > table > tbody > tr > td.content {
+/* Specific admonition types: tint the outer card (table), not the TIP label cell */
+html.dark-theme .doc .admonitionblock.tip > table {
   background-color: #1a2a1a !important;
   background: #1a2a1a !important;
 }
 
-html.dark-theme .doc .admonitionblock.note > table > tbody > tr > td.content {
+html.dark-theme .doc .admonitionblock.note > table {
   background-color: #1a1a2a !important;
   background: #1a1a2a !important;
 }
 
-html.dark-theme .doc .admonitionblock.warning > table > tbody > tr > td.content {
+html.dark-theme .doc .admonitionblock.warning > table {
   background-color: #2a2a1a !important;
   background: #2a2a1a !important;
 }
 
-html.dark-theme .doc .admonitionblock.caution > table > tbody > tr > td.content {
+html.dark-theme .doc .admonitionblock.caution > table {
   background-color: #2a1a1a !important;
   background: #2a1a1a !important;
 }
 
-html.dark-theme .doc .admonitionblock.important > table > tbody > tr > td.content {
+html.dark-theme .doc .admonitionblock.important > table {
   background-color: #2a1a2a !important;
   background: #2a1a2a !important;
 }

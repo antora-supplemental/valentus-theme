@@ -805,31 +805,46 @@ html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item-toggle {
   color: #94a3b8 !important;
 }
 
-/* ——— Admonitions: left accent + tinted fill ——— */
+/* ——— Admonitions: one bordered card wraps TIP/NOTE label + body ——— */
 .doc .admonitionblock {
   margin: 1.35rem 0 0;
+}
+
+.doc .admonitionblock > table,
+.doc .admonitionblock > table > tbody,
+.doc .admonitionblock > table > tbody > tr {
+  display: block;
+  width: 100%;
 }
 
 .doc .admonitionblock > table {
   border-collapse: separate;
   border-spacing: 0;
-}
-
-.doc .admonitionblock td.content {
   background: var(--adt-elevated) !important;
   border: 1px solid var(--adt-border) !important;
   border-left-width: 3px !important;
   border-radius: var(--adt-radius) !important;
-  padding: 0.95rem 1rem 0.85rem !important;
-  color: var(--adt-ink) !important;
 }
 
 .doc .admonitionblock td.icon {
   position: static !important;
   transform: none !important;
-  padding: 0 0 0.4rem 0 !important;
+  display: block;
+  width: 100% !important;
+  padding: 0.75rem 1rem 0.35rem !important;
   line-height: 1.2;
-  width: auto;
+  background: transparent !important;
+  border: none !important;
+}
+
+.doc .admonitionblock td.content {
+  display: block;
+  width: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0.25rem 1rem 0.95rem !important;
+  color: var(--adt-ink) !important;
 }
 
 .doc .admonitionblock td.icon i {
@@ -841,43 +856,29 @@ html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item-toggle {
   letter-spacing: 0.04em;
 }
 
-.doc .admonitionblock.note td.content {
+.doc .admonitionblock.note > table {
   border-left-color: #2563eb !important;
   background: color-mix(in srgb, #2563eb 7%, var(--adt-elevated)) !important;
 }
 
-.doc .admonitionblock.tip td.content {
+.doc .admonitionblock.tip > table {
   border-left-color: #059669 !important;
   background: color-mix(in srgb, #059669 8%, var(--adt-elevated)) !important;
 }
 
-.doc .admonitionblock.important td.content {
+.doc .admonitionblock.important > table {
   border-left-color: #dc2626 !important;
   background: color-mix(in srgb, #dc2626 8%, var(--adt-elevated)) !important;
 }
 
-.doc .admonitionblock.warning td.content {
+.doc .admonitionblock.warning > table {
   border-left-color: #d97706 !important;
   background: color-mix(in srgb, #d97706 9%, var(--adt-elevated)) !important;
 }
 
-.doc .admonitionblock.caution td.content {
+.doc .admonitionblock.caution > table {
   border-left-color: #be185d !important;
   background: color-mix(in srgb, #be185d 8%, var(--adt-elevated)) !important;
-}
-
-/* Stack icon above content on narrow: keep table but restyle cells as block-ish */
-.doc .admonitionblock > table,
-.doc .admonitionblock > table > tbody,
-.doc .admonitionblock > table > tbody > tr {
-  display: block;
-  width: 100%;
-}
-
-.doc .admonitionblock td.icon,
-.doc .admonitionblock td.content {
-  display: block;
-  width: 100% !important;
 }
 
 /* ——— Other content blocks ——— */
@@ -962,7 +963,6 @@ html.dark-theme .toc.sidebar a {
   color: var(--adt-ink-muted) !important;
 }
 
-html.dark-theme .admonitionblock,
 html.dark-theme .exampleblock:not(.tile),
 html.dark-theme .sidebarblock,
 html.dark-theme .quoteblock,
@@ -977,38 +977,42 @@ html.dark-theme .doc .exampleblock:not(.tile) > .content {
   border-color: var(--adt-border) !important;
 }
 
-/* Admonitions: neutralize site-extra table/icon washes; card is td.content only */
+/* Admonitions: one card (table) wraps label + body; neutralize cell washes */
 html.dark-theme .doc .admonitionblock,
-html.dark-theme .doc .admonitionblock > table,
-html.dark-theme .doc .admonitionblock > table > tbody,
-html.dark-theme .doc .admonitionblock > table > tbody > tr,
-html.dark-theme .doc .admonitionblock td.icon {
+html.dark-theme .doc .admonitionblock td.icon,
+html.dark-theme .doc .admonitionblock td.content {
   background: transparent !important;
   background-color: transparent !important;
   border-color: transparent !important;
 }
 
-html.dark-theme .doc .admonitionblock.note > table > tbody > tr > td.content {
+html.dark-theme .doc .admonitionblock > table {
+  border: 1px solid var(--adt-border) !important;
+  border-left-width: 3px !important;
+  background: var(--adt-elevated) !important;
+}
+
+html.dark-theme .doc .admonitionblock.note > table {
   border-left-color: #2563eb !important;
   background: color-mix(in srgb, #2563eb 12%, var(--adt-elevated)) !important;
 }
 
-html.dark-theme .doc .admonitionblock.tip > table > tbody > tr > td.content {
+html.dark-theme .doc .admonitionblock.tip > table {
   border-left-color: #059669 !important;
   background: color-mix(in srgb, #059669 12%, var(--adt-elevated)) !important;
 }
 
-html.dark-theme .doc .admonitionblock.important > table > tbody > tr > td.content {
+html.dark-theme .doc .admonitionblock.important > table {
   border-left-color: #dc2626 !important;
   background: color-mix(in srgb, #dc2626 12%, var(--adt-elevated)) !important;
 }
 
-html.dark-theme .doc .admonitionblock.warning > table > tbody > tr > td.content {
+html.dark-theme .doc .admonitionblock.warning > table {
   border-left-color: #d97706 !important;
   background: color-mix(in srgb, #d97706 12%, var(--adt-elevated)) !important;
 }
 
-html.dark-theme .doc .admonitionblock.caution > table > tbody > tr > td.content {
+html.dark-theme .doc .admonitionblock.caution > table {
   border-left-color: #be185d !important;
   background: color-mix(in srgb, #be185d 12%, var(--adt-elevated)) !important;
 }

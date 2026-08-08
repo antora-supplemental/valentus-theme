@@ -1,0 +1,5 @@
+= 2026-08-08 — Admonition card wraps TIP label
+
+See antora-dark-mode notes: border + type tint on the admonition `table` so
+TIP/NOTE labels sit inside the card. Replaces the content-only card approach
+from 2.0.6.
