@@ -1,0 +1,13 @@
+= 2026-08-08 — Admonition pill and card share tokens
+
+TIP/NOTE (and other) label pills previously used Antora Default UI hardcoded
+colors (e.g. `.icon-tip` `#41af46`) while the card border/tint used
+`--adt-admonition-*` (or, earlier, a divergent emerald `#059669`). Sites that
+overrode one path saw two greens in one block.
+
+Pill backgrounds now use the same `--adt-admonition-*` custom properties as the
+card chrome. Recolor once per site:
+
+----
+:root { --adt-admonition-tip: #41af46; } /* or brand accent */
+----

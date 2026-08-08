@@ -11,7 +11,8 @@
   --adt-accent: #0f766e;
   --adt-accent-hover: #0d9488;
   --adt-accent-soft: rgba(15, 118, 110, 0.1);
-  /* Admonition accents — tip matches Antora default `.icon-tip` (#41af46), not brand teal */
+  /* Admonition accents — one token per type drives TIP/NOTE pill *and* card border/tint.
+     Sites recolor by overriding these vars once (do not hardcode a second tip green). */
   --adt-admonition-tip: #41af46;
   --adt-admonition-note: #2563eb;
   --adt-admonition-important: #dc2626;
@@ -864,6 +865,27 @@ html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item-toggle {
   padding: 0.15rem 0.45rem !important;
   font-size: 0.72rem;
   letter-spacing: 0.04em;
+}
+
+/* Override Default UI hardcoded pill colors so they track --adt-admonition-* */
+.doc .admonitionblock td.icon i.icon-tip {
+  background-color: var(--adt-admonition-tip) !important;
+}
+
+.doc .admonitionblock td.icon i.icon-note {
+  background-color: var(--adt-admonition-note) !important;
+}
+
+.doc .admonitionblock td.icon i.icon-important {
+  background-color: var(--adt-admonition-important) !important;
+}
+
+.doc .admonitionblock td.icon i.icon-warning {
+  background-color: var(--adt-admonition-warning) !important;
+}
+
+.doc .admonitionblock td.icon i.icon-caution {
+  background-color: var(--adt-admonition-caution) !important;
 }
 
 .doc .admonitionblock.note > table {

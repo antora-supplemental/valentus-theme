@@ -20,6 +20,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * *Docs:* xref:guide:value-proposition.adoc[Value Proposition & Upstream Fixes] — add Default UI MRs/branches for nav label alignment (!210), sticky footer (!211), TOC heading rail inset, and dark-mode proposal (!207) with “ship via Valentus / antora-dark-mode today” guidance.
 * *Docs:* Installation migrate-from-`antora-dark-theme` notes canonical org repos and points at the dark-mode legacy-names guide; Getting Started / README link the org Theme products map.
 
+== [2.0.9] - 2026-08-08
+
+Public label: *2.0.9+antora.3* (Antora 3).
+
+* *Fix:* Admonition TIP/NOTE pills use `--adt-admonition-*` (same tokens as card border/tint) so one override recolors both; stops Default UI `#41af46` pill vs divergent card green. Sync antora-dark-mode **1.4.4**. See link:changelog-details/2026-08-08%20-%20admonition%20pill%20and%20card%20share%20tokens.adoc[Detailed notes].
+
 == [2.0.8] - 2026-08-08
 
 Public label: *2.0.8+antora.3* (Antora 3).

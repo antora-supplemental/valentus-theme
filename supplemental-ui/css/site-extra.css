@@ -249,30 +249,36 @@ html.dark-theme .doc .admonitionblock .title {
   color: #ffffff;
 }
 
-/* Specific admonition types: tint the outer card (table), not the TIP label cell */
+/* Specific admonition types: tint the outer card (table), not the TIP label cell.
+   Use the same --adt-admonition-* tokens as Valentus pill/card chrome (fallback = Antora defaults). */
 html.dark-theme .doc .admonitionblock.tip > table {
   background-color: #1a2a1a !important;
-  background: color-mix(in srgb, #41af46 14%, #25262b) !important;
+  background: color-mix(in srgb, var(--adt-admonition-tip, #41af46) 14%, #25262b) !important;
+  border-left-color: var(--adt-admonition-tip, #41af46) !important;
 }
 
 html.dark-theme .doc .admonitionblock.note > table {
   background-color: #1a1a2a !important;
-  background: #1a1a2a !important;
+  background: color-mix(in srgb, var(--adt-admonition-note, #217ee7) 14%, #25262b) !important;
+  border-left-color: var(--adt-admonition-note, #217ee7) !important;
 }
 
 html.dark-theme .doc .admonitionblock.warning > table {
   background-color: #2a2a1a !important;
-  background: #2a2a1a !important;
+  background: color-mix(in srgb, var(--adt-admonition-warning, #e18114) 14%, #25262b) !important;
+  border-left-color: var(--adt-admonition-warning, #e18114) !important;
 }
 
 html.dark-theme .doc .admonitionblock.caution > table {
   background-color: #2a1a1a !important;
-  background: #2a1a1a !important;
+  background: color-mix(in srgb, var(--adt-admonition-caution, #a0439c) 14%, #25262b) !important;
+  border-left-color: var(--adt-admonition-caution, #a0439c) !important;
 }
 
 html.dark-theme .doc .admonitionblock.important > table {
   background-color: #2a1a2a !important;
-  background: #2a1a2a !important;
+  background: color-mix(in srgb, var(--adt-admonition-important, #d32f2f) 14%, #25262b) !important;
+  border-left-color: var(--adt-admonition-important, #d32f2f) !important;
 }
 
 html.dark-theme .quoteblock blockquote,
