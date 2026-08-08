@@ -15,7 +15,7 @@ content:
 
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/antora-dark-mode/releases/download/v1.4.0/ui-bundle.zip
+    url: https://github.com/antora-supplemental/antora-dark-mode/releases/download/v1.4.2/ui-bundle.zip
     snapshot: true
   supplemental_files: ./supplemental-ui
 
