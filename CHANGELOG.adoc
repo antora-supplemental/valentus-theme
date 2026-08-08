@@ -20,6 +20,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * *Docs:* xref:guide:value-proposition.adoc[Value Proposition & Upstream Fixes] — add Default UI MRs/branches for nav label alignment (!210), sticky footer (!211), TOC heading rail inset, and dark-mode proposal (!207) with “ship via Valentus / antora-dark-mode today” guidance.
 * *Docs:* Installation migrate-from-`antora-dark-theme` notes canonical org repos and points at the dark-mode legacy-names guide; Getting Started / README link the org Theme products map.
 
+== [2.0.11] - 2026-08-08
+
+Public label: *2.0.11+antora.3* (Antora 3).
+
+* *Chore:* Alias `--adt-admonition-*` to Default UI `--tip-color` / `--note-color` / etc. so one site override recolors TIP pill and card.
+
 == [2.0.10] - 2026-08-08
 
 Public label: *2.0.10+antora.3* (Antora 3).

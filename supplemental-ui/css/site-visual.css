@@ -11,13 +11,13 @@
   --adt-accent: #0f766e;
   --adt-accent-hover: #0d9488;
   --adt-accent-soft: rgba(15, 118, 110, 0.1);
-  /* Admonition accents — one token per type drives TIP/NOTE pill *and* card border/tint.
-     Sites recolor by overriding these vars once (do not hardcode a second tip green). */
-  --adt-admonition-tip: #41af46;
-  --adt-admonition-note: #2563eb;
-  --adt-admonition-important: #dc2626;
-  --adt-admonition-warning: #d97706;
-  --adt-admonition-caution: #be185d;
+  /* Admonition accents — alias Default UI --*-color so one override recolors pill + card.
+     Sites set --tip-color (etc.); --adt-admonition-* tracks them. */
+  --adt-admonition-tip: var(--tip-color, #41af46);
+  --adt-admonition-note: var(--note-color, #217ee7);
+  --adt-admonition-important: var(--important-color, #d32f2f);
+  --adt-admonition-warning: var(--warning-color, #e18114);
+  --adt-admonition-caution: var(--caution-color, #a0439c);
   --adt-border: #d9dee7;
   --adt-chrome: var(--adt-canvas);
   --adt-chrome-border: var(--adt-border);
