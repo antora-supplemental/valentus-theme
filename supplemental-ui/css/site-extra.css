@@ -314,10 +314,14 @@ html.dark-theme .doc .literalblock .content {
 /* Inline code */
 html.dark-theme .doc p code,
 html.dark-theme .doc td code,
-html.dark-theme .doc li code {
+html.dark-theme .doc li code,
+html.dark-theme .doc dt code,
+html.dark-theme .doc dd code {
   background-color: #2c2e33;
   color: #ff6b6b;
-  border-color: #373a40;
+  border: 1px solid #373a40;
+  border-radius: 0.25rem;
+  padding: 0.1em 0.35em;
 }
 
 /* Syntax highlighting colors for dark mode */

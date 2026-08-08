@@ -745,6 +745,10 @@ html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item-toggle {
 }
 
 .doc p code,
+.doc td code,
+.doc li code,
+.doc dt code,
+.doc dd code,
 .doc thead code,
 .doc .colist > table code {
   color: var(--adt-ink) !important;
