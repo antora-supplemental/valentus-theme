@@ -72,6 +72,11 @@ For each row: the stock behavior, what Valentus does, and the upstream tracker.
 | Stock Default UI is light-only
 | *Ship today via supplemental packages* — Valentus (bundled) or `antora-dark-mode` (overlay). Upstream proposal https://gitlab.com/antora/antora-ui-default/-/merge_requests/207[!207] remains open; prefer the org packages over waiting on merge, and prefer proposing Valentus as a richer *default* rather than merging the old monolithic experiment into Default UI as-is
 | https://gitlab.com/antora/antora-ui-default/-/merge_requests/207[!207]
+
+| Brief layout “settle” / FOUC on refresh when theme or brand CSS loads *after* `site.css`
+| Default UI emits one `site.css`; supplemental UI (and site brand overlays) often add more `<link rel="stylesheet">` layers that reflow chrome after first paint
+| *Interim hack:* paint-hold (`html.adt-fouc-pending`) in Valentus `head-meta` until layered CSS + preference FOUC scripts finish; remove when upstream ships single-pass tokens / documented no-cascade path. Sites that override `head-meta.hbs` must copy the pattern
+| Prefer `@import` into UI-build `site.css` over post-`site.css` links (Default UI stylesheets guide). Dark-mode FOUC script: https://gitlab.com/antora/antora-ui-default/-/merge_requests/207[!207]
 |===
 
 == Valentus-only product chrome (not upstream bugs)

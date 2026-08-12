@@ -11,29 +11,29 @@ This approach means you don't need to fork or rebuild the Antora Default UI.
 
 == The Four Key Files
 
-=== 1. head-meta.hbs (FOUC Prevention)
+=== 1. head-meta.hbs (FOUC prevention + paint-hold)
 
 This Handlebars partial is injected into the `<head>` of every page.
-It does two critical things:
+It coordinates three concerns:
 
-. Loads the `site-extra.css` stylesheet
-. Runs an inline script that immediately applies dark mode if needed
+. *Paint-hold* — adds `html.adt-fouc-pending { visibility: hidden }` until layered supplemental CSS and preference scripts finish, then removes the class (interim until upstream ships single-pass `site.css`; see xref:value-proposition.adoc#_upstream_problems_valentus_already_softens[Value Proposition — layout settle row]).
+. *Stylesheet cascade* — loads `site-extra.css`, fonts, and Valentus layout/visual/read-width/font-size/math CSS *before* preference scripts so the release script waits on the full cascade.
+. *Preference FOUC scripts* — inline scripts set `dark-theme`, `data-adt-read-width`, and `data-adt-font-size` from `localStorage` before first paint.
 
-[source,handlebars]
+Order matters:
+
+[source,text]
 ----
-<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-extra.css">
-<script>
-(function () {
-  const themeKey = 'antora-theme';
-  const savedTheme = localStorage.getItem(themeKey);
-  if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.classList.add('dark-theme');
-  }
-})();
-</script>
+1. Paint-hold style + add adt-fouc-pending
+2. Stylesheet <link> tags (site-extra, fonts, layout, visual, …)
+3. Dark-mode preference script (antora-theme-mode / legacy antora-theme)
+4. Read-width + font-size FOUC scripts
+5. Remove adt-fouc-pending
 ----
 
-The inline script runs before the page renders, preventing the flash of light mode that would occur if we waited for the main JavaScript to load.
+Sites that *override* `partials/head-meta.hbs` must preserve this order (stylesheets → preference scripts → release) or the refresh “settle” flash returns.
+Brand CSS links belong with the other stylesheets, before step 3.
+See also xref:customization.adoc#_changing_colors[Customization — layered CSS warning].
 
 === 2. footer-scripts.hbs (Script Loading)
 
@@ -123,10 +123,10 @@ When a page loads:
 
 . Browser starts parsing HTML
 . `<head>` is processed, loading `head-meta.hbs`
-. Inline script checks `localStorage` and system preference
-. If dark mode should be active, `dark-theme` class is added to `<html>` immediately
-. CSS loads with dark mode already applied (no flash)
-. Page renders in the correct theme
+. `adt-fouc-pending` hides the document while stylesheets and preference scripts run
+. Inline scripts set `dark-theme`, read-width, and font-size attrs from `localStorage`
+. Paint-hold releases once the cascade is ready
+. Page renders in the correct theme and layout tier (no light-mode or layout-settle flash)
 . Footer scripts load, including `site-dark-mode.js`
 . Toggle button is injected into navbar
 . User can now toggle between themes
