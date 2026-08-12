@@ -201,7 +201,7 @@ supplemental-ui/
 │   └── site-dark-mode.js   # Toggle button logic
 └── partials/
     ├── footer-scripts.hbs  # Loads the dark mode script
-    └── head-meta.hbs       # Loads CSS and prevents FOUC
+    └── head-meta.hbs       # CSS cascade, preference FOUC, paint-hold
 ----
 
 Each file serves a specific purpose:
@@ -213,7 +213,7 @@ Contains all dark mode styles using the `html.dark-theme` selector prefix.
 Injects the toggle button and handles theme switching logic.
 
 `head-meta.hbs`::
-Handlebars partial injected into `<head>` that loads CSS and prevents flash of unstyled content.
+Handlebars partial injected into `<head>` that loads supplemental CSS, runs preference FOUC scripts (dark mode, read-width, font-size), and applies the interim paint-hold (`html.adt-fouc-pending`) until the layered cascade is ready.
 
 `footer-scripts.hbs`::
 Handlebars partial that loads the JavaScript at the end of the page body.
