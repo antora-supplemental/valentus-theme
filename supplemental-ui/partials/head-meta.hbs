@@ -1,5 +1,31 @@
+{{!--
+  HACK (interim paint-hold): hide the document until layered supplemental CSS has
+  loaded and preference attrs are set. Default UI paints site.css first; Valentus
+  then applies site-extra / layout / visual / read-width / font-size (and often a
+  site brand overlay). That cascade is the “settle on refresh” flash.
+
+  Pending better upstream: compile theme + layout tokens into a single site.css
+  and ship the FOUC preference contract in antora-ui-default (dark mode: !207;
+  supplemental cascade guidance: follow-up on master). Remove this hold when first
+  paint no longer depends on post-site.css layers.
+--}}
+<style>
+html.adt-fouc-pending { visibility: hidden !important; }
+</style>
+<script>
+document.documentElement.classList.add('adt-fouc-pending')
+</script>
 <link rel="stylesheet" href="{{{uiRootPath}}}/css/site-extra.css">
 <meta name="dm-navbar" content="{{or site.keys.darkModeNavbar 'light'}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-doc-layout.css">
+<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-visual.css">
+<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-read-width.css">
+<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-font-size.css">
+<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-math.css">
+{{!-- Preference FOUC: run after stylesheet links so this script waits on them, then release paint-hold. --}}
 <script>
 (function () {
   const dmNavbar = document.querySelector('meta[name="dm-navbar"]')
@@ -52,14 +78,9 @@
   }
 })()
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
-<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-doc-layout.css">
-<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-visual.css">
-<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-read-width.css">
-<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-font-size.css">
-<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-math.css">
+<script>
+document.documentElement.classList.remove('adt-fouc-pending')
+</script>
 {{#if page.origin.webUrl}}
 <meta name="antora-repo-url" content="{{page.origin.webUrl}}">
 {{/if}}
