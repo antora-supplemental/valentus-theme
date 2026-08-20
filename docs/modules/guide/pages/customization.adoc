@@ -11,7 +11,7 @@ Edit `supplemental-ui/css/site-extra.css` to customize the color palette.
 
 IMPORTANT: Prefer putting layout-affecting rules into the UI bundle’s compiled `site.css` (or Valentus supplemental CSS that ships in the release zip) instead of a late extra `<link>`.
 Layered stylesheets after Default UI `site.css` cause a refresh “settle” flash (FOUC).
-Valentus currently ships an *interim* paint-hold in `partials/head-meta.hbs` (`html.adt-fouc-pending`) marked pending upstream Default UI guidance / !207 — if you override `head-meta.hbs`, keep that hold (stylesheets first, then preference scripts, then release) or you reintroduce the flash.
+Valentus currently ships an *interim* paint-hold in `partials/head-meta.hbs` (`html.adt-fouc-pending`) marked pending upstream Default UI guidance / !207 / !213 — if you override `head-meta.hbs`, keep that hold (stylesheets first, then preference scripts, then release only after `document.fonts` for your linked families — or you reintroduce CSS settle and webfont FOUT / width jump).
 
 === Current Color Palette
 

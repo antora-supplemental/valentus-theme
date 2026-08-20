@@ -1,13 +1,14 @@
 {{!--
   HACK (interim paint-hold): hide the document until layered supplemental CSS has
-  loaded and preference attrs are set. Default UI paints site.css first; Valentus
-  then applies site-extra / layout / visual / read-width / font-size (and often a
-  site brand overlay). That cascade is the “settle on refresh” flash.
+  loaded, preference attrs are set, and web fonts are ready. Default UI paints
+  site.css first; Valentus then applies site-extra / layout / visual / read-width /
+  font-size (and often a site brand overlay). Google Fonts use display=swap, so
+  releasing before font files arrive causes a FOUT width jump on refresh.
 
   Pending better upstream: compile theme + layout tokens into a single site.css
   and ship the FOUC preference contract in antora-ui-default (dark mode: !207;
-  supplemental cascade guidance: follow-up on master). Remove this hold when first
-  paint no longer depends on post-site.css layers.
+  supplemental cascade: !213). Remove this hold when first paint no longer depends
+  on post-site.css layers / remote webfonts.
 --}}
 <style>
 html.adt-fouc-pending { visibility: hidden !important; }
@@ -25,7 +26,7 @@ document.documentElement.classList.add('adt-fouc-pending')
 <link rel="stylesheet" href="{{{uiRootPath}}}/css/site-read-width.css">
 <link rel="stylesheet" href="{{{uiRootPath}}}/css/site-font-size.css">
 <link rel="stylesheet" href="{{{uiRootPath}}}/css/site-math.css">
-{{!-- Preference FOUC: run after stylesheet links so this script waits on them, then release paint-hold. --}}
+{{!-- Preference FOUC: after stylesheet links so the parser has applied the cascade. --}}
 <script>
 (function () {
   const dmNavbar = document.querySelector('meta[name="dm-navbar"]')
@@ -78,8 +79,34 @@ document.documentElement.classList.add('adt-fouc-pending')
   }
 })()
 </script>
+{{!-- Webfont FOUT: kick loads, then release paint-hold (3s timeout if CDN stalls). --}}
 <script>
-document.documentElement.classList.remove('adt-fouc-pending')
+(function () {
+  var released = false
+  function release () {
+    if (released) return
+    released = true
+    document.documentElement.classList.remove('adt-fouc-pending')
+  }
+  var fallback = setTimeout(release, 3000)
+  function finish () {
+    clearTimeout(fallback)
+    release()
+  }
+  if (!document.fonts || !document.fonts.load) {
+    finish()
+    return
+  }
+  Promise.all([
+    document.fonts.load('400 1em "Source Sans 3"'),
+    document.fonts.load('600 1em "Source Sans 3"'),
+    document.fonts.load('500 1em "Plus Jakarta Sans"'),
+    document.fonts.load('700 1em "Plus Jakarta Sans"'),
+    document.fonts.load('400 1em "IBM Plex Mono"'),
+  ])
+    .then(function () { return document.fonts.ready })
+    .then(finish, finish)
+})()
 </script>
 {{#if page.origin.webUrl}}
 <meta name="antora-repo-url" content="{{page.origin.webUrl}}">

@@ -1,0 +1,6 @@
+= Font FOUT paint-hold (content-width jump on refresh)
+
+* *Symptom:* On refresh, body/UI text briefly renders in fallback system fonts, then swaps to Source Sans 3 / Plus Jakarta Sans / IBM Plex Mono. Metrics differ, so the doc column and chrome jump width for a frame.
+* *Cause:* Google Fonts CSS uses `display=swap`. The interim CSS/preference paint-hold released as soon as stylesheet *links* and `localStorage` FOUC scripts finished — before font *files* arrived — so first paint still used fallback faces.
+* *Fix:* Keep `html.adt-fouc-pending { visibility: hidden }` until `document.fonts.load(...)` for the Valentus families resolves (then `document.fonts.ready`), with a 3s timeout so a stalled fonts CDN never hangs the page. Sites that override `head-meta.hbs` must copy this release pattern (and load their own brand families if they replaced the Google Fonts URL).
+* *Files:* `supplemental-ui/partials/head-meta.hbs`.

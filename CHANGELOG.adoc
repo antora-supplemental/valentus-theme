@@ -16,7 +16,11 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
-* *Fix (interim hack):* FOUC / layout-settle on refresh — paint-hold (`html.adt-fouc-pending`) in `head-meta.hbs` until layered supplemental CSS loads and preference attrs apply; stylesheet links moved before FOUC scripts. Marked pending upstream Default UI single-pass CSS / !207 FOUC contract. See link:changelog-details/2026-08-12%20-%20fouc%20paint-hold%20hack.adoc[Detailed notes].
+== [2.0.13] - 2026-08-20
+
+Public label: *2.0.13+antora.3* (Antora 3).
+
+* *Fix (interim hack):* FOUC / layout-settle on refresh — paint-hold (`html.adt-fouc-pending`) in `head-meta.hbs` until layered supplemental CSS loads, preference attrs apply, **and** Valentus web fonts are ready (`document.fonts.load` + `fonts.ready`, 3s timeout). Stops fallback→webfont FOUT that jumped content width. Stylesheet links stay before FOUC scripts. Pending upstream Default UI single-pass CSS / !207 / !213. See link:changelog-details/2026-08-12%20-%20fouc%20paint-hold%20hack.adoc[CSS cascade hold] and link:changelog-details/2026-08-20%20-%20font%20fouc%20paint-hold.adoc[font FOUT hold].
 * *Docs / convention:* GitHub *product dependency topics* — playbook repos that pin Valentus must add topic `valentus-theme` for rediscovery (`topic:valentus-theme`). Guide xref:guide:github-topics.adoc[GitHub Topics]; `antora-registry-topics.json5` lists `productTopic` + `knownDependents`.
 * *Docs:* xref:guide:value-proposition.adoc[Value Proposition & Upstream Fixes] — add Default UI MRs/branches for nav label alignment (!210), sticky footer (!211), TOC heading rail inset, and dark-mode proposal (!207) with “ship via Valentus / antora-dark-mode today” guidance; FOUC / supplemental CSS cascade row.
 * *Docs:* Installation migrate-from-`antora-dark-theme` notes canonical org repos and points at the dark-mode legacy-names guide; Getting Started / README link the org Theme products map.
