@@ -484,7 +484,9 @@ a.adt-header-title:focus {
   padding: 0.35rem var(--adt-mast-pad-h) 0.35rem var(--adt-mast-pad-h);
   position: sticky;
   top: 3.5rem;
-  z-index: 3;
+  /* Must beat .adt-tool-band (20–21): component/version dropdowns extend below the mast;
+     a low mast z-index traps the first menu rows under the read-width tool band. */
+  z-index: 25;
   background: var(--adt-chrome);
   border-bottom: 1px solid var(--adt-chrome-border);
   box-sizing: border-box;

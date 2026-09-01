@@ -16,6 +16,8 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+* *Fix:* Component/version breadcrumb dropdowns — raise `.adt-doc-mast` stacking above `.adt-tool-band` so the first menu rows receive clicks instead of the read-width band below.
+
 == [2.0.13] - 2026-08-20
 
 Public label: *2.0.13+antora.3* (Antora 3).
