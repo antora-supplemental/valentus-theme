@@ -220,14 +220,20 @@ a.adt-header-title {
 
 /* Condensed / mobile drawer: --adt-nav-bg is transparent on desktop so the
    nav blends with the canvas. Below 1024px the nav overlays the article, so
-   it needs an opaque fill (light + dark) or page text shows through. */
+   it needs an opaque fill (light + dark) or page text shows through.
+   Override on :root and html.dark-theme (not bare html) so specificity beats
+   the transparent token defaults. Backgrounds use --adt-elevated directly. */
 @media screen and (max-width: 1023.5px) {
-  html {
+  :root,
+  html.dark-theme {
     --adt-nav-bg: var(--adt-elevated);
   }
 
-  .nav-container {
-    background: var(--adt-nav-bg) !important;
+  .nav-container,
+  .nav,
+  .nav .panels,
+  .nav-panel-menu {
+    background: var(--adt-elevated) !important;
   }
 }
 

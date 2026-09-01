@@ -16,6 +16,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+== [2.0.16] - 2026-09-01
+
+Public label: *2.0.16+antora.3* (Antora 3).
+
+* *Fix:* Condensed (mobile) nav drawer backdrop — override `--adt-nav-bg` on `:root` / `html.dark-theme` (not bare `html`) so the token beats transparent defaults; paint nav shell layers with `var(--adt-elevated)` directly. Fixes sidebar text showing over page content in light and dark mode. See link:changelog-details/2026-09-01%20-%20mobile%20nav%20backdrop%20specificity.adoc[Detailed notes — mobile nav backdrop specificity].
+
 == [2.0.15] - 2026-09-01
 
 Public label: *2.0.15+antora.3* (Antora 3).

@@ -1,0 +1,6 @@
+= Mobile nav drawer backdrop — CSS specificity
+
+* *Symptom:* Below 1024px, opening the hamburger nav still showed sidebar link text over the article (no opaque panel), in light and dark mode.
+* *Cause:* The 2026-07-25 fix set `--adt-nav-bg: var(--adt-elevated)` on bare `html` inside the mobile media query. That loses to `:root { --adt-nav-bg: transparent }` (0,1,0 vs 0,0,1) and to `html.dark-theme { --adt-nav-bg: transparent }` (0,1,1). Drawer backgrounds still resolved to transparent.
+* *Fix:* In `@media (max-width: 1023.5px)`, override the token on `:root` and `html.dark-theme`, and paint `.nav-container`, `.nav`, `.nav .panels`, and `.nav-panel-menu` with `var(--adt-elevated) !important` directly.
+* *Files:* `site-visual.css` in `supplemental-ui` and `ui-modules/packages/doc-layout`.
