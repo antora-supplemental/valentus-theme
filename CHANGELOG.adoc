@@ -16,6 +16,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+== [2.0.18] - 2026-09-01
+
+Public label: *2.0.18+antora.3* (Antora 3).
+
+* *Fix:* Page title mast vertical scrollbar — 2.0.17’s `overflow-x: hidden; overflow-y: visible` on `.adt-page-title`, breadcrumb trail, and kickers forced `overflow-y` to compute as `auto` (CSS overflow pairing rule), showing a vscroll bar when descenders extended past the line box. Restore single-axis `overflow: hidden` with raised `line-height` and small `padding-bottom` so descenders stay visible without scrollbars. See link:changelog-details/2026-09-01%20-%20page%20title%20mast%20scrollbar.adoc[Detailed notes — page title mast scrollbar].
+
 == [2.0.17] - 2026-09-01
 
 Public label: *2.0.17+antora.3* (Antora 3).

@@ -1,0 +1,6 @@
+= Page title mast vertical scrollbar
+
+* *Symptom:* After the 2.0.17 descender-clip fix, page titles showed full lowercase descenders (g, p, y) but a vertical scrollbar appeared on or near the title mast.
+* *Cause:* CSS overflow pairing — when `overflow-x` is not `visible` and `overflow-y` is `visible`, the used value of `overflow-y` becomes `auto`. Descenders extending below the line box then overflow vertically and trigger a scrollbar.
+* *Fix:* Revert to `overflow: hidden` on ellipsis targets (page title, breadcrumb trail, kickers, dropdown items). Keep raised `line-height` from 2.0.17 and add small `padding-bottom` on the page title and trail so display-font descenders fit inside the clip box without reintroducing clip or scrollbars.
+* *Files:* `site-doc-layout.css` in `supplemental-ui` and `ui-modules/packages/doc-layout`.
