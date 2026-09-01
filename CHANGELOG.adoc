@@ -16,6 +16,9 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+* *Fix:* Breadcrumb home icon — link to site start page (`relativize site.homeUrl`), not the active component index.
+* *Fix:* Breadcrumb mast — hide component kicker when `@antora-supplemental/site-nav-tree` is active (`site.keys.site_nav_tree`); version selector and trail unchanged.
+* *Fix:* Version kicker label — implicit/default version shows **Version** on the button and **Default** in the dropdown (`adt-version-label` helper); named versions unchanged.
 * *Fix:* Component/version breadcrumb dropdowns — raise `.adt-doc-mast` stacking above `.adt-tool-band` so the first menu rows receive clicks instead of the read-width band below.
 
 == [2.0.13] - 2026-08-20
