@@ -16,6 +16,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+== [2.0.17] - 2026-09-01
+
+Public label: *2.0.17+antora.3* (Antora 3).
+
+* *Fix:* Page title, breadcrumb trail, and mast kicker labels — `overflow: hidden` with tight `line-height` (1.2) clipped lowercase descenders (g, p, y) on display fonts (Syne, Plus Jakarta Sans, etc.). Use horizontal-only ellipsis clipping, raise line-height, and keep `-webkit-line-clamp` line-height at 1.35 on narrow viewports. See link:changelog-details/2026-09-01%20-%20descender%20clip%20page%20title.adoc[Detailed notes — descender clip on page title].
+
 == [2.0.16] - 2026-09-01
 
 Public label: *2.0.16+antora.3* (Antora 3).
