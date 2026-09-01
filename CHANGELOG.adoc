@@ -16,6 +16,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+== [2.0.15] - 2026-09-01
+
+Public label: *2.0.15+antora.3* (Antora 3).
+
+* *Feature:* Nav-tree expand/collapse chevrons (`.nav-item-toggle`) use themeable tokens `--adt-nav-item-toggle` and `--adt-nav-item-toggle-hover` (default to `--adt-ink-muted` / `--adt-ink`). Legacy dark-mode caret in `site-extra.css` follows the same token so site overlays can recolor component-level arrows without editing Valentus CSS.
+
 == [2.0.14] - 2026-09-01
 
 Public label: *2.0.14+antora.3* (Antora 3).

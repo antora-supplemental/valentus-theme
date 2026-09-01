@@ -668,6 +668,7 @@ html.dark-theme .home-link {
 }
 
 html.dark-theme .nav-item-toggle {
+  background-color: var(--adt-nav-item-toggle);
   -webkit-mask-image: url(../img/caret.svg);
   mask-image: url(../img/caret.svg);
   -webkit-mask-size: 50%;
