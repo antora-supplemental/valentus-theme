@@ -1,0 +1,6 @@
+= Tabs extension renders unstyled and non-interactive
+
+* *Symptom:* Content built with `@asciidoctor/tabs` (documented and demoed on this theme's own site, e.g. `extensions.adoc`) renders the tab markup (`.tabs`, `.tab`, `.tabpanel`) but tabs stay stacked, unstyled, and stuck with the `is-loading` class — clicking a tab label does nothing.
+* *Cause:* `@asciidoctor/tabs` only emits HTML; the CSS and the behavior JS that make tabs look and act like tabs ship separately as the package's `dist/css/tabs.css` and `dist/js/tabs.js`. Valentus never vendored or referenced either file, so no consuming site gets them — including this theme's own demo playbook.
+* *Fix:* Vendor `tabs.css`/`tabs.js` from `@asciidoctor/tabs` under `supplemental-ui/{css,js}/vendor/`, link the stylesheet in `partials/head-meta.hbs` (after `site-math.css`), and load the script in `partials/footer-scripts.hbs` (alongside `highlight.js`) with `data-sync-storage-key` so the selected tab persists across pages within a sync group.
+* *Files:* `supplemental-ui/css/vendor/tabs.css` (new), `supplemental-ui/js/vendor/tabs.js` (new), `supplemental-ui/partials/head-meta.hbs`, `supplemental-ui/partials/footer-scripts.hbs`.
