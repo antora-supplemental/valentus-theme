@@ -62,9 +62,25 @@ console.log(localStorage.getItem('test')); // Should print "value"
 supplemental-ui/partials/head-meta.hbs
 ----
 
-. *CSP blocking inline script* - The FOUC prevention relies on an inline script in `<head>`. If blocked by CSP, add the script's hash to your policy.
+. *CSP blocking inline script* - FOUC prevention and the interim paint-hold rely on inline `<script>` blocks in `<head>`. If blocked by CSP, add each script's hash to your policy or host equivalent logic externally.
 
 . *Caching issue* - Clear your browser cache and rebuild the site.
+
+== Layout “Settle” Flash on Refresh
+
+*Symptom:* On hard refresh, chrome briefly paints in Default UI layout, then jumps as supplemental CSS (layout, visual, read-width, brand overlays) applies.
+
+*Cause:* Default UI emits one compiled `site.css`; Valentus and site branding add more `<link rel="stylesheet">` layers that reflow chrome after first paint.
+
+*Fix (bundled):* Valentus ships an interim paint-hold in `head-meta.hbs` (`html.adt-fouc-pending`) until stylesheets load and preference FOUC scripts run.
+Upgrade to a release that includes this hold.
+
+*If you override `head-meta.hbs`:* Copy the paint-hold pattern from the bundle partial — stylesheets first, then dark-mode / read-width / font-size preference scripts, then remove `adt-fouc-pending`.
+Do not add brand CSS *after* the release script.
+
+*Long-term:* Prefer compiling layout-affecting rules into the UI bundle's `site.css` (or Valentus supplemental CSS in the release zip) instead of late extra `<link>` tags.
+See xref:customization.adoc#_changing_colors[Customization] and xref:value-proposition.adoc[Value Proposition — layout settle row].
+Upstream trackers: Default UI dark-mode FOUC https://gitlab.com/antora/antora-ui-default/-/merge_requests/207[!207]; supplemental cascade guidance on `master`.
 
 == Some Elements Aren't Styled
 

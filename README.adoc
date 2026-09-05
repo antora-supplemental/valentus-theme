@@ -14,6 +14,8 @@ ifdef::env-github[]
 <a href="https://github.com/antora-supplemental/valentus-theme/stargazers"><img src="https://img.shields.io/github/stars/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="Stars"></a>
 <a href="https://github.com/antora-supplemental/valentus-theme/issues"><img src="https://img.shields.io/github/issues/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="Issues"></a>
 <a href="https://github.com/antora-supplemental/valentus-theme/blob/main/LICENSE"><img src="https://img.shields.io/github/license/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="License"></a>
+<a href="https://antora-supplemental.github.io/valentus-theme/"><img src="https://img.shields.io/badge/docs-Antora%20Supplemental-22c55e?style=for-the-badge" alt="Docs"></a>
+<a href="https://github.com/antora-supplemental/valentus-theme/actions/workflows/deploy.yml"><img src="https://img.shields.io/github/actions/workflow/status/antora-supplemental/valentus-theme/deploy.yml?style=for-the-badge&label=CI" alt="CI"></a>
 <br />
 <h3 align="center">Valentus Theme</h3>
 <p align="center">
@@ -39,6 +41,8 @@ ifdef::env-github[]
 <a href="https://github.com/antora-supplemental/valentus-theme/stargazers"><img src="https://img.shields.io/github/stars/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="Stars"></a>
 <a href="https://github.com/antora-supplemental/valentus-theme/issues"><img src="https://img.shields.io/github/issues/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="Issues"></a>
 <a href="https://github.com/antora-supplemental/valentus-theme/blob/main/LICENSE"><img src="https://img.shields.io/github/license/antora-supplemental/valentus-theme.svg?style=for-the-badge" alt="License"></a>
+<a href="https://antora-supplemental.github.io/valentus-theme/"><img src="https://img.shields.io/badge/docs-Antora%20Supplemental-22c55e?style=for-the-badge" alt="Docs"></a>
+<a href="https://github.com/antora-supplemental/valentus-theme/actions/workflows/deploy.yml"><img src="https://img.shields.io/github/actions/workflow/status/antora-supplemental/valentus-theme/deploy.yml?style=for-the-badge&label=CI" alt="CI"></a>
 <br />
 <h3 align="center">Valentus Theme</h3>
 <p align="center">
@@ -59,6 +63,8 @@ image:https://img.shields.io/github/forks/antora-supplemental/valentus-theme.svg
 image:https://img.shields.io/github/stars/antora-supplemental/valentus-theme.svg?style=for-the-badge[Stars,link=https://github.com/antora-supplemental/valentus-theme/stargazers]
 image:https://img.shields.io/github/issues/antora-supplemental/valentus-theme.svg?style=for-the-badge[Issues,link=https://github.com/antora-supplemental/valentus-theme/issues]
 image:https://img.shields.io/github/license/antora-supplemental/valentus-theme.svg?style=for-the-badge[License,link=https://github.com/antora-supplemental/valentus-theme/blob/main/LICENSE]
+image:https://img.shields.io/badge/docs-Antora%20Supplemental-22c55e?style=for-the-badge[Docs,link=https://antora-supplemental.github.io/valentus-theme/]
+image:https://img.shields.io/github/actions/workflow/status/antora-supplemental/valentus-theme/deploy.yml?style=for-the-badge&label=CI[CI,link=https://github.com/antora-supplemental/valentus-theme/actions/workflows/deploy.yml]
 
 = Valentus Theme
 
