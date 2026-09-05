@@ -16,6 +16,8 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+* *Fix:* Tabs extension (`@asciidoctor/tabs`) rendered unstyled and non-interactive — the theme never vendored the extension's `tabs.css`/`tabs.js`, only shipping dark-mode color overrides in `site-extra.css` that assumed base tab styles already existed. Vendor both files under `supplemental-ui/{css,js}/vendor/` and reference them from `head-meta.hbs`/`footer-scripts.hbs`, with `data-sync-storage-key` so tab selection persists across pages. See link:changelog-details/2026-09-05%20-%20tabs%20extension%20vendor%20assets.adoc[Detailed notes — tabs extension vendor assets].
+
 == [2.0.18] - 2026-09-01
 
 Public label: *2.0.18+antora.3* (Antora 3).
