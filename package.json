@@ -33,9 +33,15 @@
     "serve:visual-demo": "pnpm build:visual-demo && npx http-server build/site -p 8081 -o",
     "clean": "rimraf build .cache",
     "ui-modules:validate": "node ui-modules/scripts/validate-ui-modules.mjs",
-    "dark-mode:sync": "node scripts/sync-dark-mode.mjs"
+    "dark-mode:sync": "node scripts/sync-dark-mode.mjs",
+    "diagrams:generate": "node scripts/generate-themed-diagrams.mjs",
+    "diagrams:check": "node scripts/generate-themed-diagrams.mjs --check",
+    "themed-svg:sync": "node scripts/sync-themed-svg-runtime.mjs"
   },
   "devDependencies": {
+    "@dev-centr/mermaid-svg-css-vars": "0.1.2",
+    "@dev-centr/themed-svg": "0.1.1",
+    "@mermaid-js/mermaid-cli": "11.17.0",
     "@antora-supplemental/antora-search-chat": "github:antora-supplemental/antora-search-chat#beea395",
     "@antora/lunr-extension": "1.0.0-alpha.12",
     "@asciidoctor/tabs": "^1.0.0-beta.6",
@@ -44,6 +50,12 @@
     "http-server": "^14.1.1",
     "json5": "^2.2.3",
     "rimraf": "^6.0.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "core-js",
+      "puppeteer"
+    ]
   },
   "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319"
 }

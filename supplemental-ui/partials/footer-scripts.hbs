@@ -10,3 +10,8 @@
 <script src="{{{uiRootPath}}}/js/site-read-width.js"></script>
 <script src="{{{uiRootPath}}}/js/site-font-size.js"></script>
 <script src="{{{uiRootPath}}}/js/site-math.js" defer></script>
+<script type="module">
+  import { upgradeThemedSvgImages } from '{{{uiRootPath}}}/js/themed-svg-element.js'
+  document.querySelectorAll('.imageblock.themed-svg img').forEach((image) => image.dataset.themedSvg = '')
+  upgradeThemedSvgImages()
+</script>

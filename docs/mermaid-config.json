@@ -1,0 +1,10 @@
+{
+  "deterministicIds": true,
+  "deterministicIDSeed": "valentus-example-diagrams",
+  "htmlLabels": false,
+  "flowchart": {
+    "htmlLabels": false
+  },
+  "securityLevel": "strict",
+  "theme": "base"
+}

@@ -1,0 +1,113 @@
+{
+  "$schema": "https://docs.devcentr.org/themed-svg/schemas/themed-svg-manifest-v1.schema.json",
+  "schemaVersion": 1,
+  "namespace": "valentus-example-authentication-sequence",
+  "source": {
+    "kind": "diagram-generator",
+    "uri": "authentication-sequence.mmd",
+    "generator": "mermaid"
+  },
+  "tokens": [
+    {
+      "id": "color.canvas"
+    },
+    {
+      "id": "color.surface.primary"
+    },
+    {
+      "id": "color.surface.secondary"
+    },
+    {
+      "id": "color.text.primary"
+    },
+    {
+      "id": "color.border.primary"
+    },
+    {
+      "id": "color.edge"
+    },
+    {
+      "id": "color.edge.label"
+    },
+    {
+      "id": "color.accent.primary"
+    }
+  ],
+  "defaultPreset": "light",
+  "presets": {
+    "light": {
+      "color.canvas": "#ffffff",
+      "color.surface.primary": "#f3f4f6",
+      "color.surface.secondary": "#ffffff",
+      "color.text.primary": "#1f2937",
+      "color.border.primary": "#6b7280",
+      "color.edge": "#4b5563",
+      "color.edge.label": "#374151",
+      "color.accent.primary": "#0f766e"
+    },
+    "dark": {
+      "color.canvas": "#111827",
+      "color.surface.primary": "#293548",
+      "color.surface.secondary": "#1f2937",
+      "color.text.primary": "#f9fafb",
+      "color.border.primary": "#9ca3af",
+      "color.edge": "#d1d5db",
+      "color.edge.label": "#e5e7eb",
+      "color.accent.primary": "#5eead4"
+    }
+  },
+  "bindings": [
+    {
+      "kind": "presentation",
+      "selector": "svg",
+      "attribute": "color",
+      "token": "color.text.primary"
+    },
+    {
+      "kind": "presentation",
+      "selector": ".background",
+      "attribute": "fill",
+      "token": "color.canvas"
+    },
+    {
+      "kind": "presentation",
+      "selector": ".node rect, .node polygon, .node circle, .actor, .label-container, .entityBox",
+      "attribute": "fill",
+      "token": "color.surface.primary"
+    },
+    {
+      "kind": "presentation",
+      "selector": ".cluster rect, .edgeLabel rect, .labelBkg",
+      "attribute": "fill",
+      "token": "color.surface.secondary"
+    },
+    {
+      "kind": "presentation",
+      "selector": ".node rect, .node polygon, .node circle, .actor, .entityBox",
+      "attribute": "stroke",
+      "token": "color.border.primary"
+    },
+    {
+      "kind": "presentation",
+      "selector": ".flowchart-link, .messageLine0, .messageLine1, .relationshipLine",
+      "attribute": "stroke",
+      "token": "color.edge"
+    },
+    {
+      "kind": "presentation",
+      "selector": ".nodeLabel, .cluster-label, .actor, .messageText, .labelText, .edgeLabel",
+      "attribute": "fill",
+      "token": "color.text.primary"
+    },
+    {
+      "kind": "presentation",
+      "selector": ".edgeLabel",
+      "attribute": "color",
+      "token": "color.edge.label"
+    }
+  ],
+  "fallback": {
+    "unresolvedToken": "error",
+    "missingTarget": "warn"
+  }
+}

@@ -1,0 +1,8 @@
+= Themed diagram artifacts
+:description: Canonical Mermaid examples with portable and host-aware SVG delivery.
+
+The extension examples now keep editable Mermaid source beside explicit Themed SVG manifests and committed standalone-adaptive and host artifacts.
+
+The former Alice/Bob PlantUML example is a Mermaid sequence diagram, so one generator and one safety policy cover both examples. `htmlLabels` is disabled globally and for flowcharts; generated SVGs contain no `foreignObject`, scripts, handlers, or external resources.
+
+Valentus marks portable images with the `.themed-svg` role. The pinned `@dev-centr/themed-svg` 0.1.1 browser runtime sanitizes and injects the matching host artifact when JavaScript is available, while the adaptive image remains the failure-safe fallback.
