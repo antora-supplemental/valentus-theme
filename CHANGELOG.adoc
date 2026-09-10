@@ -16,6 +16,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+== [2.0.28] - 2026-09-10
+
+Public label: *2.0.28+antora.3* (Antora 3).
+
+* *Fix / UX:* Breadcrumb mast — site home is a real `/` character (no chip); separators are real `/` text nodes so a drag-select copies as a pasteable path; home lights up on hover. See link:changelog-details/2026-09-10%20-%20copyable%20breadcrumb%20path.adoc[Detailed notes].
+
 == [2.0.27] - 2026-09-10
 
 Public label: *2.0.27+antora.3* (Antora 3).

@@ -730,8 +730,7 @@ html.dark-theme .adt-doc-mast {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  /* Row gap only when wrapping. No column-gap — Antora’s li::after "/" already
-     pads both sides; an extra gap shoved crumbs right of each slash center. */
+  /* Row gap only when wrapping. Separators are real "/" text nodes (copyable). */
   row-gap: 0.25rem;
   column-gap: 0;
   list-style: none;
@@ -747,18 +746,21 @@ html.dark-theme .adt-doc-mast {
   min-width: 0;
 }
 
-/* Own the separators so padding stays symmetric (optically center on "/"). */
-.adt-breadcrumbs > ul > li::after {
-  content: "/";
-  padding: 0 0.45rem;
-  font-weight: 400;
-  color: var(--adt-ink-muted, inherit);
-  pointer-events: none;
+/* Kill Default UI / legacy pseudo separators — real path chars live in the DOM. */
+.adt-breadcrumbs > ul > li::after,
+.breadcrumbs.adt-breadcrumbs > ul > li::after {
+  content: none !important;
+  padding: 0 !important;
 }
 
-.adt-breadcrumbs > ul > li:last-of-type::after {
-  content: none;
-  padding: 0;
+.adt-breadcrumb-sep {
+  flex: 0 0 auto;
+  padding: 0 0.45rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--adt-ink-muted, inherit);
+  pointer-events: none;
+  user-select: text;
 }
 
 .adt-breadcrumb-masthead {
@@ -948,6 +950,8 @@ html.dark-theme .adt-breadcrumb-edit .adt-edit-vcs-img {
 .adt-breadcrumb-home {
   flex: 0 0 auto;
   list-style: none;
+  /* Space after the root "/" so it does not glue to the component kicker. */
+  margin-inline-end: 0.35rem;
 }
 
 .adt-breadcrumb-home-link {
@@ -955,43 +959,60 @@ html.dark-theme .adt-breadcrumb-edit .adt-edit-vcs-img {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: 1.5rem;
-  height: 1.5rem;
-  min-width: 1.5rem;
   min-height: 1.5rem;
-  padding: 0;
-  border: 1px solid var(--adt-bc-kicker-border);
-  border-radius: 0.2rem;
-  background: var(--adt-bc-kicker-bg);
-  color: var(--adt-bc-kicker-fg);
+  padding: 0 0.1rem;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--adt-ink-muted, inherit);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
   text-decoration: none;
   vertical-align: middle;
+  transition: color 0.15s ease;
 }
 
-.adt-breadcrumb-home-link:hover {
-  border-color: color-mix(in srgb, var(--adt-accent) 45%, transparent);
-  background: color-mix(in srgb, var(--adt-accent) 18%, var(--adt-bc-kicker-bg));
+.adt-breadcrumb-home-link:hover,
+.adt-breadcrumb-home-link:focus-visible {
+  color: var(--adt-accent);
+  background: transparent;
+  border: none;
   text-decoration: none;
+}
+
+.adt-breadcrumb-home-link:focus {
+  outline: none;
+}
+
+.adt-breadcrumb-home-link:focus-visible {
+  outline: 2px solid var(--adt-accent);
+  outline-offset: 2px;
+  border-radius: 0.15rem;
 }
 
 html.dark-theme .adt-breadcrumb-home-link {
-  color: var(--adt-bc-kicker-fg);
-  background: var(--adt-bc-kicker-bg);
-  border-color: var(--adt-bc-kicker-border);
+  color: var(--adt-ink-muted, inherit);
+  background: transparent;
+  border: none;
 }
 
-html.dark-theme .adt-breadcrumb-home-link:hover {
-  border-color: color-mix(in srgb, var(--adt-accent) 45%, transparent);
-  background: color-mix(in srgb, var(--adt-accent) 18%, var(--adt-bc-kicker-bg));
-}
-
-.adt-breadcrumb-home-icon {
-  display: block;
+html.dark-theme .adt-breadcrumb-home-link:hover,
+html.dark-theme .adt-breadcrumb-home-link:focus-visible {
+  color: var(--adt-accent);
+  background: transparent;
+  border: none;
 }
 
 /* Vertical | between component/version kickers — hidden; trail still uses / separators */
 .adt-bc-sep {
   display: none;
+}
+
+.adt-bc-cluster-gap {
+  flex: 0 0 auto;
+  white-space: pre;
 }
 
 /* Component + version read as one mast segment (version sits tight to the right). */

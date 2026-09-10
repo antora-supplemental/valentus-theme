@@ -2,11 +2,8 @@
   <ul>
     {{#if site.homeUrl}}
     <li class="adt-breadcrumb-home">
-      <a href="{{{relativize site.homeUrl}}}" class="adt-breadcrumb-home-link" title="Site home" aria-label="Site home">
-        <svg class="adt-breadcrumb-home-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-        </svg>
-      </a>
+      {{! Real "/" so a drag-select copies as a path (not an SVG / CSS pseudo). }}
+      <a href="{{{relativize site.homeUrl}}}" class="adt-breadcrumb-home-link" title="Site home" aria-label="Site home">/</a>
     </li>
     {{/if}}
     <li class="adt-breadcrumb-col adt-breadcrumb-masthead">
@@ -14,6 +11,7 @@
         Component + version stay visible together (including with site-nav-tree).
         Mobile needs the component jump; version sits conjoined to its right.
         Trail drops a duplicate component-root crumb via adt-bc-trail-crumbs.
+        Separators are real "/" text nodes so the mast copies as a pasteable path.
       }}
       <div class="adt-bc-cluster" role="group" aria-label="Documentation component and version">
         <div class="adt-bc-menu adt-bc-menu-project">
@@ -28,6 +26,7 @@
             {{/each}}
           </ul>
         </div>
+        <span class="adt-bc-cluster-gap" aria-hidden="true"> </span>
         {{#with (adt-version-mode @root.page)}}
         {{#if (eq this 'menu')}}
         <div class="adt-bc-menu adt-bc-menu-version">
@@ -58,6 +57,7 @@
     </li>
     {{#with (adt-bc-trail-crumbs page.breadcrumbs)}}
     {{#each this}}
+    <li class="adt-breadcrumb-sep" aria-hidden="true">/</li>
     <li class="adt-breadcrumb-trail{{#if @last}} adt-breadcrumb-trail--current{{/if}}">
     {{~#if (and ./url (eq ./urlType 'internal'))~}}
     <a class="adt-breadcrumb-trail-link" href="{{{relativize ./url}}}">{{{./content}}}</a>

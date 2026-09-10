@@ -2,11 +2,8 @@
   <ul>
     {{#if site.homeUrl}}
     <li class="adt-breadcrumb-home">
-      <a href="{{{relativize site.homeUrl}}}" class="adt-breadcrumb-home-link" title="Site home" aria-label="Site home">
-        <svg class="adt-breadcrumb-home-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-        </svg>
-      </a>
+      {{! Real "/" so a drag-select copies as a path (not an SVG / CSS pseudo). }}
+      <a href="{{{relativize site.homeUrl}}}" class="adt-breadcrumb-home-link" title="Site home" aria-label="Site home">/</a>
     </li>
     {{/if}}
     <li class="adt-breadcrumb-col adt-breadcrumb-masthead">
