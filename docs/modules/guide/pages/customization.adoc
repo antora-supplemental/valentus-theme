@@ -13,6 +13,50 @@ IMPORTANT: Prefer putting layout-affecting rules into the UI bundle’s compiled
 Layered stylesheets after Default UI `site.css` cause a refresh “settle” flash (FOUC).
 Valentus currently ships an *interim* paint-hold in `partials/head-meta.hbs` (`html.adt-fouc-pending`) marked pending upstream Default UI guidance / !207 / !213 — if you override `head-meta.hbs`, keep that hold (stylesheets first, then preference scripts, then release only after `document.fonts` for your linked families — or you reintroduce CSS settle and webfont FOUT / width jump).
 
+== Overriding `head-meta.hbs` (brand overlays)
+
+Hubs often override `supplemental-ui/partials/head-meta.hbs` for fonts, favicons, or brand CSS.
+**Copy the full Valentus CSS chain**, then add brand overlays only — do not replace the partial with a minimal dark-mode stub.
+
+Required Valentus stylesheet links (order matters; match upstream `head-meta.hbs`):
+
+. `site-extra.css`
+. `site-doc-layout.css`
+. `site-visual.css`
+. `site-read-width.css`
+. `site-font-size.css`
+. `site-math.css` (when math is enabled)
+
+Also keep: paint-hold (`adt-fouc-pending`), dark-mode / read-width / font-size FOUC preference scripts, and webfont `document.fonts` release.
+After those, append **only** hub brand sheets (e.g. `brand.css`, `nav-typology.css`).
+Dropping layout/visual sheets while keeping a brand overlay yields a broken mast/nav even though the site “builds”.
+
+== Supplemental footer scripts (do not double-load)
+
+Valentus `footer-scripts.hbs` already loads `site.js` and the theme’s footer scripts (dark mode, accordion, visual, read-width, font-size, math, …).
+
+If your hub overrides `footer-content.hbs` or adds another footer partial, **do not** re-emit:
+
+* `site.js` (id `site-script`)
+* Valentus scripts already listed in theme `footer-scripts.hbs`
+
+Double-loading `site.js` registers expand/collapse handlers twice and breaks nav tree expand.
+Load **only** hub companions after the theme scripts (e.g. `site-nav-tree-current.js` after `site.js`). Prefer extending `footer-scripts.hbs` over stuffing script tags into `footer-content.hbs`.
+
+== Mast version control (`~` / Default)
+
+Helper `adt-version-mode` drives the breadcrumb version control (Valentus 2.0.19+):
+
+| Mode | When | UI |
+| --- | --- | --- |
+| `hide` | Only the implicit/unversioned Antora version (`~`), or no version | Version control omitted (no “Default” chip) |
+| `plain` | Exactly one **named** version | Underlined text (not a dropdown) |
+| `menu` | Two or more versions | Dropdown; implicit rows still use the `adt-version-label` fallback **Default** |
+
+**Rationale:** showing “Default” for a single unversioned component teaches little and clutters the mast; hiding matches reader expectation that unversioned docs have no version picker.
+
+**Possible future option (not shipped):** show a literal unclickable `~` for Antora pedagogy instead of hiding. Do not invent a conflicting hub override that re-labels `~` as “Default” when the theme already hides it.
+
 === Current Color Palette
 
 [cols="1,1,2", options="header"]

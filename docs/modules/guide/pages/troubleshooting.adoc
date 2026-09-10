@@ -66,6 +66,14 @@ supplemental-ui/partials/head-meta.hbs
 
 . *Caching issue* - Clear your browser cache and rebuild the site.
 
+== Nav expand / collapse broken after override
+
+*Symptom:* Sidebar carets do nothing, or expand then immediately collapse; console may show duplicate listeners.
+
+*Cause:* Hub `footer-content.hbs` (or another supplemental partial) reloads `site.js` / Valentus footer scripts while theme `footer-scripts.hbs` already injects them.
+
+*Fix:* Remove the duplicate `<script src="…/js/site.js">` (and duplicate Valentus script tags). Keep a single load via `footer-scripts.hbs`; append only hub companions (e.g. `site-nav-tree-current.js`) after it. See xref:customization.adoc[Customization].
+
 == Some Elements Aren't Styled
 
 *Symptom:* Certain page elements remain light-colored in dark mode.

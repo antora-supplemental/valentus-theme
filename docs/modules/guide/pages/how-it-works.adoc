@@ -11,13 +11,17 @@ This approach means you don't need to fork or rebuild the Antora Default UI.
 
 == The Four Key Files
 
-=== 1. head-meta.hbs (FOUC Prevention)
+=== 1. head-meta.hbs (FOUC Prevention + CSS chain)
 
 This Handlebars partial is injected into the `<head>` of every page.
-It does two critical things:
+It:
 
-. Loads the `site-extra.css` stylesheet
-. Runs an inline script that immediately applies dark mode if needed
+. Applies the interim paint-hold (`html.adt-fouc-pending`)
+. Loads the Valentus stylesheet chain (`site-extra`, `site-doc-layout`, `site-visual`, `site-read-width`, `site-font-size`, `site-math`)
+. Runs preference FOUC scripts (dark mode, read-width, font-size) and releases paint after webfonts
+
+Hub overrides must keep that full chain — see xref:customization.adoc[Customization].
+Simplified illustration (not the full production partial):
 
 [source,handlebars]
 ----
@@ -33,16 +37,19 @@ It does two critical things:
 </script>
 ----
 
-The inline script runs before the page renders, preventing the flash of light mode that would occur if we waited for the main JavaScript to load.
+The preference script runs before the page paints so dark mode does not flash light-first.
 
 === 2. footer-scripts.hbs (Script Loading)
 
 This partial is injected at the end of the page body.
 It loads:
 
-* The main Antora site script
+* The main Antora site script (`site.js`)
 * highlight.js for syntax highlighting
-* The dark mode toggle script
+* Valentus scripts (dark mode, VCS icons, accordion, visual, read-width, font-size, math, …)
+
+Hubs that override footer partials must **not** load `site.js` (or these Valentus scripts) a second time — duplicate handlers break nav expand/collapse.
+Add only hub-specific companions after the theme list (see xref:customization.adoc[Customization]).
 
 === 3. site-dark-mode.js (Toggle Logic)
 
