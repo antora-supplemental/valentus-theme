@@ -145,6 +145,21 @@ html.dark-theme body {
 
 This makes it easier to create multiple dark theme variants.
 
+== Side-rail panel wash (nav + sidebar TOC)
+
+Light mode defaults to a clean flat rail (`--adt-side-panel-bg: transparent`).
+Dark mode uses a subtle elevated wash by default.
+
+To enable the panel treatment in light mode (or force it), add one of:
+
+* class `adt-side-panels` on `html` or `body`
+* attribute `data-adt-side-panels="true"` on `html`
+
+Tokens: `--adt-side-panel-bg`, `--adt-side-panel-radius` (default `2px`), `--adt-side-panel-pad`.
+
+Sidebar TOC **CONTENTS** always gets a little padding + radius so the label is not flush to the edge.
+In-doc Asciidoctor `:toc:` (`.doc .toc` / `#toc`) is styled separately as a muted block — it is **not** part of `@antora-supplemental/page-context` metadata.
+
 == VCS Repo Logo (Download button replacement)
 
 The theme replaces the default UI's nonfunctional "Download" button with a version control provider logo that links to the docs repository.

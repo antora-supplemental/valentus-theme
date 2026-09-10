@@ -18,6 +18,17 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 * *Diagrams:* Replace the duplicated authored PlantUML sequence with canonical Mermaid, extract both extension examples into named sources, and ship deterministic Themed SVG adaptive/host artifacts. The UI progressively upgrades `.themed-svg` image roles with the sanitized 0.1.1 runtime. See link:changelog-details/2026-09-08%20-%20themed%20diagram%20artifacts.adoc[Detailed notes — themed diagram artifacts].
 
+== [2.0.19] - 2026-09-09
+
+Public label: *2.0.19+antora.3* (Antora 3).
+
+* *Fix / UX:* Mast version control — hide when only the implicit/unversioned (`~`) version; plain underlined text for a single named version; dropdown only when multiple versions (`adt-version-mode` helper).
+* *Fix / UX:* Mast kickers (version / component) rest as underlined text links; chip fill appears on hover / open.
+* *Fix / UX:* Nav current-page soft-fill — `overflow: hidden` on tree labels so nowrap text cannot paint past the highlight box; tree-edge fade mask (`--adt-nav-scroll-fade`).
+* *Feature:* Optional light side-rail panel wash — `html.adt-side-panels` / `data-adt-side-panels="true"` sets `--adt-side-panel-bg` (dark already defaults to elevated). Sidebar TOC CONTENTS gets padding + 2px radius.
+* *Feature:* In-doc Asciidoctor `:toc:` (`.doc .toc` / `#toc`) muted smaller own block — **not** part of `@antora-supplemental/page-context` metadata. Theme also bridges `.page-context` tokens.
+* *Docs:* Component picker already hidden when `site.keys.site_nav_tree=true` (2.0.14); reaffirm with site-nav-tree README.
+
 == [2.0.18] - 2026-09-01
 
 Public label: *2.0.18+antora.3* (Antora 3).

@@ -941,19 +941,21 @@ html.dark-theme .adt-breadcrumb-home-link:hover {
   padding: 0.15rem 0.35rem 0.15rem 0.4rem;
   font: inherit;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.45;
   text-align: left;
-  color: var(--adt-bc-kicker-fg);
-  background: var(--adt-bc-kicker-bg);
-  border: 1px solid var(--adt-bc-kicker-border);
+  color: var(--adt-accent);
+  background: transparent;
+  border: 1px solid transparent;
   border-radius: 0.2rem;
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
   opacity: 1;
   outline: none;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, text-decoration-color 0.15s ease;
 }
 
 /* Small muted stroke chevron — reads as a menu without competing with the label. */
@@ -977,6 +979,9 @@ html.dark-theme .adt-breadcrumb-home-link:hover {
 
 .adt-bc-kicker:hover {
   border-color: color-mix(in srgb, var(--adt-accent) 45%, transparent);
+  background: var(--adt-bc-kicker-bg);
+  color: var(--adt-bc-kicker-fg);
+  text-decoration: none;
 }
 
 .adt-bc-kicker:hover::after {
@@ -997,6 +1002,8 @@ html.dark-theme .adt-breadcrumb-home-link:hover {
   outline: none;
   border-color: var(--adt-accent);
   background: color-mix(in srgb, var(--adt-accent) 18%, var(--adt-bc-kicker-bg));
+  color: var(--adt-bc-kicker-fg);
+  text-decoration: none;
 }
 
 .adt-bc-kicker[aria-expanded='true']::after {
@@ -1013,6 +1020,20 @@ html.dark-theme .adt-breadcrumb-home-link:hover {
 
 .adt-bc-kicker-version {
   max-width: 7rem;
+}
+
+.adt-bc-version-plain {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.5rem;
+  padding: 0.15rem 0.1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--adt-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+  white-space: nowrap;
 }
 
 /* [hidden] must win over #adt-bc-proj / #adt-bc-ver (ID + display:block !important from layout fixes) */
@@ -1223,6 +1244,7 @@ nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text {
   text-indent: 0;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  overflow: hidden;
   padding: 0.12rem 0.4rem;
   font-size: 0.75rem;
   font-weight: 400;

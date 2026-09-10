@@ -1,0 +1,12 @@
+= 2.0.19 — mast, nav highlight, side panels, in-doc TOC
+:navtitle: 2.0.19 mast nav TOC panels
+:description: Valentus 2.0.19 UX: version control modes, link-style kickers, nav highlight clip/fade, optional side panels, muted in-doc TOC.
+
+== Summary
+
+Mast version control is mode-aware (`hide` / `plain` / `menu`). Kickers look like links until hover. Nav current-row highlights clip with overflowing labels. Side-rail panel wash is optional in light mode (`adt-side-panels`). In-doc TOC is styled as its own muted block, separate from page-context metadata tables.
+
+== Options
+
+* `html.adt-side-panels` / `body.adt-side-panels` / `html[data-adt-side-panels=true]` — enable light-mode nav/TOC panel wash (`--adt-side-panel-bg`).
+* `--adt-side-panel-radius` (default `2px`), `--adt-side-panel-pad`, `--adt-nav-scroll-fade`.

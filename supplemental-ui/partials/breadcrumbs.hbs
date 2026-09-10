@@ -26,11 +26,12 @@
         </div>
         <span class="adt-bc-sep" aria-hidden="true">|</span>
         {{/unless}}
+        {{#with (adt-version-mode @root.page)}}
+        {{#if (eq this 'menu')}}
         <div class="adt-bc-menu adt-bc-menu-version">
           <button type="button" class="adt-bc-kicker" data-adt-toggle="adt-bc-ver" aria-haspopup="listbox" aria-expanded="false" aria-label="Select documentation version">
             <span class="adt-bc-kicker-version">{{adt-version-label @root.page.componentVersion fallback="Version"}}</span>
           </button>
-          {{#if @root.page.versions}}
           <ul class="adt-bc-dropdown adt-bc-dropdown--version" id="adt-bc-ver" role="listbox" hidden>
             {{#each @root.page.versions}}
             <li role="none" class="adt-bc-menu-item">
@@ -38,15 +39,13 @@
             </li>
             {{/each}}
           </ul>
-          {{else if @root.page.componentVersion}}
-          {{! Antora may omit page.versions on single-version sites — still show one option so the control is not “dead”/disabled. }}
-          <ul class="adt-bc-dropdown adt-bc-dropdown--version" id="adt-bc-ver" role="listbox" hidden>
-            <li role="none" class="adt-bc-menu-item">
-              <a href="{{{relativize @root.page.componentVersion.url}}}" class="adt-bc-version-pill is-current" aria-current="page">{{adt-version-label @root.page.componentVersion fallback="Default"}}</a>
-            </li>
-          </ul>
-          {{/if}}
         </div>
+        {{else if (eq this 'plain')}}
+        <div class="adt-bc-menu adt-bc-menu-version adt-bc-menu-version--plain">
+          <span class="adt-bc-version-plain" title="Documentation version">{{adt-version-label @root.page.componentVersion fallback="Version"}}</span>
+        </div>
+        {{/if}}
+        {{/with}}
       </div>
     </li>
     {{#if page.breadcrumbs}}

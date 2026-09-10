@@ -24,6 +24,12 @@
   --adt-nav-bg: transparent;
   --adt-nav-item-toggle: var(--adt-ink-muted);
   --adt-nav-item-toggle-hover: var(--adt-ink);
+  /* Side-rail wash (nav + sidebar TOC). Light default: off (transparent).
+     Opt in: html.adt-side-panels / data-adt-side-panels="true". Dark sets elevated below. */
+  --adt-side-panel-bg: transparent;
+  --adt-side-panel-radius: 2px;
+  --adt-side-panel-pad: 0.45rem 0.55rem;
+  --adt-nav-scroll-fade: 1.25rem;
   --adt-code-bg: #151a24;
   --adt-code-fg: #e8ecf2;
   --adt-code-border: rgba(20, 24, 32, 0.35);
@@ -81,6 +87,8 @@ html.dark-theme {
   --adt-chrome: var(--adt-canvas);
   --adt-chrome-border: var(--adt-border);
   --adt-nav-bg: transparent;
+  /* Dark: subtle differentiated rail by default (matches prior chrome expectation). */
+  --adt-side-panel-bg: var(--adt-elevated);
   --adt-code-bg: #080b10;
   --adt-code-fg: #e8ecf2;
   --adt-code-border: rgba(255, 255, 255, 0.08);
@@ -216,6 +224,35 @@ a.adt-header-title {
   border-color: var(--adt-border) !important;
   color: var(--adt-ink-muted) !important;
   box-shadow: none !important;
+}
+
+/* Opt-in light (or force) side-rail panel wash — see --adt-side-panel-bg. */
+html.adt-side-panels,
+body.adt-side-panels,
+html[data-adt-side-panels='true'] {
+  --adt-side-panel-bg: color-mix(in srgb, var(--adt-ink) 4.5%, var(--adt-elevated));
+}
+
+html.dark-theme.adt-side-panels,
+html.dark-theme[data-adt-side-panels='true'],
+body.adt-side-panels html.dark-theme {
+  --adt-side-panel-bg: var(--adt-elevated);
+}
+
+@media screen and (min-width: 1024px) {
+  .nav,
+  .nav-panel-menu {
+    background: var(--adt-side-panel-bg, var(--adt-nav-bg)) !important;
+    border-radius: var(--adt-side-panel-radius);
+  }
+
+  .body.adt-body > aside.toc.sidebar .toc-menu,
+  aside.toc.sidebar .toc-menu {
+    background: var(--adt-side-panel-bg);
+    border-radius: var(--adt-side-panel-radius);
+    padding: var(--adt-side-panel-pad);
+    box-sizing: border-box;
+  }
 }
 
 /* Condensed / mobile drawer: --adt-nav-bg is transparent on desktop so the
@@ -522,6 +559,37 @@ footer.footer a {
   border-radius: var(--adt-radius-sm);
 }
 
+/* Mast dropdowns: resting state reads as an underlined text link; chip on hover/open. */
+.adt-bc-kicker {
+  color: var(--adt-accent) !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+  font-weight: 500 !important;
+}
+
+.adt-bc-kicker:hover,
+.adt-bc-kicker[aria-expanded='true'] {
+  color: var(--adt-bc-kicker-fg) !important;
+  background: var(--adt-bc-kicker-bg) !important;
+  border-color: var(--adt-bc-kicker-border) !important;
+  text-decoration: none;
+}
+
+.adt-bc-version-plain {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.5rem;
+  padding: 0.15rem 0.1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--adt-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
 .adt-bc-dropdown {
   background: var(--adt-elevated) !important;
   border: 1px solid var(--adt-border) !important;
@@ -549,6 +617,21 @@ footer.footer a {
    Caret column is margin (outside the highlight box). Same padding for
    normal / hover / current so soft-fill never breaks tree vertical rhythm;
    current differs by accent color + weight only. */
+/* Tree edge fade so overflowing labels (and their highlight fill) soft-clip together. */
+nav.nav-menu.nav-tree-only,
+nav.nav-menu.adt-nav-tree-only {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 calc(100% - var(--adt-nav-scroll-fade, 1.25rem)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    #000 calc(100% - var(--adt-nav-scroll-fade, 1.25rem)),
+    transparent 100%
+  );
+}
+
 nav.nav-menu.nav-tree-only .nav-item > .nav-link,
 nav.nav-menu.adt-nav-tree-only .nav-item > .nav-link,
 nav.nav-menu.nav-tree-only .nav-item > .nav-text,
@@ -560,6 +643,8 @@ nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text {
   width: calc(100% - (0.85em + 0.55rem)) !important;
   max-width: calc(100% - (0.85em + 0.55rem)) !important;
   padding: 0.12rem 0.4rem !important;
+  /* nowrap labels (e.g. nav-typology) must not paint past the soft-fill box */
+  overflow: hidden;
   transition: var(--adt-transition);
 }
 
@@ -642,6 +727,86 @@ html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item-toggle {
   letter-spacing: 0.02em;
   text-transform: uppercase;
   font-size: 0.72rem !important;
+}
+
+/* Always give sidebar CONTENTS a little inset + radius (even when panel wash is off). */
+aside.toc.sidebar .toc-menu {
+  padding: var(--adt-side-panel-pad, 0.45rem 0.55rem);
+  border-radius: var(--adt-side-panel-radius, 2px);
+  box-sizing: border-box;
+}
+
+/*
+ * In-doc TOC (Asciidoctor :toc: inside .doc) — separate from page-context metadata
+ * and from the right-rail sidebar TOC. Muted / smaller; own block after provenance.
+ */
+.doc .toc:not(.sidebar),
+.doc #toc.toc,
+.doc #toc {
+  margin: 0.65rem 0 1rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--adt-ink-muted) 22%, transparent);
+  border-radius: 2px;
+  background: transparent;
+  font-size: 0.82em;
+  line-height: 1.35;
+  color: var(--adt-ink-muted);
+}
+
+.doc .toc:not(.sidebar) #toctitle,
+.doc #toc.toc #toctitle,
+.doc #toc #toctitle,
+.doc .toc:not(.sidebar) .title,
+.doc #toc .title {
+  margin: 0 0 0.35rem;
+  padding: 0;
+  font-size: 0.92em;
+  font-weight: 550;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--adt-ink-muted);
+  border: none;
+  background: none;
+}
+
+.doc .toc:not(.sidebar) ul,
+.doc #toc ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.doc .toc:not(.sidebar) a,
+.doc #toc a {
+  color: var(--adt-ink-muted) !important;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.doc .toc:not(.sidebar) a:hover,
+.doc #toc a:hover {
+  color: var(--adt-accent) !important;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+html.dark-theme .doc .toc:not(.sidebar),
+html.dark-theme .doc #toc.toc,
+html.dark-theme .doc #toc {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* page-context extension markup — theme token bridge (extension ships baseline CSS). */
+.doc .page-context {
+  --page-context-fg: var(--adt-ink-muted);
+  --page-context-label: var(--adt-ink-muted);
+  --page-context-border: color-mix(in srgb, var(--adt-ink-muted) 22%, transparent);
+  --page-context-bg: transparent;
+}
+
+html.dark-theme .doc .page-context {
+  --page-context-border: rgba(255, 255, 255, 0.1);
+  --page-context-bg: rgba(255, 255, 255, 0.02);
 }
 
 .toc .toc-menu a {
