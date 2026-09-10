@@ -1,0 +1,12 @@
+= 2.0.26 — hide tree-nav scrollbars
+:navtitle: 2.0.26 hide nav scrollbars
+:description: Keep overflow scroll and edge fades; hide the scrollbar chrome on the tree nav.
+
+== Summary
+
+After width containment (2.0.24), overflowing nowrap labels can show a horizontal scrollbar on `nav.nav-menu`. Edge fades already signal leftover overflow, so the bar is redundant chrome.
+
+== Change
+
+* `scrollbar-width: none` / `-ms-overflow-style: none` / `::-webkit-scrollbar { display: none }` on tree-only nav menus.
+* Overflow axes stay `auto`; wheel, trackpad, and touch scrolling still work.

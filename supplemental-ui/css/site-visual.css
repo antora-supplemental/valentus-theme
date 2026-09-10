@@ -659,6 +659,7 @@ footer.footer a {
  * Horizontal scroll + edge fades (site-visual.js toggles .adt-nav-overflow-*).
  * Fades appear only when that edge still has overflow; mask soft-clips
  * overflowing labels and their highlight fill together.
+ * Hide scrollbars — wheel/trackpad + edge fades remain the affordance.
  */
 nav.nav-menu.nav-tree-only,
 nav.nav-menu.adt-nav-tree-only {
@@ -666,7 +667,15 @@ nav.nav-menu.adt-nav-tree-only {
   overflow-y: auto;
   -webkit-mask-image: none;
   mask-image: none;
-  scrollbar-width: thin;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+nav.nav-menu.nav-tree-only::-webkit-scrollbar,
+nav.nav-menu.adt-nav-tree-only::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 nav.nav-menu.nav-tree-only.adt-nav-overflow-end:not(.adt-nav-overflow-start),

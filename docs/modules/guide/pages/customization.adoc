@@ -203,7 +203,7 @@ Tokens: `--adt-side-panel-bg`, `--adt-side-panel-radius` (default `2px`), `--adt
 When enabled, sidebar TOC **CONTENTS** and the nav tree menu get padding + radius so labels are not flush to the panel edge.
 The wash paints the **content-sized** menu/TOC surface (not the full-height `.nav` column).
 
-Tree-nav supports **horizontal scroll** when labels overflow. Left/right transparency fades (`adt-nav-overflow-start` / `adt-nav-overflow-end`, driven by `site-visual.js`) appear only while that edge still has overflow.
+Tree-nav supports **horizontal scroll** when labels overflow. Left/right transparency fades (`adt-nav-overflow-start` / `adt-nav-overflow-end`, driven by `site-visual.js`) appear only while that edge still has overflow. Scrollbars on the tree menu are hidden; wheel/trackpad scrolling still works.
 
 In-doc Asciidoctor `:toc:` (`.doc .toc` / `#toc`) is styled separately as a muted block — it is **not** part of `@antora-supplemental/page-context` metadata.
 `.page-context-table` uses its own tokens (muted type, thin outer + inner borders, light/dark surface) and does **not** inherit doc-table zebra striping.
