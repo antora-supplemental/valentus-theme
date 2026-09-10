@@ -16,7 +16,7 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
-* *Chore:* Bump demo playbook dep `@antora-supplemental/antora-search-chat` to `v0.1.4` (hierarchical scope tree; closed face without *Component*/*Version* kind prefix). Tag consumer topic `uses-antora-search-chat` for post-release discovery.
+* *Chore:* Bump demo playbook dep `@antora-supplemental/antora-search-chat` to `v0.1.4` (hierarchical scope tree; closed face without *Component*/*Version* kind prefix). Tag consumer topic `antora-search-chat` for post-release discovery.
 * *Docs:* Customization / How it works / Troubleshooting — overriding `head-meta.hbs` must keep the full Valentus CSS chain + FOUC hold; do not double-load `site.js` from hub footer partials; document mast `adt-version-mode` (hide `~`, plain single named, menu multi) and note literal `~` as a possible future pedagogy option.
 * *Diagrams:* Replace the duplicated authored PlantUML sequence with canonical Mermaid, extract both extension examples into named sources, and ship deterministic Themed SVG adaptive/host artifacts. The UI progressively upgrades `.themed-svg` image roles with the sanitized 0.1.1 runtime. See link:changelog-details/2026-09-08%20-%20themed%20diagram%20artifacts.adoc[Detailed notes — themed diagram artifacts].
 
