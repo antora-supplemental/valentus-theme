@@ -1333,6 +1333,14 @@ nav.nav-menu.adt-nav-tree-only {
   padding: 0 var(--adt-global-rail-hpad) 0.5rem var(--adt-global-rail-hpad) !important;
 }
 
+/* Antora Default UI sets .nav-list { margin-left: .75rem } for nesting.
+   Top-level list under the menu already has rail padding — drop the extra inset.
+   Nested .nav-list margins stay for tree indentation. */
+nav.nav-menu.nav-tree-only > .nav-list,
+nav.nav-menu.adt-nav-tree-only > .nav-list {
+  margin-left: 0;
+}
+
 /* Component label is <p class="adt-nav-component-title"> — not a heading; avoids .nav-menu h3.title / .doc h3. */
 .adt-nav-component-title {
   margin: 0 0 0.4rem 0;

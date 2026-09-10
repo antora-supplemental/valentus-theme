@@ -1,0 +1,12 @@
+= 2.0.30 — top-level nav-list margin
+:navtitle: 2.0.30 top-level nav-list margin
+:description: Remove redundant left margin on the root nav list under tree-only menus.
+
+== Summary
+
+Antora Default UI sets `.nav-list { margin-left: .75rem }` for every list, including the root list under `nav.nav-menu`. Valentus already pads that menu with `--adt-global-rail-hpad`, so the top-level margin double-insets the tree.
+
+== Change
+
+* `nav.nav-menu.nav-tree-only > .nav-list` (and `adt-nav-tree-only`) → `margin-left: 0`.
+* Nested `.nav-list` margins unchanged (tree depth indentation).

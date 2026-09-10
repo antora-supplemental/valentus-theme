@@ -20,6 +20,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 +
 Debt: Mermaid host SVGs still carry a few hard-coded `fill:#…!important` rules (arrow/root anchors); regenerate with `@dev-centr/themed-svg@0.2.2` when practical.
 
+== [2.0.30] - 2026-09-10
+
+Public label: *2.0.30+antora.3* (Antora 3).
+
+* *Fix / UX:* Drop Antora’s extra `.75rem` left margin on the **top-level** tree `nav > .nav-list` (rail padding already insets); keep nested `.nav-list` margins for depth indentation.
+
 == [2.0.29] - 2026-09-10
 
 Public label: *2.0.29+antora.3* (Antora 3).
