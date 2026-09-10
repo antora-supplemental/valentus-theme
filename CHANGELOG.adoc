@@ -16,6 +16,10 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+== [2.0.31] - 2026-09-10
+
+Public label: *2.0.31+antora.3* (Antora 3).
+
 * *Fix / UX:* Restore icon-only site-home chip (SVG house); keep copyable `/` trail separators. Version kicker button shows **Version** for `~`/default; dropdown rows show literal `~`. See link:changelog-details/2026-09-10%20-%20home%20chip%20and%20version%20button.adoc[Detailed notes].
 * *Docs / SEO:* Antora `site.robots` now emits `/robots.txt` with an absolute `Sitemap:` line for the production host.
 * *Fix:* Docs example Themed SVG host mode — ship `site-themed-svg.css` with light+dark `--themed-svg-valentus-example-*` host vars (match diagram manifests) so dark mode no longer falls back to light after runtime upgrade. See link:changelog-details/2026-09-10%20-%20themed%20svg%20host%20css.adoc[Detailed notes].
