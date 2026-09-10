@@ -16,6 +16,7 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+* *Fix / UX:* Style page-edit **View | Edit** as a muted lead-table Source cell (`.page-context-source-actions`); keep legacy `.page-context-actions` aside selectors for hubs without a lead table.
 * *Fix / UX:* Breadcrumb mast — trail segments (links, folder nodes, current page) use accent color + underline; Version/component kickers keep accent chip-on-hover but no resting underline. See link:changelog-details/2026-09-10%20-%20breadcrumb%20trail%20underline.adoc[Detailed notes].
 * *Polish / UX:* Read-width control icons use sharp rectangles (drop SVG `rx`) so column glyphs contrast the soft selector bar. See link:changelog-details/2026-09-10%20-%20read-width%20sharp%20icons.adoc[Detailed notes].
 * *Chore:* Bump demo playbook dep `@antora-supplemental/antora-search-chat` to `v0.1.4` (hierarchical scope tree; closed face without *Component*/*Version* kind prefix). Tag consumer topic `antora-search-chat` for post-release discovery.
