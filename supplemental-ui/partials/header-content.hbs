@@ -34,11 +34,11 @@
       <div class="navbar-end adt-header-actions">
         {{#if (and @root.page.origin @root.page.origin.webUrl)}}
         <a class="navbar-item adt-header-icon-btn adt-header-vcs" href="{{{@root.page.origin.webUrl}}}" rel="noopener" target="_blank" title="Source repository" aria-label="Source repository (opens in new tab)">
-          <img class="adt-header-vcs-img" src="{{{uiRootPath}}}/img/vcs/repo.svg" width="24" height="24" alt="" />
+          <img class="adt-header-vcs-img" src="{{{uiRootPath}}}/img/vcs/{{adt-vcs-icon-id @root.page.origin.webUrl 'repo'}}.svg" width="24" height="24" alt="" />
         </a>
         {{else}}
         <a class="navbar-item adt-header-icon-btn adt-header-vcs" href="{{{or site.keys.githubProfileUrl 'https://github.com'}}}" rel="noopener" target="_blank" title="Source host" aria-label="Source host (opens in new tab)">
-          <img class="adt-header-vcs-img" src="{{{uiRootPath}}}/img/vcs/github.svg" width="24" height="24" alt="" />
+          <img class="adt-header-vcs-img" src="{{{uiRootPath}}}/img/vcs/{{adt-vcs-icon-id (or site.keys.githubProfileUrl 'https://github.com') 'github'}}.svg" width="24" height="24" alt="" />
         </a>
         {{/if}}
       </div>

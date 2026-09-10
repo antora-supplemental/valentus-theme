@@ -1,9 +1,9 @@
 {
   id: "edit-crumb",
-  name: "Edit in breadcrumb",
-  version: "1.0.0",
+  name: "Edit breadcrumb stub",
+  version: "1.1.0",
   type: "ui-module",
-  description: "Inline edit link partial for breadcrumb rows (pairs with bc-mast or custom breadcrumbs).",
+  description: "Empty edit-breadcrumb partial for backward compatibility. Real Edit control: @antora-supplemental/page-edit into page-context lead.",
   repository: "https://github.com/antora-supplemental/valentus-theme",
   requires: [],
   recommends: ["vcs-icons"],

@@ -1,3 +1,11 @@
+'use strict'
+
+/**
+ * @deprecated Antora hubs: use `@antora-supplemental/page-edit` (baked Edit + icons)
+ * and the `adt-vcs-icon-id` Handlebars helper for header marks. This script is no
+ * longer loaded by Valentus footer-scripts; kept only for optional Download-button
+ * replacement on Default UI leftovers.
+ */
 (function () {
   "use strict";
 
@@ -52,39 +60,7 @@
   function getRepoUrl() {
     const meta = document.querySelector('meta[name="antora-repo-url"]');
     if (meta && meta.content) return meta.content;
-    const editLink = document.querySelector(
-      '.navbar-end a[href*="/edit/"], .navbar-end a[href*="/-/edit/"], .navbar-end a[href*="/blob/"], a.adt-edit-inline-link[href*="/"]'
-    );
-    if (editLink && editLink.href) {
-      try {
-        const u = new URL(editLink.href);
-        const pathParts = u.pathname.split("/").filter(Boolean);
-        if (pathParts.length >= 2) return u.origin + "/" + pathParts.slice(0, 2).join("/");
-      } catch {
-        // ignore
-      }
-    }
     return null;
-  }
-
-  function applyVcsIcons() {
-    const base = getUiBase();
-    function setVcsImage(img, href, unknownId) {
-      if (!img || !href) return;
-      setVcsImageSrc(img, base, vcsIconIdFromUrl(href, unknownId));
-    }
-    document.querySelectorAll("a.adt-edit-inline-link[href]").forEach((a) => {
-      const img = a.querySelector("img.adt-vcs-icon-img, img.adt-edit-vcs-img");
-      setVcsImage(img, a.href, "code");
-    });
-    document.querySelectorAll("a.adt-header-vcs[href] img.adt-header-vcs-img").forEach((img) => {
-      const a = img.closest("a");
-      if (a) setVcsImage(img, a.href, "repo");
-    });
-    document.querySelectorAll("a.vcs-repo-link[href] img.vcs-logo-img").forEach((img) => {
-      const a = img.closest("a");
-      if (a) setVcsImage(img, a.href, "repo");
-    });
   }
 
   function buildVcsLogoWidget(repoUrl, id, base) {
@@ -128,7 +104,6 @@
 
   function init() {
     replaceDownloadWithVcsLogo();
-    applyVcsIcons();
   }
 
   if (document.readyState === "loading") {

@@ -1,16 +1,16 @@
 {
   id: "vcs-icons",
   name: "VCS provider icons",
-  version: "1.0.0",
+  version: "1.1.0",
   type: "ui-module",
-  description: "Provider SVG assets and JS to map repository URLs to icons in header and edit links.",
+  description: "Provider SVG assets + Handlebars helper adt-vcs-icon-id (bake icon at generate time). Edit injection lives in @antora-supplemental/page-edit.",
   repository: "https://github.com/antora-supplemental/valentus-theme",
   requires: [],
   recommends: ["dark-mode"],
   conflicts: [],
   slots: {
     foot: {
-      scripts: ["js/site-vcs-icons.js"],
+      scripts: [],
     },
   },
   ui: {
