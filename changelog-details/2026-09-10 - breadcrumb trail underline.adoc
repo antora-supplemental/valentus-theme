@@ -1,0 +1,22 @@
+= Breadcrumb mast — trail underlines, plain kickers
+:navtitle: Breadcrumb trail underline
+:description: Swap resting underlines from Version/component kickers onto breadcrumb trail segments; accent color for current page and folder nodes.
+
+== Summary
+
+Mast kickers previously rested as underlined accent text while trail links stayed un-underlined and the current page / folder nodes used body ink (white in dark mode). That inverted the usual “links look linked” reading.
+
+== Change
+
+* Trail links, non-link folder nodes (`.adt-breadcrumb-trail-text`), and the current crumb all use `--adt-accent` plus a resting underline.
+* Version / component kickers (and single-version plain labels) keep accent color and chip fill on hover/open, but drop the resting underline.
+* Mirror in `site-doc-layout.css` and `site-visual.css` under both `supplemental-ui` and `ui-modules/packages/doc-layout`.
+* Docs: customization table for `adt-version-mode` `plain` no longer says “underlined”.
+
+== Files
+
+* `supplemental-ui/css/site-doc-layout.css`
+* `supplemental-ui/css/site-visual.css`
+* `ui-modules/packages/doc-layout/ui/css/site-doc-layout.css`
+* `ui-modules/packages/doc-layout/ui/css/site-visual.css`
+* `docs/modules/guide/pages/customization.adoc`

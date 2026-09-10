@@ -573,20 +573,21 @@ footer.footer a {
 
 /* ——— Breadcrumbs / mast accents ——— */
 .adt-breadcrumb-trail .adt-breadcrumb-trail-link,
+.adt-breadcrumb-trail--current .adt-breadcrumb-trail-link,
+.adt-breadcrumb-trail--current .adt-breadcrumb-trail-text,
+.adt-breadcrumb-trail-text,
 .adt-breadcrumb-edit .adt-edit-inline-link,
 .adt-breadcrumb-home-link {
   color: var(--adt-accent) !important;
 }
 
-.adt-breadcrumb-trail .adt-breadcrumb-trail-link {
-  font-weight: 400 !important;
-}
-
+.adt-breadcrumb-trail .adt-breadcrumb-trail-link,
 .adt-breadcrumb-trail--current .adt-breadcrumb-trail-link,
 .adt-breadcrumb-trail--current .adt-breadcrumb-trail-text,
 .adt-breadcrumb-trail-text {
-  color: var(--adt-ink) !important;
-  font-weight: 500 !important;
+  font-weight: 400 !important;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
 }
 
 .adt-bc-sep {
@@ -597,13 +598,12 @@ footer.footer a {
   border-radius: var(--adt-radius-sm);
 }
 
-/* Mast dropdowns: resting state reads as an underlined text link; chip on hover/open. */
+/* Mast dropdowns: accent label at rest; chip fill on hover/open (no underline — trail owns that). */
 .adt-bc-kicker {
   color: var(--adt-accent) !important;
   background: transparent !important;
   border-color: transparent !important;
-  text-decoration: underline;
-  text-underline-offset: 0.12em;
+  text-decoration: none;
   font-weight: 500 !important;
 }
 
@@ -624,8 +624,7 @@ footer.footer a {
   font-weight: 500;
   line-height: 1.35;
   color: var(--adt-accent);
-  text-decoration: underline;
-  text-underline-offset: 0.12em;
+  text-decoration: none;
 }
 
 .adt-bc-dropdown {

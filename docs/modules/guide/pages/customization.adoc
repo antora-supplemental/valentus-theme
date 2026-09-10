@@ -50,7 +50,7 @@ Helper `adt-version-mode` drives the breadcrumb version control (Valentus 2.0.19
 | Mode | When | UI |
 | --- | --- | --- |
 | `hide` | Only the implicit/unversioned Antora version (`~`), or no version | Version control omitted (no “Default” chip) |
-| `plain` | Exactly one **named** version | Underlined text (not a dropdown) |
+| `plain` | Exactly one **named** version | Accent-colored plain text (not a dropdown; no underline) |
 | `menu` | Two or more versions | Dropdown; implicit rows still use the `adt-version-label` fallback **Default** |
 
 **Rationale:** showing “Default” for a single unversioned component teaches little and clutters the mast; hiding matches reader expectation that unversioned docs have no version picker.

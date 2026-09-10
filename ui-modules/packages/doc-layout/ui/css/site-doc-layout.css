@@ -780,51 +780,61 @@ html.dark-theme .adt-doc-mast {
   overflow: hidden;
 }
 
-.adt-breadcrumb-trail .adt-breadcrumb-trail-link {
+/* Trail: accent + underline for links, folder nodes, and current page (uniform mast). */
+.adt-breadcrumb-trail .adt-breadcrumb-trail-link,
+.adt-breadcrumb-trail--current .adt-breadcrumb-trail-link,
+.adt-breadcrumb-trail--current .adt-breadcrumb-trail-text,
+.adt-breadcrumb-trail-text {
   color: var(--adt-accent);
   font-weight: 400;
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
 }
 
 .adt-breadcrumb-trail .adt-breadcrumb-trail-link:hover {
   text-decoration: underline;
 }
 
-.adt-breadcrumb-trail--current .adt-breadcrumb-trail-link,
-.adt-breadcrumb-trail--current .adt-breadcrumb-trail-text,
-.adt-breadcrumb-trail-text {
-  color: var(--adt-ink);
-  font-weight: 500;
-}
-
-html.dark-theme .adt-breadcrumb-trail .adt-breadcrumb-trail-link {
-  color: var(--adt-accent);
-}
-
+html.dark-theme .adt-breadcrumb-trail .adt-breadcrumb-trail-link,
 html.dark-theme .adt-breadcrumb-trail--current .adt-breadcrumb-trail-link,
 html.dark-theme .adt-breadcrumb-trail--current .adt-breadcrumb-trail-text,
 html.dark-theme .adt-breadcrumb-trail-text {
-  color: var(--adt-ink);
+  color: var(--adt-accent);
 }
 
-/* “Edit” in page-context lead (from @antora-supplemental/page-edit); breadcrumb stub is empty. */
+/* “View | Edit” in page-context lead table (from @antora-supplemental/page-edit); breadcrumb stub is empty. */
+.page-context-source-actions,
+.doc .page-context-source-actions,
 .page-context-actions,
 .doc .page-context-actions {
-  display: flex;
+  display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-end;
+  gap: 0.35rem 0.45rem;
   margin: 0;
-  padding: 0.35rem 0.9rem 0.15rem;
+  padding: 0;
   border: none;
   background: transparent;
 }
 
 .page-context-lead > .page-context-actions,
 .doc .page-context-lead > .page-context-actions {
+  display: flex;
+  justify-content: flex-end;
   margin: 0;
   padding: 0.35rem 0.9rem 0.25rem;
 }
 
+.page-context-source-sep,
+.doc .page-context-source-sep {
+  opacity: 0.55;
+  user-select: none;
+}
+
+.page-context-source-actions .adt-view-inline-link,
+.page-context-source-actions .adt-edit-inline-link,
+.doc .page-context-source-actions .adt-view-inline-link,
+.doc .page-context-source-actions .adt-edit-inline-link,
 .page-context-actions .adt-edit-inline-link,
 .doc .page-context-actions .adt-edit-inline-link {
   display: inline-flex;
@@ -835,16 +845,24 @@ html.dark-theme .adt-breadcrumb-trail-text {
   font-size: 0.95em;
   font-weight: 500;
   line-height: 1.2;
-  color: var(--adt-accent);
-  text-decoration: none;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
   white-space: nowrap;
 }
 
+.page-context-source-actions .adt-view-inline-link:hover,
+.page-context-source-actions .adt-edit-inline-link:hover,
+.doc .page-context-source-actions .adt-view-inline-link:hover,
+.doc .page-context-source-actions .adt-edit-inline-link:hover,
 .page-context-actions .adt-edit-inline-link:hover,
 .doc .page-context-actions .adt-edit-inline-link:hover {
   text-decoration: underline;
+  text-decoration-thickness: 0.1em;
 }
 
+.page-context-source-actions .adt-edit-vcs-svg,
+.doc .page-context-source-actions .adt-edit-vcs-svg,
 .page-context-actions .adt-edit-vcs-svg,
 .doc .page-context-actions .adt-edit-vcs-svg {
   width: 16px;
@@ -854,6 +872,8 @@ html.dark-theme .adt-breadcrumb-trail-text {
   opacity: 0.75;
 }
 
+html.dark-theme .page-context-source-actions .adt-edit-vcs-svg,
+html.dark-theme .doc .page-context-source-actions .adt-edit-vcs-svg,
 html.dark-theme .page-context-actions .adt-edit-vcs-svg,
 html.dark-theme .doc .page-context-actions .adt-edit-vcs-svg {
   opacity: 0.9;
@@ -1009,11 +1029,10 @@ html.dark-theme .adt-breadcrumb-home-link:hover {
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
-  text-decoration: underline;
-  text-underline-offset: 0.12em;
+  text-decoration: none;
   opacity: 1;
   outline: none;
-  transition: background-color 0.15s ease, border-color 0.15s ease, text-decoration-color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 /* Small muted stroke chevron — reads as a menu without competing with the label. */
@@ -1039,7 +1058,6 @@ html.dark-theme .adt-breadcrumb-home-link:hover {
   border-color: color-mix(in srgb, var(--adt-accent) 45%, transparent);
   background: var(--adt-bc-kicker-bg);
   color: var(--adt-bc-kicker-fg);
-  text-decoration: none;
 }
 
 .adt-bc-kicker:hover::after {
@@ -1061,7 +1079,6 @@ html.dark-theme .adt-breadcrumb-home-link:hover {
   border-color: var(--adt-accent);
   background: color-mix(in srgb, var(--adt-accent) 18%, var(--adt-bc-kicker-bg));
   color: var(--adt-bc-kicker-fg);
-  text-decoration: none;
 }
 
 .adt-bc-kicker[aria-expanded='true']::after {
@@ -1089,8 +1106,7 @@ html.dark-theme .adt-breadcrumb-home-link:hover {
   font-weight: 500;
   line-height: 1.45;
   color: var(--adt-accent);
-  text-decoration: underline;
-  text-underline-offset: 0.12em;
+  text-decoration: none;
   white-space: nowrap;
 }
 
