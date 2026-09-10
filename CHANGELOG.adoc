@@ -19,6 +19,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * *Docs:* Customization / How it works / Troubleshooting — overriding `head-meta.hbs` must keep the full Valentus CSS chain + FOUC hold; do not double-load `site.js` from hub footer partials; document mast `adt-version-mode` (hide `~`, plain single named, menu multi) and note literal `~` as a possible future pedagogy option.
 * *Diagrams:* Replace the duplicated authored PlantUML sequence with canonical Mermaid, extract both extension examples into named sources, and ship deterministic Themed SVG adaptive/host artifacts. The UI progressively upgrades `.themed-svg` image roles with the sanitized 0.1.1 runtime. See link:changelog-details/2026-09-08%20-%20themed%20diagram%20artifacts.adoc[Detailed notes — themed diagram artifacts].
 
+== [2.0.21] - 2026-09-09
+
+Public label: *2.0.21+antora.3* (Antora 3).
+
+* *Fix / UX:* Tree-nav horizontal scroll — long/nowrap labels expand the scrollport; left/right edge fades toggle with overflow (`adt-nav-overflow-start` / `adt-nav-overflow-end` via `site-visual.js`) so each fade shows only while that side still overflows; mask soft-clips highlight + text together. See link:changelog-details/2026-09-09%20-%20nav%20scroll%20edge%20fades.adoc[Detailed notes].
+
 == [2.0.20] - 2026-09-09
 
 Public label: *2.0.20+antora.3* (Antora 3).

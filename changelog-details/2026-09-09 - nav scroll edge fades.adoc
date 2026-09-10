@@ -1,0 +1,14 @@
+= 2.0.21 — tree-nav horizontal scroll edge fades
+:navtitle: 2.0.21 nav scroll fades
+:description: Dynamic left/right nav edge fades driven by horizontal overflow and scroll position.
+
+== Summary
+
+Tree-nav labels (especially nav-typology nowrap rows) must be reachable via horizontal scroll. Valentus previously clipped with a permanent right-edge mask and fixed-width `overflow: hidden` links, so overflow could not scroll.
+
+== Behavior
+
+* `nav.nav-menu` is `overflow-x/y: auto`; links use `width: max-content` so long labels widen the scrollport.
+* `site-visual.js` toggles `adt-nav-overflow-start` / `adt-nav-overflow-end` from `scrollLeft` / `scrollWidth`.
+* CSS `mask-image` fades only the overflowing edge(s); both edges fade when scrolled mid-content; no fade when fully scrolled into view or when nothing overflows.
+* The same mask soft-clips active-row highlight fill with the text.

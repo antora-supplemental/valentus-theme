@@ -1,5 +1,6 @@
 /**
- * Valentus visual polish: sticky header shadow + search UX helpers.
+ * Valentus visual polish: sticky header shadow + search UX helpers +
+ * tree-nav horizontal scroll edge fades.
  * Root light↔dark transition lives in antora-dark-mode (View Transitions +
  * html.adt-theme-animating fallback). Reading width: site-read-width.js.
  */
@@ -46,4 +47,56 @@
     input.focus()
     input.select()
   })
+
+  /**
+   * Tree-nav edge fades: right when more content to the right, left when scrolled
+   * away from start. Classes drive mask-image in site-visual.css.
+   */
+  function updateNavScrollFades (menu) {
+    if (!(menu instanceof HTMLElement)) return
+    const epsilon = 1
+    const maxScroll = menu.scrollWidth - menu.clientWidth
+    const canScroll = maxScroll > epsilon
+    const atStart = menu.scrollLeft <= epsilon
+    const atEnd = menu.scrollLeft >= maxScroll - epsilon
+    menu.classList.toggle('adt-nav-overflow-start', canScroll && !atStart)
+    menu.classList.toggle('adt-nav-overflow-end', canScroll && !atEnd)
+  }
+
+  function bindNavScrollFades (menu) {
+    if (!(menu instanceof HTMLElement) || menu.dataset.adtNavScrollBound === '1') return
+    menu.dataset.adtNavScrollBound = '1'
+    const refresh = () => updateNavScrollFades(menu)
+    menu.addEventListener('scroll', refresh, { passive: true })
+    window.addEventListener('resize', refresh)
+    if (typeof ResizeObserver !== 'undefined') {
+      const ro = new ResizeObserver(refresh)
+      ro.observe(menu)
+    }
+    if (typeof MutationObserver !== 'undefined') {
+      const mo = new MutationObserver(refresh)
+      mo.observe(menu, {
+        subtree: true,
+        childList: true,
+        attributes: true,
+        attributeFilter: ['class', 'style'],
+      })
+    }
+    refresh()
+    // After fonts/icons settle (nav-typology nowrap labels)
+    window.setTimeout(refresh, 0)
+    window.setTimeout(refresh, 250)
+  }
+
+  function initNavScrollFades () {
+    document
+      .querySelectorAll('nav.nav-menu.nav-tree-only, nav.nav-menu.adt-nav-tree-only')
+      .forEach(bindNavScrollFades)
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNavScrollFades)
+  } else {
+    initNavScrollFades()
+  }
 })()

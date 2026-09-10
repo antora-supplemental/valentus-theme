@@ -640,9 +640,22 @@ footer.footer a {
    Caret column is margin (outside the highlight box). Same padding for
    normal / hover / current so soft-fill never breaks tree vertical rhythm;
    current differs by accent color + weight only. */
-/* Tree edge fade so overflowing labels (and their highlight fill) soft-clip together. */
+/*
+ * Horizontal scroll + edge fades (site-visual.js toggles .adt-nav-overflow-*).
+ * Fades appear only when that edge still has overflow; mask soft-clips
+ * overflowing labels and their highlight fill together.
+ */
 nav.nav-menu.nav-tree-only,
 nav.nav-menu.adt-nav-tree-only {
+  overflow-x: auto;
+  overflow-y: auto;
+  -webkit-mask-image: none;
+  mask-image: none;
+  scrollbar-width: thin;
+}
+
+nav.nav-menu.nav-tree-only.adt-nav-overflow-end:not(.adt-nav-overflow-start),
+nav.nav-menu.adt-nav-tree-only.adt-nav-overflow-end:not(.adt-nav-overflow-start) {
   -webkit-mask-image: linear-gradient(
     to right,
     #000 calc(100% - var(--adt-nav-scroll-fade, 1.25rem)),
@@ -650,6 +663,40 @@ nav.nav-menu.adt-nav-tree-only {
   );
   mask-image: linear-gradient(
     to right,
+    #000 calc(100% - var(--adt-nav-scroll-fade, 1.25rem)),
+    transparent 100%
+  );
+}
+
+nav.nav-menu.nav-tree-only.adt-nav-overflow-start:not(.adt-nav-overflow-end),
+nav.nav-menu.adt-nav-tree-only.adt-nav-overflow-start:not(.adt-nav-overflow-end) {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--adt-nav-scroll-fade, 1.25rem),
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--adt-nav-scroll-fade, 1.25rem),
+    #000 100%
+  );
+}
+
+nav.nav-menu.nav-tree-only.adt-nav-overflow-start.adt-nav-overflow-end,
+nav.nav-menu.adt-nav-tree-only.adt-nav-overflow-start.adt-nav-overflow-end {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--adt-nav-scroll-fade, 1.25rem),
+    #000 calc(100% - var(--adt-nav-scroll-fade, 1.25rem)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--adt-nav-scroll-fade, 1.25rem),
     #000 calc(100% - var(--adt-nav-scroll-fade, 1.25rem)),
     transparent 100%
   );
@@ -663,11 +710,12 @@ nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text {
   border-radius: var(--adt-radius-sm);
   /* Extra rem beyond the caret glyph so toggle and label don’t kiss */
   margin-left: calc(0.85em + 0.55rem) !important;
-  width: calc(100% - (0.85em + 0.55rem)) !important;
-  max-width: calc(100% - (0.85em + 0.55rem)) !important;
+  /* Intrinsic width so long/nowrap labels expand the nav scrollport */
+  width: max-content !important;
+  min-width: calc(100% - (0.85em + 0.55rem)) !important;
+  max-width: none !important;
   padding: 0.12rem 0.4rem !important;
-  /* nowrap labels (e.g. nav-typology) must not paint past the soft-fill box */
-  overflow: hidden;
+  overflow: visible;
   transition: var(--adt-transition);
 }
 
