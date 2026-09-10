@@ -1,0 +1,21 @@
+= Themed SVG host CSS for docs examples
+:description: Light and dark host custom properties for Valentus example diagram namespaces.
+
+Host-mode Themed SVG artifacts resolve colors through document CSS variables
+(`--themed-svg-<namespace>-…`). After the browser runtime upgrades an adaptive
+image to the host SVG, dark mode only works when the page defines those variables
+for both light and dark.
+
+This change adds `supplemental-ui/css/site-themed-svg.css` with presets matching
+`valentus-example-decision-flow` and `valentus-example-authentication-sequence`
+manifests, and links it from `head-meta.hbs`.
+
+== Files
+
+* `supplemental-ui/css/site-themed-svg.css`
+* `supplemental-ui/partials/head-meta.hbs`
+
+== Follow-up
+
+Regenerate Mermaid host SVGs with `@dev-centr/themed-svg@0.2.2` to clear residual
+inline `fill:…!important` styles that host CSS cannot override.

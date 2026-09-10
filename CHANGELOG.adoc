@@ -16,6 +16,10 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+* *Fix:* Docs example Themed SVG host mode — ship `site-themed-svg.css` with light+dark `--themed-svg-valentus-example-*` host vars (match diagram manifests) so dark mode no longer falls back to light after runtime upgrade. See link:changelog-details/2026-09-10%20-%20themed%20svg%20host%20css.adoc[Detailed notes].
++
+Debt: Mermaid host SVGs still carry a few hard-coded `fill:#…!important` rules (arrow/root anchors); regenerate with `@dev-centr/themed-svg@0.2.2` when practical.
+
 == [2.0.29] - 2026-09-10
 
 Public label: *2.0.29+antora.3* (Antora 3).

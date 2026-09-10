@@ -1,0 +1,51 @@
+/* Host CSS vars for docs example Themed SVG namespaces (match *.theme.json presets).
+   Adaptive SVGs embed light+dark; host mode needs these on the document after runtime upgrade. */
+
+:root {
+  /* valentus-example-decision-flow */
+  --themed-svg-valentus-example-decision-flow-color-canvas: #ffffff;
+  --themed-svg-valentus-example-decision-flow-color-surface-primary: #f3f4f6;
+  --themed-svg-valentus-example-decision-flow-color-surface-secondary: #ffffff;
+  --themed-svg-valentus-example-decision-flow-color-text-primary: #1f2937;
+  --themed-svg-valentus-example-decision-flow-color-border-primary: #6b7280;
+  --themed-svg-valentus-example-decision-flow-color-edge: #4b5563;
+  --themed-svg-valentus-example-decision-flow-color-edge-label: #374151;
+  --themed-svg-valentus-example-decision-flow-color-accent-primary: #0f766e;
+
+  /* valentus-example-authentication-sequence */
+  --themed-svg-valentus-example-authentication-sequence-color-canvas: #ffffff;
+  --themed-svg-valentus-example-authentication-sequence-color-surface-primary: #f3f4f6;
+  --themed-svg-valentus-example-authentication-sequence-color-surface-secondary: #ffffff;
+  --themed-svg-valentus-example-authentication-sequence-color-text-primary: #1f2937;
+  --themed-svg-valentus-example-authentication-sequence-color-border-primary: #6b7280;
+  --themed-svg-valentus-example-authentication-sequence-color-edge: #4b5563;
+  --themed-svg-valentus-example-authentication-sequence-color-edge-label: #374151;
+  --themed-svg-valentus-example-authentication-sequence-color-accent-primary: #0f766e;
+}
+
+html.dark-theme {
+  --themed-svg-valentus-example-decision-flow-color-canvas: #111827;
+  --themed-svg-valentus-example-decision-flow-color-surface-primary: #293548;
+  --themed-svg-valentus-example-decision-flow-color-surface-secondary: #1f2937;
+  --themed-svg-valentus-example-decision-flow-color-text-primary: #f9fafb;
+  --themed-svg-valentus-example-decision-flow-color-border-primary: #9ca3af;
+  --themed-svg-valentus-example-decision-flow-color-edge: #d1d5db;
+  --themed-svg-valentus-example-decision-flow-color-edge-label: #e5e7eb;
+  --themed-svg-valentus-example-decision-flow-color-accent-primary: #5eead4;
+
+  --themed-svg-valentus-example-authentication-sequence-color-canvas: #111827;
+  --themed-svg-valentus-example-authentication-sequence-color-surface-primary: #293548;
+  --themed-svg-valentus-example-authentication-sequence-color-surface-secondary: #1f2937;
+  --themed-svg-valentus-example-authentication-sequence-color-text-primary: #f9fafb;
+  --themed-svg-valentus-example-authentication-sequence-color-border-primary: #9ca3af;
+  --themed-svg-valentus-example-authentication-sequence-color-edge: #d1d5db;
+  --themed-svg-valentus-example-authentication-sequence-color-edge-label: #e5e7eb;
+  --themed-svg-valentus-example-authentication-sequence-color-accent-primary: #5eead4;
+}
+
+.imageblock.themed-svg themed-svg,
+.imageblock.themed-svg img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
