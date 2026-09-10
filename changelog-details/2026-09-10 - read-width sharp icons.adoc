@@ -1,0 +1,17 @@
+= Read-width icons — sharp column glyphs
+:navtitle: Read-width sharp icons
+:description: Drop rounded corners on read-width SVG rectangles so measure glyphs read as columns against the soft control bar.
+
+== Summary
+
+The `adt-read-width` segmented control keeps a rounded selector bar and slightly rounded button hit areas. The three measure icons were also rounded (`<rect … rx="1">`), which nested soft corners inside soft chrome and weakened the “column width” metaphor.
+
+== Change
+
+* Remove `rx` from the narrow / comfortable / wide SVG rectangles in `adt-read-width.hbs`.
+* Set icon stroke joins to miter (butt caps) so stroked corners stay crisp.
+* Edit the `read-width` UI module source and mirror into `supplemental-ui` (bundled consumer).
+
+== Scope note
+
+`read-width` is already a standalone UI module (`ui-modules/packages/read-width`). It is not an Antora pipeline extension; chrome packages live in the UI-modules registry the same way as `font-size`.

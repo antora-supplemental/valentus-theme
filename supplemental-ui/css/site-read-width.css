@@ -125,7 +125,9 @@ article.doc > .adt-read-width {
   fill: none;
   stroke: currentColor;
   stroke-width: 1.75;
-  stroke-linecap: round;
+  /* Sharp column glyphs; soft chrome stays on the bar / button hit areas. */
+  stroke-linejoin: miter;
+  stroke-linecap: butt;
 }
 
 /* Below the 3-col / doc-measure breakpoint, width control is a no-op — hide it. */
