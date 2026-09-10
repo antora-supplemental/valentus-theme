@@ -1,0 +1,20 @@
+= Home chip restored; Version button for `~`
+:description: Restore the icon-only site-home chip and show Version on the kicker while menu rows keep Antora’s tilde.
+:page-audience: Theme maintainers and hub authors
+:page-usage-context: After rebuilding against Valentus with this Unreleased fix (pairs with page-context 0.6.4 / page-edit 0.2.3 for View|Edit zones)
+:page-orig-author: Ryan Johnson
+:page-last-author: Cursor agent on behalf of Ryan Johnson
+:page-last-edited: 2026-09-10
+
+== Context
+
+Commit `3515896` replaced the home SVG chip with a plain `/` so the mast would copy as a path. The intent was only to drop a **Home** text control and keep real `/` separators — not to remove the house icon.
+
+Readers also saw a literal `~` on the version **button**, which is Antora’s internal unversioned marker; the button should read **Version**, while the dropdown still teaches `~`.
+
+== Changes
+
+* Restore the SVG house icon inside `.adt-breadcrumb-home-link` (icon-only; no “Home” word).
+* Restore kicker-chip sizing/border/background for the home control.
+* Keep `<li class="adt-breadcrumb-sep">/</li>` trail separators for copyability.
+* Kicker: `{{adt-version-label … fallback="Version"}}`; dropdown rows keep default `~`.

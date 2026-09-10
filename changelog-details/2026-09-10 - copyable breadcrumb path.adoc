@@ -8,11 +8,11 @@
 
 == Context
 
-Pseudo-element `/` separators and an SVG home icon do not survive a text selection. Readers (and agents) want to drag-select the mast and paste something like `/ Home ~ / Where docs live`.
+Pseudo-element `/` separators and an SVG home icon do not survive a text selection. Readers (and agents) want to drag-select the mast and paste a path-like string. Trail separators became real `/` text nodes; the site-home control stayed an icon chip (restored after a brief overshoot that rendered `/` as the home glyph — see link:2026-09-10%20-%20home%20chip%20and%20version%20button.adoc[Home chip restored]).
 
 == Changes
 
-* Site home control renders the character `/` (aria-label still “Site home”); drop the kicker chip chrome — muted at rest, accent on hover/focus.
 * Trail separators are `<li class="adt-breadcrumb-sep">/</li>` text nodes (CSS `::after` separators disabled).
-* A real space sits between the component and version kickers so a selection reads `Home ~` instead of `Home~`.
-* Leading `/` is the site root; additional `/` characters only appear before trail segments (no doubled slash after home).
+* A real space sits between the component and version kickers so a selection reads `Component Version` / `Component ~` instead of glued tokens.
+* Additional `/` characters only appear before trail segments (no doubled slash after home).
+* *(Superseded)* An early cut of this change also replaced the home SVG with a plain `/`; that home glyph was restored to the icon chip while keeping copyable trail separators.

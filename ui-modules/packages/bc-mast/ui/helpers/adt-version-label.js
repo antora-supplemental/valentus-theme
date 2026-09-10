@@ -1,8 +1,9 @@
 'use strict'
 
 /**
- * Version kicker / dropdown label: named versions as-is; implicit default → `~`.
- * Override with hash.fallback when a caller needs a different placeholder.
+ * Version kicker / dropdown label: named versions as-is; implicit default → fallback.
+ * Default fallback is `~` (Antora’s unversioned marker) for dropdown rows.
+ * Kickers pass fallback="Version" so the button reads “Version”, not `~`.
  */
 function isNamedVersion (value) {
   if (value == null) return false

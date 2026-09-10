@@ -47,7 +47,7 @@ Load **only** hub companions after the theme scripts (e.g. `site-nav-tree-curren
 
 The breadcrumb mast keeps the **component** kicker even when `@antora-supplemental/site-nav-tree` is active — mobile readers still need a jump to the component home without opening the drawer, and desktop redundancy with the sidebar is mild. Version sits **conjoined to the right** of the component (same mast segment). When site-nav-tree is on, the page **trail** drops a leading crumb that duplicates the component root so you do not get `Home` twice.
 
-Site home is a real `/` character (not an SVG chip). Separators between trail segments are also real `/` text nodes, so a drag-select copies a pasteable path such as `/ Home ~ / Where docs live`.
+Site home is an **icon-only** house chip (no “Home” word label). Separators between trail segments are real `/` text nodes, so a drag-select still copies a pasteable path such as `/ Component Version / Where docs live` (the home glyph itself is not a slash character).
 
 Helper `adt-version-mode` drives the version control (Valentus 2.0.19+; `~` menu behavior from 2.0.27+):
 
@@ -55,9 +55,9 @@ Helper `adt-version-mode` drives the version control (Valentus 2.0.19+; `~` menu
 | --- | --- | --- |
 | `hide` | No version on the page model | Version control omitted |
 | `plain` | Exactly one **named** version | Accent-colored plain text (not a dropdown) |
-| `menu` | Multiple versions, **or** a single implicit/unversioned (`~`) version | Dropdown; implicit rows label as literal `~` (`adt-version-label`) |
+| `menu` | Multiple versions, **or** a single implicit/unversioned (`~`) version | Dropdown; button shows **Version** for `~`/default (`adt-version-label` with `fallback="Version"`); menu rows show literal `~` |
 
-**Rationale:** a lone `~` still deserves a real mast segment (hiding left empty `/  /` separators when the component kicker was also suppressed). The tilde matches Antora’s unversioned marker instead of inventing “Default”.
+**Rationale:** a lone `~` still deserves a real mast segment (hiding left empty `/  /` separators when the component kicker was also suppressed). The button says “Version” for readability; the menu teaches Antora’s tilde marker.
 
 === Current Color Palette
 

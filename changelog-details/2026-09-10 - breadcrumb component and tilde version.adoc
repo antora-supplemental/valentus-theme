@@ -13,7 +13,7 @@ Hiding the mast version control for a lone Antora `~` left an empty masthead seg
 == Changes
 
 * Component kicker stays visible even when `site.keys.site_nav_tree=true` (mobile context + click-to-component-home without opening the drawer).
-* Single implicit/`~` versions use `adt-version-mode` **menu** again; `adt-version-label` prints literal `~` (not “Version” / “Default”).
+* Single implicit/`~` versions use `adt-version-mode` **menu** again. The kicker button shows **Version** (`adt-version-label` with `fallback="Version"`); dropdown rows show literal `~` (not “Default”).
 * Version sits **conjoined to the right** of the component name in `.adt-bc-cluster` (tight gap, compact mono version chip).
 * Helper `adt-bc-trail-crumbs` drops a leading trail crumb that duplicates the component root under site-nav-tree, so the path does not spell the component twice.
 * Empty masthead `:not(:has(.adt-bc-menu…))` is `display: none` so a future hide path cannot leave stray separators.

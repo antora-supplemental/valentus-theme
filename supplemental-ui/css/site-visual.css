@@ -580,20 +580,14 @@ footer.footer a {
   color: var(--adt-accent) !important;
 }
 
-/* Site-root "/" is muted until hover (no chip); still a real character for copy. */
+/* Home chip uses accent ink (matches pre-copyable-path chip). */
 .adt-breadcrumb-home-link {
-  color: var(--adt-ink-muted) !important;
-  background: transparent !important;
-  border-color: transparent !important;
-  text-decoration: none !important;
+  color: var(--adt-accent) !important;
 }
 
 .adt-breadcrumb-home-link:hover,
 .adt-breadcrumb-home-link:focus-visible {
   color: var(--adt-accent) !important;
-  background: transparent !important;
-  border-color: transparent !important;
-  text-decoration: none !important;
 }
 
 .adt-breadcrumb-trail .adt-breadcrumb-trail-link,

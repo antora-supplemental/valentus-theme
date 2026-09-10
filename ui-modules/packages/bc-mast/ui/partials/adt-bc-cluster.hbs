@@ -20,7 +20,7 @@
   {{#if (eq this 'menu')}}
   <div class="adt-bc-menu adt-bc-menu-version">
     <button type="button" class="adt-bc-kicker adt-bc-kicker--version" data-adt-toggle="adt-bc-ver" aria-haspopup="listbox" aria-expanded="false" aria-label="Select documentation version">
-      <span class="adt-bc-kicker-version">{{adt-version-label @root.page.componentVersion}}</span>
+            <span class="adt-bc-kicker-version">{{adt-version-label @root.page.componentVersion fallback="Version"}}</span>
     </button>
     <ul class="adt-bc-dropdown adt-bc-dropdown--version" id="adt-bc-ver" role="listbox" hidden>
       {{#if @root.page.versions}}

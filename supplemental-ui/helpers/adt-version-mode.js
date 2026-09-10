@@ -37,8 +37,9 @@ module.exports = (page) => {
       page.componentVersion ||
       (Array.isArray(page.versions) && page.versions[0]) ||
       null
-    // Single `~` still gets a menu (literal tilde label) so the mast keeps a
-    // real segment instead of an empty `/  /` gap when the component kicker is hidden.
+    // Single `~` still gets a menu (button label "Version"; rows show `~`) so the
+    // mast keeps a real segment instead of an empty `/  /` gap when the component
+    // kicker is hidden.
     return isImplicitVersion(cv) ? 'menu' : 'plain'
   }
   return 'hide'
