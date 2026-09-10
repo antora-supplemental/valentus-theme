@@ -250,11 +250,21 @@ body.adt-side-panels html.dark-theme {
     background: transparent !important;
   }
 
+  /*
+   * Panel fills the fixed --adt-nav-width column (not shrink-to-fit).
+   * align-self:flex-start let max-content labels grow the elevated wash past
+   * .nav-container, so overflow-x:auto on nav.nav-menu never engaged.
+   */
   .nav .nav-panel-menu {
     height: auto !important;
     max-height: 100%;
-    align-self: flex-start;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    align-self: stretch;
     box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 
   .nav nav.nav-menu {
@@ -265,6 +275,9 @@ body.adt-side-panels html.dark-theme {
     padding-top: 0.45rem !important;
     padding-bottom: 0.55rem !important;
     box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
 
   .body.adt-body > aside.toc.sidebar .toc-menu,
@@ -340,8 +353,11 @@ body.adt-side-panels html.dark-theme {
   .nav-container {
     width: var(--adt-nav-width) !important;
     flex: 0 0 var(--adt-nav-width) !important;
+    min-width: 0 !important;
+    max-width: var(--adt-nav-width) !important;
     border-right: none !important;
     box-shadow: none !important;
+    overflow-x: hidden;
   }
 
   main.adt-article {

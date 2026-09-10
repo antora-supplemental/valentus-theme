@@ -1,0 +1,18 @@
+= 2.0.24 — tree-nav panel width containment
+:navtitle: 2.0.24 nav panel width
+:description: Keep the elevated nav menu inside the fixed nav column so horizontal scroll and edge fades work.
+
+== Summary
+
+After 2.0.20–2.0.21, the elevated wash lived on `nav.nav-menu` (content-sized) and long labels used `width: max-content` so they could widen a scrollport. In practice `.nav-panel-menu` used `align-self: flex-start` with no `max-width: 100%`, so the panel *and* its background grew past the fixed `--adt-nav-width` `.nav-container`. `scrollWidth` stayed equal to `clientWidth`, so `overflow-x: auto` and the edge-fade classes never engaged.
+
+== Fix
+
+* Stretch `.nav-panel-menu` to the column (`width/max-width: 100%`, `min-width: 0`, `align-self: stretch`).
+* Clip horizontal overflow on the panel; keep the scrollport on `nav.nav-menu`.
+* Cap `.nav-container` at `--adt-nav-width` with `overflow-x: hidden` as a safety rail.
+* Mirror in `supplemental-ui` and `ui-modules/packages/doc-layout`.
+
+== Expectation
+
+Long nowrap labels stay inside the column, scroll horizontally, and toggle `adt-nav-overflow-start` / `adt-nav-overflow-end` as designed in 2.0.21.
