@@ -885,7 +885,21 @@ html.dark-theme .doc .page-context {
   --page-context-bg: rgba(255, 255, 255, 0.02);
 }
 
-/* Beat site-extra `html.dark-theme table tbody tr:nth-child(even)` zebra. */
+/* page-context: aside is the panel; table is rows only. Beat dark zebra. */
+.doc .page-context-lead,
+.doc .page-context-footer {
+  border: 1px solid var(--page-context-border) !important;
+  background: var(--page-context-bg) !important;
+  color: var(--page-context-fg) !important;
+  font-size: 0.82em;
+  line-height: 1.35;
+}
+
+.doc .page-context-footer {
+  margin-top: 2.25rem;
+  margin-bottom: 1.35rem;
+}
+
 .doc table.page-context-table,
 .doc table.page-context-table > tbody > tr,
 .doc table.page-context-table > tbody > tr:nth-child(odd),
@@ -903,25 +917,31 @@ html.dark-theme .doc table.page-context-table > tbody > tr > td {
 }
 
 .doc table.page-context-table {
-  background: var(--page-context-bg) !important;
-  border: 1px solid var(--page-context-border) !important;
-  border-radius: 2px;
+  background: transparent !important;
+  border: none !important;
   border-collapse: collapse;
-  font-size: 0.82em;
-  line-height: 1.35;
-  color: var(--page-context-fg) !important;
+  color: inherit !important;
 }
 
 .doc table.page-context-table > tbody > tr > th,
 .doc table.page-context-table > tbody > tr > td {
-  border: 1px solid var(--page-context-divider, var(--page-context-border)) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--page-context-divider, var(--page-context-border)) !important;
   color: inherit !important;
   font-size: inherit;
+  padding: 0.35rem 0.9rem !important;
+  text-align: left !important;
+}
+
+.doc table.page-context-table > tbody > tr:last-child > th,
+.doc table.page-context-table > tbody > tr:last-child > td {
+  border-bottom: none !important;
 }
 
 .doc table.page-context-table > tbody > tr > th {
   color: var(--page-context-label) !important;
   font-weight: 500;
+  text-align: left !important;
 }
 
 .toc .toc-menu a {
