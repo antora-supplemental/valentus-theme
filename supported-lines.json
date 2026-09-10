@@ -1,9 +1,9 @@
 {
   "schema": 2,
-  "updated": "2026-09-10T01:30:37.636Z",
+  "updated": "2026-09-10T04:22:51.809Z",
   "scheme": "VALENTUS_SEMVER+antora.N",
-  "latest": "2.0.21",
-  "latest_label": "2.0.21+antora.3",
+  "latest": "2.0.23",
+  "latest_label": "2.0.23+antora.3",
   "latest_antora": "3",
   "lines": {
     "1": {
@@ -19,18 +19,18 @@
       "tag": "v2",
       "valentus": "2",
       "antora": "3",
-      "version": "2.0.21",
-      "label": "2.0.21+antora.3",
-      "current": "2.0.21",
+      "version": "2.0.23",
+      "label": "2.0.23+antora.3",
+      "current": "2.0.23",
       "url": "https://github.com/antora-supplemental/valentus-theme/releases/download/v2/ui-bundle.zip"
     },
     "2.0": {
       "tag": "v2.0",
       "valentus": "2",
       "antora": "3",
-      "version": "2.0.21",
-      "label": "2.0.21+antora.3",
-      "current": "2.0.21",
+      "version": "2.0.23",
+      "label": "2.0.23+antora.3",
+      "current": "2.0.23",
       "url": "https://github.com/antora-supplemental/valentus-theme/releases/download/v2.0/ui-bundle.zip"
     },
     "1.0": {
@@ -78,7 +78,8 @@
     "2.0.18": "2.0.18+antora.3",
     "2.0.19": "2.0.19+antora.3",
     "2.0.20": "2.0.20+antora.3",
-    "2.0.21": "2.0.21+antora.3"
+    "2.0.21": "2.0.21+antora.3",
+    "2.0.23": "2.0.23+antora.3"
   },
   "notes": "Git tags remain pure semver (vX.Y.Z). Public labels append +antora.N. Historical 1.x tags were not renamed; labels are documentary."
 }
