@@ -208,7 +208,8 @@ The wash paints the **content-sized** menu/TOC surface (not the full-height `.na
 Tree-nav supports **horizontal scroll** when labels overflow. Left/right transparency fades (`adt-nav-overflow-start` / `adt-nav-overflow-end`, driven by `site-visual.js`) appear only while that edge still has overflow. Scrollbars on the tree menu are hidden; wheel/trackpad scrolling still works.
 
 In-doc Asciidoctor `:toc:` (`.doc .toc` / `#toc`) is styled separately as a muted block — it is **not** part of `@antora-supplemental/page-context` metadata.
-`.page-context-table` uses its own tokens (muted type, thin outer + inner borders, light/dark surface) and does **not** inherit doc-table zebra striping.
+`.page-context-table` uses its own tokens (muted type, thin inner borders, light/dark surface) and does **not** inherit doc-table zebra striping.
+Lead markup: seamless outer `.page-context-lead` (holds byline) + inner `.page-context-panel` (table chrome only); footer aside remains a single panel.
 
 == VCS Repo Logo (Download button replacement)
 
