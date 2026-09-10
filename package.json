@@ -42,7 +42,7 @@
     "@dev-centr/mermaid-svg-css-vars": "0.1.2",
     "@dev-centr/themed-svg": "0.1.1",
     "@mermaid-js/mermaid-cli": "11.17.0",
-    "@antora-supplemental/antora-search-chat": "github:antora-supplemental/antora-search-chat#beea395",
+    "@antora-supplemental/antora-search-chat": "github:antora-supplemental/antora-search-chat#v0.1.4",
     "@antora/lunr-extension": "1.0.0-alpha.12",
     "@asciidoctor/tabs": "^1.0.0-beta.6",
     "antora": "^3.1.14",
