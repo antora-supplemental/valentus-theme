@@ -5,6 +5,10 @@ site:
   title: Valentus Theme
   url: https://antora-supplemental.github.io/valentus-theme
   start_page: valentus-theme:guide:index.adoc
+  robots: |
+    User-agent: *
+    Allow: /
+    Sitemap: https://antora-supplemental.github.io/valentus-theme/sitemap.xml
   keys:
     dark_mode_navbar: light
     header_logo: logo.svg
