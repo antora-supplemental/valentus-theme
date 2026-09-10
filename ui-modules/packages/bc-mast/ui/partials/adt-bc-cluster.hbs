@@ -1,5 +1,8 @@
+{{!
+  Component kicker + version control stay visible together (including with
+  site-nav-tree). Mobile needs the component jump target; version sits to its right.
+}}
 <div class="adt-bc-cluster" role="group" aria-label="Documentation component and version">
-  {{#unless (eq site.keys.site_nav_tree 'true')}}
   <div class="adt-bc-menu adt-bc-menu-project">
     <button type="button" class="adt-bc-kicker" data-adt-toggle="adt-bc-proj" aria-haspopup="listbox" aria-expanded="false" aria-label="Switch documentation component">
       <span class="adt-bc-kicker-label">{{#if page.component}}{{{page.component.title}}}{{else}}{{{site.title}}}{{/if}}</span>
@@ -12,25 +15,29 @@
       {{/each}}
     </ul>
   </div>
-  <span class="adt-bc-sep" aria-hidden="true">|</span>
-  {{/unless}}
   {{#with (adt-version-mode @root.page)}}
   {{#if (eq this 'menu')}}
   <div class="adt-bc-menu adt-bc-menu-version">
-    <button type="button" class="adt-bc-kicker" data-adt-toggle="adt-bc-ver" aria-haspopup="listbox" aria-expanded="false" aria-label="Select documentation version">
-      <span class="adt-bc-kicker-version">{{adt-version-label @root.page.componentVersion fallback="Version"}}</span>
+    <button type="button" class="adt-bc-kicker adt-bc-kicker--version" data-adt-toggle="adt-bc-ver" aria-haspopup="listbox" aria-expanded="false" aria-label="Select documentation version">
+      <span class="adt-bc-kicker-version">{{adt-version-label @root.page.componentVersion}}</span>
     </button>
     <ul class="adt-bc-dropdown adt-bc-dropdown--version" id="adt-bc-ver" role="listbox" hidden>
+      {{#if @root.page.versions}}
       {{#each @root.page.versions}}
       <li role="none" class="adt-bc-menu-item">
-        <a href="{{{relativize ./url}}}" class="adt-bc-version-pill{{#if (eq ./version @root.page.version)}} is-current{{/if}}{{#if ./missing}} is-missing{{/if}}"{{#if (eq ./version @root.page.version)}} aria-current="page"{{/if}}>{{adt-version-label this fallback="Default"}}</a>
+        <a href="{{{relativize ./url}}}" class="adt-bc-version-pill{{#if (eq ./version @root.page.version)}} is-current{{/if}}{{#if ./missing}} is-missing{{/if}}"{{#if (eq ./version @root.page.version)}} aria-current="page"{{/if}}>{{adt-version-label this}}</a>
       </li>
       {{/each}}
+      {{else if @root.page.componentVersion}}
+      <li role="none" class="adt-bc-menu-item">
+        <a href="{{{relativize @root.page.componentVersion.url}}}" class="adt-bc-version-pill is-current" aria-current="page">{{adt-version-label @root.page.componentVersion}}</a>
+      </li>
+      {{/if}}
     </ul>
   </div>
   {{else if (eq this 'plain')}}
   <div class="adt-bc-menu adt-bc-menu-version adt-bc-menu-version--plain">
-    <span class="adt-bc-version-plain" title="Documentation version">{{adt-version-label @root.page.componentVersion fallback="Version"}}</span>
+    <span class="adt-bc-version-plain" title="Documentation version">{{adt-version-label @root.page.componentVersion}}</span>
   </div>
   {{/if}}
   {{/with}}

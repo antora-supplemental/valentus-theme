@@ -994,13 +994,19 @@ html.dark-theme .adt-breadcrumb-home-link:hover {
   display: none;
 }
 
+/* Component + version read as one mast segment (version sits tight to the right). */
 .adt-bc-cluster {
   display: inline-flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 0.25rem 0.3rem;
+  gap: 0.1rem;
   min-width: 0;
   max-width: 100%;
+}
+
+/* Empty masthead (no kickers) must not leave `/  /` separators in the trail. */
+.adt-breadcrumbs > ul > li.adt-breadcrumb-masthead:not(:has(.adt-bc-menu, .adt-bc-version-plain)) {
+  display: none;
 }
 
 .adt-bc-menu {
@@ -1097,13 +1103,25 @@ html.dark-theme .adt-breadcrumb-home-link:hover {
   max-width: 7rem;
 }
 
+/* Version kicker is secondary to the component name — compact, same accent family. */
+.adt-bc-kicker--version {
+  max-width: 5.5rem;
+  padding-inline: 0.28rem 0.3rem;
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
 .adt-bc-version-plain {
   display: inline-flex;
   align-items: center;
   min-height: 1.5rem;
-  padding: 0.15rem 0.1rem;
-  font-size: 0.9rem;
-  font-weight: 500;
+  padding: 0.15rem 0.28rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   line-height: 1.45;
   color: var(--adt-accent);
   text-decoration: none;

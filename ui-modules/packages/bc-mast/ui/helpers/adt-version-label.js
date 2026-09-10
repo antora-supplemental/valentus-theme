@@ -1,17 +1,19 @@
 'use strict'
 
 /**
- * Version kicker / dropdown label: show named versions as-is; implicit default → fallback.
- * Button fallback: "Version"; dropdown row fallback: "Default".
+ * Version kicker / dropdown label: named versions as-is; implicit default → `~`.
+ * Override with hash.fallback when a caller needs a different placeholder.
  */
 function isNamedVersion (value) {
   if (value == null) return false
   const s = String(value).trim()
-  return s !== '' && s.toLowerCase() !== 'default'
+  if (s === '' || s === '~') return false
+  const lower = s.toLowerCase()
+  return lower !== 'default'
 }
 
 module.exports = (versionRef, { hash } = {}) => {
-  const fallback = (hash && hash.fallback) || 'Version'
+  const fallback = (hash && hash.fallback) || '~'
   let display
   let version
   if (versionRef && typeof versionRef === 'object') {

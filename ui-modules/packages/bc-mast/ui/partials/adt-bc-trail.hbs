@@ -1,5 +1,5 @@
-{{#if page.breadcrumbs}}
-{{#each page.breadcrumbs}}
+{{#with (adt-bc-trail-crumbs page.breadcrumbs)}}
+{{#each this}}
 <li class="adt-breadcrumb-trail{{#if @last}} adt-breadcrumb-trail--current{{/if}}">
 {{~#if (and ./url (eq ./urlType 'internal'))~}}
 <a class="adt-breadcrumb-trail-link" href="{{{relativize ./url}}}">{{{./content}}}</a>
@@ -8,4 +8,4 @@
 {{~/if~}}
 </li>
 {{/each}}
-{{/if}}
+{{/with}}

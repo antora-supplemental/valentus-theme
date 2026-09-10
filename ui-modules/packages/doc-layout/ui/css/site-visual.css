@@ -619,12 +619,21 @@ footer.footer a {
   display: inline-flex;
   align-items: center;
   min-height: 1.5rem;
-  padding: 0.15rem 0.1rem;
-  font-size: 0.9rem;
-  font-weight: 500;
+  padding: 0.15rem 0.28rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   line-height: 1.35;
   color: var(--adt-accent);
   text-decoration: none;
+}
+
+.adt-bc-kicker--version {
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
 }
 
 .adt-bc-dropdown {

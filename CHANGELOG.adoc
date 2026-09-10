@@ -16,11 +16,16 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+== [2.0.27] - 2026-09-10
+
+Public label: *2.0.27+antora.3* (Antora 3).
+
+* *Fix / UX:* Breadcrumb mast — keep the **component** kicker with site-nav-tree (mobile jump target); conjoin a literal `~` version menu to its right; drop only the trail’s duplicate component-root crumb. See link:changelog-details/2026-09-10%20-%20breadcrumb%20component%20and%20tilde%20version.adoc[Detailed notes].
 * *Fix / UX:* Style page-edit **View | Edit** as a muted lead-table Source cell (`.page-context-source-actions`); keep legacy `.page-context-actions` aside selectors for hubs without a lead table.
 * *Fix / UX:* Breadcrumb mast — trail segments (links, folder nodes, current page) use accent color + underline; Version/component kickers keep accent chip-on-hover but no resting underline. See link:changelog-details/2026-09-10%20-%20breadcrumb%20trail%20underline.adoc[Detailed notes].
 * *Polish / UX:* Read-width control icons use sharp rectangles (drop SVG `rx`) so column glyphs contrast the soft selector bar. See link:changelog-details/2026-09-10%20-%20read-width%20sharp%20icons.adoc[Detailed notes].
 * *Chore:* Bump demo playbook dep `@antora-supplemental/antora-search-chat` to `v0.1.4` (hierarchical scope tree; closed face without *Component*/*Version* kind prefix). Tag consumer topic `antora-search-chat` for post-release discovery.
-* *Docs:* Customization / How it works / Troubleshooting — overriding `head-meta.hbs` must keep the full Valentus CSS chain + FOUC hold; do not double-load `site.js` from hub footer partials; document mast `adt-version-mode` (hide `~`, plain single named, menu multi) and note literal `~` as a possible future pedagogy option.
+* *Docs:* Customization — mast keeps component + conjoined `~` menu; trail dedupes component root under site-nav-tree.
 * *Diagrams:* Replace the duplicated authored PlantUML sequence with canonical Mermaid, extract both extension examples into named sources, and ship deterministic Themed SVG adaptive/host artifacts. The UI progressively upgrades `.themed-svg` image roles with the sanitized 0.1.1 runtime. See link:changelog-details/2026-09-08%20-%20themed%20diagram%20artifacts.adoc[Detailed notes — themed diagram artifacts].
 
 == [2.0.26] - 2026-09-10

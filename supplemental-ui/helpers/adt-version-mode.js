@@ -3,9 +3,9 @@
 /**
  * Breadcrumb version control mode for the current page.
  * @returns {'hide'|'plain'|'menu'}
- * - menu: multiple versions → dropdown
- * - plain: exactly one named version → text (link-styled chrome)
- * - hide: unversioned / implicit default (`~`) only, or no version
+ * - menu: multiple versions, or a single implicit/unversioned (`~`) version
+ * - plain: exactly one named version → text (not a dropdown)
+ * - hide: no version at all
  */
 function isImplicitVersion (cv) {
   if (!cv) return true
@@ -37,7 +37,9 @@ module.exports = (page) => {
       page.componentVersion ||
       (Array.isArray(page.versions) && page.versions[0]) ||
       null
-    return isImplicitVersion(cv) ? 'hide' : 'plain'
+    // Single `~` still gets a menu (literal tilde label) so the mast keeps a
+    // real segment instead of an empty `/  /` gap when the component kicker is hidden.
+    return isImplicitVersion(cv) ? 'menu' : 'plain'
   }
   return 'hide'
 }

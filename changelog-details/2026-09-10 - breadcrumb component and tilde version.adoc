@@ -1,0 +1,19 @@
+= Breadcrumb component stays; `~` version conjoined
+:description: Keep the component kicker for mobile context, show literal ~ version to its right, and drop only the trail duplicate under site-nav-tree.
+:page-audience: Theme maintainers and hub authors using site-nav-tree
+:page-usage-context: After rebuilding against Valentus 2.0.27+
+:page-orig-author: Ryan Johnson
+:page-last-author: Cursor agent on behalf of Ryan Johnson
+:page-last-edited: 2026-09-10
+
+== Context
+
+Hiding the mast version control for a lone Antora `~` left an empty masthead segment (`/  /` separators). Hiding the component kicker when site-nav-tree was active also removed the mobile jump target to the component home.
+
+== Changes
+
+* Component kicker stays visible even when `site.keys.site_nav_tree=true` (mobile context + click-to-component-home without opening the drawer).
+* Single implicit/`~` versions use `adt-version-mode` **menu** again; `adt-version-label` prints literal `~` (not “Version” / “Default”).
+* Version sits **conjoined to the right** of the component name in `.adt-bc-cluster` (tight gap, compact mono version chip).
+* Helper `adt-bc-trail-crumbs` drops a leading trail crumb that duplicates the component root under site-nav-tree, so the path does not spell the component twice.
+* Empty masthead `:not(:has(.adt-bc-menu…))` is `display: none` so a future hide path cannot leave stray separators.
