@@ -1,0 +1,11 @@
+= 2.0.20 — page-context table + side-panel sizing
+:navtitle: 2.0.20 page-context panels
+:description: Independent page-context table chrome (no zebra) and content-sized side-rail panels.
+
+== Summary
+
+`.page-context-table` must not inherit Valentus/dark-mode doc table zebra (`html.dark-theme table tbody tr:nth-child(even)`). Theme tokens now give light mode a subtle surface wash + thin outer/inner borders, muted type at in-doc TOC scale, and explicit transparent row resets. Side-rail panel background applies to the nav menu (padded, 2px radius) instead of the full-height `.nav` column so dark panels match content size; light remains clean unless `adt-side-panels` is on.
+
+== Related
+
+* `@antora-supplemental/page-context` **0.3.2** ships matching baseline CSS in the extension docinfo.

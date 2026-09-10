@@ -240,10 +240,31 @@ body.adt-side-panels html.dark-theme {
 }
 
 @media screen and (min-width: 1024px) {
+  /*
+   * Side-rail panel wash: paint the content-sized menu/TOC surface — not the
+   * full-height .nav column (that looked oversized vs the tree). Light stays
+   * transparent unless html.adt-side-panels; dark uses --adt-elevated.
+   */
   .nav,
   .nav-panel-menu {
-    background: var(--adt-side-panel-bg, var(--adt-nav-bg)) !important;
+    background: transparent !important;
+  }
+
+  .nav .nav-panel-menu {
+    height: auto !important;
+    max-height: 100%;
+    align-self: flex-start;
+    box-sizing: border-box;
+  }
+
+  .nav nav.nav-menu {
+    background: var(--adt-side-panel-bg, transparent);
     border-radius: var(--adt-side-panel-radius);
+    /* Keep mast-aligned horizontal rail pad; add vertical inset so labels
+       are not flush to the colored panel edge. */
+    padding-top: 0.45rem !important;
+    padding-bottom: 0.55rem !important;
+    box-sizing: border-box;
   }
 
   .body.adt-body > aside.toc.sidebar .toc-menu,
@@ -252,6 +273,8 @@ body.adt-side-panels html.dark-theme {
     border-radius: var(--adt-side-panel-radius);
     padding: var(--adt-side-panel-pad);
     box-sizing: border-box;
+    align-self: flex-start;
+    width: 100%;
   }
 }
 
@@ -796,17 +819,61 @@ html.dark-theme .doc #toc {
   background: rgba(255, 255, 255, 0.02);
 }
 
-/* page-context extension markup — theme token bridge (extension ships baseline CSS). */
+/* page-context extension markup — theme token bridge (extension ships baseline CSS).
+   Independent of .tableblock / dark-mode zebra; light mode gets a subtle surface. */
 .doc .page-context {
-  --page-context-fg: var(--adt-ink-muted);
-  --page-context-label: var(--adt-ink-muted);
+  --page-context-fg: color-mix(in srgb, var(--adt-ink-muted) 82%, transparent);
+  --page-context-label: color-mix(in srgb, var(--adt-ink-muted) 72%, transparent);
   --page-context-border: color-mix(in srgb, var(--adt-ink-muted) 22%, transparent);
-  --page-context-bg: transparent;
+  --page-context-divider: color-mix(in srgb, var(--adt-ink-muted) 16%, transparent);
+  --page-context-bg: color-mix(in srgb, var(--adt-ink-muted) 5.5%, var(--adt-elevated));
 }
 
 html.dark-theme .doc .page-context {
+  --page-context-fg: color-mix(in srgb, var(--adt-ink-muted) 90%, transparent);
+  --page-context-label: color-mix(in srgb, var(--adt-ink-muted) 80%, transparent);
   --page-context-border: rgba(255, 255, 255, 0.1);
+  --page-context-divider: rgba(255, 255, 255, 0.08);
   --page-context-bg: rgba(255, 255, 255, 0.02);
+}
+
+/* Beat site-extra `html.dark-theme table tbody tr:nth-child(even)` zebra. */
+.doc table.page-context-table,
+.doc table.page-context-table > tbody > tr,
+.doc table.page-context-table > tbody > tr:nth-child(odd),
+.doc table.page-context-table > tbody > tr:nth-child(even),
+.doc table.page-context-table > tbody > tr > th,
+.doc table.page-context-table > tbody > tr > td,
+html.dark-theme .doc table.page-context-table > tbody > tr,
+html.dark-theme .doc table.page-context-table > tbody > tr:nth-child(even),
+html.dark-theme .doc table.page-context-table > tbody > tr:nth-child(odd),
+html.dark-theme .doc table.page-context-table > tbody > tr > th,
+html.dark-theme .doc table.page-context-table > tbody > tr > td {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+.doc table.page-context-table {
+  background: var(--page-context-bg) !important;
+  border: 1px solid var(--page-context-border) !important;
+  border-radius: 2px;
+  border-collapse: collapse;
+  font-size: 0.82em;
+  line-height: 1.35;
+  color: var(--page-context-fg) !important;
+}
+
+.doc table.page-context-table > tbody > tr > th,
+.doc table.page-context-table > tbody > tr > td {
+  border: 1px solid var(--page-context-divider, var(--page-context-border)) !important;
+  color: inherit !important;
+  font-size: inherit;
+}
+
+.doc table.page-context-table > tbody > tr > th {
+  color: var(--page-context-label) !important;
+  font-weight: 500;
 }
 
 .toc .toc-menu a {

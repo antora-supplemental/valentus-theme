@@ -201,8 +201,11 @@ To enable the panel treatment in light mode (or force it), add one of:
 
 Tokens: `--adt-side-panel-bg`, `--adt-side-panel-radius` (default `2px`), `--adt-side-panel-pad`.
 
-Sidebar TOC **CONTENTS** always gets a little padding + radius so the label is not flush to the edge.
+Sidebar TOC **CONTENTS** and the nav tree menu get padding + radius so labels are not flush to the panel edge.
+The wash paints the **content-sized** menu/TOC surface (not the full-height `.nav` column).
+
 In-doc Asciidoctor `:toc:` (`.doc .toc` / `#toc`) is styled separately as a muted block — it is **not** part of `@antora-supplemental/page-context` metadata.
+`.page-context-table` uses its own tokens (muted type, thin outer + inner borders, light/dark surface) and does **not** inherit doc-table zebra striping.
 
 == VCS Repo Logo (Download button replacement)
 
