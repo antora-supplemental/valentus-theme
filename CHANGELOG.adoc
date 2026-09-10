@@ -16,6 +16,13 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+== [2.0.29] - 2026-09-10
+
+Public label: *2.0.29+antora.3* (Antora 3).
+
+* *Fix / UX:* page-context lead — outer `.page-context-lead` is seamless; byline sits above an inner `.page-context-panel` that holds only the metadata table (pairs with page-context **0.6.1**).
+* *Fix / UX:* Source row — VCS mark on the **Source** key; value cell is text-only `View | Edit` (pairs with page-edit **0.2.1**).
+
 == [2.0.28] - 2026-09-10
 
 Public label: *2.0.28+antora.3* (Antora 3).

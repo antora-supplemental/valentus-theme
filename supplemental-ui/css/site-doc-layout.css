@@ -863,8 +863,16 @@ html.dark-theme .adt-breadcrumb-trail-text {
   text-decoration-thickness: 0.1em;
 }
 
-.page-context-source-actions .adt-edit-vcs-svg,
-.doc .page-context-source-actions .adt-edit-vcs-svg,
+.page-context-source-key,
+.doc .page-context-source-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.page-context-source-key .adt-edit-vcs-svg,
+.doc .page-context-source-key .adt-edit-vcs-svg,
 .page-context-actions .adt-edit-vcs-svg,
 .doc .page-context-actions .adt-edit-vcs-svg {
   width: 16px;
@@ -874,11 +882,21 @@ html.dark-theme .adt-breadcrumb-trail-text {
   opacity: 0.75;
 }
 
-html.dark-theme .page-context-source-actions .adt-edit-vcs-svg,
-html.dark-theme .doc .page-context-source-actions .adt-edit-vcs-svg,
+html.dark-theme .page-context-source-key .adt-edit-vcs-svg,
+html.dark-theme .doc .page-context-source-key .adt-edit-vcs-svg,
 html.dark-theme .page-context-actions .adt-edit-vcs-svg,
 html.dark-theme .doc .page-context-actions .adt-edit-vcs-svg {
   opacity: 0.9;
+}
+
+/* Legacy: icon used to live on Edit; keep selectors harmless if old HTML remains */
+.page-context-source-actions .adt-edit-vcs-svg,
+.doc .page-context-source-actions .adt-edit-vcs-svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--adt-ink-muted, currentColor);
+  opacity: 0.75;
 }
 
 /* Legacy breadcrumb edit selectors kept for hubs that still emit that markup */

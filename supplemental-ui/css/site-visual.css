@@ -923,9 +923,9 @@ html.dark-theme .doc #toc {
 .doc .page-context {
   --page-context-fg: color-mix(in srgb, var(--adt-ink-muted) 82%, transparent);
   --page-context-label: color-mix(in srgb, var(--adt-ink-muted) 72%, transparent);
-  --page-context-border: color-mix(in srgb, var(--adt-ink-muted) 22%, transparent);
-  --page-context-divider: color-mix(in srgb, var(--adt-ink-muted) 16%, transparent);
-  --page-context-bg: color-mix(in srgb, var(--adt-ink-muted) 5.5%, var(--adt-elevated));
+  --page-context-border: color-mix(in srgb, var(--adt-ink-muted) 16%, transparent);
+  --page-context-divider: color-mix(in srgb, var(--adt-ink-muted) 12%, transparent);
+  --page-context-bg: color-mix(in srgb, var(--adt-ink-muted) 3.5%, var(--adt-elevated));
 }
 
 html.dark-theme .doc .page-context {
@@ -936,14 +936,35 @@ html.dark-theme .doc .page-context {
   --page-context-bg: rgba(255, 255, 255, 0.02);
 }
 
-/* page-context: aside is the panel; table is rows only. Beat dark zebra. */
-.doc .page-context-lead,
+/* page-context: lead outer is seamless; panel/footer hold chrome. Beat dark zebra. */
+.doc .page-context-lead {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  color: var(--page-context-fg) !important;
+  font-size: 0.82em;
+  line-height: 1.35;
+}
+
+.doc .page-context-panel,
 .doc .page-context-footer {
   border: 1px solid var(--page-context-border) !important;
   background: var(--page-context-bg) !important;
   color: var(--page-context-fg) !important;
   font-size: 0.82em;
   line-height: 1.35;
+}
+
+.doc .page-context-panel {
+  padding: 0.4rem 0.15rem !important;
+}
+
+.doc .page-context-byline {
+  margin: 0 0 0.55rem !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--page-context-fg) !important;
 }
 
 .doc .page-context-footer {
