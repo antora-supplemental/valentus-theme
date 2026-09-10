@@ -191,17 +191,16 @@ This makes it easier to create multiple dark theme variants.
 
 == Side-rail panel wash (nav + sidebar TOC)
 
-Light mode defaults to a clean flat rail (`--adt-side-panel-bg: transparent`).
-Dark mode uses a subtle elevated wash by default.
+Light and dark both default to a clean flat rail (`--adt-side-panel-bg: transparent`).
 
-To enable the panel treatment in light mode (or force it), add one of:
+To enable the elevated panel treatment, add one of:
 
 * class `adt-side-panels` on `html` or `body`
 * attribute `data-adt-side-panels="true"` on `html`
 
 Tokens: `--adt-side-panel-bg`, `--adt-side-panel-radius` (default `2px`), `--adt-side-panel-pad`, `--adt-nav-scroll-fade` (edge fade width).
 
-Sidebar TOC **CONTENTS** and the nav tree menu get padding + radius so labels are not flush to the panel edge.
+When enabled, sidebar TOC **CONTENTS** and the nav tree menu get padding + radius so labels are not flush to the panel edge.
 The wash paints the **content-sized** menu/TOC surface (not the full-height `.nav` column).
 
 Tree-nav supports **horizontal scroll** when labels overflow. Left/right transparency fades (`adt-nav-overflow-start` / `adt-nav-overflow-end`, driven by `site-visual.js`) appear only while that edge still has overflow.

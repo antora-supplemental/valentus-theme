@@ -24,8 +24,8 @@
   --adt-nav-bg: transparent;
   --adt-nav-item-toggle: var(--adt-ink-muted);
   --adt-nav-item-toggle-hover: var(--adt-ink);
-  /* Side-rail wash (nav + sidebar TOC). Light default: off (transparent).
-     Opt in: html.adt-side-panels / data-adt-side-panels="true". Dark sets elevated below. */
+  /* Side-rail wash (nav + sidebar TOC). Default: off (transparent) in light and dark.
+     Opt in: html.adt-side-panels / data-adt-side-panels="true". */
   --adt-side-panel-bg: transparent;
   --adt-side-panel-radius: 2px;
   --adt-side-panel-pad: 0.45rem 0.55rem;
@@ -87,8 +87,8 @@ html.dark-theme {
   --adt-chrome: var(--adt-canvas);
   --adt-chrome-border: var(--adt-border);
   --adt-nav-bg: transparent;
-  /* Dark: subtle differentiated rail by default (matches prior chrome expectation). */
-  --adt-side-panel-bg: var(--adt-elevated);
+  /* Side-rail wash stays off until html.adt-side-panels (same as light). */
+  --adt-side-panel-bg: transparent;
   --adt-code-bg: #080b10;
   --adt-code-fg: #e8ecf2;
   --adt-code-border: rgba(255, 255, 255, 0.08);
@@ -226,7 +226,7 @@ a.adt-header-title {
   box-shadow: none !important;
 }
 
-/* Opt-in light (or force) side-rail panel wash — see --adt-side-panel-bg. */
+/* Opt-in side-rail panel wash (light + dark) — see --adt-side-panel-bg. */
 html.adt-side-panels,
 body.adt-side-panels,
 html[data-adt-side-panels='true'] {
@@ -242,8 +242,7 @@ body.adt-side-panels html.dark-theme {
 @media screen and (min-width: 1024px) {
   /*
    * Side-rail panel wash: paint the content-sized menu/TOC surface — not the
-   * full-height .nav column (that looked oversized vs the tree). Light stays
-   * transparent unless html.adt-side-panels; dark uses --adt-elevated.
+   * full-height .nav column. Default transparent; html.adt-side-panels enables wash.
    */
   .nav,
   .nav-panel-menu {

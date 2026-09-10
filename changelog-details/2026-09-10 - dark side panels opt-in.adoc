@@ -1,0 +1,13 @@
+= 2.0.25 — dark side-rail wash opt-in
+:navtitle: 2.0.25 dark side panels opt-in
+:description: Dark mode no longer paints an elevated nav/TOC wash by default; use adt-side-panels to enable it.
+
+== Summary
+
+Valentus 2.0.19–2.0.24 left dark mode with `--adt-side-panel-bg: var(--adt-elevated)` while light stayed transparent unless `html.adt-side-panels` was set. Existing hubs then looked inconsistent across themes: dark got a filled `nav.nav-menu` / TOC panel, light stayed flat.
+
+== Change
+
+* Dark default `--adt-side-panel-bg` is `transparent` (same as light).
+* `html.adt-side-panels` / `data-adt-side-panels="true"` still enables the wash in both themes (elevated in dark; subtle mix in light).
+* Customization guide updated accordingly.
