@@ -16,6 +16,14 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+== [2.0.32] - 2026-09-15
+
+Public label: *2.0.32+antora.3* (Antora 3).
+
+=== Fixed
+
+* Breadcrumb mast controls — shared `--adt-bc-ctrl-h` so home chip, component kicker, and version kicker match height; label text uses `line-height: 1` + flex centering (component text was sitting high vs Version). Home→component gap restored by beating Default UI `.breadcrumbs li { margin: 0 }` with a more specific selector. See link:changelog-details/2026-09-15 - breadcrumb control align.adoc[Detailed notes].
+
 == [2.0.31] - 2026-09-10
 
 Public label: *2.0.31+antora.3* (Antora 3).

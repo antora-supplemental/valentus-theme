@@ -23,6 +23,8 @@
   --adt-bc-kicker-fg: var(--adt-accent);
   --adt-bc-kicker-bg: var(--adt-accent-soft);
   --adt-bc-kicker-border: color-mix(in srgb, var(--adt-accent) 28%, transparent);
+  /* Shared mast control height: home chip + component/version kickers */
+  --adt-bc-ctrl-h: 1.75rem;
   /* Top bar: all controls (logo hit-area, title, theme, org GitHub) share one line height */
   --adt-header-ctrl: 2.5rem;
   /* Light theme (default): chrome matches page canvas */
@@ -965,11 +967,11 @@ html.dark-theme .adt-breadcrumb-edit .adt-edit-vcs-img {
   padding: 0 !important;
 }
 
-.adt-breadcrumb-home {
+/* Beat Default UI `.breadcrumbs li { margin: 0 }` (0,1,1) — that zeroed the home→component gap. */
+.adt-breadcrumbs > ul > li.adt-breadcrumb-home {
   flex: 0 0 auto;
   list-style: none;
-  /* Space after the home chip so it does not glue to the component kicker. */
-  margin-inline-end: 0.35rem;
+  margin-inline-end: 0.45rem;
 }
 
 .adt-breadcrumb-home-link {
@@ -977,10 +979,10 @@ html.dark-theme .adt-breadcrumb-edit .adt-edit-vcs-img {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: 1.5rem;
-  height: 1.5rem;
-  min-width: 1.5rem;
-  min-height: 1.5rem;
+  width: var(--adt-bc-ctrl-h);
+  height: var(--adt-bc-ctrl-h);
+  min-width: var(--adt-bc-ctrl-h);
+  min-height: var(--adt-bc-ctrl-h);
   padding: 0;
   border: 1px solid var(--adt-bc-kicker-border);
   border-radius: 0.2rem;
@@ -1056,15 +1058,18 @@ html.dark-theme .adt-breadcrumb-home-link:focus-visible {
 .adt-bc-kicker {
   display: inline-flex;
   align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
   gap: 0.28rem;
   max-width: 12rem;
-  min-height: 1.5rem;
+  height: var(--adt-bc-ctrl-h);
+  min-height: var(--adt-bc-ctrl-h);
   margin: 0;
-  padding: 0.15rem 0.35rem 0.15rem 0.4rem;
+  padding: 0 0.4rem;
   font: inherit;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 1;
   text-align: left;
   color: var(--adt-accent);
   background: transparent;
@@ -1132,7 +1137,10 @@ html.dark-theme .adt-breadcrumb-home-link:focus-visible {
 
 .adt-bc-kicker-label,
 .adt-bc-kicker-version {
+  display: inline-flex;
+  align-items: center;
   min-width: 0;
+  line-height: 1;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -1141,26 +1149,31 @@ html.dark-theme .adt-breadcrumb-home-link:focus-visible {
   max-width: 7rem;
 }
 
-/* Version kicker is secondary to the component name — compact, same accent family. */
+/* Version kicker is secondary to the component name — same box height, compact mono type. */
 .adt-bc-kicker--version {
   max-width: 5.5rem;
-  padding-inline: 0.28rem 0.3rem;
+  height: var(--adt-bc-ctrl-h);
+  min-height: var(--adt-bc-ctrl-h);
+  padding: 0 0.35rem;
   font-variant-numeric: tabular-nums;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.85rem;
+  font-size: 0.8125rem;
   font-weight: 600;
+  line-height: 1;
 }
 
 .adt-bc-version-plain {
   display: inline-flex;
   align-items: center;
-  min-height: 1.5rem;
-  padding: 0.15rem 0.28rem;
-  font-size: 0.85rem;
+  box-sizing: border-box;
+  height: var(--adt-bc-ctrl-h);
+  min-height: var(--adt-bc-ctrl-h);
+  padding: 0 0.35rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  line-height: 1.45;
+  line-height: 1;
   color: var(--adt-accent);
   text-decoration: none;
   white-space: nowrap;
