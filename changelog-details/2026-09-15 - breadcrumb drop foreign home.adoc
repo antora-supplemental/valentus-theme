@@ -1,0 +1,29 @@
+= Breadcrumb trail drops foreign Home crumb
+:description: With site-nav-tree, strip leading Home / foreign component-root crumbs from the mast trail.
+:page-audience: Theme maintainers and multi-component hub authors
+:page-usage-context: After rebuilding against Valentus with this patch
+:page-orig-author: Ryan Johnson
+:page-last-author: Cursor agent on behalf of Ryan Johnson
+:page-last-edited: 2026-09-15
+
+== Context
+
+On hubs that enable `@antora-supplemental/site-nav-tree`, the mast trail could start with **Home** even when the page lived in another component (for example General Developer Knowledge). The icon-only house chip already links to site home, and the component kicker already names the current component.
+
+== Cause
+
+`adt-bc-trail-crumbs` only dropped a leading crumb that matched the *current* component root. Home is often first in the curated forest, and home nav commonly xrefs into other components, so Antora's `page.breadcrumbs` resolved under Home first.
+
+== Changes
+
+When `site.keys.site_nav_tree` is true:
+
+. Strip leading crumbs that are foreign component roots or site-home (title `Home`, `site.homeUrl`, or the `home` component root).
+. Then apply the existing current-component-root strip.
+
+Site-nav-tree off leaves the trail unchanged.
+
+== Files
+
+* `ui-modules/packages/bc-mast/ui/helpers/adt-bc-trail-crumbs.js`
+* `supplemental-ui/helpers/adt-bc-trail-crumbs.js`

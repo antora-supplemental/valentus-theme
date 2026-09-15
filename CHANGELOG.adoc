@@ -16,6 +16,14 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+== [2.0.34] - 2026-09-15
+
+Public label: *2.0.34+antora.3* (Antora 3).
+
+=== Fixed
+
+* Breadcrumb trail with site-nav-tree - drop leading foreign component-root crumbs (especially Home / site home) before the usual current-component-root strip so the underlined path stays within the page component; house chip still covers site home. See link:changelog-details/2026-09-15 - breadcrumb drop foreign home.adoc[Detailed notes].
+
 == [2.0.33] - 2026-09-15
 
 Public label: *2.0.33+antora.3* (Antora 3).
