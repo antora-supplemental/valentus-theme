@@ -16,6 +16,14 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+== [2.0.33] - 2026-09-15
+
+Public label: *2.0.33+antora.3* (Antora 3).
+
+=== Fixed
+
+* Breadcrumb component/version kickers — truncated labels show trailing `…` again (`display: block` + `white-space: nowrap` on `.adt-bc-kicker-label` / `.adt-bc-kicker-version`; `text-overflow` does not paint on the `inline-flex` used in 2.0.32). See link:changelog-details/2026-09-15 - breadcrumb kicker ellipsis.adoc[Detailed notes].
+
 == [2.0.32] - 2026-09-15
 
 Public label: *2.0.32+antora.3* (Antora 3).

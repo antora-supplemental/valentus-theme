@@ -1135,12 +1135,16 @@ html.dark-theme .adt-breadcrumb-home-link:focus-visible {
   opacity: 0.9;
 }
 
+/* Block + nowrap: text-overflow does not paint "…" on a flex container (2.0.32
+   used inline-flex for vertical centering; the parent kicker already flex-centers). */
 .adt-bc-kicker-label,
 .adt-bc-kicker-version {
-  display: inline-flex;
-  align-items: center;
+  display: block;
+  flex: 1 1 auto;
   min-width: 0;
+  max-width: 100%;
   line-height: 1;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
