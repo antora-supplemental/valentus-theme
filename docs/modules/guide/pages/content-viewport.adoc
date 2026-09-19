@@ -1,0 +1,45 @@
+= Content viewport and wide tables
+:navtitle: Content viewport
+:description: How Valentus keeps article measure (--adt-doc-max) while wide tables, listings, and code scroll inside the column.
+:page-tags: layout, tables, overflow
+
+Valentus sizes the article column with `--adt-doc-max` (read-width tiers change only that token).
+Wide AsciiDoc tables, listings, and literals must scroll *inside* that column so they do not paint over the TOC or widen the shell.
+
+== Contract
+
+* *Measure:* `main.adt-article` shrink-wraps to `--adt-doc-max` (see link:customization.adoc#_overriding_head_meta_hbs_brand_overlays[Customization] and the `read-width` module).
+* *Flex safety:* `min-width: 0` on `main.adt-article` and its `.content` child lets the column shrink in the three-column shell.
+* *Horizontal overflow:* Scrollports live on wrappers (`.tablecontainer` from Asciidoctor, or `.adt-table-scroll` from theme JS)—**not** on the `<table>` element.
+
+[NOTE]
+====
+Putting `overflow-x: auto` directly on `<table class="tableblock">` breaks table layout in several engines.
+The Antora community pattern is: wrap the table, then style the wrapper (see `adt-table-scroll.js`).
+====
+
+== Asciidoctor output
+
+Most table blocks render inside `.tablecontainer` with `overflow-x: auto` in `site-visual.css`.
+
+Bare tables (no container) are wrapped at `DOMContentLoaded` by `adt-table-scroll.js`:
+
+* Skips tables already inside `.tablecontainer`, `.adt-table-scroll`, admonitions, or column lists.
+* Inserts `<div class="adt-table-scroll" role="region" tabindex="0">` with an `aria-label` from the table caption when present.
+
+Scripts load from theme `footer-scripts.hbs` and the `doc-layout` UI module foot bundle (`js/adt-table-scroll.js` after `site-visual.js`).
+
+== Cell wrapping
+
+Long tokens in table cells use `overflow-wrap: anywhere` (and normal white-space on inline `code`) so narrow measure does not force the whole table wider than necessary before horizontal scroll kicks in.
+
+== Local demo
+
+Open `ui-modules/demos/content-viewport/index.html` in a browser (from a static server or `file:`) for a minimal article + TOC layout that mirrors the CSS contract.
+
+== Hub overrides
+
+If you override `footer-scripts.hbs`, keep `adt-table-scroll.js` in the chain after layout/visual scripts.
+Do not load it twice.
+
+See also link:../../ROOT/pages/tables.adoc#_wide_table_full_width[Tables — wide example] and link:troubleshooting.adoc#_wide_table_spills_over_the_toc[Troubleshooting].

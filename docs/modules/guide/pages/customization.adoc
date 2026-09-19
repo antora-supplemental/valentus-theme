@@ -33,7 +33,7 @@ Dropping layout/visual sheets while keeping a brand overlay yields a broken mast
 
 == Supplemental footer scripts (do not double-load)
 
-Valentus `footer-scripts.hbs` already loads `site.js` and the theme’s footer scripts (dark mode, accordion, visual, read-width, font-size, math, …).
+Valentus `footer-scripts.hbs` already loads `site.js` and the theme’s footer scripts (dark mode, accordion, visual, table scroll wrapper, read-width, font-size, math, …).
 
 If your hub overrides `footer-content.hbs` or adds another footer partial, **do not** re-emit:
 

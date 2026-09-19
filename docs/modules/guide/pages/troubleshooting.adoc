@@ -137,6 +137,18 @@ const observer = new MutationObserver((mutations) => {
 observer.observe(document.documentElement, { attributes: true });
 ----
 
+== Wide table spills over the TOC
+
+*Symptom:* A wide table extends past the article column and covers the right-hand TOC (or widens the whole page).
+
+*Checks:*
+
+. Confirm `site-visual.css` and `adt-table-scroll.js` load from theme `footer-scripts.hbs` (or the `doc-layout` module foot bundle). Hub overrides must not drop the table-scroll script.
+. In DevTools, the table should sit inside `.tablecontainer` or `.adt-table-scroll` with `overflow-x: auto` on that wrapper—not on the `<table>`.
+. Nested tables inside admonitions or column lists are intentionally not re-wrapped; narrow those tables in AsciiDoc or split content.
+
+See link:content-viewport.adoc[Content viewport and wide tables].
+
 == Still Having Issues?
 
 If your issue isn't covered here:

@@ -1463,43 +1463,33 @@ html.dark-theme .doc .sect4 {
     }
   }
 }
-/* --- Content viewport contract (adt-content-viewport) ---
-   Theme sets measure (--adt-doc-max). This pane owns overflow inside that box
-   so wide tables/pre/SVG scroll horizontally instead of painting over the TOC. */
+/* --- Content viewport (adt-content-viewport) ---
+   Theme sets measure (--adt-doc-max). Overflow stays inside this pane so wide
+   tables/pre/SVG scroll horizontally instead of painting over the TOC.
+   Wrapper scroll only — see adt-table-scroll.js (do not overflow-x the <table>). */
 main.adt-article,
-main.adt-article[data-adt-content-viewport] {
+main.adt-article[data-adt-content-viewport],
+main.adt-article > .content {
   min-width: 0;
 }
 
 main.adt-article > .content,
 main.adt-article[data-adt-content-viewport] > .content,
 .doc[data-adt-content-viewport] {
-  min-width: 0;
   max-width: 100%;
 }
 
-/* Prefer Asciidoctor's .tablecontainer when present; wrap-equivalent for bare tables */
-.doc .tablecontainer {
+.doc .tablecontainer,
+.doc .adt-table-scroll {
   display: block;
   max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-.doc .tablecontainer > table.tableblock {
-  max-width: none; /* allow intrinsic width; container scrolls */
-}
-
-/* Bare table.tableblock (no container): still clamp to pane */
-.doc > table.tableblock,
-.doc .sect1 > table.tableblock,
-.doc .sect2 > table.tableblock,
-.doc .sect3 > table.tableblock,
-.doc td.tableblock > .content table.tableblock {
-  display: block;
-  max-width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+.doc .tablecontainer > table.tableblock,
+.doc .adt-table-scroll > table.tableblock {
+  max-width: none;
 }
 
 .doc table.tableblock th,
@@ -1513,45 +1503,6 @@ main.adt-article[data-adt-content-viewport] > .content,
   white-space: normal;
   overflow-wrap: anywhere;
   word-break: break-word;
-}
-
-.doc .listingblock > .content,
-.doc .literalblock > .content {
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-/* --- Content viewport: wide tables (wrapper scroll, not table scroll) ---
-   See Antora Zulip #users "horizontal scroll for large tables" (mojavelinux):
-   do not put overflow-x on the <table>; wrap it, then style the wrapper. */
-main.adt-article,
-main.adt-article > .content {
-  min-width: 0;
-}
-
-.doc .tablecontainer,
-.doc .adt-table-scroll {
-  display: block;
-  max-width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.doc .tablecontainer > table.tableblock,
-.doc .adt-table-scroll > table.tableblock {
-  /* keep table layout; wrapper owns scrolling */
-  max-width: none;
-}
-
-.doc table.tableblock th,
-.doc table.tableblock td {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-.doc table.tableblock code {
-  white-space: normal;
-  overflow-wrap: anywhere;
 }
 
 .doc .listingblock > .content,

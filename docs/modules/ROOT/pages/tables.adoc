@@ -183,6 +183,10 @@ NOTE: Tables can contain admonitions.
 
 == Wide Table (Full Width)
 
+When many columns exceed `--adt-doc-max`, the table scrolls horizontally inside the article column (wrapper scroll, not table scroll).
+Valentus styles Asciidoctor's `.tablecontainer` and wraps bare tables with `.adt-table-scroll` via `adt-table-scroll.js`.
+See link:../../guide/pages/content-viewport.adoc[Content viewport] for the layout contract.
+
 [cols="1,1,1,1,1", width="100%", options="header"]
 |===
 | Col 1 | Col 2 | Col 3 | Col 4 | Col 5

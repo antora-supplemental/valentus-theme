@@ -1,0 +1,21 @@
+= Unreleased — content viewport wide tables
+:navtitle: Content viewport wide tables
+:description: Horizontal scroll for wide AsciiDoc tables inside --adt-doc-max without covering the TOC.
+
+== Summary
+
+Wide tables and long listings could extend past the article column and paint over the TOC because overflow was not owned inside the content viewport.
+
+== Fix
+
+* *CSS (`site-visual.css`):* `min-width: 0` on `main.adt-article` and `.content`; horizontal scroll on `.tablecontainer` and `.adt-table-scroll` wrappers; cell/code wrapping inside tables; listing/literal block scroll.
+* *JS (`adt-table-scroll.js`):* At load, wrap bare `.doc table.tableblock` nodes in `.adt-table-scroll` (skips existing containers, admonitions, colists). Accessible region + caption-derived `aria-label`.
+* *Wiring:* `footer-scripts.hbs` and `doc-layout` module foot scripts include the new file.
+* *Demo:* `ui-modules/demos/content-viewport/` static preview of the contract.
+* *Docs:* `docs/modules/guide/pages/content-viewport.adoc` guide; tables sample cross-link.
+
+== Expectation
+
+At comfortable read width, a many-column table shows a horizontal scrollbar inside the article pane; the TOC column stays visible and does not receive table paint.
+
+Mirror changes in `supplemental-ui` and `ui-modules/packages/doc-layout`.
