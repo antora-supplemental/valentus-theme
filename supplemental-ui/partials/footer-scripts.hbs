@@ -1,4 +1,4 @@
-<script id="site-script" src="{{{uiRootPath}}}/js/site.js" data-ui-root-path="{{{uiRootPath}}}"></script>
+﻿<script id="site-script" src="{{{uiRootPath}}}/js/site.js" data-ui-root-path="{{{uiRootPath}}}"></script>
 <script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
 {{#if env.SITE_SEARCH_PROVIDER}}
 {{> search-scripts}}
@@ -6,6 +6,7 @@
 <script src="{{{uiRootPath}}}/js/site-dark-mode.js"></script>
 <script src="{{{uiRootPath}}}/js/site-adt-accordion.js"></script>
 <script src="{{{uiRootPath}}}/js/site-visual.js"></script>
+<script src="{{{uiRootPath}}}/js/adt-table-scroll.js"></script>
 <script src="{{{uiRootPath}}}/js/site-read-width.js"></script>
 <script src="{{{uiRootPath}}}/js/site-font-size.js"></script>
 <script src="{{{uiRootPath}}}/js/site-math.js" defer></script>
@@ -14,3 +15,4 @@
   document.querySelectorAll('.imageblock.themed-svg img').forEach((image) => image.dataset.themedSvg = '')
   upgradeThemedSvgImages()
 </script>
+

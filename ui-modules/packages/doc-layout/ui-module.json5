@@ -1,4 +1,4 @@
-{
+﻿{
   id: "doc-layout",
   name: "Doc layout body and styles",
   version: "1.0.0",
@@ -13,7 +13,7 @@
       stylesheets: ["css/site-doc-layout.css", "css/site-visual.css"],
     },
     foot: {
-      scripts: ["js/site-visual.js"],
+      scripts: ["js/site-visual.js", "js/adt-table-scroll.js"],
     },
   },
   ui: {
@@ -23,3 +23,4 @@
     },
   },
 }
+

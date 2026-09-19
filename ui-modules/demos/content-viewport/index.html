@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Demo: content viewport</title>
+  <style>
+    :root { --adt-doc-max: 42rem; --adt-border: #d9dee7; --adt-elevated: #fff; --adt-ink: #141820; --adt-canvas: #f3f5f8; --adt-toc-width: 12rem; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 15px/1.5 system-ui, sans-serif; color: var(--adt-ink); background: var(--adt-canvas); }
+    .shell { display: flex; gap: 1.5rem; padding: 1.5rem; align-items: flex-start; }
+    main.adt-article[data-adt-content-viewport] {
+      flex: 0 1 auto; width: var(--adt-doc-max); max-width: var(--adt-doc-max); min-width: 0;
+      background: var(--adt-elevated); padding: 1rem 1.25rem; border: 1px solid var(--adt-border); border-radius: 8px;
+    }
+    aside.toc { flex: 0 0 var(--adt-toc-width); width: var(--adt-toc-width); position: sticky; top: 1rem;
+      background: #fff; border: 1px dashed #94a3b8; border-radius: 8px; padding: 0.75rem; }
+    .doc .tablecontainer { display: block; max-width: 100%; overflow-x: auto; /* on .adt-table-scroll wrapper, not table */ }
+    .doc table.tableblock { border-collapse: collapse; width: max-content; min-width: 100%; }
+    .doc table.tableblock th, .doc table.tableblock td { border: 1px solid var(--adt-border); padding: 0.5rem 0.65rem; vertical-align: top; }
+    .doc table.tableblock code { font-family: ui-monospace, monospace; font-size: 0.9em; }
+    h1 { font-size: 1.35rem; margin-top: 0; }
+    h2 { font-size: 1.1rem; margin-top: 1.75rem; }
+    pre.html { background: #151a24; color: #e8ecf2; padding: 1rem; overflow-x: auto; border-radius: 8px; font-size: 0.8rem; }
+    .note { color: #5a6270; font-size: 0.92rem; }
+    a { color: #0f766e; }
+  </style>
+</head>
+<body>
+  <p style="margin:1rem 1.5rem"><a href="../">← demos</a></p>
+  <div class="shell">
+    <main class="adt-article" data-adt-content-viewport>
+      <div class="doc">
+        <h1>Content viewport</h1>
+        <p class="note">Article measure is <code>--adt-doc-max</code>. Wide tables scroll inside the pane; TOC stays put.</p>
+        <h2>Preview</h2>
+        <div class="tablecontainer">
+          <table class="tableblock frame-all grid-all stretch">
+            <thead><tr>
+              <th>Our layer</th><th>Repo / path</th><th>What it holds</th><th>Common harness names (examples)</th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>User</strong></td>
+                <td><code>user.md</code> in agent-rules (paste or compose)</td>
+                <td>Portable always-on policy — team/personal baseline</td>
+                <td>Cursor <strong>User Rules</strong>; Claude Code user <code>CLAUDE.md</code>; generic system prompt / custom instructions</td>
+              </tr>
+              <tr>
+                <td><strong>Harness</strong></td>
+                <td><code>$CODE_ROOT/harness.md</code></td>
+                <td>How this AI runtime is wired on this machine</td>
+                <td><code>ALWAYS_ON_RULES</code>, skill install paths, MCP flags; Cursor Settings + <code>~/.cursor/skills</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h2>HTML</h2>
+        <pre class="html">&lt;main class="adt-article" data-adt-content-viewport&gt;
+  &lt;div class="doc"&gt;…&lt;/div&gt;
+&lt;/main&gt;
+&lt;aside class="toc sidebar"&gt;…&lt;/aside&gt;
+
+/* contract */
+main.adt-article[data-adt-content-viewport] { width/max-width: var(--adt-doc-max); min-width: 0; }
+.doc .tablecontainer { max-width: 100%; overflow-x: auto; /* on .adt-table-scroll wrapper, not table */ }</pre>
+      </div>
+    </main>
+    <aside class="toc sidebar">
+      <strong>On this page</strong>
+      <ol>
+        <li>Preview</li>
+        <li>HTML</li>
+      </ol>
+      <p class="note">If h-scroll works, this column never gets covered.</p>
+    </aside>
+  </div>
+</body>
+</html>
+
