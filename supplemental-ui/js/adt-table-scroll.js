@@ -1,4 +1,4 @@
-﻿/*! Wrap bare AsciiDoc tables so overflow-x can live on a div (not the table). */
+/*! Wrap bare AsciiDoc tables so overflow-x can live on a div (not the table). */
 ;(function () {
   function wrapTables (root) {
     var doc = root || document
