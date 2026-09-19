@@ -1463,3 +1463,51 @@ html.dark-theme .doc .sect4 {
     }
   }
 }
+
+/* --- Content viewport (adt-content-viewport) ---
+   Theme sets measure (--adt-doc-max). Overflow stays inside this pane so wide
+   tables/pre/SVG scroll horizontally instead of painting over the TOC.
+   Wrapper scroll only — see adt-table-scroll.js (do not overflow-x the <table>). */
+main.adt-article,
+main.adt-article[data-adt-content-viewport],
+main.adt-article > .content {
+  min-width: 0;
+}
+
+main.adt-article > .content,
+main.adt-article[data-adt-content-viewport] > .content,
+.doc[data-adt-content-viewport] {
+  max-width: 100%;
+}
+
+.doc .tablecontainer,
+.doc .adt-table-scroll {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.doc .tablecontainer > table.tableblock,
+.doc .adt-table-scroll > table.tableblock {
+  max-width: none;
+}
+
+.doc table.tableblock th,
+.doc table.tableblock td {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.doc table.tableblock code,
+.doc table.tableblock .literal {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.doc .listingblock > .content,
+.doc .literalblock > .content {
+  max-width: 100%;
+  overflow-x: auto;
+}

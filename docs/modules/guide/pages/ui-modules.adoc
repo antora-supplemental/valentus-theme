@@ -67,7 +67,7 @@ Conflicts fail the build with a clear error.
 | Site navbar, logo slot, doc mast include, Source Sans 3
 
 | `doc-layout`
-| Body/nav/article layout and `site-doc-layout.css`
+| Body/nav/article layout, `site-doc-layout.css` / `site-visual.css`, and `adt-table-scroll.js` for wide tables
 |===
 
 == Recipes

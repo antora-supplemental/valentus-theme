@@ -26,3 +26,7 @@ After a Valentus patch release: update any exact pins / `release_info` label, th
 ## Math
 
 KaTeX via `supplemental-ui/js/site-math.js` + `css/site-math.css`. Playbooks still need `asciidoc.attributes.stem: latexmath`.
+
+## Content viewport
+
+Wide tables scroll on `.tablecontainer` or JS-wrapped `.adt-table-scroll` (not on `<table>`). `adt-table-scroll.js` ships in `footer-scripts.hbs` and the `doc-layout` module. Guide: `docs/modules/guide/pages/content-viewport.adoc`.

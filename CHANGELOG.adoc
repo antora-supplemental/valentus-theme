@@ -16,6 +16,10 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+=== Fixed
+
+* Content viewport — wide AsciiDoc tables and listings scroll inside the `--adt-doc-max` article column via wrapper scroll (`.tablecontainer` / `.adt-table-scroll`) instead of painting over the TOC; `adt-table-scroll.js` wraps bare tables. See link:changelog-details/2026-09-19 - content viewport wide tables.adoc[Detailed notes].
+
 == [2.0.34] - 2026-09-15
 
 Public label: *2.0.34+antora.3* (Antora 3).
