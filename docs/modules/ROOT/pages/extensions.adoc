@@ -1,4 +1,4 @@
-= Extensions & Integrations
+﻿= Extensions & Integrations
 :navtitle: Extensions
 :description: Exploring how common Asciidoctor extensions and third-party integrations render with the dark theme.
 :icons: font
@@ -138,7 +138,7 @@ TIP: Keep authored diagram examples in Mermaid and regenerate both SVG delivery 
 
 [TIP]
 ====
-For **client** Mermaid (CDN runtime, source-in-HTML), diagram lightbox, and SoftNav — without folding them into Valentus core — see the https://antora-supplemental.github.io/antora-facto/[Facto stack demo^] and https://github.com/antora-supplemental/antora-facto[`antora-facto`^].
+For **client** Mermaid (CDN runtime, source-in-HTML), diagram lightbox, and SoftNav — without folding them into Valentus core — see the https://antora-supplemental.github.io/facto-stack/[Facto stack demo^] and https://github.com/antora-supplemental/facto-stack[`facto-stack`^].
 ====
 --
 

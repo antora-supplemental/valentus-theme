@@ -1,4 +1,4 @@
-= Theme Demo
+﻿= Theme Demo
 :navtitle: Demo Home
 :description: A comprehensive demonstration of the Antora Dark Theme styling.
 
@@ -12,7 +12,7 @@ TIP: Use the *theme toggle button* in the navbar (sun/moon icon) to switch betwe
 ====
 This is the **Valentus theme** demo (lean chrome).
 Want client Mermaid, diagram lightbox, and SoftNav?
-See the https://antora-supplemental.github.io/antora-facto/[Facto stack demo^].
+See the https://antora-supplemental.github.io/facto-stack/[Facto stack demo^].
 ====
 
 == Demo Pages

@@ -1,4 +1,4 @@
-= Valentus Theme
+﻿= Valentus Theme
 :navtitle: Getting Started
 :description: Composed Antora doc-site chrome with bundled dark mode — mast, header, layout, and VCS icons.
 
@@ -19,10 +19,10 @@ See xref:value-proposition.adoc[Value Proposition & Upstream Fixes] for the chec
 Valentus stays **lean** — Mermaid client, diagram lightbox, and SoftNav are **not** in this UI bundle.
 
 Want the full Facto compose on top of Valentus?
-See the https://antora-supplemental.github.io/antora-facto/[Facto stack demo^]
+See the https://antora-supplemental.github.io/facto-stack/[Facto stack demo^]
 (`@antora-supplemental/mermaid-client` + `@antora-supplemental/diagram-lightbox` + SoftNav).
 
-Pack source: https://github.com/antora-supplemental/antora-facto[`antora-facto`^].
+Pack source: https://github.com/antora-supplemental/facto-stack[`facto-stack`^].
 
 
 == Install
