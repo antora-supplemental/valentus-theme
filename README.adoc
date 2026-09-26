@@ -122,6 +122,8 @@ The `supplemental-ui/` tree vendors dark mode assets (`site-extra.css`, `site-da
 
 https://antora-supplemental.github.io/valentus-theme[GitHub Pages demo] (published from `main` via GitHub Actions).
 
+Facto compose (client Mermaid, lightbox, SoftNav) lives in a **separate** demo: https://antora-supplemental.github.io/antora-facto/[Facto stack demo] — Valentus core stays lean.
+
 Local preview requires at least one Git commit on `HEAD` (Antora reads `content.sources` from the repo). Then:
 
 [source,shell]

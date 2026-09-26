@@ -1,5 +1,9 @@
 = Changelog
 
+== 2026-09-25 -- Link Facto stack demo
+
+* Point theme demo (guide start, demo home, extensions tip, footer, README) at https://antora-supplemental.github.io/antora-facto/[Facto stack demo] for client Mermaid + lightbox + SoftNav.
+* Keep Valentus lean — those compose pieces stay out of core / `v2`.
 All notable changes to this project will be documented in this file.
 
 The format is based on https://keepachangelog.com/en/1.1.0/[Keep a Changelog],

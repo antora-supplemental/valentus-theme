@@ -134,6 +134,12 @@ include::../images/diagrams/authentication-sequence.mmd[]
 ----
 
 TIP: Keep authored diagram examples in Mermaid and regenerate both SVG delivery modes after source or palette changes.
+
+
+[TIP]
+====
+For **client** Mermaid (CDN runtime, source-in-HTML), diagram lightbox, and SoftNav — without folding them into Valentus core — see the https://antora-supplemental.github.io/antora-facto/[Facto stack demo^] and https://github.com/antora-supplemental/antora-facto[`antora-facto`^].
+====
 --
 
 '''

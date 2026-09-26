@@ -7,6 +7,14 @@ Use these pages to see how different AsciiDoc elements render in both light and 
 
 TIP: Use the *theme toggle button* in the navbar (sun/moon icon) to switch between light and dark modes.
 
+
+[NOTE]
+====
+This is the **Valentus theme** demo (lean chrome).
+Want client Mermaid, diagram lightbox, and SoftNav?
+See the https://antora-supplemental.github.io/antora-facto/[Facto stack demo^].
+====
+
 == Demo Pages
 
 [cols="1,2"]
