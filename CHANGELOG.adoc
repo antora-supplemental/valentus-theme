@@ -1,4 +1,4 @@
-﻿= Changelog
+= Changelog
 
 == 2026-09-25 -- Facto demo URL rename
 
@@ -22,6 +22,14 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
 == [Unreleased]
+
+== [2.0.35] - 2026-09-27
+
+Public label: *2.0.35+antora.3* (Antora 3).
+
+=== Fixed
+
+* Breadcrumb trail - intermediate crumbs (nav titles / unlinked section parents) resolve a landing URL from `page.navigation` (Overview/Home child or first descendant) and render as `<a href>`; current leaf stays a non-link with `aria-current="page"`. Site-home chip unchanged. See link:changelog-details/2026-09-27 - breadcrumb intermediate trail links.adoc[Detailed notes].
 
 == [2.0.34] - 2026-09-15
 

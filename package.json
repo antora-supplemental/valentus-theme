@@ -1,6 +1,6 @@
 {
   "name": "valentus-theme",
-  "version": "2.0.34",
+  "version": "2.0.35",
   "description": "Valentus — composed Antora doc-site chrome with bundled dark mode (mast, header, layout, toggle).",
   "private": true,
   "keywords": [
@@ -36,7 +36,8 @@
     "dark-mode:sync": "node scripts/sync-dark-mode.mjs",
     "diagrams:generate": "node scripts/generate-themed-diagrams.mjs",
     "diagrams:check": "node scripts/generate-themed-diagrams.mjs --check",
-    "themed-svg:sync": "node scripts/sync-themed-svg-runtime.mjs"
+    "themed-svg:sync": "node scripts/sync-themed-svg-runtime.mjs",
+    "test": "node --test test/*.test.js"
   },
   "devDependencies": {
     "@dev-centr/mermaid-svg-css-vars": "0.1.2",

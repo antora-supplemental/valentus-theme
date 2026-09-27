@@ -2,7 +2,9 @@
 {{#each this}}
 <li class="adt-breadcrumb-sep" aria-hidden="true">/</li>
 <li class="adt-breadcrumb-trail{{#if @last}} adt-breadcrumb-trail--current{{/if}}">
-{{~#if (and ./url (eq ./urlType 'internal'))~}}
+{{~#if @last~}}
+<span class="adt-breadcrumb-trail-text" aria-current="page">{{{./content}}}</span>
+{{~else if (and ./url (eq ./urlType 'internal'))~}}
 <a class="adt-breadcrumb-trail-link" href="{{{relativize ./url}}}">{{{./content}}}</a>
 {{~else~}}
 <span class="adt-breadcrumb-trail-text">{{{./content}}}</span>

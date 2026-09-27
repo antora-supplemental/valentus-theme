@@ -1,0 +1,28 @@
+= Breadcrumb intermediate trail links
+
+*Date:* 2026-09-27
+*Release:* 2.0.35+antora.3
+
+== Problem
+
+Antora `page.breadcrumbs` includes nav *titles* (`. Documentation`) and section parents that site-nav-tree unlinks via `promoteLinkedSectionLandings`. Those crumbs have content but no `url`, so the mast rendered them as `<span>` text. Readers could not click an intermediate crumb to jump up a level without hunting in the side-nav.
+
+The current leaf was also rendered as a link (Antora always attaches the page URL), which is noisy for "you are here".
+
+== Fix
+
+`adt-bc-trail-crumbs` now **enriches** crumbs that lack an internal URL by walking `page.navigation`:
+
+1. Match each trail label to a nav node (depth-first if siblings miss).
+2. Landing URL = the node's own internal URL, else an **Overview**/**Home** child, else the first BFS descendant with an internal URL.
+3. Runs whether or not `site.keys.site_nav_tree` is set (site-nav-tree still strips foreign Home / duplicate component-root crumbs first).
+
+Trail partials (`breadcrumbs.hbs` / `adt-bc-trail.hbs`):
+
+* Intermediate crumbs with an internal URL → `<a class="adt-breadcrumb-trail-link">`
+* Current (last) crumb → `<span aria-current="page">` (non-link)
+* Site-home house chip unchanged (still linked)
+
+== Tests
+
+`test/adt-bc-trail-crumbs.test.js` covers landing resolution, nav-title enrichment, Overview preference, and site-nav-tree Home strip + enrich.

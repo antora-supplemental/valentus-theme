@@ -49,6 +49,8 @@ The breadcrumb mast keeps the **component** kicker even when `@antora-supplement
 
 Site home is an **icon-only** house chip (no “Home” word label). Separators between trail segments are real `/` text nodes, so a drag-select still copies a pasteable path such as `/ Component Version / Where docs live` (the home glyph itself is not a slash character).
 
+Intermediate trail crumbs that Antora left without a URL (nav section titles, or parents unlinked by site-nav-tree) resolve a *landing* URL from the sidebar nav (Overview/Home child, else the first page under that node) so they are clickable. The current page crumb stays plain text with ``aria-current="page"``; the house chip remains the site-home link.
+
 Helper `adt-version-mode` drives the version control (Valentus 2.0.19+; `~` menu behavior from 2.0.27+):
 
 | Mode | When | UI |

@@ -2,10 +2,18 @@
 
 /**
  * Breadcrumb trail items for the mast.
+ *
  * When `@antora-supplemental/site-nav-tree` is active (`site.keys.site_nav_tree`):
  * 1. Strip leading crumbs that are foreign component roots (esp. Home / site home)
  * 2. Drop a leading crumb that duplicates the *current* component root (already in
  *    the sidebar forest / component kicker)
+ *
+ * Always (with or without site-nav-tree):
+ * 3. Enrich intermediate crumbs that lack an internal URL by resolving a section
+ *    landing from `page.navigation` (Overview/Home child, else first descendant
+ *    with an internal URL). Nav titles (`. Section`) and parents unlinked by
+ *    site-nav-tree promoteLinkedSectionLandings become clickable so readers can
+ *    navigate up without scrolling the side-nav.
  *
  * Multi-component hubs often put `home` first in the forest and xref into other
  * components from home nav. Antora's trail can then start with Home even when
@@ -104,41 +112,140 @@ function isForeignComponentRootCrumb (crumb, site, currentComponentName) {
   return false
 }
 
-module.exports = (breadcrumbs, options) => {
-  const list = Array.isArray(breadcrumbs) ? breadcrumbs.slice() : []
+function hasInternalUrl (item) {
+  return !!(item && item.url && (item.urlType === 'internal' || item.urlType == null || item.urlType === ''))
+}
+
+function navLabel (item) {
+  return crumbContent(item).toLowerCase().replace(/\s+/g, ' ')
+}
+
+function isHomeNavItem (item) {
+  if (!item) return false
+  const text = navLabel(item)
+  return text === 'home' || text === 'overview'
+}
+
+/**
+ * Top-level list of nav items Antora / site-nav-tree expose on page.navigation.
+ * Handles a single anonymous tree `{ items: [...] }` or a forest of roots.
+ */
+function navigationRoots (navigation) {
+  if (!navigation) return []
+  if (Array.isArray(navigation)) return navigation
+  if (Array.isArray(navigation.items)) return navigation.items
+  return []
+}
+
+function findChildByContent (siblings, content) {
+  const want = String(content || '').trim()
+  if (!want || !Array.isArray(siblings)) return null
+  for (const item of siblings) {
+    if (crumbContent(item) === want) return item
+  }
+  return null
+}
+
+function findDeepByContent (siblings, content) {
+  const want = String(content || '').trim()
+  if (!want || !Array.isArray(siblings)) return null
+  for (const item of siblings) {
+    if (crumbContent(item) === want) return item
+    const nested = findDeepByContent(item.items, content)
+    if (nested) return nested
+  }
+  return null
+}
+
+/**
+ * Landing URL for a nav node: own internal URL, else Overview/Home child,
+ * else first BFS descendant with an internal URL.
+ */
+function landingFromNavItem (item) {
+  if (!item) return null
+  if (hasInternalUrl(item)) {
+    return { url: item.url, urlType: item.urlType || 'internal' }
+  }
+  const kids = Array.isArray(item.items) ? item.items : []
+  const home = kids.find(isHomeNavItem)
+  if (home && hasInternalUrl(home)) {
+    return { url: home.url, urlType: home.urlType || 'internal' }
+  }
+  const queue = kids.slice()
+  while (queue.length) {
+    const node = queue.shift()
+    if (!node) continue
+    if (hasInternalUrl(node)) {
+      return { url: node.url, urlType: node.urlType || 'internal' }
+    }
+    if (Array.isArray(node.items) && node.items.length) {
+      queue.push(...node.items)
+    }
+  }
+  return null
+}
+
+/**
+ * Walk the trail against the sidebar nav and attach internal URLs to crumbs
+ * that Antora left as bare section titles (or that site-nav-tree unlinked).
+ */
+function enrichCrumbUrls (crumbs, navigation) {
+  const list = Array.isArray(crumbs) ? crumbs : []
   if (!list.length) return list
 
-  const root = options && options.data && options.data.root
-  const site = root && root.site
-  const keys = site && site.keys
-  if (!keys || String(keys.site_nav_tree) !== 'true') return list
+  let siblings = navigationRoots(navigation)
+  const out = []
 
-  const page = root.page
+  for (let i = 0; i < list.length; i++) {
+    const crumb = list[i]
+    const copy = Object.assign({}, crumb)
+    const label = crumbContent(crumb)
+
+    let match = findChildByContent(siblings, label)
+    if (!match) match = findDeepByContent(siblings, label)
+
+    if (!hasInternalUrl(copy) && match) {
+      const landing = landingFromNavItem(match)
+      if (landing) {
+        copy.url = landing.url
+        copy.urlType = landing.urlType
+      }
+    }
+
+    out.push(copy)
+
+    if (match && Array.isArray(match.items) && match.items.length) {
+      siblings = match.items
+    }
+  }
+
+  return out
+}
+
+function stripSiteNavTreeDupes (list, site, page) {
   const currentComponent = page && page.component
   const currentName = currentComponent && currentComponent.name
   const homeComponent = findHomeComponent(site)
+  const crumbs = list.slice()
 
-  // 1. Drop leading foreign roots (Home first among them) / site-home crumbs
-  while (list.length) {
-    const first = list[0]
+  while (crumbs.length) {
+    const first = crumbs[0]
     const foreign =
       isSiteHomeCrumb(first, site, homeComponent) ||
       isForeignComponentRootCrumb(first, site, currentName)
-    // Never strip the current component's own root here — step 2 owns that
     if (currentComponent && crumbMatchesComponentRoot(first, currentComponent)) break
     if (!foreign) break
-    list.shift()
+    crumbs.shift()
   }
 
-  // 2. Drop leading crumb that duplicates the current component root
   const cv = page && page.componentVersion
   const componentUrl = cv && cv.url
   const componentTitle =
     (currentComponent && currentComponent.title) ||
     (cv && (cv.title || cv.displayVersion))
 
-  const first = list[0]
-  if (!first) return list
+  const first = crumbs[0]
+  if (!first) return crumbs
 
   const urlMatch =
     first.url &&
@@ -149,6 +256,29 @@ module.exports = (breadcrumbs, options) => {
     componentTitle &&
     String(first.content) === String(componentTitle)
 
-  if (urlMatch || titleMatch) return list.slice(1)
-  return list
+  if (urlMatch || titleMatch) return crumbs.slice(1)
+  return crumbs
 }
+
+function adtBcTrailCrumbs (breadcrumbs, options) {
+  const list = Array.isArray(breadcrumbs) ? breadcrumbs.slice() : []
+  if (!list.length) return list
+
+  const root = options && options.data && options.data.root
+  const site = root && root.site
+  const page = root && root.page
+  const keys = site && site.keys
+
+  let crumbs = list
+  if (keys && String(keys.site_nav_tree) === 'true') {
+    crumbs = stripSiteNavTreeDupes(crumbs, site, page)
+  }
+
+  return enrichCrumbUrls(crumbs, page && page.navigation)
+}
+
+module.exports = adtBcTrailCrumbs
+module.exports.enrichCrumbUrls = enrichCrumbUrls
+module.exports.landingFromNavItem = landingFromNavItem
+module.exports.hasInternalUrl = hasInternalUrl
+module.exports.stripSiteNavTreeDupes = stripSiteNavTreeDupes
