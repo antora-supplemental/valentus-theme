@@ -1463,3 +1463,43 @@ html.dark-theme .doc .sect4 {
     }
   }
 }
+
+/* Content viewport — wide tables scroll inside the article, not over the TOC.
+   Overflow lives on the wrapper (adt-table-scroll.js), never on the <table>. */
+main.adt-article,
+main.adt-article > .content {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.doc .tablecontainer,
+.doc .adt-table-scroll {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.doc .tablecontainer > table.tableblock,
+.doc .adt-table-scroll > table.tableblock {
+  max-width: none;
+}
+
+.doc table.tableblock th,
+.doc table.tableblock td {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.doc table.tableblock code,
+.doc table.tableblock .literal {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.doc .listingblock > .content,
+.doc .literalblock > .content {
+  max-width: 100%;
+  overflow-x: auto;
+}

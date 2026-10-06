@@ -23,6 +23,10 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+=== Fixed
+
+* Wide AsciiDoc tables scroll inside the article column. A wrapper (`adt-table-scroll`) gets `overflow-x`; the table itself is not clipped, so the right-hand contents column stays clear.
+
 == [2.0.35] - 2026-09-27
 
 Public label: *2.0.35+antora.3* (Antora 3).
