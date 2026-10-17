@@ -1,5 +1,5 @@
 /* Reading width module — doc measure tokens + control chrome.
-   Place {{> adt-read-width}} anywhere; demo places it in .adt-tool-band (outside the 3-col row).
+   Place {{> adt-read-width}} in {{> adt-doc-toolbar}} (top of the article column) or anywhere in .doc.
    data-adt-read-width only changes --adt-doc-max. Layout sizes main to the doc; --adt-col-gap stays fixed. */
 
 :root {
@@ -69,7 +69,8 @@ html[data-adt-read-width="wide"] {
   box-sizing: border-box;
 }
 
-/* Demo / tool-band placement: centered over the article column; shares --adt-tool-band height */
+/* Doc toolbar placement (Valentus default) */
+.adt-doc-toolbar > .adt-read-width,
 .adt-tool-band-center > .adt-read-width,
 article.doc > .adt-read-width {
   display: flex;
@@ -136,7 +137,8 @@ article.doc > .adt-read-width {
     display: none !important;
   }
 
-  /* Collapse the tool band when only (hidden) read-width is present. */
+  /* Collapse the doc toolbar when only (hidden) read-width would show. */
+  .adt-doc-toolbar:has(.adt-read-width):not(:has(.adt-font-size)),
   .adt-tool-band:has(.adt-read-width):not(:has(.adt-font-size)) {
     display: none;
   }

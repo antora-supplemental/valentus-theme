@@ -70,7 +70,7 @@
   --adt-content-rail-top: 0;
   --adt-tool-band: 2.15rem;
   --adt-tool-gap: 0.65rem;
-  --adt-col-rail-top: 0;
+  --adt-col-rail-top: var(--adt-global-rail-top);
   --adt-toc-rail-top: var(--adt-col-rail-top);
   --adt-mast-pad-h: 1.25rem;
 }
@@ -311,8 +311,8 @@ body.adt-side-panels html.dark-theme {
 
 @media screen and (min-width: 1024px) {
   /*
-   * Shell: .adt-shell > tool-band + .body.adt-body (nav | main | TOC peers).
-   * Tool band is outside the 3-col row so search dropdowns are not clipped by nav overflow.
+   * Shell: .adt-shell > .body.adt-body (nav | main | TOC peers).
+   * Read-width lives in .adt-doc-toolbar at the top of the article column.
    * Footer stays outside .adt-shell (sibling under body); shell flex-grows to pin it.
    * Width is intrinsic (panels + fixed --adt-col-gap + doc column); viewport-centered
    * via align-self + margin-inline:auto. Main shrink-wraps to --adt-doc-max (no flex grow).
@@ -328,10 +328,6 @@ body.adt-side-panels html.dark-theme {
     margin-inline: auto;
     padding-inline: var(--adt-shell-pad);
     box-sizing: border-box;
-    overflow: visible;
-  }
-
-  .adt-tool-band {
     overflow: visible;
   }
 

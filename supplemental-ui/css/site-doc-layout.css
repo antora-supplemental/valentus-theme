@@ -36,17 +36,17 @@
   --adt-header-bar-hover: var(--adt-accent-soft);
   /* Raster/SVG VCS marks (white in file): invert for light top bar. */
   --adt-header-vcs-icon-filter: brightness(0) opacity(0.92);
-  /* Tool band sits above the 3-col row (.adt-shell > .adt-tool-band + .body.adt-body):
-     - --adt-global-rail-top: top inset under the mast for the tool band.
-     - --adt-tool-band: height of the read-width control row.
-     - --adt-tool-gap: space under the tool band before tree / title / TOC.
-     Columns share a common baseline (--adt-col-rail-top) below the band.
+  /* Doc-column toolbar (.adt-doc-toolbar in main): read-width + condensed font-size.
+     - --adt-global-rail-top: shared top inset under mast for nav, TOC, and doc toolbar.
+     - --adt-tool-band: control row height token (read-width / font-size).
+     - --adt-tool-gap: space under the toolbar before the page title.
+     Side columns no longer reserve phantom width for a full-shell tool band.
      Site-wide search lives in .adt-site-navbar (own width, not column measure). */
   --adt-global-rail-top: 0.85rem;
   --adt-content-rail-top: 0;
   --adt-tool-band: 2.15rem;
   --adt-tool-gap: 0.65rem;
-  --adt-col-rail-top: 0;
+  --adt-col-rail-top: var(--adt-global-rail-top);
   --adt-toc-rail-top: var(--adt-col-rail-top);
   /* Horizontal rail: mast + left nav share an inset so home / component title line up. */
   --adt-mast-pad-h: 1.25rem;
@@ -541,6 +541,8 @@ html.dark-theme .adt-doc-mast {
     flex-direction: column !important;
     align-self: flex-start !important;
     min-height: 0 !important;
+    padding-top: var(--adt-col-rail-top);
+    box-sizing: border-box;
   }
 
   .nav {
@@ -1526,72 +1528,31 @@ body {
   overflow: visible;
 }
 
-/* Tool band: read-width centered over the article column (not search). */
-.adt-tool-band {
+/* Doc-column toolbar: read-width (desktop) + font-size (condensed). */
+.adt-doc-toolbar {
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 0.75rem;
-  position: relative;
-  top: auto;
-  z-index: 20;
+  justify-content: flex-end;
+  gap: 0.5rem;
   box-sizing: border-box;
   width: 100%;
-  overflow: visible;
-  padding: var(--adt-global-rail-top) var(--adt-shell-pad, 1.75rem) var(--adt-tool-gap);
+  max-width: 100%;
+  min-height: var(--adt-tool-band, 2.15rem);
+  padding-top: var(--adt-global-rail-top);
+  padding-bottom: var(--adt-tool-gap);
 }
 
-.adt-tool-nav-slot,
-.adt-tool-search,
-.adt-tool-search-slot {
-  flex: 1 1 auto;
-  min-width: 0;
-  max-width: 22rem;
-  position: relative;
-  z-index: 21;
-  overflow: visible;
+@media screen and (max-width: 1023.5px) {
+  .adt-doc-toolbar {
+    justify-content: center;
+  }
 }
 
-.adt-tool-band-center {
-  flex: 0 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-inline-start: auto;
-}
-
-.adt-tool-toc-slot {
-  display: none;
-}
-
-@media screen and (min-width: 1024px) {
-  .adt-tool-band {
-    gap: var(--adt-col-gap);
-    padding-inline: 0;
-  }
-
-  .adt-tool-nav-slot,
-  .adt-tool-search,
-  .adt-tool-search-slot {
-    flex: 0 0 var(--adt-nav-width);
-    width: var(--adt-nav-width);
-    max-width: none;
-  }
-
-  .adt-tool-band-center {
-    flex: 0 1 auto;
-    width: var(--adt-doc-max);
-    max-width: var(--adt-doc-max);
-    min-width: 0;
-    margin-inline-start: 0;
-    transition: width 0.25s ease, max-width 0.25s ease;
-  }
-
-  .adt-tool-toc-slot {
-    display: block;
-    flex: 0 0 var(--adt-toc-width);
-    width: var(--adt-toc-width);
-  }
+/* Legacy shell tool band (removed from body.hbs in 2.1.0) — hide if a hub still renders it. */
+.adt-shell > .adt-tool-band {
+  display: none !important;
 }
 
 /* Footer is outside .adt-shell / .adt-body; natural height only (does not grow). */

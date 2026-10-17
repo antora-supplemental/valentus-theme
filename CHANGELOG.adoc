@@ -28,12 +28,21 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Docs: removed in-repo `docs/modules/ROOT/` fixture pages (canonical copy in `antora-supplemental/demo-data` `demo-pages`). GitHub Pages and local playbooks compose `demo-data` @ `v0.3.5` (`branches: []` on tag sources); guide-only nav in `docs/antora.yml`. Extension fixtures nest under **Extensions** in `demo-pages` nav (v0.3.3+ **Core** / **Extensions** hierarchy).
 * Pages deploy: `scripts/legacy-theme-demo-redirects.mjs` stubs `/theme-demo/…` → `/demo-pages/…` after Antora build.
 
+== [2.1.0] - 2026-10-17
+
+Public label: *2.1.0+antora.3* (Antora 3).
+
+=== Changed
+
+* **BREAKING (layout):** read-width + condensed font-size move from the full-shell `.adt-tool-band` into **`.adt-doc-toolbar`** at the top of `main.adt-article > .content`. Nav and TOC align with `--adt-col-rail-top` (`--adt-global-rail-top`) — no phantom nav/TOC slots above the three-column row. Legacy `{{> adt-tool-band}}` in custom `body.hbs` still works but is hidden when placed under `.adt-shell`; prefer `{{> adt-doc-toolbar}}` in `main` (stock partials updated).
+* Scroll-away site chrome (2.0.37+): navbar + doc mast hide on scroll down, reveal on scroll up; `--adt-chrome-sticky-top` drives left nav height.
+
 === Fixed
 
-* **Scroll-away site chrome:** navbar + doc mast hide on scroll down and reappear on scroll up (class `adt-chrome-scroll-away` on `<html>`); near the top of the page chrome stays visible. Left nav sticky offset uses `--adt-chrome-sticky-top` (full viewport when chrome is away). **`/`** (Lunr search shortcut) calls `adtRevealSiteChrome()` so the navbar peeks back for typing; search-chat **v0.1.6+** does the same when it owns `/` and `?`.
-* **Nav tree viewport column:** restore sticky left nav under `--adt-mast-total` (not document-height stretch). Keeps the project switcher at the bottom of the visible tree without pinning the read-width tool band or breaking sticky site navbar + doc mast.
-* Wide AsciiDoc tables scroll inside the article column. A wrapper (`adt-table-scroll`) gets `overflow-x`; the table itself is not clipped, so the right-hand contents column stays clear.
-* GitHub Pages demo footer drops the Facto stack demo link (theme demo playbook does not compose `@antora-supplemental/facto-stack`); UI line adds `(demo)` after the `valentus-theme` repo link (this site).
+* **`/` search shortcut** peeks scroll-away chrome (`adtRevealSiteChrome`); pair with `@antora-supplemental/antora-search-chat` **v0.1.6+** for Search/Ask.
+* Nav tree viewport column: sticky under `--adt-chrome-sticky-top` / `--adt-mast-total` (not document-height stretch).
+* Wide AsciiDoc tables scroll inside the article column (`adt-table-scroll` wrapper).
+* GitHub Pages demo footer drops the Facto stack demo link; UI line adds `(demo)` after the `valentus-theme` repo link.
 
 == [2.0.35] - 2026-09-27
 

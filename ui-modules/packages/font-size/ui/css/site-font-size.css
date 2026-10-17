@@ -1,5 +1,5 @@
 /* Reading font-size module — doc text scale + condensed-viewport control.
-   Place {{> adt-font-size}} in .adt-tool-band-center (alongside adt-read-width).
+   Place {{> adt-font-size}} in .adt-doc-toolbar (alongside adt-read-width).
    Desktop (≥1024px) keeps read-width; this control shows only below that breakpoint.
    data-adt-font-size scales article.doc (zoom + font-size fallback). */
 
@@ -60,6 +60,7 @@ html[data-adt-font-size="large"] {
   box-sizing: border-box;
 }
 
+.adt-doc-toolbar > .adt-font-size,
 .adt-tool-band-center > .adt-font-size {
   display: flex;
   width: fit-content;
@@ -131,13 +132,8 @@ html[data-adt-font-size="large"] {
 
 /* Condensed / mobile: center over content (no far-right remnant). */
 @media screen and (max-width: 1023.5px) {
-  .adt-tool-nav-slot {
-    display: none;
-  }
-
+  .adt-doc-toolbar,
   .adt-tool-band-center {
-    flex: 1 1 auto;
-    margin-inline-start: 0;
     justify-content: center;
     width: 100%;
     max-width: none;

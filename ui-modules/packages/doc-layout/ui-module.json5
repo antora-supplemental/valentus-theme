@@ -18,7 +18,7 @@
   },
   ui: {
     partials: {
-      provide: ["adt-tool-band"],
+      provide: ["adt-doc-toolbar", "adt-tool-band"],
       replace: ["body", "nav", "nav-menu", "main", "article", "footer-content", "edit-this-page"],
     },
   },
