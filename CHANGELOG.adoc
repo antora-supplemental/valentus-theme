@@ -28,6 +28,14 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Docs: removed in-repo `docs/modules/ROOT/` fixture pages (canonical copy in `antora-supplemental/demo-data` `demo-pages`). GitHub Pages and local playbooks compose `demo-data` @ `v0.3.5` (`branches: []` on tag sources); guide-only nav in `docs/antora.yml`. Extension fixtures nest under **Extensions** in `demo-pages` nav (v0.3.3+ **Core** / **Extensions** hierarchy).
 * Pages deploy: `scripts/legacy-theme-demo-redirects.mjs` stubs `/theme-demo/…` → `/demo-pages/…` after Antora build.
 
+== [2.1.6] - 2026-10-17
+
+Public label: *2.1.6+antora.3* (Antora 3).
+
+=== Fixed
+
+* **Bundle parity:** the 2.1.3 nav-toggle icon and 2.1.4/2.1.5 mobile drawer shade landed only in `ui-modules/` sources; the release bundle ships the parallel `supplemental-ui/` copies, so hubs saw no change. Both copies are now synced — toggle icon and canvas drawer shade actually ship in the bundle.
+
 == [2.1.5] - 2026-10-17
 
 Public label: *2.1.5+antora.3* (Antora 3).

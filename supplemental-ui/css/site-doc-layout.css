@@ -515,9 +515,41 @@ html.dark-theme .adt-doc-mast {
   border-bottom-color: var(--adt-chrome-border);
 }
 
+/*
+ * Self-contained toggle icon: inline SVG in currentColor, not the Default UI
+ * background-image (menu.svg/back.svg carry a hardcoded #222 and only render
+ * when that bundle asset + load order cooperate; dark mode previously needed
+ * a mask hack on the button itself). Neutralize the bundle + mask rules so
+ * the glyph is visible in both themes and both toggle states.
+ */
 .adt-doc-mast .nav-toggle {
   flex: 0 0 auto;
   align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: none;
+  background: none !important;
+  background-color: transparent !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  color: var(--adt-ink);
+  cursor: pointer;
+}
+
+.adt-doc-mast .nav-toggle .adt-nav-toggle-icon--back {
+  display: none;
+}
+
+.adt-doc-mast .nav-toggle.is-active .adt-nav-toggle-icon--menu {
+  display: none;
+}
+
+.adt-doc-mast .nav-toggle.is-active .adt-nav-toggle-icon--back {
+  display: block;
 }
 
 @media screen and (min-width: 1024px) {
