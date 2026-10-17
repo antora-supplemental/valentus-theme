@@ -1534,7 +1534,8 @@ body {
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: flex-end;
+  /* Align with the start of the article column (doc title / prose). */
+  justify-content: flex-start;
   gap: 0.5rem;
   box-sizing: border-box;
   width: 100%;
@@ -1542,12 +1543,6 @@ body {
   min-height: var(--adt-tool-band, 2.15rem);
   padding-top: var(--adt-global-rail-top);
   padding-bottom: var(--adt-tool-gap);
-}
-
-@media screen and (max-width: 1023.5px) {
-  .adt-doc-toolbar {
-    justify-content: center;
-  }
 }
 
 /* Legacy shell tool band (removed from body.hbs in 2.1.0) — hide if a hub still renders it. */
