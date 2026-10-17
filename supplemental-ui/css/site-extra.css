@@ -908,7 +908,8 @@ html.dark-theme .videoblock {
 }
 
 /* Sticky left nav: keep viewport-height column so the project switcher stays at the
-   bottom of the visible nav tree (in-flow stretch pushed it to the document bottom). */
+   bottom of the visible nav tree (in-flow stretch pushed it to the document bottom).
+   Authoritative offsets live in site-doc-layout.css (mast-aware --adt-mast-total). */
 @media screen and (min-width: 1024px) {
   .nav-container {
     align-self: flex-start !important;
@@ -917,8 +918,9 @@ html.dark-theme .videoblock {
 
   .nav {
     position: sticky !important;
-    top: var(--navbar-height) !important;
-    height: var(--nav-height--desktop) !important;
+    top: var(--adt-mast-total, var(--navbar-height)) !important;
+    height: calc(100vh - var(--adt-mast-total, var(--navbar-height))) !important;
+    max-height: calc(100vh - var(--adt-mast-total, var(--navbar-height))) !important;
     display: flex !important;
     flex-direction: column !important;
     min-height: 0 !important;
