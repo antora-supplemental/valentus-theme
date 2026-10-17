@@ -151,11 +151,14 @@ html.adt-chrome-scroll-away {
   --adt-chrome-sticky-top: 0px;
 }
 
-/* Navbar row: opaque fill (sticky stack lives on .header.adt-header). */
+/* Navbar row: opaque fill (sticky stack lives on .header.adt-header).
+   z-index must beat .adt-doc-mast (z-index: 2): the navbar owns the search
+   omnibox, whose scope menu / results / Ask panel drop down over the mast.
+   At z-index: 1 those menus were trapped under the mast stacking context. */
 .adt-site-navbar {
   position: relative;
   top: auto;
-  z-index: 1;
+  z-index: 20;
   width: 100%;
   min-height: 3.5rem;
   display: flex;
