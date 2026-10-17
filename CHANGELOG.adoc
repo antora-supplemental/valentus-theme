@@ -25,7 +25,7 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 === Changed
 
-* Docs: removed in-repo `docs/modules/ROOT/` fixture pages (canonical copy in `antora-supplemental/demo-data` `theme-demo`). GitHub Pages and local playbooks compose `demo-data` @ `v0.2.0`; guide-only nav in `docs/antora.yml`.
+* Docs: removed in-repo `docs/modules/ROOT/` fixture pages (canonical copy in `antora-supplemental/demo-data` `theme-demo`). GitHub Pages and local playbooks compose `demo-data` @ `v0.2.1` (`branches: []` on tag sources); guide-only nav in `docs/antora.yml`.
 
 === Fixed
 
