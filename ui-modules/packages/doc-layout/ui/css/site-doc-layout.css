@@ -46,6 +46,9 @@
   --adt-content-rail-top: 0;
   --adt-tool-band: 2.15rem;
   --adt-tool-gap: 0.65rem;
+  /* Antora Default UI article inset (`.doc { padding: 0 1rem 4rem }`); toolbar is a `.content` sibling. */
+  --adt-doc-pad-inline: 1rem;
+  --adt-doc-pad-bottom: 4rem;
   --adt-col-rail-top: var(--adt-global-rail-top);
   --adt-toc-rail-top: var(--adt-col-rail-top);
   /* Horizontal rail: mast + left nav share an inset so home / component title line up. */
@@ -621,6 +624,12 @@ html.dark-theme .adt-doc-mast {
 .adt-article .content {
   padding-top: var(--adt-col-rail-top, 0);
   box-sizing: border-box;
+}
+
+/* Share horizontal inset with `.adt-doc-toolbar` (sibling, not inside `article.doc`). */
+main.adt-article > .content > article.doc {
+  padding-inline: var(--adt-doc-pad-inline);
+  padding-bottom: var(--adt-doc-pad-bottom);
 }
 
 /* ——— Content rail: TOC h3 (Antora’s fake height/flex) ——— */
@@ -1542,6 +1551,7 @@ body {
   max-width: 100%;
   min-height: var(--adt-tool-band, 2.15rem);
   padding-top: var(--adt-global-rail-top);
+  padding-inline: var(--adt-doc-pad-inline);
   padding-bottom: var(--adt-tool-gap);
 }
 
