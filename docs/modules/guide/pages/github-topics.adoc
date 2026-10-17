@@ -19,6 +19,15 @@ On the repository that owns the Antora playbook:
 . Add **`valentus-theme`** (exact repo/product name, kebab-case).
 . Optionally add `antora-docs` / `antora-site` if you want broad Antora site discovery.
 
+== Direct dependencies only
+
+Tag **direct** playbook dependencies — not transitive compose-pack members.
+
+* Tag `valentus-theme` when this bundle URL (or vendored supplemental-ui) is yours.
+* Tag `facto-stack` when the playbook `require`s the compose pack — do **not** also tag linkinator, page-edit, antora-search-chat, nav-typology, build-stack, and other members the pack registers unless the hub **also** pins or `require`s them directly (`package.json` or playbook YAML).
+
+Hub checklist: link:https://github.com/antora-supplemental/docs/blob/main/docs/modules/ROOT/pages/hub-github-topics.adoc[Hub GitHub topics^] (antora-supplemental/docs).
+
 CLI (merge-safe — fetches existing topics first):
 
 [source,bash]
