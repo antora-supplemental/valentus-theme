@@ -30,7 +30,7 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 === Fixed
 
 * Wide AsciiDoc tables scroll inside the article column. A wrapper (`adt-table-scroll`) gets `overflow-x`; the table itself is not clipped, so the right-hand contents column stays clear.
-* GitHub Pages demo footer drops the Facto stack demo link (theme demo playbook does not compose `@antora-supplemental/facto-stack`).
+* GitHub Pages demo footer drops the Facto stack demo link (theme demo playbook does not compose `@antora-supplemental/facto-stack`); UI line adds `(demo)` after the `valentus-theme` repo link (this site).
 
 == [2.0.35] - 2026-09-27
 
