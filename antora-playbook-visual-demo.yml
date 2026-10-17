@@ -14,7 +14,7 @@ content:
       branches: HEAD
       start_path: docs
     - url: https://github.com/antora-supplemental/demo-data.git
-      tags: [v0.3.3]
+      tags: [v0.3.2]
       branches: []
       start_path: docs/demo-pages
 
