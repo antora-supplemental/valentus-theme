@@ -5,6 +5,8 @@
 :root {
   --adt-mast-h: 2.75rem;
   --adt-mast-total: calc(3.5rem + var(--adt-mast-h));
+  /* Left nav sticky offset tracks visible site chrome (mast hides with navbar on scroll-away). */
+  --adt-chrome-sticky-top: var(--adt-mast-total);
   --adt-font: "Source Sans 3", system-ui, "Segoe UI", sans-serif;
   --adt-font-display: "Plus Jakarta Sans", var(--adt-font);
   --adt-font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace;
@@ -125,20 +127,32 @@ pre,
 /* ——— Top bar: light strip in “light” theme, dark strip in dark theme ——— */
 .header.adt-header {
   display: block;
-  color: var(--adt-header-bar-fg);
-  box-sizing: border-box;
-  /* Mast has its own fill and bottom border; top row is .adt-site-navbar (sticky + opaque). */
-  background: transparent;
-}
-
-/* Sticky first row: must be solid so page content does not show through on scroll.
-   z-index must beat .adt-tool-band (20): Lunr .search-result-dropdown-menu and the
-   Ask panel live inside this sticky stacking context, so a low navbar z-index traps
-   overlays under the read-width tool band. */
-.adt-site-navbar {
   position: sticky;
   top: 0;
   z-index: 30;
+  color: var(--adt-header-bar-fg);
+  box-sizing: border-box;
+  background: transparent;
+  overflow: visible;
+  transition: transform 0.22s ease;
+  will-change: transform;
+}
+
+/* Scroll down: chrome leaves the viewport; scroll up (or near top): reveal without scrolling to 0. */
+html.adt-chrome-scroll-away .header.adt-header {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+html.adt-chrome-scroll-away {
+  --adt-chrome-sticky-top: 0px;
+}
+
+/* Navbar row: opaque fill (sticky stack lives on .header.adt-header). */
+.adt-site-navbar {
+  position: relative;
+  top: auto;
+  z-index: 1;
   width: 100%;
   min-height: 3.5rem;
   display: flex;
@@ -484,11 +498,10 @@ a.adt-header-title:focus {
   gap: 0.5rem;
   min-height: var(--adt-mast-h);
   padding: 0.35rem var(--adt-mast-pad-h) 0.35rem var(--adt-mast-pad-h);
-  position: sticky;
-  top: 3.5rem;
-  /* Must beat .adt-tool-band (20–21): component/version dropdowns extend below the mast;
-     a low mast z-index traps the first menu rows under the read-width tool band. */
-  z-index: 25;
+  position: relative;
+  top: auto;
+  /* Dropdowns must beat .adt-tool-band (20–21) when the band is present. */
+  z-index: 2;
   background: var(--adt-chrome);
   border-bottom: 1px solid var(--adt-chrome-border);
   box-sizing: border-box;
@@ -532,9 +545,9 @@ html.dark-theme .adt-doc-mast {
 
   .nav {
     position: sticky !important;
-    top: var(--adt-mast-total) !important;
-    height: calc(100vh - var(--adt-mast-total)) !important;
-    max-height: calc(100vh - var(--adt-mast-total)) !important;
+    top: var(--adt-chrome-sticky-top) !important;
+    height: calc(100vh - var(--adt-chrome-sticky-top)) !important;
+    max-height: calc(100vh - var(--adt-chrome-sticky-top)) !important;
     display: flex !important;
     flex-direction: column !important;
     min-height: 0 !important;

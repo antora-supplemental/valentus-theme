@@ -6,13 +6,38 @@
  */
 (function () {
   const nav = document.querySelector('.adt-site-navbar')
-  if (nav) {
-    const onScroll = () => {
-      nav.classList.toggle('is-scrolled', window.scrollY > 4)
+  const root = document.documentElement
+  const CHROME_SCROLL_MIN = 8
+  const CHROME_SCROLL_DELTA = 5
+  let lastScrollY = window.scrollY
+  let chromeTick = false
+
+  function updateChromeOnScroll () {
+    const y = window.scrollY
+    if (nav) {
+      nav.classList.toggle('is-scrolled', y > 4)
     }
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
+    if (y <= CHROME_SCROLL_MIN) {
+      root.classList.remove('adt-chrome-scroll-away')
+    } else if (y > lastScrollY + CHROME_SCROLL_DELTA) {
+      root.classList.add('adt-chrome-scroll-away')
+    } else if (y < lastScrollY - CHROME_SCROLL_DELTA) {
+      root.classList.remove('adt-chrome-scroll-away')
+    }
+    lastScrollY = y
+    chromeTick = false
   }
+
+  updateChromeOnScroll()
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (chromeTick) return
+      chromeTick = true
+      window.requestAnimationFrame(updateChromeOnScroll)
+    },
+    { passive: true }
+  )
 
   // Antora UI default site.js (nav panel): mousedown with detail > 1 → preventDefault
   // so double-clicking nav labels does not select text. When #search-input lives inside
