@@ -30,7 +30,7 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 === Fixed
 
-* **Scroll-away site chrome:** navbar + doc mast hide on scroll down and reappear on scroll up (class `adt-chrome-scroll-away` on `<html>`); near the top of the page chrome stays visible. Left nav sticky offset uses `--adt-chrome-sticky-top` (full viewport when chrome is away).
+* **Scroll-away site chrome:** navbar + doc mast hide on scroll down and reappear on scroll up (class `adt-chrome-scroll-away` on `<html>`); near the top of the page chrome stays visible. Left nav sticky offset uses `--adt-chrome-sticky-top` (full viewport when chrome is away). **`/`** (Lunr search shortcut) calls `adtRevealSiteChrome()` so the navbar peeks back for typing; search-chat **v0.1.6+** does the same when it owns `/` and `?`.
 * **Nav tree viewport column:** restore sticky left nav under `--adt-mast-total` (not document-height stretch). Keeps the project switcher at the bottom of the visible tree without pinning the read-width tool band or breaking sticky site navbar + doc mast.
 * Wide AsciiDoc tables scroll inside the article column. A wrapper (`adt-table-scroll`) gets `overflow-x`; the table itself is not clipped, so the right-hand contents column stays clear.
 * GitHub Pages demo footer drops the Facto stack demo link (theme demo playbook does not compose `@antora-supplemental/facto-stack`); UI line adds `(demo)` after the `valentus-theme` repo link (this site).

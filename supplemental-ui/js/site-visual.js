@@ -12,6 +12,16 @@
   let lastScrollY = window.scrollY
   let chromeTick = false
 
+  /** Show navbar + mast when hidden by scroll-away (e.g. "/" search summon). */
+  function revealSiteChrome () {
+    root.classList.remove('adt-chrome-scroll-away')
+    lastScrollY = window.scrollY
+  }
+
+  if (typeof window !== 'undefined') {
+    window.adtRevealSiteChrome = revealSiteChrome
+  }
+
   function updateChromeOnScroll () {
     const y = window.scrollY
     if (nav) {
@@ -69,6 +79,7 @@
     const input = document.getElementById('search-input')
     if (!input || input.disabled) return
     e.preventDefault()
+    revealSiteChrome()
     input.focus()
     input.select()
   })
