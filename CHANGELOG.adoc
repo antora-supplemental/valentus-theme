@@ -28,6 +28,14 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Docs: removed in-repo `docs/modules/ROOT/` fixture pages (canonical copy in `antora-supplemental/demo-data` `demo-pages`). GitHub Pages and local playbooks compose `demo-data` @ `v0.3.5` (`branches: []` on tag sources); guide-only nav in `docs/antora.yml`. Extension fixtures nest under **Extensions** in `demo-pages` nav (v0.3.3+ **Core** / **Extensions** hierarchy).
 * Pages deploy: `scripts/legacy-theme-demo-redirects.mjs` stubs `/theme-demo/…` → `/demo-pages/…` after Antora build.
 
+== [2.1.3] - 2026-10-17
+
+Public label: *2.1.3+antora.3* (Antora 3).
+
+=== Fixed
+
+* **Invisible mast nav-toggle icon:** the toggle was an empty button relying on the Default UI `site.css` background (`menu.svg`/`back.svg`, hardcoded `#222`, with a dark-mode mask hack on the button in `site-extra.css`). When that bundle asset/load-order chain breaks, the button renders as an empty box. `adt-doc-mast` now carries inline `currentColor` SVG icons (menu / back by `.is-active`) and `site-doc-layout.css` explicitly sizes and colors the button with `--adt-ink`, neutralizing the bundle background and mask rules in both themes.
+
 == [2.1.2] - 2026-10-17
 
 Public label: *2.1.2+antora.3* (Antora 3).
