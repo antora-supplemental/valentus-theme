@@ -28,6 +28,14 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Docs: removed in-repo `docs/modules/ROOT/` fixture pages (canonical copy in `antora-supplemental/demo-data` `demo-pages`). GitHub Pages and local playbooks compose `demo-data` @ `v0.3.5` (`branches: []` on tag sources); guide-only nav in `docs/antora.yml`. Extension fixtures nest under **Extensions** in `demo-pages` nav (v0.3.3+ **Core** / **Extensions** hierarchy).
 * Pages deploy: `scripts/legacy-theme-demo-redirects.mjs` stubs `/theme-demo/…` → `/demo-pages/…` after Antora build.
 
+== [2.1.4] - 2026-10-17
+
+Public label: *2.1.4+antora.3* (Antora 3).
+
+=== Changed
+
+* **Mobile nav drawer shade:** below 1024px the overlaying nav container painted bright `--adt-elevated` (pure white in light mode) over the `#f3f5f8` canvas. It now uses `--adt-nav-bg: color-mix(ink 5%, canvas)` — close to the page background in both themes — with a soft edge shadow to keep the drawer layer readable.
+
 == [2.1.3] - 2026-10-17
 
 Public label: *2.1.3+antora.3* (Antora 3).
