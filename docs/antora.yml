@@ -4,4 +4,3 @@ version: "1.0"
 start_page: guide:index.adoc
 nav:
   - modules/guide/nav.adoc
-  - modules/ROOT/nav.adoc

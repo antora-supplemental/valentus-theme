@@ -1,4 +1,4 @@
-# Visual redesign demo — content from main clone (Antora rejects linked worktrees as url: .)
+# Visual redesign demo — guide from this worktree; fixtures from demo-data.
 # UI overlays come from this worktree's ./supplemental-ui
 site:
   title: Valentus Theme
@@ -10,10 +10,13 @@ site:
 
 content:
   sources:
-    # Sibling primary checkout (real .git directory). Docs need not match this branch.
-    - url: ./../valentus-theme
-      branches: main
+    - url: .
+      branches: HEAD
       start_path: docs
+    - url: https://github.com/antora-supplemental/demo-data.git
+      tags: [v0.2.0]
+      branches: []
+      start_path: docs/theme-demo
 
 ui:
   bundle:
@@ -25,7 +28,7 @@ output:
   dir: ./build/site
 
 runtime:
-  fetch: false
+  fetch: true
 
 antora:
   extensions:

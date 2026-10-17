@@ -18,6 +18,11 @@ content:
     - url: .
       branches: HEAD
       start_path: docs
+    # Baseline body fixtures (canonical copy in demo-data — not in-repo ROOT)
+    - url: https://github.com/antora-supplemental/demo-data.git
+      tags: [v0.2.0]
+      branches: []
+      start_path: docs/theme-demo
 
 ui:
   bundle:
