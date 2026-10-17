@@ -50,6 +50,9 @@ jobs:
           setup_node: false
           fetch: true
 
+      - name: Legacy /theme-demo/ redirects to /demo-pages/
+        run: node scripts/legacy-theme-demo-redirects.mjs
+
       - name: Setup Pages
         uses: actions/configure-pages@v6
 

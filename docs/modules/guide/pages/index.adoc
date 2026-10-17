@@ -16,12 +16,12 @@ See xref:value-proposition.adoc[Value Proposition & Upstream Fixes] for the chec
 
 == Theme demo fixtures (AsciiDoc catalog)
 
-Body pages that exercise typography, tables, code, admonitions, and extension samples live in link:https://github.com/antora-supplemental/demo-data[`demo-data`^] (`theme-demo`), composed into this GitHub Pages site — not in the theme repo.
+Body pages that exercise typography, tables, code, admonitions, and extension samples live in link:https://github.com/antora-supplemental/demo-data[`demo-data`^] (`demo-pages`), composed into this GitHub Pages site — not in the theme repo.
 
-* https://antora-supplemental.github.io/valentus-theme/theme-demo/~/[Theme demo home on Pages^]
-* Canonical source: link:https://github.com/antora-supplemental/demo-data/blob/main/docs/theme-demo/modules/ROOT/pages/migration.adoc[migration notes^]
+* https://antora-supplemental.github.io/valentus-theme/demo-pages/~/[Demo pages home on Pages^]
+* Canonical source: link:https://github.com/antora-supplemental/demo-data/blob/main/docs/demo-pages/modules/ROOT/pages/migration.adoc[migration notes^]
 
-Legacy URLs under `valentus-theme/1.0/` for those fixture pages are retired; use the `theme-demo` component paths above.
+Legacy URLs under `valentus-theme/1.0/` and `theme-demo/` for those fixture pages redirect to `demo-pages/` on Pages; use the component paths above.
 
 == Facto stack demo (compose extras)
 

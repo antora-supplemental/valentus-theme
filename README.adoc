@@ -120,7 +120,7 @@ The `supplemental-ui/` tree vendors dark mode assets (`site-extra.css`, `site-da
 
 === Demo
 
-https://antora-supplemental.github.io/valentus-theme[GitHub Pages demo] (published from `main` via GitHub Actions) — *guide* plus link:https://antora-supplemental.github.io/valentus-theme/theme-demo/~/[theme-demo fixtures^] composed from link:https://github.com/antora-supplemental/demo-data[`demo-data`^].
+https://antora-supplemental.github.io/valentus-theme[GitHub Pages demo] (published from `main` via GitHub Actions) — *guide* plus link:https://antora-supplemental.github.io/valentus-theme/demo-pages/~/[demo-pages fixtures^] composed from link:https://github.com/antora-supplemental/demo-data[`demo-data`^].
 
 Facto compose (client Mermaid, lightbox, SoftNav) lives in a **separate** demo: https://antora-supplemental.github.io/facto-stack/[Facto stack demo] — Valentus core stays lean.
 
