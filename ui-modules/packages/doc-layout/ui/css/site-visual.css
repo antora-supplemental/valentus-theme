@@ -294,13 +294,14 @@ body.adt-side-panels html.dark-theme {
    nav blends with the canvas. Below 1024px the nav overlays the article, so
    it needs an opaque fill (light + dark) or page text shows through.
    Override on :root and html.dark-theme (not bare html) so specificity beats
-   the transparent token defaults. The fill stays close to the canvas (ink
-   washed over it) rather than bright --adt-elevated white, which floated
-   over the light-grey page; a soft edge shadow keeps the overlay readable. */
+   the transparent token defaults. The fill is the canvas itself — darker
+   than the bright --adt-elevated white that floated over the light-grey
+   page, without going darker than the page base; a soft edge shadow keeps
+   the overlay layer readable. */
 @media screen and (max-width: 1023.5px) {
   :root,
   html.dark-theme {
-    --adt-nav-bg: color-mix(in srgb, var(--adt-ink) 5%, var(--adt-canvas));
+    --adt-nav-bg: var(--adt-canvas);
   }
 
   .nav-container,
