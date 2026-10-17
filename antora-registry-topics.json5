@@ -14,10 +14,9 @@
   ],
   // Product topic dependents should add (same string as repo name).
   productTopic: "valentus-theme",
-  // Known playbook repos that pin Valentus ui-bundle (seed list; keep current).
+  // Known playbook repos that pin Valentus ui-bundle WITHOUT a compose pack (seed list; keep current).
+  // facto-stack hubs (antora-supplemental/docs, dev-centr/docs, dlang-supplemental/docs) tag the pack instead.
   knownDependents: [
-    "https://github.com/antora-supplemental/docs",
-    "https://github.com/dev-centr/docs",
     "https://github.com/FoodTruckNerdz/docs",
     "https://github.com/HCI-Nerdz/docs",
     "https://github.com/openshellorg/docs",

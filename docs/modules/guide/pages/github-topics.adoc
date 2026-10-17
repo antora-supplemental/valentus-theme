@@ -2,7 +2,7 @@
 :navtitle: GitHub Topics
 :description: Tag sites that use Valentus with the valentus-theme GitHub topic so dependents stay rediscoverable.
 
-Sites that pin the Valentus `ui-bundle.zip` (or vendor Valentus `supplemental-ui`) should add the GitHub *repository topic* `valentus-theme`.
+Sites that pin the Valentus `ui-bundle.zip` (or vendor Valentus `supplemental-ui`) without a compose pack should add the GitHub *repository topic* `valentus-theme`.
 That is separate from gallery classification topics (`antora-theme`, `antora-light-theme`, …).
 
 == Why
@@ -19,14 +19,14 @@ On the repository that owns the Antora playbook:
 . Add **`valentus-theme`** (exact repo/product name, kebab-case).
 . Optionally add `antora-docs` / `antora-site` if you want broad Antora site discovery.
 
-== Direct dependencies only
+== Provider rule (facto-stack hubs)
 
-Tag **direct** playbook dependencies — not transitive compose-pack members.
+Tag the **provider** your playbook declares.
 
-* Tag `valentus-theme` when this bundle URL (or vendored supplemental-ui) is yours.
-* Tag `facto-stack` when the playbook `require`s the compose pack — do **not** also tag linkinator, page-edit, antora-search-chat, nav-typology, build-stack, and other members the pack registers unless the hub **also** pins or `require`s them directly (`package.json` or playbook YAML).
+* **No compose pack:** tag `valentus-theme` when this bundle URL (or vendored supplemental-ui) is yours.
+* **facto-stack hub:** tag `facto-stack` **only**. The pack is the provider and pairs with this bundle, so the hub does *not* also carry `valentus-theme`, and not linkinator, page-edit, antora-search-chat, nav-typology, page-context, site-nav-tree, soft-nav-page-toc, or any other member. The bundle URL is a rolling `v2` asset with no pin to bump.
 
-Hub checklist: link:https://github.com/antora-supplemental/docs/blob/main/docs/modules/ROOT/pages/hub-github-topics.adoc[Hub GitHub topics^] (antora-supplemental/docs).
+Hub checklist: link:https://docs.antora-supplemental.org/docs/hub-github-topics/[Hub GitHub topics^].
 
 CLI (merge-safe — fetches existing topics first):
 
@@ -66,7 +66,7 @@ gh api "search/repositories?q=topic:valentus-theme"
 Any published Antora UI theme should document the same rule:
 
 * Theme **product** topic = GitHub repository name (for example `valentus-theme`, `architexture-theme`).
-* **Dependents** (playbook repos) must add that product topic when they adopt the theme.
+* **Dependents** (playbook repos) add that product topic when they adopt the theme *without* a compose pack. Hubs on a pack that pairs with the theme (facto-stack) tag the pack instead.
 * Gallery filters keep using capability topics (`antora-theme`, appearance tags) — do not replace those with the product name alone on the theme repo.
 
 See also: link:https://github.com/antora-supplemental/antora-extensions-registry/blob/main/docs/modules/ROOT/pages/contributing.adoc[Registry contributing — GitHub Topics^].
