@@ -21,6 +21,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
+== 3.0.3 — 2026-10-21
+
+=== Fixed
+
+* **Mobile nav drawer:** condensed overlay nav paints `var(--valentus-canvas)` directly so supplemental brand layers that re-set `--valentus-nav-bg: transparent` after `site-visual.css` no longer leave the site-nav-tree drawer fully transparent.
+
 == 3.0.2 — 2026-10-21
 
 * **Zoned `article.hbs`:** `data-zone-root` article with `header` / `meta` / `body` / `footer` zones (`doc-zone--*`). Prose and page-context blocks land in `body` until `@antora-supplemental/article-zones` moves the lead into `meta`; `@antora-supplemental/page-edit` injects Source into `header`. Empty meta zone is hidden (`:empty`). **UI bundle rebuild required** for published `ui-bundle.zip`.

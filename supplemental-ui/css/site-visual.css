@@ -312,7 +312,8 @@ body.valentus-side-panels html.dark-theme {
   .nav,
   .nav .panels,
   .nav-panel-menu {
-    background: var(--valentus-nav-bg) !important;
+    /* Canvas directly — supplemental brand CSS often re-sets --valentus-nav-bg after this file. */
+    background: var(--valentus-canvas) !important;
   }
 
   .nav-container {
