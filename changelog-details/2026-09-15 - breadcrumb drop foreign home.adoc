@@ -12,7 +12,7 @@ On hubs that enable `@antora-supplemental/site-nav-tree`, the mast trail could s
 
 == Cause
 
-`adt-bc-trail-crumbs` only dropped a leading crumb that matched the *current* component root. Home is often first in the curated forest, and home nav commonly xrefs into other components, so Antora's `page.breadcrumbs` resolved under Home first.
+`valentus-bc-trail-crumbs` only dropped a leading crumb that matched the *current* component root. Home is often first in the curated forest, and home nav commonly xrefs into other components, so Antora's `page.breadcrumbs` resolved under Home first.
 
 == Changes
 
@@ -25,5 +25,5 @@ Site-nav-tree off leaves the trail unchanged.
 
 == Files
 
-* `ui-modules/packages/bc-mast/ui/helpers/adt-bc-trail-crumbs.js`
-* `supplemental-ui/helpers/adt-bc-trail-crumbs.js`
+* `ui-modules/packages/bc-mast/ui/helpers/valentus-bc-trail-crumbs.js`
+* `supplemental-ui/helpers/valentus-bc-trail-crumbs.js`

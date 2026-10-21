@@ -12,7 +12,7 @@ Pseudo-element `/` separators and an SVG home icon do not survive a text selecti
 
 == Changes
 
-* Trail separators are `<li class="adt-breadcrumb-sep">/</li>` text nodes (CSS `::after` separators disabled).
+* Trail separators are `<li class="valentus-breadcrumb-sep">/</li>` text nodes (CSS `::after` separators disabled).
 * A real space sits between the component and version kickers so a selection reads `Component Version` / `Component ~` instead of glued tokens.
 * Additional `/` characters only appear before trail segments (no doubled slash after home).
 * *(Superseded)* An early cut of this change also replaced the home SVG with a plain `/`; that home glyph was restored to the icon chip while keeping copyable trail separators.

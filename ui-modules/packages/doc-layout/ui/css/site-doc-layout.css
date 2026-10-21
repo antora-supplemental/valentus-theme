@@ -3,99 +3,99 @@
    in-article toolbar, and a sidebar with component label + page navigation tree. */
 
 :root {
-  --adt-mast-h: 2.75rem;
-  --adt-mast-total: calc(3.5rem + var(--adt-mast-h));
+  --valentus-mast-h: 2.75rem;
+  --valentus-mast-total: calc(3.5rem + var(--valentus-mast-h));
   /* Left nav sticky offset tracks visible site chrome (mast hides with navbar on scroll-away). */
-  --adt-chrome-sticky-top: var(--adt-mast-total);
-  --adt-font: "Source Sans 3", system-ui, "Segoe UI", sans-serif;
-  --adt-font-display: "Plus Jakarta Sans", var(--adt-font);
-  --adt-font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace;
+  --valentus-chrome-sticky-top: var(--valentus-mast-total);
+  --valentus-font: "Source Sans 3", system-ui, "Segoe UI", sans-serif;
+  --valentus-font-display: "Plus Jakarta Sans", var(--valentus-font);
+  --valentus-font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace;
   /* Surfaces — site-visual.css may refine; keep sensible defaults if visual CSS is omitted */
-  --adt-canvas: #f3f5f8;
-  --adt-elevated: #ffffff;
-  --adt-ink: #141820;
-  --adt-ink-muted: #5a6270;
-  --adt-accent: #0f766e;
-  --adt-accent-hover: #0d9488;
-  --adt-accent-soft: rgba(15, 118, 110, 0.1);
-  --adt-border: #d9dee7;
-  --adt-chrome: var(--adt-canvas);
-  --adt-chrome-border: var(--adt-border);
+  --valentus-canvas: #f3f5f8;
+  --valentus-elevated: #ffffff;
+  --valentus-ink: #141820;
+  --valentus-ink-muted: #5a6270;
+  --valentus-accent: #0f766e;
+  --valentus-accent-hover: #0d9488;
+  --valentus-accent-soft: rgba(15, 118, 110, 0.1);
+  --valentus-border: #d9dee7;
+  --soft-nav-context: var(--valentus-canvas);
+  --valentus-chrome-border: var(--valentus-border);
   /* Component + version breadcrumb kickers (same color for both) */
-  --adt-bc-kicker-fg: var(--adt-accent);
-  --adt-bc-kicker-bg: var(--adt-accent-soft);
-  --adt-bc-kicker-border: color-mix(in srgb, var(--adt-accent) 28%, transparent);
+  --valentus-bc-kicker-fg: var(--valentus-accent);
+  --valentus-bc-kicker-bg: var(--valentus-accent-soft);
+  --valentus-bc-kicker-border: color-mix(in srgb, var(--valentus-accent) 28%, transparent);
   /* Shared mast control height: home chip + component/version kickers */
-  --adt-bc-ctrl-h: 1.75rem;
+  --valentus-bc-ctrl-h: 1.75rem;
   /* Top bar: all controls (logo hit-area, title, theme, org GitHub) share one line height */
-  --adt-header-ctrl: 2.5rem;
+  --valentus-header-ctrl: 2.5rem;
   /* Light theme (default): chrome matches page canvas */
-  --adt-header-bar-bg: var(--adt-chrome);
-  --adt-header-bar-fg: var(--adt-ink);
-  --adt-header-bar-border: var(--adt-chrome-border);
-  --adt-header-bar-hover: var(--adt-accent-soft);
+  --valentus-header-bar-bg: var(--valentus-chrome);
+  --valentus-header-bar-fg: var(--valentus-ink);
+  --valentus-header-bar-border: var(--valentus-chrome-border);
+  --valentus-header-bar-hover: var(--valentus-accent-soft);
   /* Raster/SVG VCS marks (white in file): invert for light top bar. */
-  --adt-header-vcs-icon-filter: brightness(0) opacity(0.92);
-  /* Doc-column toolbar (.adt-doc-toolbar in main): read-width + condensed font-size.
-     - --adt-global-rail-top: shared top inset under mast for nav, TOC, and doc toolbar.
-     - --adt-tool-band: control row height token (read-width / font-size).
-     - --adt-tool-gap: space under the toolbar before the page title.
+  --valentus-header-vcs-icon-filter: brightness(0) opacity(0.92);
+  /* Doc-column toolbar (.valentus-doc-toolbar in main): read-width + condensed font-size.
+     - --valentus-global-rail-top: shared top inset under mast for nav, TOC, and doc toolbar.
+     - --valentus-tool-band: control row height token (read-width / font-size).
+     - --valentus-tool-gap: space under the toolbar before the page title.
      Side columns no longer reserve phantom width for a full-shell tool band.
-     Site-wide search lives in .adt-site-navbar (own width, not column measure). */
-  --adt-global-rail-top: 0.85rem;
-  --adt-content-rail-top: 0;
-  --adt-tool-band: 2.15rem;
-  --adt-tool-gap: 0.65rem;
+     Site-wide search lives in .valentus-site-navbar (own width, not column measure). */
+  --valentus-global-rail-top: 0.85rem;
+  --valentus-content-rail-top: 0;
+  --valentus-tool-band: 2.15rem;
+  --valentus-tool-gap: 0.65rem;
   /* Antora Default UI article inset (`.doc { padding: 0 1rem 4rem }`); toolbar is a `.content` sibling. */
-  --adt-doc-pad-inline: 1rem;
-  --adt-doc-pad-bottom: 4rem;
-  --adt-col-rail-top: var(--adt-global-rail-top);
-  --adt-toc-rail-top: var(--adt-col-rail-top);
+  --valentus-doc-pad-inline: 1rem;
+  --valentus-doc-pad-bottom: 4rem;
+  --valentus-col-rail-top: var(--valentus-global-rail-top);
+  --valentus-toc-rail-top: var(--valentus-col-rail-top);
   /* Horizontal rail: mast + left nav share an inset so home / component title line up. */
-  --adt-mast-pad-h: 1.25rem;
-  --adt-global-rail-hpad: var(--adt-mast-pad-h);
+  --valentus-mast-pad-h: 1.25rem;
+  --valentus-global-rail-hpad: var(--valentus-mast-pad-h);
   /* Centered page shell + reading measure (site-visual applies the layout rules).
-     --adt-shell-max is a soft fallback; site-visual derives it from nav + gaps + doc + toc.
-     Nav and TOC share --adt-side-width so the article sits optically centered. */
-  --adt-shell-pad: 1.75rem;
-  --adt-side-width: 16rem;
-  --adt-nav-width: var(--adt-side-width);
-  --adt-col-gap: 2rem;
-  --adt-toc-width: var(--adt-side-width);
-  --adt-doc-max: 82ch;
-  --adt-shell-max: calc(
-    var(--adt-nav-width) + var(--adt-col-gap) + var(--adt-doc-max) + var(--adt-col-gap) + var(--adt-toc-width) +
-      2 * var(--adt-shell-pad)
+     --valentus-shell-max is a soft fallback; site-visual derives it from nav + gaps + doc + toc.
+     Nav and TOC share --valentus-side-width so the article sits optically centered. */
+  --valentus-shell-pad: 1.75rem;
+  --valentus-side-width: 16rem;
+  --valentus-nav-width: var(--valentus-side-width);
+  --valentus-col-gap: 2rem;
+  --valentus-toc-width: var(--valentus-side-width);
+  --valentus-doc-max: 82ch;
+  --valentus-shell-max: calc(
+    var(--valentus-nav-width) + var(--valentus-col-gap) + var(--valentus-doc-max) + var(--valentus-col-gap) + var(--valentus-toc-width) +
+      2 * var(--valentus-shell-pad)
   );
-  --adt-footer-pad-top: 1.5rem;
-  --adt-footer-pad-h: 1.5rem;
-  --adt-footer-pad-bottom: 1.5rem;
+  --valentus-footer-pad-top: 1.5rem;
+  --valentus-footer-pad-h: 1.5rem;
+  --valentus-footer-pad-bottom: 1.5rem;
 }
 
 html.dark-theme {
-  --adt-canvas: #0b0e13;
-  --adt-elevated: #141a22;
-  --adt-ink: #e8ebf0;
-  --adt-ink-muted: #9aa3b2;
-  --adt-accent: #2dd4bf;
-  --adt-accent-hover: #5eead4;
-  --adt-accent-soft: rgba(45, 212, 191, 0.12);
-  --adt-border: rgba(255, 255, 255, 0.09);
-  --adt-chrome: var(--adt-canvas);
-  --adt-chrome-border: var(--adt-border);
-  --adt-bc-kicker-fg: var(--adt-accent);
-  --adt-bc-kicker-bg: var(--adt-accent-soft);
-  --adt-bc-kicker-border: color-mix(in srgb, var(--adt-accent) 35%, transparent);
+  --valentus-canvas: #0b0e13;
+  --valentus-elevated: #141a22;
+  --valentus-ink: #e8ebf0;
+  --valentus-ink-muted: #9aa3b2;
+  --valentus-accent: #2dd4bf;
+  --valentus-accent-hover: #5eead4;
+  --valentus-accent-soft: rgba(45, 212, 191, 0.12);
+  --valentus-border: rgba(255, 255, 255, 0.09);
+  --soft-nav-context: var(--valentus-canvas);
+  --valentus-chrome-border: var(--valentus-border);
+  --valentus-bc-kicker-fg: var(--valentus-accent);
+  --valentus-bc-kicker-bg: var(--valentus-accent-soft);
+  --valentus-bc-kicker-border: color-mix(in srgb, var(--valentus-accent) 35%, transparent);
   /* Dark header: keep white foreground on dark bar (GitHub mark stays white; no filter) */
-  --adt-header-bar-bg: var(--adt-chrome);
-  --adt-header-bar-fg: var(--adt-ink);
-  --adt-header-bar-border: var(--adt-chrome-border);
-  --adt-header-bar-hover: var(--adt-accent-soft);
-  --adt-header-vcs-icon-filter: none;
+  --valentus-header-bar-bg: var(--valentus-chrome);
+  --valentus-header-bar-fg: var(--valentus-ink);
+  --valentus-header-bar-border: var(--valentus-chrome-border);
+  --valentus-header-bar-hover: var(--valentus-accent-soft);
+  --valentus-header-vcs-icon-filter: none;
 }
 
 html {
-  font-family: var(--adt-font);
+  font-family: var(--valentus-font);
 }
 
 /* Default UI: body { padding-top: var(--navbar-height) } for a fixed, separate top .navbar. FTN uses
@@ -115,7 +115,7 @@ textarea,
 .breadcrumbs,
 .doc,
 footer.footer {
-  font-family: var(--adt-font) !important;
+  font-family: var(--valentus-font) !important;
 }
 
 code,
@@ -124,16 +124,16 @@ pre,
 .spectrum,
 .doc .conum {
   /* Keep a distinct monospace; Roboto still loads from the default bundle as fallback */
-  font-family: var(--adt-font-mono);
+  font-family: var(--valentus-font-mono);
 }
 
 /* ——— Top bar: light strip in “light” theme, dark strip in dark theme ——— */
-.header.adt-header {
+.header.valentus-header {
   display: block;
   position: sticky;
   top: 0;
   z-index: 30;
-  color: var(--adt-header-bar-fg);
+  color: var(--valentus-header-bar-fg);
   box-sizing: border-box;
   background: transparent;
   overflow: visible;
@@ -142,20 +142,20 @@ pre,
 }
 
 /* Scroll down: chrome leaves the viewport; scroll up (or near top): reveal without scrolling to 0. */
-html.adt-chrome-scroll-away .header.adt-header {
+html.valentus-chrome-scroll-away .header.valentus-header {
   transform: translateY(-100%);
   pointer-events: none;
 }
 
-html.adt-chrome-scroll-away {
-  --adt-chrome-sticky-top: 0px;
+html.valentus-chrome-scroll-away {
+  --valentus-chrome-sticky-top: 0px;
 }
 
-/* Navbar row: opaque fill (sticky stack lives on .header.adt-header).
-   z-index must beat .adt-doc-mast (z-index: 2): the navbar owns the search
+/* Navbar row: opaque fill (sticky stack lives on .header.valentus-header).
+   z-index must beat .valentus-doc-mast (z-index: 2): the navbar owns the search
    omnibox, whose scope menu / results / Ask panel drop down over the mast.
    At z-index: 1 those menus were trapped under the mast stacking context. */
-.adt-site-navbar {
+.valentus-site-navbar {
   position: relative;
   top: auto;
   z-index: 20;
@@ -168,13 +168,13 @@ html.adt-chrome-scroll-away {
   box-sizing: border-box;
   padding: 0 0.6rem 0 0.5rem;
   column-gap: 0.75rem;
-  background: var(--adt-header-bar-bg) !important;
+  background: var(--valentus-header-bar-bg) !important;
   color: inherit;
-  border-bottom: 1px solid var(--adt-header-bar-border);
+  border-bottom: 1px solid var(--valentus-header-bar-border);
 }
 
 /* Brand may shrink; title ellipsizes so search/actions never overlap it. */
-.adt-site-navbar .adt-header-brand {
+.valentus-site-navbar .valentus-header-brand {
   flex: 0 1 auto;
   max-width: min(40%, 22rem);
 }
@@ -182,7 +182,7 @@ html.adt-chrome-scroll-away {
 /* Site-wide search (command palette): flex middle slot — not absolute center.
    Absolute centering + min-width caused brand/title overlap at high zoom / narrow widths.
    search-chat JS toggles .is-collapsed → icon; popover drops under the toggle. */
-.adt-navbar-search {
+.valentus-navbar-search {
   position: relative;
   z-index: 9;
   flex: 1 1 auto;
@@ -195,44 +195,44 @@ html.adt-chrome-scroll-away {
   overflow: visible;
 }
 
-.adt-navbar-search.is-collapsed {
+.valentus-navbar-search.is-collapsed {
   flex: 0 0 auto;
   width: auto;
   max-width: none;
   margin-inline: 0 0.25rem;
 }
 
-.adt-navbar-search .adt-nav-search,
-.adt-navbar-search .adt-search-chat {
+.valentus-navbar-search .valentus-nav-search,
+.valentus-navbar-search .valentus-search-chat {
   width: 100%;
   max-width: none;
   min-height: 2.15rem;
 }
 
-.adt-navbar-search.is-collapsed .adt-search-chat {
+.valentus-navbar-search.is-collapsed .valentus-search-chat {
   width: auto;
 }
 
-.header.adt-header .adt-topbar,
-.header.adt-header .adt-topbar .navbar-end {
+.header.valentus-header .valentus-topbar,
+.header.valentus-header .valentus-topbar .navbar-end {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
   margin-left: auto;
 }
 
-.adt-header-actions {
+.valentus-header-actions {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: flex-end;
   column-gap: 0.15rem;
-  min-height: var(--adt-header-ctrl);
+  min-height: var(--valentus-header-ctrl);
 }
 
 /* Keep the end links visible: no Bulma burger for this project */
-.header.adt-header .navbar-menu.adt-topbar {
+.header.valentus-header .navbar-menu.valentus-topbar {
   display: flex !important;
   flex: 0 0 auto;
   max-height: none;
@@ -242,33 +242,33 @@ html.adt-chrome-scroll-away {
   overflow: visible;
 }
 
-.header.adt-header .adt-topbar,
-.header.adt-header .adt-topbar .navbar-end {
+.header.valentus-header .valentus-topbar,
+.header.valentus-header .valentus-topbar .navbar-end {
   color: inherit;
   background: transparent;
 }
 
 /* Brand: food truck mark (→ main site) + “Documentation” (→ docs home) */
-.adt-header-brand {
+.valentus-header-brand {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
   min-width: 0;
   flex: 1 1 auto;
-  min-height: var(--adt-header-ctrl);
+  min-height: var(--valentus-header-ctrl);
   column-gap: 0.15rem;
 }
 
-.adt-header-logo-item {
+.valentus-header-logo-item {
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  width: var(--adt-header-ctrl);
-  height: var(--adt-header-ctrl);
-  min-width: var(--adt-header-ctrl);
-  min-height: var(--adt-header-ctrl);
+  width: var(--valentus-header-ctrl);
+  height: var(--valentus-header-ctrl);
+  min-width: var(--valentus-header-ctrl);
+  min-height: var(--valentus-header-ctrl);
   padding: 0;
   line-height: 0;
   border-radius: 0.2rem;
@@ -276,13 +276,13 @@ html.adt-chrome-scroll-away {
   box-sizing: border-box;
 }
 
-.adt-header-logo-item:hover,
-.adt-header-logo-item:focus {
-  background: var(--adt-header-bar-hover);
+.valentus-header-logo-item:hover,
+.valentus-header-logo-item:focus {
+  background: var(--valentus-header-bar-hover);
   outline: none;
 }
 
-.adt-header-logo {
+.valentus-header-logo {
   display: block;
   width: 30px;
   height: 30px;
@@ -290,43 +290,43 @@ html.adt-chrome-scroll-away {
 }
 
 /* Light/dark asset pair (site.keys.header_logo_dark): show one mark per theme. */
-.adt-header-logo--for-dark {
+.valentus-header-logo--for-dark {
   display: none;
 }
 
-html.dark-theme .adt-header-logo--for-light {
+html.dark-theme .valentus-header-logo--for-light {
   display: none;
 }
 
-html.dark-theme .adt-header-logo--for-dark {
+html.dark-theme .valentus-header-logo--for-dark {
   display: block;
 }
 
 /* Brand logos (default): no filter — colored marks stay as authored in light and dark.
    Opt in with site.keys.header_logo_tone: mono for single-ink marks that need invert on the dark bar.
    Pair mode (header_logo_dark) skips tone filters — each asset is authored for its bar. */
-html.dark-theme .adt-header-logo--mono {
+html.dark-theme .valentus-header-logo--mono {
   filter: brightness(0) invert(1);
   opacity: 0.92;
 }
 
 /* Guide: header logo strategy fixtures (mocked bars; not live chrome). */
-.adt-logo-fixture-grid {
+.valentus-logo-fixture-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
   gap: 1rem 1.25rem;
   margin: 1.25rem 0 1.75rem;
 }
 
-.adt-logo-fixture-label {
+.valentus-logo-fixture-label {
   display: block;
   margin-bottom: 0.4rem;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--adt-header-bar-fg, #1f2933);
+  color: var(--valentus-header-bar-fg, #1f2933);
 }
 
-.adt-logo-fixture-bar {
+.valentus-logo-fixture-bar {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -335,41 +335,41 @@ html.dark-theme .adt-header-logo--mono {
   border-radius: 0.35rem;
 }
 
-.adt-logo-fixture-bar--light {
+.valentus-logo-fixture-bar--light {
   background: #f7f9fb;
   border: 1px solid #d5dde6;
 }
 
-.adt-logo-fixture-bar--dark {
+.valentus-logo-fixture-bar--dark {
   background: #1a2332;
   border: 1px solid #2c3a4d;
 }
 
-.adt-logo-fixture-bar img,
-.adt-logo-fixture-bar object {
+.valentus-logo-fixture-bar img,
+.valentus-logo-fixture-bar object {
   width: 48px;
   height: 48px;
   display: block;
 }
 
 /* Show mono fix beside the intentional failure mock. */
-.adt-logo-fixture-bar--mono-fixed img {
+.valentus-logo-fixture-bar--mono-fixed img {
   filter: brightness(0) invert(1);
   opacity: 0.92;
 }
 
-a.adt-header-title,
-.navbar-item.adt-header-title {
-  color: var(--adt-header-bar-fg) !important;
+a.valentus-header-title,
+.navbar-item.valentus-header-title {
+  color: var(--valentus-header-bar-fg) !important;
   font-weight: 600;
   font-size: 1.15rem;
   letter-spacing: 0.01em;
   padding: 0 0.4rem 0 0.15rem;
   min-width: 0;
   max-width: 100%;
-  height: var(--adt-header-ctrl);
-  min-height: var(--adt-header-ctrl);
-  line-height: var(--adt-header-ctrl);
+  height: var(--valentus-header-ctrl);
+  min-height: var(--valentus-header-ctrl);
+  line-height: var(--valentus-header-ctrl);
   display: block;
   text-decoration: none;
   box-sizing: border-box;
@@ -378,18 +378,18 @@ a.adt-header-title,
   white-space: nowrap;
 }
 
-a.adt-header-title:hover,
-a.adt-header-title:focus {
+a.valentus-header-title:hover,
+a.valentus-header-title:focus {
   text-decoration: none;
   opacity: 0.9;
 }
 
 /* Header end controls (GitHub, theme) — one shape; beats site-extra .theme-toggle:hover colors. */
-.header.adt-header .navbar .navbar-end .adt-header-icon-btn {
-  min-width: var(--adt-header-ctrl) !important;
-  min-height: var(--adt-header-ctrl) !important;
-  width: var(--adt-header-ctrl) !important;
-  height: var(--adt-header-ctrl) !important;
+.header.valentus-header .navbar .navbar-end .valentus-header-icon-btn {
+  min-width: var(--valentus-header-ctrl) !important;
+  min-height: var(--valentus-header-ctrl) !important;
+  width: var(--valentus-header-ctrl) !important;
+  height: var(--valentus-header-ctrl) !important;
   padding: 0 !important;
   display: inline-flex !important;
   align-items: center;
@@ -399,42 +399,42 @@ a.adt-header-title:focus {
   border: none;
   border-radius: 0.2rem;
   text-decoration: none;
-  color: var(--adt-header-bar-fg) !important;
+  color: var(--valentus-header-bar-fg) !important;
   background: transparent !important;
   cursor: pointer;
 }
 
 /* :focus (mouse click) would keep the “hover” fill until click-away—use :focus-visible for keyboard. */
-.header.adt-header .navbar .navbar-end .adt-header-icon-btn:hover {
-  background: var(--adt-header-bar-hover) !important;
+.header.valentus-header .navbar .navbar-end .valentus-header-icon-btn:hover {
+  background: var(--valentus-header-bar-hover) !important;
   text-decoration: none;
 }
 
-.header.adt-header .navbar .navbar-end .adt-header-icon-btn:focus {
+.header.valentus-header .navbar .navbar-end .valentus-header-icon-btn:focus {
   outline: none;
   background: transparent !important;
 }
 
-.header.adt-header .navbar .navbar-end .adt-header-icon-btn:focus-visible {
-  background: var(--adt-header-bar-hover) !important;
-  outline: 2px solid var(--adt-header-bar-fg);
+.header.valentus-header .navbar .navbar-end .valentus-header-icon-btn:focus-visible {
+  background: var(--valentus-header-bar-hover) !important;
+  outline: 2px solid var(--valentus-header-bar-fg);
   outline-offset: 2px;
 }
 
 /* VCS mark in file is white: filter on light top bar, none on dark. */
-.adt-header-vcs .adt-header-vcs-img,
-.adt-header-icon-btn.adt-header-vcs .adt-header-vcs-img {
+.valentus-header-vcs .valentus-header-vcs-img,
+.valentus-header-icon-btn.valentus-header-vcs .valentus-header-vcs-img {
   width: 24px;
   height: 24px;
   display: block;
   object-fit: contain;
   flex-shrink: 0;
   pointer-events: none;
-  filter: var(--adt-header-vcs-icon-filter, none);
+  filter: var(--valentus-header-vcs-icon-filter, none);
 }
 
-.header.adt-header .adt-header-icon-btn .theme-icon,
-.header.adt-header .navbar .navbar-end .theme-toggle .theme-icon {
+.header.valentus-header .valentus-header-icon-btn .theme-icon,
+.header.valentus-header .navbar .navbar-end .theme-toggle .theme-icon {
   width: 18px;
   height: 18px;
   display: block;
@@ -445,19 +445,19 @@ a.adt-header-title:focus {
   stroke-linejoin: round;
 }
 
-.header.adt-header .adt-header-icon-btn .theme-icon path,
-.header.adt-header .adt-header-icon-btn .theme-icon circle,
-.header.adt-header .navbar .navbar-end .theme-toggle .theme-icon path,
-.header.adt-header .navbar .navbar-end .theme-toggle .theme-icon circle {
+.header.valentus-header .valentus-header-icon-btn .theme-icon path,
+.header.valentus-header .valentus-header-icon-btn .theme-icon circle,
+.header.valentus-header .navbar .navbar-end .theme-toggle .theme-icon path,
+.header.valentus-header .navbar .navbar-end .theme-toggle .theme-icon circle {
   fill: none;
 }
 
-/* Theme toggle matches other header icon buttons (dark-mode JS adds adt-header-icon-btn). */
-.header.adt-header .navbar .navbar-end .theme-toggle.adt-header-icon-btn {
-  min-width: var(--adt-header-ctrl) !important;
-  min-height: var(--adt-header-ctrl) !important;
-  width: var(--adt-header-ctrl) !important;
-  height: var(--adt-header-ctrl) !important;
+/* Theme toggle matches other header icon buttons (dark-mode JS adds valentus-header-icon-btn). */
+.header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn {
+  min-width: var(--valentus-header-ctrl) !important;
+  min-height: var(--valentus-header-ctrl) !important;
+  width: var(--valentus-header-ctrl) !important;
+  height: var(--valentus-header-ctrl) !important;
   padding: 0 !important;
   display: inline-flex !important;
   align-items: center;
@@ -466,56 +466,56 @@ a.adt-header-title:focus {
   flex-shrink: 0;
   border: none;
   border-radius: 0.2rem;
-  color: var(--adt-header-bar-fg) !important;
+  color: var(--valentus-header-bar-fg) !important;
   background: transparent !important;
   cursor: pointer;
 }
 
-.header.adt-header .navbar .navbar-end .theme-toggle.adt-header-icon-btn:hover {
-  background: var(--adt-header-bar-hover) !important;
+.header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn:hover {
+  background: var(--valentus-header-bar-hover) !important;
 }
 
-.header.adt-header .navbar .navbar-end .theme-toggle.adt-header-icon-btn:focus {
+.header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn:focus {
   outline: none;
   background: transparent !important;
 }
 
-.header.adt-header .navbar .navbar-end .theme-toggle.adt-header-icon-btn:focus-visible {
-  background: var(--adt-header-bar-hover) !important;
-  outline: 2px solid var(--adt-header-bar-fg);
+.header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn:focus-visible {
+  background: var(--valentus-header-bar-hover) !important;
+  outline: 2px solid var(--valentus-header-bar-fg);
   outline-offset: 2px;
 }
 
 @media screen and (min-width: 1024px) {
-  .adt-header .adt-topbar,
-  .adt-header .adt-topbar .navbar-end {
+  .valentus-header .valentus-topbar,
+  .valentus-header .valentus-topbar .navbar-end {
     flex: 0 0 auto;
   }
-  .adt-header-brand {
+  .valentus-header-brand {
     min-width: 0;
   }
 }
 
 /* ——— Doc mast: component, version, breadcrumb trail, edit — not in the content column ——— */
-.adt-doc-mast {
+.valentus-doc-mast {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
   gap: 0.5rem;
-  min-height: var(--adt-mast-h);
-  padding: 0.35rem var(--adt-mast-pad-h) 0.35rem var(--adt-mast-pad-h);
+  min-height: var(--valentus-mast-h);
+  padding: 0.35rem var(--valentus-mast-pad-h) 0.35rem var(--valentus-mast-pad-h);
   position: relative;
   top: auto;
-  /* Dropdowns must beat .adt-tool-band (20–21) when the band is present. */
+  /* Dropdowns must beat .valentus-tool-band (20–21) when the band is present. */
   z-index: 2;
-  background: var(--adt-chrome);
-  border-bottom: 1px solid var(--adt-chrome-border);
+  background: var(--valentus-chrome);
+  border-bottom: 1px solid var(--valentus-chrome-border);
   box-sizing: border-box;
 }
 
-html.dark-theme .adt-doc-mast {
-  background: var(--adt-chrome);
-  border-bottom-color: var(--adt-chrome-border);
+html.dark-theme .valentus-doc-mast {
+  background: var(--valentus-chrome);
+  border-bottom-color: var(--valentus-chrome-border);
 }
 
 /*
@@ -525,7 +525,7 @@ html.dark-theme .adt-doc-mast {
  * a mask hack on the button itself). Neutralize the bundle + mask rules so
  * the glyph is visible in both themes and both toggle states.
  */
-.adt-doc-mast .nav-toggle {
+.valentus-doc-mast .nav-toggle {
   flex: 0 0 auto;
   align-self: center;
   display: inline-flex;
@@ -539,29 +539,29 @@ html.dark-theme .adt-doc-mast {
   background-color: transparent !important;
   -webkit-mask-image: none !important;
   mask-image: none !important;
-  color: var(--adt-ink);
+  color: var(--valentus-ink);
   cursor: pointer;
 }
 
-.adt-doc-mast .nav-toggle .adt-nav-toggle-icon--back {
+.valentus-doc-mast .nav-toggle .valentus-nav-toggle-icon--back {
   display: none;
 }
 
-.adt-doc-mast .nav-toggle.is-active .adt-nav-toggle-icon--menu {
+.valentus-doc-mast .nav-toggle.is-active .valentus-nav-toggle-icon--menu {
   display: none;
 }
 
-.adt-doc-mast .nav-toggle.is-active .adt-nav-toggle-icon--back {
+.valentus-doc-mast .nav-toggle.is-active .valentus-nav-toggle-icon--back {
   display: block;
 }
 
 @media screen and (min-width: 1024px) {
-  .adt-doc-mast .nav-toggle {
+  .valentus-doc-mast .nav-toggle {
     display: none;
   }
 }
 
-.adt-doc-mast-center {
+.valentus-doc-mast-center {
   flex: 1 1 auto;
   min-width: 0;
 }
@@ -570,7 +570,7 @@ html.dark-theme .adt-doc-mast {
    Do not stretch the nav column to document height — that breaks mast/navbar sticky context
    and leaves the read-width tool band visually pinned while chrome scrolls away. */
 @media screen and (min-width: 1024px) {
-  .body.adt-body {
+  .body.valentus-body {
     align-items: flex-start;
   }
 
@@ -579,15 +579,15 @@ html.dark-theme .adt-doc-mast {
     flex-direction: column !important;
     align-self: flex-start !important;
     min-height: 0 !important;
-    padding-top: var(--adt-col-rail-top);
+    padding-top: var(--valentus-col-rail-top);
     box-sizing: border-box;
   }
 
   .nav {
     position: sticky !important;
-    top: var(--adt-chrome-sticky-top) !important;
-    height: calc(100vh - var(--adt-chrome-sticky-top)) !important;
-    max-height: calc(100vh - var(--adt-chrome-sticky-top)) !important;
+    top: var(--valentus-chrome-sticky-top) !important;
+    height: calc(100vh - var(--valentus-chrome-sticky-top)) !important;
+    max-height: calc(100vh - var(--valentus-chrome-sticky-top)) !important;
     display: flex !important;
     flex-direction: column !important;
     min-height: 0 !important;
@@ -641,35 +641,35 @@ html.dark-theme .adt-doc-mast {
 /* Mobile overlay: account for the mast in addition to the main navbar */
 @media screen and (max-width: 1023.5px) {
   .nav-container {
-    top: var(--adt-mast-total) !important;
+    top: var(--valentus-mast-total) !important;
   }
 
   .nav {
     top: 2.5rem;
-    height: calc(100vh - var(--adt-mast-total) - 2.5rem);
+    height: calc(100vh - var(--valentus-mast-total) - 2.5rem);
   }
 }
 
 /* Article column no longer has the old toolbar; avoid extra top gap if any */
-.adt-article {
+.valentus-article {
   min-width: 0;
 }
 
 /* Inset article + in-page TOC. Tool band is outside columns; peers share col rail. */
-.adt-article .content {
-  padding-top: var(--adt-col-rail-top, 0);
+.valentus-article .content {
+  padding-top: var(--valentus-col-rail-top, 0);
   box-sizing: border-box;
 }
 
-/* Share horizontal inset with `.adt-doc-toolbar` (sibling, not inside `article.doc`). */
-main.adt-article > .content > article.doc {
-  padding-inline: var(--adt-doc-pad-inline);
-  padding-bottom: var(--adt-doc-pad-bottom);
+/* Share horizontal inset with `.valentus-doc-toolbar` (sibling, not inside `article.doc`). */
+main.valentus-article > .content > article.doc {
+  padding-inline: var(--valentus-doc-pad-inline);
+  padding-bottom: var(--valentus-doc-pad-bottom);
 }
 
 /* ——— Content rail: TOC h3 (Antora’s fake height/flex) ——— */
-.body.adt-body > aside.toc.sidebar .toc-menu h3,
-.adt-article .content .toc .toc-menu h3 {
+.body.valentus-body > aside.toc.sidebar .toc-menu h3,
+.valentus-article .content .toc .toc-menu h3 {
   display: block;
   height: auto;
   min-height: 0;
@@ -683,8 +683,8 @@ main.adt-article > .content > article.doc {
 /* ——— Page title (Edit link lives in the mast next to the breadcrumb trail) ——— */
 /* Antora: .doc h1 { margin: 1rem 0 0 } still matches the layout h1 (not only .doc > h1:first-child).
    Zero it here so the only top inset is .content’s padding. */
-.doc .adt-page-header,
-.adt-article .adt-page-header {
+.doc .valentus-page-header,
+.valentus-article .valentus-page-header {
   display: flex;
   flex-wrap: nowrap;
   align-items: flex-start;
@@ -696,14 +696,14 @@ main.adt-article > .content > article.doc {
   padding-top: 0;
 }
 
-.doc .adt-page-header h1.page.adt-page-title,
-.adt-article .adt-page-header h1.page.adt-page-title {
+.doc .valentus-page-header h1.page.valentus-page-title,
+.valentus-article .valentus-page-header h1.page.valentus-page-title {
   margin: 0;
   padding: 0;
 }
 
-.doc .adt-page-title,
-.adt-article .adt-page-title {
+.doc .valentus-page-title,
+.valentus-article .valentus-page-title {
   flex: 1 1 auto;
   min-width: 0;
   /* Raised line-height + bottom padding fit display-font descenders inside overflow:hidden.
@@ -717,8 +717,8 @@ main.adt-article > .content > article.doc {
 }
 
 @media screen and (max-width: 480px) {
-  .doc .adt-page-title,
-  .adt-article .adt-page-title {
+  .doc .valentus-page-title,
+  .valentus-article .valentus-page-title {
     white-space: normal;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -757,7 +757,7 @@ main.adt-article > .content > article.doc {
   margin-left: calc(-1.5ex - 0.7em);
   margin-top: -0.35em;
   box-sizing: content-box;
-  color: var(--adt-ink-muted, #5b6472);
+  color: var(--valentus-ink-muted, #5b6472);
   text-decoration: none !important;
   z-index: 1;
 }
@@ -787,18 +787,18 @@ main.adt-article > .content > article.doc {
 .doc h5 .anchor:focus-visible,
 .doc h6 .anchor:focus-visible {
   opacity: 1;
-  color: var(--adt-accent, #0d6e6e) !important;
+  color: var(--valentus-accent, #0d6e6e) !important;
 }
 
 /* ——— Breadcrumb row in mast ——— */
-.adt-breadcrumbs {
+.valentus-breadcrumbs {
   display: block;
   width: 100%;
   font-size: 0.85rem;
   line-height: 1.25;
 }
 
-.adt-breadcrumbs > ul {
+.valentus-breadcrumbs > ul {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -811,7 +811,7 @@ main.adt-article > .content > article.doc {
   min-width: 0;
 }
 
-.adt-breadcrumbs > ul > li {
+.valentus-breadcrumbs > ul > li {
   max-width: 100%;
   display: flex;
   align-items: center;
@@ -819,28 +819,28 @@ main.adt-article > .content > article.doc {
 }
 
 /* Kill Default UI / legacy pseudo separators — real path chars live in the DOM. */
-.adt-breadcrumbs > ul > li::after,
-.breadcrumbs.adt-breadcrumbs > ul > li::after {
+.valentus-breadcrumbs > ul > li::after,
+.breadcrumbs.valentus-breadcrumbs > ul > li::after {
   content: none !important;
   padding: 0 !important;
 }
 
-.adt-breadcrumb-sep {
+.valentus-breadcrumb-sep {
   flex: 0 0 auto;
   padding: 0 0.45rem;
   font-weight: 400;
   line-height: 1.5;
-  color: var(--adt-ink-muted, inherit);
+  color: var(--valentus-ink-muted, inherit);
   pointer-events: none;
   user-select: text;
 }
 
-.adt-breadcrumb-masthead {
+.valentus-breadcrumb-masthead {
   flex: 0 0 auto;
 }
 
 /* Trail segments: borrow doc-style link weight (don’t paint parent li +li gray — that hid link color) */
-.adt-breadcrumb-trail {
+.valentus-breadcrumb-trail {
   display: flex;
   align-items: center;
   min-height: 1.5rem;
@@ -855,30 +855,30 @@ main.adt-article > .content > article.doc {
 }
 
 /* Trail: accent + underline for visitable links and current page; plain folder labels stay un-underlined. */
-.adt-breadcrumb-trail .adt-breadcrumb-trail-link,
-.adt-breadcrumb-trail--current .adt-breadcrumb-trail-link,
-.adt-breadcrumb-trail--current .adt-breadcrumb-trail-text {
-  color: var(--adt-accent);
+.valentus-breadcrumb-trail .valentus-breadcrumb-trail-link,
+.valentus-breadcrumb-trail--current .valentus-breadcrumb-trail-link,
+.valentus-breadcrumb-trail--current .valentus-breadcrumb-trail-text {
+  color: var(--valentus-accent);
   font-weight: 400;
   text-decoration: underline;
   text-underline-offset: 0.12em;
 }
 
-.adt-breadcrumb-trail:not(.adt-breadcrumb-trail--current) .adt-breadcrumb-trail-text {
-  color: var(--adt-accent);
+.valentus-breadcrumb-trail:not(.valentus-breadcrumb-trail--current) .valentus-breadcrumb-trail-text {
+  color: var(--valentus-accent);
   font-weight: 400;
   text-decoration: none;
 }
 
-.adt-breadcrumb-trail .adt-breadcrumb-trail-link:hover {
+.valentus-breadcrumb-trail .valentus-breadcrumb-trail-link:hover {
   text-decoration: underline;
 }
 
-html.dark-theme .adt-breadcrumb-trail .adt-breadcrumb-trail-link,
-html.dark-theme .adt-breadcrumb-trail--current .adt-breadcrumb-trail-link,
-html.dark-theme .adt-breadcrumb-trail--current .adt-breadcrumb-trail-text,
-html.dark-theme .adt-breadcrumb-trail-text {
-  color: var(--adt-accent);
+html.dark-theme .valentus-breadcrumb-trail .valentus-breadcrumb-trail-link,
+html.dark-theme .valentus-breadcrumb-trail--current .valentus-breadcrumb-trail-link,
+html.dark-theme .valentus-breadcrumb-trail--current .valentus-breadcrumb-trail-text,
+html.dark-theme .valentus-breadcrumb-trail-text {
+  color: var(--valentus-accent);
 }
 
 /* “View | Edit” in page-context lead table (from @antora-supplemental/page-edit); breadcrumb stub is empty. */
@@ -910,12 +910,12 @@ html.dark-theme .adt-breadcrumb-trail-text {
   user-select: none;
 }
 
-.page-context-source-actions .adt-view-inline-link,
-.page-context-source-actions .adt-edit-inline-link,
-.doc .page-context-source-actions .adt-view-inline-link,
-.doc .page-context-source-actions .adt-edit-inline-link,
-.page-context-actions .adt-edit-inline-link,
-.doc .page-context-actions .adt-edit-inline-link {
+.page-context-source-actions .valentus-view-inline-link,
+.page-context-source-actions .valentus-edit-inline-link,
+.doc .page-context-source-actions .valentus-view-inline-link,
+.doc .page-context-source-actions .valentus-edit-inline-link,
+.page-context-actions .valentus-edit-inline-link,
+.doc .page-context-actions .valentus-edit-inline-link {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -930,12 +930,12 @@ html.dark-theme .adt-breadcrumb-trail-text {
   white-space: nowrap;
 }
 
-.page-context-source-actions .adt-view-inline-link:hover,
-.page-context-source-actions .adt-edit-inline-link:hover,
-.doc .page-context-source-actions .adt-view-inline-link:hover,
-.doc .page-context-source-actions .adt-edit-inline-link:hover,
-.page-context-actions .adt-edit-inline-link:hover,
-.doc .page-context-actions .adt-edit-inline-link:hover {
+.page-context-source-actions .valentus-view-inline-link:hover,
+.page-context-source-actions .valentus-edit-inline-link:hover,
+.doc .page-context-source-actions .valentus-view-inline-link:hover,
+.doc .page-context-source-actions .valentus-edit-inline-link:hover,
+.page-context-actions .valentus-edit-inline-link:hover,
+.doc .page-context-actions .valentus-edit-inline-link:hover {
   text-decoration: underline;
   text-decoration-thickness: 0.1em;
 }
@@ -948,36 +948,36 @@ html.dark-theme .adt-breadcrumb-trail-text {
   white-space: nowrap;
 }
 
-.page-context-source-key .adt-edit-vcs-svg,
-.doc .page-context-source-key .adt-edit-vcs-svg,
-.page-context-actions .adt-edit-vcs-svg,
-.doc .page-context-actions .adt-edit-vcs-svg {
+.page-context-source-key .valentus-edit-vcs-svg,
+.doc .page-context-source-key .valentus-edit-vcs-svg,
+.page-context-actions .valentus-edit-vcs-svg,
+.doc .page-context-actions .valentus-edit-vcs-svg {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  color: var(--adt-ink-muted, currentColor);
+  color: var(--valentus-ink-muted, currentColor);
   opacity: 0.75;
 }
 
-html.dark-theme .page-context-source-key .adt-edit-vcs-svg,
-html.dark-theme .doc .page-context-source-key .adt-edit-vcs-svg,
-html.dark-theme .page-context-actions .adt-edit-vcs-svg,
-html.dark-theme .doc .page-context-actions .adt-edit-vcs-svg {
+html.dark-theme .page-context-source-key .valentus-edit-vcs-svg,
+html.dark-theme .doc .page-context-source-key .valentus-edit-vcs-svg,
+html.dark-theme .page-context-actions .valentus-edit-vcs-svg,
+html.dark-theme .doc .page-context-actions .valentus-edit-vcs-svg {
   opacity: 0.9;
 }
 
 /* Legacy: icon used to live on Edit; keep selectors harmless if old HTML remains */
-.page-context-source-actions .adt-edit-vcs-svg,
-.doc .page-context-source-actions .adt-edit-vcs-svg {
+.page-context-source-actions .valentus-edit-vcs-svg,
+.doc .page-context-source-actions .valentus-edit-vcs-svg {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  color: var(--adt-ink-muted, currentColor);
+  color: var(--valentus-ink-muted, currentColor);
   opacity: 0.75;
 }
 
 /* Legacy breadcrumb edit selectors kept for hubs that still emit that markup */
-.adt-breadcrumb-edit {
+.valentus-breadcrumb-edit {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
@@ -985,7 +985,7 @@ html.dark-theme .doc .page-context-actions .adt-edit-vcs-svg {
   list-style: none;
 }
 
-.adt-breadcrumb-edit .adt-edit-inline-link {
+.valentus-breadcrumb-edit .valentus-edit-inline-link {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
@@ -994,20 +994,20 @@ html.dark-theme .doc .page-context-actions .adt-edit-vcs-svg {
   font-size: 0.85rem;
   font-weight: 500;
   line-height: 1.2;
-  color: var(--adt-accent);
+  color: var(--valentus-accent);
   text-decoration: none;
   white-space: nowrap;
 }
 
-.adt-breadcrumb-edit .adt-edit-inline-link:hover {
+.valentus-breadcrumb-edit .valentus-edit-inline-link:hover {
   text-decoration: underline;
 }
 
-html.dark-theme .adt-breadcrumb-edit .adt-edit-inline-link {
-  color: var(--adt-accent);
+html.dark-theme .valentus-breadcrumb-edit .valentus-edit-inline-link {
+  color: var(--valentus-accent);
 }
 
-.adt-breadcrumb-edit .adt-edit-vcs-img {
+.valentus-breadcrumb-edit .valentus-edit-vcs-img {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
@@ -1016,101 +1016,101 @@ html.dark-theme .adt-breadcrumb-edit .adt-edit-inline-link {
   vertical-align: middle;
 }
 
-html.dark-theme .adt-breadcrumb-edit .adt-edit-vcs-img {
+html.dark-theme .valentus-breadcrumb-edit .valentus-edit-vcs-img {
   filter: none;
   opacity: 0.95;
 }
 
-.adt-bc-menu-item a,
-.adt-bc-menu-item a.adt-cmp-version-pill {
+.valentus-bc-menu-item a,
+.valentus-bc-menu-item a.valentus-cmp-version-pill {
   text-decoration: none;
 }
 
-.adt-breadcrumbs a:hover {
+.valentus-breadcrumbs a:hover {
   text-decoration: underline;
 }
 
 /* Default UI adds `/` after every .breadcrumbs li and uses display:inline — breaks component dropdown */
-.adt-breadcrumbs .adt-bc-dropdown li,
-.breadcrumbs.adt-breadcrumbs .adt-bc-dropdown li {
+.valentus-breadcrumbs .valentus-bc-dropdown li,
+.breadcrumbs.valentus-breadcrumbs .valentus-bc-dropdown li {
   display: block !important;
 }
 
-.adt-breadcrumbs .adt-bc-dropdown li::after,
-.breadcrumbs.adt-breadcrumbs .adt-bc-dropdown li::after {
+.valentus-breadcrumbs .valentus-bc-dropdown li::after,
+.breadcrumbs.valentus-breadcrumbs .valentus-bc-dropdown li::after {
   content: none !important;
   padding: 0 !important;
 }
 
 /* Beat Default UI `.breadcrumbs li { margin: 0 }` (0,1,1) — that zeroed the home→component gap. */
-.adt-breadcrumbs > ul > li.adt-breadcrumb-home {
+.valentus-breadcrumbs > ul > li.valentus-breadcrumb-home {
   flex: 0 0 auto;
   list-style: none;
   margin-inline-end: 0.45rem;
 }
 
-.adt-breadcrumb-home-link {
+.valentus-breadcrumb-home-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: var(--adt-bc-ctrl-h);
-  height: var(--adt-bc-ctrl-h);
-  min-width: var(--adt-bc-ctrl-h);
-  min-height: var(--adt-bc-ctrl-h);
+  width: var(--valentus-bc-ctrl-h);
+  height: var(--valentus-bc-ctrl-h);
+  min-width: var(--valentus-bc-ctrl-h);
+  min-height: var(--valentus-bc-ctrl-h);
   padding: 0;
-  border: 1px solid var(--adt-bc-kicker-border);
+  border: 1px solid var(--valentus-bc-kicker-border);
   border-radius: 0.2rem;
-  background: var(--adt-bc-kicker-bg);
-  color: var(--adt-bc-kicker-fg);
+  background: var(--valentus-bc-kicker-bg);
+  color: var(--valentus-bc-kicker-fg);
   text-decoration: none;
   vertical-align: middle;
 }
 
-.adt-breadcrumb-home-link:hover,
-.adt-breadcrumb-home-link:focus-visible {
-  border-color: color-mix(in srgb, var(--adt-accent) 45%, transparent);
-  background: color-mix(in srgb, var(--adt-accent) 18%, var(--adt-bc-kicker-bg));
+.valentus-breadcrumb-home-link:hover,
+.valentus-breadcrumb-home-link:focus-visible {
+  border-color: color-mix(in srgb, var(--valentus-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--valentus-accent) 18%, var(--valentus-bc-kicker-bg));
   text-decoration: none;
 }
 
-.adt-breadcrumb-home-link:focus {
+.valentus-breadcrumb-home-link:focus {
   outline: none;
 }
 
-.adt-breadcrumb-home-link:focus-visible {
-  outline: 2px solid var(--adt-accent);
+.valentus-breadcrumb-home-link:focus-visible {
+  outline: 2px solid var(--valentus-accent);
   outline-offset: 2px;
 }
 
-html.dark-theme .adt-breadcrumb-home-link {
-  color: var(--adt-bc-kicker-fg);
-  background: var(--adt-bc-kicker-bg);
-  border-color: var(--adt-bc-kicker-border);
+html.dark-theme .valentus-breadcrumb-home-link {
+  color: var(--valentus-bc-kicker-fg);
+  background: var(--valentus-bc-kicker-bg);
+  border-color: var(--valentus-bc-kicker-border);
 }
 
-html.dark-theme .adt-breadcrumb-home-link:hover,
-html.dark-theme .adt-breadcrumb-home-link:focus-visible {
-  border-color: color-mix(in srgb, var(--adt-accent) 45%, transparent);
-  background: color-mix(in srgb, var(--adt-accent) 18%, var(--adt-bc-kicker-bg));
+html.dark-theme .valentus-breadcrumb-home-link:hover,
+html.dark-theme .valentus-breadcrumb-home-link:focus-visible {
+  border-color: color-mix(in srgb, var(--valentus-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--valentus-accent) 18%, var(--valentus-bc-kicker-bg));
 }
 
-.adt-breadcrumb-home-icon {
+.valentus-breadcrumb-home-icon {
   display: block;
 }
 
 /* Vertical | between component/version kickers — hidden; trail still uses / separators */
-.adt-bc-sep {
+.valentus-bc-sep {
   display: none;
 }
 
-.adt-bc-cluster-gap {
+.valentus-bc-cluster-gap {
   flex: 0 0 auto;
   white-space: pre;
 }
 
 /* Component + version read as one mast segment (version sits tight to the right). */
-.adt-bc-cluster {
+.valentus-bc-cluster {
   display: inline-flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -1120,25 +1120,25 @@ html.dark-theme .adt-breadcrumb-home-link:focus-visible {
 }
 
 /* Empty masthead (no kickers) must not leave `/  /` separators in the trail. */
-.adt-breadcrumbs > ul > li.adt-breadcrumb-masthead:not(:has(.adt-bc-menu, .adt-bc-version-plain)) {
+.valentus-breadcrumbs > ul > li.valentus-breadcrumb-masthead:not(:has(.valentus-bc-menu, .valentus-bc-version-plain)) {
   display: none;
 }
 
-.adt-bc-menu {
+.valentus-bc-menu {
   position: relative;
   display: inline-block;
   min-width: 0;
 }
 
-.adt-bc-kicker {
+.valentus-bc-kicker {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
   box-sizing: border-box;
   gap: 0.28rem;
   max-width: 12rem;
-  height: var(--adt-bc-ctrl-h);
-  min-height: var(--adt-bc-ctrl-h);
+  height: var(--valentus-bc-ctrl-h);
+  min-height: var(--valentus-bc-ctrl-h);
   margin: 0;
   padding: 0 0.4rem;
   font: inherit;
@@ -1146,7 +1146,7 @@ html.dark-theme .adt-breadcrumb-home-link:focus-visible {
   font-weight: 500;
   line-height: 1;
   text-align: left;
-  color: var(--adt-accent);
+  color: var(--valentus-accent);
   background: transparent;
   border: 1px solid transparent;
   border-radius: 0.2rem;
@@ -1160,7 +1160,7 @@ html.dark-theme .adt-breadcrumb-home-link:focus-visible {
 }
 
 /* Small muted stroke chevron — reads as a menu without competing with the label. */
-.adt-bc-kicker::after {
+.valentus-bc-kicker::after {
   content: "";
   flex: 0 0 auto;
   width: 0.55em;
@@ -1178,42 +1178,42 @@ html.dark-theme .adt-breadcrumb-home-link:focus-visible {
   transition: transform 0.15s ease, opacity 0.15s ease;
 }
 
-.adt-bc-kicker:hover {
-  border-color: color-mix(in srgb, var(--adt-accent) 45%, transparent);
-  background: var(--adt-bc-kicker-bg);
-  color: var(--adt-bc-kicker-fg);
+.valentus-bc-kicker:hover {
+  border-color: color-mix(in srgb, var(--valentus-accent) 45%, transparent);
+  background: var(--valentus-bc-kicker-bg);
+  color: var(--valentus-bc-kicker-fg);
 }
 
-.adt-bc-kicker:hover::after {
+.valentus-bc-kicker:hover::after {
   opacity: 0.9;
 }
 
 /* Mouse click must not leave a UA / double ring; keyboard still gets a clean ring. */
-.adt-bc-kicker:focus {
+.valentus-bc-kicker:focus {
   outline: none;
 }
 
-.adt-bc-kicker:focus-visible {
-  outline: 2px solid var(--adt-accent);
+.valentus-bc-kicker:focus-visible {
+  outline: 2px solid var(--valentus-accent);
   outline-offset: 2px;
 }
 
-.adt-bc-kicker[aria-expanded='true'] {
+.valentus-bc-kicker[aria-expanded='true'] {
   outline: none;
-  border-color: var(--adt-accent);
-  background: color-mix(in srgb, var(--adt-accent) 18%, var(--adt-bc-kicker-bg));
-  color: var(--adt-bc-kicker-fg);
+  border-color: var(--valentus-accent);
+  background: color-mix(in srgb, var(--valentus-accent) 18%, var(--valentus-bc-kicker-bg));
+  color: var(--valentus-bc-kicker-fg);
 }
 
-.adt-bc-kicker[aria-expanded='true']::after {
+.valentus-bc-kicker[aria-expanded='true']::after {
   transform: rotate(180deg);
   opacity: 0.9;
 }
 
 /* Block + nowrap: text-overflow does not paint "…" on a flex container (2.0.32
    used inline-flex for vertical centering; the parent kicker already flex-centers). */
-.adt-bc-kicker-label,
-.adt-bc-kicker-version {
+.valentus-bc-kicker-label,
+.valentus-bc-kicker-version {
   display: block;
   flex: 1 1 auto;
   min-width: 0;
@@ -1224,15 +1224,15 @@ html.dark-theme .adt-breadcrumb-home-link:focus-visible {
   text-overflow: ellipsis;
 }
 
-.adt-bc-kicker-version {
+.valentus-bc-kicker-version {
   max-width: 7rem;
 }
 
 /* Version kicker is secondary to the component name — same box height, compact mono type. */
-.adt-bc-kicker--version {
+.valentus-bc-kicker--version {
   max-width: 5.5rem;
-  height: var(--adt-bc-ctrl-h);
-  min-height: var(--adt-bc-ctrl-h);
+  height: var(--valentus-bc-ctrl-h);
+  min-height: var(--valentus-bc-ctrl-h);
   padding: 0 0.35rem;
   font-variant-numeric: tabular-nums;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -1241,33 +1241,33 @@ html.dark-theme .adt-breadcrumb-home-link:focus-visible {
   line-height: 1;
 }
 
-.adt-bc-version-plain {
+.valentus-bc-version-plain {
   display: inline-flex;
   align-items: center;
   box-sizing: border-box;
-  height: var(--adt-bc-ctrl-h);
-  min-height: var(--adt-bc-ctrl-h);
+  height: var(--valentus-bc-ctrl-h);
+  min-height: var(--valentus-bc-ctrl-h);
   padding: 0 0.35rem;
   font-size: 0.8125rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   line-height: 1;
-  color: var(--adt-accent);
+  color: var(--valentus-accent);
   text-decoration: none;
   white-space: nowrap;
 }
 
-/* [hidden] must win over #adt-bc-proj / #adt-bc-ver (ID + display:block !important from layout fixes) */
-.adt-bc-dropdown[hidden],
-#adt-bc-proj[hidden],
-#adt-bc-ver[hidden],
-.adt-bc-dropdown--components[hidden],
-.adt-bc-dropdown--version[hidden] {
+/* [hidden] must win over #valentus-bc-proj / #valentus-bc-ver (ID + display:block !important from layout fixes) */
+.valentus-bc-dropdown[hidden],
+#valentus-bc-proj[hidden],
+#valentus-bc-ver[hidden],
+.valentus-bc-dropdown--components[hidden],
+.valentus-bc-dropdown--version[hidden] {
   display: none !important;
 }
 
-.adt-bc-dropdown {
+.valentus-bc-dropdown {
   position: absolute;
   left: 0;
   top: 100%;
@@ -1285,28 +1285,28 @@ html.dark-theme .adt-breadcrumb-home-link:focus-visible {
   flex-direction: column !important;
   columns: 1 !important;
   white-space: normal;
-  background: var(--adt-elevated);
-  border: 1px solid var(--adt-border);
+  background: var(--valentus-elevated);
+  border: 1px solid var(--valentus-border);
   border-radius: 0.2rem;
   box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
 }
 
 /* Single column, full-width rows (override bundle / spectrum flex or multi-col creep) */
-.adt-bc-dropdown--components,
-.adt-bc-dropdown--version,
-#adt-bc-proj,
-#adt-bc-ver {
+.valentus-bc-dropdown--components,
+.valentus-bc-dropdown--version,
+#valentus-bc-proj,
+#valentus-bc-ver {
   display: block !important;
   width: max-content;
   min-width: min(100%, 12rem);
   max-width: min(100vw - 1.5rem, 24rem) !important;
 }
 
-.adt-bc-dropdown--components > li,
-.adt-bc-dropdown--version > li,
-#adt-bc-proj > li,
-#adt-bc-ver > li {
+.valentus-bc-dropdown--components > li,
+.valentus-bc-dropdown--version > li,
+#valentus-bc-proj > li,
+#valentus-bc-ver > li {
   display: block !important;
   width: 100% !important;
   max-width: 100% !important;
@@ -1315,7 +1315,7 @@ html.dark-theme .adt-breadcrumb-home-link:focus-visible {
   box-sizing: border-box;
 }
 
-#adt-bc-proj .adt-bc-menu-item a {
+#valentus-bc-proj .valentus-bc-menu-item a {
   display: block !important;
   width: 100%;
   box-sizing: border-box;
@@ -1324,7 +1324,7 @@ html.dark-theme .adt-breadcrumb-home-link:focus-visible {
   overflow-wrap: anywhere;
 }
 
-#adt-bc-ver .adt-bc-menu-item a {
+#valentus-bc-ver .valentus-bc-menu-item a {
   display: block !important;
   width: 100%;
   box-sizing: border-box;
@@ -1333,46 +1333,46 @@ html.dark-theme .adt-breadcrumb-home-link:focus-visible {
   text-overflow: ellipsis;
 }
 
-html.dark-theme .adt-bc-dropdown {
-  background: var(--adt-elevated);
-  border-color: var(--adt-border);
+html.dark-theme .valentus-bc-dropdown {
+  background: var(--valentus-elevated);
+  border-color: var(--valentus-border);
   box-shadow: 0 0.25rem 0.6rem rgba(0, 0, 0, 0.45);
 }
 
-.adt-bc-menu-item a {
+.valentus-bc-menu-item a {
   display: block;
   padding: 0.4rem 0.65rem;
   font-size: 0.8rem;
   line-height: 1.35;
-  color: var(--adt-ink);
+  color: var(--valentus-ink);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-html.dark-theme .adt-bc-menu-item a {
-  color: var(--adt-ink);
+html.dark-theme .valentus-bc-menu-item a {
+  color: var(--valentus-ink);
 }
 
-.adt-bc-menu-item a.is-current,
-.adt-bc-menu-item a.is-current:hover {
+.valentus-bc-menu-item a.is-current,
+.valentus-bc-menu-item a.is-current:hover {
   font-weight: 600;
-  background: var(--adt-accent-soft);
+  background: var(--valentus-accent-soft);
 }
 
-html.dark-theme .adt-bc-menu-item a.is-current {
-  background: var(--adt-accent-soft);
+html.dark-theme .valentus-bc-menu-item a.is-current {
+  background: var(--valentus-accent-soft);
 }
 
-.adt-bc-version-pill.is-missing {
+.valentus-bc-version-pill.is-missing {
   opacity: 0.5;
   pointer-events: none;
 }
 
-/* ——— Nav: insets = mast horizontal padding so the tree lines up with .adt-breadcrumb-home.
+/* ——— Nav: insets = mast horizontal padding so the tree lines up with .valentus-breadcrumb-home.
    The base ui-bundle’s .nav-menu still sets padding: … calc(toolbar-height/4); dark-theme or load
    order can restore that, so this rule is !important. Panel wrappers must not add a second inset. ——— */
-body.adt-body .nav .nav-panel-menu {
+body.valentus-body .nav .nav-panel-menu {
   display: flex;
   flex-direction: column;
   padding-left: 0;
@@ -1386,9 +1386,9 @@ body.adt-body .nav .nav-panel-menu {
   overflow-y: visible;
 }
 
-/* Search chrome: placement is .adt-navbar-search in the site navbar. */
-.adt-nav-search,
-.adt-tool-search {
+/* Search chrome: placement is .valentus-navbar-search in the site navbar. */
+.valentus-nav-search,
+.valentus-tool-search {
   flex: 0 0 auto;
   position: relative;
   z-index: 6;
@@ -1400,19 +1400,19 @@ body.adt-body .nav .nav-panel-menu {
   background: transparent !important;
 }
 
-.adt-nav-search:hover,
-.adt-nav-search:focus,
-.adt-nav-search:focus-within,
-.adt-tool-search:hover,
-.adt-tool-search:focus,
-.adt-tool-search:focus-within {
+.valentus-nav-search:hover,
+.valentus-nav-search:focus,
+.valentus-nav-search:focus-within,
+.valentus-tool-search:hover,
+.valentus-tool-search:focus,
+.valentus-tool-search:focus-within {
   background: transparent !important;
 }
 
-body.adt-body .nav nav.nav-menu.nav-tree-only,
-body.adt-body .nav nav.nav-menu.adt-nav-tree-only,
+body.valentus-body .nav nav.nav-menu.nav-tree-only,
+body.valentus-body .nav nav.nav-menu.valentus-nav-tree-only,
 nav.nav-menu.nav-tree-only,
-nav.nav-menu.adt-nav-tree-only {
+nav.nav-menu.valentus-nav-tree-only {
   box-sizing: border-box;
   flex: 1 1 auto;
   min-height: 0;
@@ -1421,43 +1421,43 @@ nav.nav-menu.adt-nav-tree-only {
   min-width: 0;
   overflow-x: auto;
   overflow-y: auto;
-  padding: 0 var(--adt-global-rail-hpad) 0.5rem var(--adt-global-rail-hpad) !important;
+  padding: 0 var(--valentus-global-rail-hpad) 0.5rem var(--valentus-global-rail-hpad) !important;
 }
 
 /* Antora Default UI sets .nav-list { margin-left: .75rem } for nesting.
    Top-level list under the menu already has rail padding — drop the extra inset.
    Nested .nav-list margins stay for tree indentation. */
 nav.nav-menu.nav-tree-only > .nav-list,
-nav.nav-menu.adt-nav-tree-only > .nav-list {
+nav.nav-menu.valentus-nav-tree-only > .nav-list {
   margin-left: 0;
 }
 
-/* Component label is <p class="adt-nav-component-title"> — not a heading; avoids .nav-menu h3.title / .doc h3. */
-.adt-nav-component-title {
+/* Component label is <p class="valentus-nav-component-title"> — not a heading; avoids .nav-menu h3.title / .doc h3. */
+.valentus-nav-component-title {
   margin: 0 0 0.4rem 0;
   padding: 0.12rem 0;
   font-size: 1.02rem;
   font-weight: 600;
   line-height: 1.3;
   letter-spacing: 0.01em;
-  color: var(--adt-ink);
+  color: var(--valentus-ink);
 }
 
 /* ——— Sidebar: component root + tree; hide legacy explore ——— */
 
-.adt-nav-component-title a {
+.valentus-nav-component-title a {
   text-decoration: none;
   color: inherit;
 }
 
-.adt-nav-component-title a:hover {
+.valentus-nav-component-title a:hover {
   text-decoration: underline;
 }
 
 /* Dark nav link color (site-extra.css is overwritten by sync-valentus-theme.cjs) */
-html.dark-theme .nav .adt-nav-component-title,
-html.dark-theme .nav .adt-nav-component-title a {
-  color: var(--adt-ink);
+html.dark-theme .nav .valentus-nav-component-title,
+html.dark-theme .nav .valentus-nav-component-title a {
+  color: var(--valentus-ink);
 }
 
 /* Page tree: smaller + lighter + muted vs. component title.
@@ -1465,15 +1465,15 @@ html.dark-theme .nav .adt-nav-component-title a {
      backgrounds/padding wrap the text glyphs; wrapped lines still share one
      text origin. Extra rem gap keeps the toggle clear of the label. */
 nav.nav-menu.nav-tree-only .nav-item,
-nav.nav-menu.adt-nav-tree-only .nav-item {
+nav.nav-menu.valentus-nav-tree-only .nav-item {
   position: relative;
 }
 
 /* Same label column for links (leaves) and .nav-text (section title without link). */
 nav.nav-menu.nav-tree-only .nav-item > .nav-link,
-nav.nav-menu.adt-nav-tree-only .nav-item > .nav-link,
+nav.nav-menu.valentus-nav-tree-only .nav-item > .nav-link,
 nav.nav-menu.nav-tree-only .nav-item > .nav-text,
-nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text {
+nav.nav-menu.valentus-nav-tree-only .nav-item > .nav-text {
   display: block;
   box-sizing: border-box;
   margin: 0 0 0 calc(0.85em + 0.55rem);
@@ -1487,29 +1487,29 @@ nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text {
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.35;
-  color: var(--adt-ink-muted);
+  color: var(--valentus-ink-muted);
 }
 
 nav.nav-menu.nav-tree-only .nav-item.is-current-page > .nav-link,
-nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-link,
+nav.nav-menu.valentus-nav-tree-only .nav-item.is-current-page > .nav-link,
 nav.nav-menu.nav-tree-only .nav-item.is-current-page > .nav-link .nav-text,
-nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-link .nav-text {
+nav.nav-menu.valentus-nav-tree-only .nav-item.is-current-page > .nav-link .nav-text {
   font-weight: 600;
-  color: var(--adt-accent);
+  color: var(--valentus-accent);
 }
 
 html.dark-theme nav.nav-menu.nav-tree-only .nav-item > .nav-link,
-html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item > .nav-link,
+html.dark-theme nav.nav-menu.valentus-nav-tree-only .nav-item > .nav-link,
 html.dark-theme nav.nav-menu.nav-tree-only .nav-item > .nav-text,
-html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text {
-  color: var(--adt-ink-muted);
+html.dark-theme nav.nav-menu.valentus-nav-tree-only .nav-item > .nav-text {
+  color: var(--valentus-ink-muted);
 }
 
 html.dark-theme nav.nav-menu.nav-tree-only .nav-item.is-current-page > .nav-link,
-html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-link,
+html.dark-theme nav.nav-menu.valentus-nav-tree-only .nav-item.is-current-page > .nav-link,
 html.dark-theme nav.nav-menu.nav-tree-only .nav-item.is-current-page > .nav-link .nav-text,
-html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-link .nav-text {
-  color: var(--adt-accent);
+html.dark-theme nav.nav-menu.valentus-nav-tree-only .nav-item.is-current-page > .nav-link .nav-text {
+  color: var(--valentus-accent);
   font-weight: 600;
 }
 
@@ -1517,12 +1517,12 @@ html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-
   display: none !important;
 }
 
-.adt-panels-solo {
+.valentus-panels-solo {
   min-height: 0;
 }
 
 .nav-tree-only .nav-menu-toggle,
-.adt-nav-tree-only .nav-menu-toggle {
+.valentus-nav-tree-only .nav-menu-toggle {
   display: none !important;
 }
 
@@ -1551,13 +1551,13 @@ body {
   min-height: 100vh;
 }
 
-.header.adt-header {
+.header.valentus-header {
   flex: 0 0 auto;
   overflow: visible;
 }
 
 /* Outside the 3-col row: shell grows so short pages push the footer to the viewport bottom. */
-.adt-shell {
+.valentus-shell {
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
@@ -1568,7 +1568,7 @@ body {
 }
 
 /* 3-col group stretches within the shell (nav/main/TOC fill down to the footer). */
-.body.adt-body {
+.body.valentus-body {
   flex: 1 1 auto;
   min-height: 0;
   /* Cross-axis centering when max-width binds (see site-visual @1024) */
@@ -1578,7 +1578,7 @@ body {
 }
 
 /* Doc-column toolbar: read-width (desktop) + font-size (condensed). */
-.adt-doc-toolbar {
+.valentus-doc-toolbar {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -1589,24 +1589,24 @@ body {
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
-  min-height: var(--adt-tool-band, 2.15rem);
-  padding-top: var(--adt-global-rail-top);
-  padding-inline: var(--adt-doc-pad-inline);
-  padding-bottom: var(--adt-tool-gap);
+  min-height: var(--valentus-tool-band, 2.15rem);
+  padding-top: var(--valentus-global-rail-top);
+  padding-inline: var(--valentus-doc-pad-inline);
+  padding-bottom: var(--valentus-tool-gap);
 }
 
 /* Legacy shell tool band (removed from body.hbs in 2.1.0) — hide if a hub still renders it. */
-.adt-shell > .adt-tool-band {
+.valentus-shell > .valentus-tool-band {
   display: none !important;
 }
 
-/* Footer is outside .adt-shell / .adt-body; natural height only (does not grow). */
+/* Footer is outside .valentus-shell / .valentus-body; natural height only (does not grow). */
 footer.footer {
   flex: 0 0 auto;
   box-sizing: border-box;
   width: 100%;
   margin: 0;
-  padding: var(--adt-footer-pad-top) var(--adt-footer-pad-h) var(--adt-footer-pad-bottom);
+  padding: var(--valentus-footer-pad-top) var(--valentus-footer-pad-h) var(--valentus-footer-pad-bottom);
 }
 
 footer.footer > p {

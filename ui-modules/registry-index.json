@@ -57,9 +57,9 @@
       "conflicts": [],
       "partials": {
         "provide": [
-          "adt-bc-cluster",
-          "adt-bc-trail",
-          "adt-doc-mast"
+          "valentus-bc-cluster",
+          "valentus-bc-trail",
+          "valentus-doc-mast"
         ],
         "replace": [
           "breadcrumbs"
@@ -68,7 +68,7 @@
       "slots": {
         "foot": {
           "scripts": [
-            "js/site-adt-accordion.js"
+            "js/site-valentus-accordion.js"
           ]
         }
       },

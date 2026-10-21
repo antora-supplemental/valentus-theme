@@ -5,11 +5,11 @@
     var tables = doc.querySelectorAll('.doc table.tableblock')
     for (var i = 0; i < tables.length; i++) {
       var table = tables[i]
-      if (table.closest('.tablecontainer, .adt-table-scroll, .admonitionblock, .colist')) continue
+      if (table.closest('.tablecontainer, .valentus-table-scroll, .admonitionblock, .colist')) continue
       var parent = table.parentNode
       if (!parent) continue
       var wrap = doc.createElement('div')
-      wrap.className = 'adt-table-scroll'
+      wrap.className = 'valentus-table-scroll'
       wrap.setAttribute('role', 'region')
       wrap.setAttribute('tabindex', '0')
       var caption = table.querySelector('caption')

@@ -1,74 +1,74 @@
-<nav class="breadcrumbs adt-breadcrumbs" aria-label="Breadcrumb: component, version, and page path">
+<nav class="breadcrumbs valentus-breadcrumbs" aria-label="Breadcrumb: component, version, and page path">
   <ul>
     {{#if site.homeUrl}}
-    <li class="adt-breadcrumb-home">
+    <li class="valentus-breadcrumb-home">
       {{! Icon-only home chip; trail separators stay real "/" text for copyability. }}
-      <a href="{{{relativize site.homeUrl}}}" class="adt-breadcrumb-home-link" title="Site home" aria-label="Site home">
-        <svg class="adt-breadcrumb-home-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+      <a href="{{{relativize site.homeUrl}}}" class="valentus-breadcrumb-home-link" title="Site home" aria-label="Site home">
+        <svg class="valentus-breadcrumb-home-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
           <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
         </svg>
       </a>
     </li>
     {{/if}}
-    <li class="adt-breadcrumb-col adt-breadcrumb-masthead">
+    <li class="valentus-breadcrumb-col valentus-breadcrumb-masthead">
       {{!
         Component + version stay visible together (including with site-nav-tree).
         Mobile needs the component jump; version sits conjoined to its right.
-        Trail drops a duplicate component-root crumb via adt-bc-trail-crumbs.
+        Trail drops a duplicate component-root crumb via valentus-bc-trail-crumbs.
         Separators are real "/" text nodes so the mast copies as a pasteable path.
       }}
-      <div class="adt-bc-cluster" role="group" aria-label="Documentation component and version">
-        <div class="adt-bc-menu adt-bc-menu-project">
-          <button type="button" class="adt-bc-kicker" data-adt-toggle="adt-bc-proj" aria-haspopup="listbox" aria-expanded="false" aria-label="Switch documentation component">
-            <span class="adt-bc-kicker-label">{{#if page.component}}{{{page.component.title}}}{{else}}{{{site.title}}}{{/if}}</span>
+      <div class="valentus-bc-cluster" role="group" aria-label="Documentation component and version">
+        <div class="valentus-bc-menu valentus-bc-menu-project">
+          <button type="button" class="valentus-bc-kicker" data-valentus-toggle="valentus-bc-proj" aria-haspopup="listbox" aria-expanded="false" aria-label="Switch documentation component">
+            <span class="valentus-bc-kicker-label">{{#if page.component}}{{{page.component.title}}}{{else}}{{{site.title}}}{{/if}}</span>
           </button>
-          <ul class="adt-bc-dropdown adt-bc-dropdown--components" id="adt-bc-proj" role="listbox" hidden>
+          <ul class="valentus-bc-dropdown valentus-bc-dropdown--components" id="valentus-bc-proj" role="listbox" hidden>
             {{#each site.components}}
-            <li role="none" class="adt-bc-menu-item">
+            <li role="none" class="valentus-bc-menu-item">
               <a href="{{{relativize ./url}}}" class="{{#if (eq this @root.page.component)}}is-current{{/if}}">{{{./title}}}</a>
             </li>
             {{/each}}
           </ul>
         </div>
-        <span class="adt-bc-cluster-gap" aria-hidden="true"> </span>
-        {{#with (adt-version-mode @root.page)}}
+        <span class="valentus-bc-cluster-gap" aria-hidden="true"> </span>
+        {{#with (valentus-version-mode @root.page)}}
         {{#if (eq this 'menu')}}
-        <div class="adt-bc-menu adt-bc-menu-version">
-          <button type="button" class="adt-bc-kicker adt-bc-kicker--version" data-adt-toggle="adt-bc-ver" aria-haspopup="listbox" aria-expanded="false" aria-label="Select documentation version">
-            <span class="adt-bc-kicker-version">{{adt-version-label @root.page.componentVersion fallback="Version"}}</span>
+        <div class="valentus-bc-menu valentus-bc-menu-version">
+          <button type="button" class="valentus-bc-kicker valentus-bc-kicker--version" data-valentus-toggle="valentus-bc-ver" aria-haspopup="listbox" aria-expanded="false" aria-label="Select documentation version">
+            <span class="valentus-bc-kicker-version">{{valentus-version-label @root.page.componentVersion fallback="Version"}}</span>
           </button>
-          <ul class="adt-bc-dropdown adt-bc-dropdown--version" id="adt-bc-ver" role="listbox" hidden>
+          <ul class="valentus-bc-dropdown valentus-bc-dropdown--version" id="valentus-bc-ver" role="listbox" hidden>
             {{#if @root.page.versions}}
             {{#each @root.page.versions}}
-            <li role="none" class="adt-bc-menu-item">
-              <a href="{{{relativize ./url}}}" class="adt-bc-version-pill{{#if (eq ./version @root.page.version)}} is-current{{/if}}{{#if ./missing}} is-missing{{/if}}"{{#if (eq ./version @root.page.version)}} aria-current="page"{{/if}}>{{adt-version-label this}}</a>
+            <li role="none" class="valentus-bc-menu-item">
+              <a href="{{{relativize ./url}}}" class="valentus-bc-version-pill{{#if (eq ./version @root.page.version)}} is-current{{/if}}{{#if ./missing}} is-missing{{/if}}"{{#if (eq ./version @root.page.version)}} aria-current="page"{{/if}}>{{valentus-version-label this}}</a>
             </li>
             {{/each}}
             {{else if @root.page.componentVersion}}
-            <li role="none" class="adt-bc-menu-item">
-              <a href="{{{relativize @root.page.componentVersion.url}}}" class="adt-bc-version-pill is-current" aria-current="page">{{adt-version-label @root.page.componentVersion}}</a>
+            <li role="none" class="valentus-bc-menu-item">
+              <a href="{{{relativize @root.page.componentVersion.url}}}" class="valentus-bc-version-pill is-current" aria-current="page">{{valentus-version-label @root.page.componentVersion}}</a>
             </li>
             {{/if}}
           </ul>
         </div>
         {{else if (eq this 'plain')}}
-        <div class="adt-bc-menu adt-bc-menu-version adt-bc-menu-version--plain">
-          <span class="adt-bc-version-plain" title="Documentation version">{{adt-version-label @root.page.componentVersion}}</span>
+        <div class="valentus-bc-menu valentus-bc-menu-version valentus-bc-menu-version--plain">
+          <span class="valentus-bc-version-plain" title="Documentation version">{{valentus-version-label @root.page.componentVersion}}</span>
         </div>
         {{/if}}
         {{/with}}
       </div>
     </li>
-    {{#with (adt-bc-trail-crumbs page.breadcrumbs)}}
+    {{#with (valentus-bc-trail-crumbs page.breadcrumbs)}}
     {{#each this}}
-    <li class="adt-breadcrumb-sep" aria-hidden="true">/</li>
-    <li class="adt-breadcrumb-trail{{#if @last}} adt-breadcrumb-trail--current{{/if}}">
+    <li class="valentus-breadcrumb-sep" aria-hidden="true">/</li>
+    <li class="valentus-breadcrumb-trail{{#if @last}} valentus-breadcrumb-trail--current{{/if}}">
     {{~#if @last~}}
-    <span class="adt-breadcrumb-trail-text" aria-current="page">{{{./content}}}</span>
+    <span class="valentus-breadcrumb-trail-text" aria-current="page">{{{./content}}}</span>
     {{~else if (and ./url (eq ./urlType 'internal'))~}}
-    <a class="adt-breadcrumb-trail-link" href="{{{relativize ./url}}}">{{{./content}}}</a>
+    <a class="valentus-breadcrumb-trail-link" href="{{{relativize ./url}}}">{{{./content}}}</a>
     {{~else~}}
-    <span class="adt-breadcrumb-trail-text">{{{./content}}}</span>
+    <span class="valentus-breadcrumb-trail-text">{{{./content}}}</span>
     {{~/if~}}
     </li>
     {{/each}}

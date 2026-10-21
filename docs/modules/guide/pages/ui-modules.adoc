@@ -58,7 +58,7 @@ Conflicts fail the build with a clear error.
 | Provider SVG assets + URL detection for repo/edit icons
 
 | `bc-mast`
-| Component/version kickers (`adt-bc-cluster`), trail fragment, doc mast, accordion JS
+| Component/version kickers (`valentus-bc-cluster`), trail fragment, doc mast, accordion JS
 
 | `edit-crumb`
 | Inline edit link partial for breadcrumb rows
@@ -88,11 +88,11 @@ Writes `ui-modules/registry-index.json` for external catalog crawlers.
 
 == Fragment partials
 
-Modules such as `bc-mast` ship *fragment* partials (`adt-bc-cluster`, `adt-bc-trail`) you can include from custom headers:
+Modules such as `bc-mast` ship *fragment* partials (`valentus-bc-cluster`, `valentus-bc-trail`) you can include from custom headers:
 
 [source,handlebars]
 ----
-{{> adt-bc-cluster}}
+{{> valentus-bc-cluster}}
 ----
 
 You are not required to adopt the full `doc-site` recipe.

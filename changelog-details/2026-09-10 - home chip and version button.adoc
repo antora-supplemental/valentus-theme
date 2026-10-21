@@ -14,7 +14,7 @@ Readers also saw a literal `~` on the version **button**, which is Antora’s in
 
 == Changes
 
-* Restore the SVG house icon inside `.adt-breadcrumb-home-link` (icon-only; no “Home” word).
+* Restore the SVG house icon inside `.valentus-breadcrumb-home-link` (icon-only; no “Home” word).
 * Restore kicker-chip sizing/border/background for the home control.
-* Keep `<li class="adt-breadcrumb-sep">/</li>` trail separators for copyability.
-* Kicker: `{{adt-version-label … fallback="Version"}}`; dropdown rows keep default `~`.
+* Keep `<li class="valentus-breadcrumb-sep">/</li>` trail separators for copyability.
+* Kicker: `{{valentus-version-label … fallback="Version"}}`; dropdown rows keep default `~`.

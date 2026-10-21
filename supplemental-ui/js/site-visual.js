@@ -2,10 +2,10 @@
  * Valentus visual polish: sticky header shadow + search UX helpers +
  * tree-nav horizontal scroll edge fades.
  * Root light↔dark transition lives in antora-dark-mode (View Transitions +
- * html.adt-theme-animating fallback). Reading width: site-read-width.js.
+ * html.valentus-theme-animating fallback). Reading width: site-read-width.js.
  */
 (function () {
-  const nav = document.querySelector('.adt-site-navbar')
+  const nav = document.querySelector('.valentus-site-navbar')
   const root = document.documentElement
   const CHROME_SCROLL_MIN = 8
   const CHROME_SCROLL_DELTA = 5
@@ -14,7 +14,7 @@
 
   /** Show navbar + mast when hidden by scroll-away (e.g. "/" search summon). */
   function revealSiteChrome () {
-    root.classList.remove('adt-chrome-scroll-away')
+    root.classList.remove('valentus-chrome-scroll-away')
     lastScrollY = window.scrollY
   }
 
@@ -28,11 +28,11 @@
       nav.classList.toggle('is-scrolled', y > 4)
     }
     if (y <= CHROME_SCROLL_MIN) {
-      root.classList.remove('adt-chrome-scroll-away')
+      root.classList.remove('valentus-chrome-scroll-away')
     } else if (y > lastScrollY + CHROME_SCROLL_DELTA) {
-      root.classList.add('adt-chrome-scroll-away')
+      root.classList.add('valentus-chrome-scroll-away')
     } else if (y < lastScrollY - CHROME_SCROLL_DELTA) {
-      root.classList.remove('adt-chrome-scroll-away')
+      root.classList.remove('valentus-chrome-scroll-away')
     }
     lastScrollY = y
     chromeTick = false
@@ -55,7 +55,7 @@
   // from bubbling out of the search field (tool-band search is already outside the panel;
   // search-chat adds its own stop when present).
   const searchField = document.getElementById('search-field')
-  if (searchField && !document.querySelector('[data-adt-search-chat]')) {
+  if (searchField && !document.querySelector('[data-valentus-search-chat]')) {
     searchField.addEventListener('mousedown', (e) => {
       if (e.detail > 1) e.stopPropagation()
     })
@@ -63,7 +63,7 @@
 
   // Focus search with / (defer when search-chat owns / and ?)
   document.addEventListener('keydown', (e) => {
-    if (document.querySelector('[data-adt-search-chat]')) return
+    if (document.querySelector('[data-valentus-search-chat]')) return
     if (e.key !== '/') return
     if (e.metaKey || e.ctrlKey || e.altKey) return
     const t = e.target
@@ -95,8 +95,8 @@
     const canScroll = maxScroll > epsilon
     const atStart = menu.scrollLeft <= epsilon
     const atEnd = menu.scrollLeft >= maxScroll - epsilon
-    menu.classList.toggle('adt-nav-overflow-start', canScroll && !atStart)
-    menu.classList.toggle('adt-nav-overflow-end', canScroll && !atEnd)
+    menu.classList.toggle('valentus-nav-overflow-start', canScroll && !atStart)
+    menu.classList.toggle('valentus-nav-overflow-end', canScroll && !atEnd)
   }
 
   function bindNavScrollFades (menu) {
@@ -126,7 +126,7 @@
 
   function initNavScrollFades () {
     document
-      .querySelectorAll('nav.nav-menu.nav-tree-only, nav.nav-menu.adt-nav-tree-only')
+      .querySelectorAll('nav.nav-menu.nav-tree-only, nav.nav-menu.valentus-nav-tree-only')
       .forEach(bindNavScrollFades)
   }
 

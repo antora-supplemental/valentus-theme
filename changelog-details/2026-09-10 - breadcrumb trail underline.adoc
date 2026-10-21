@@ -8,10 +8,10 @@ Mast kickers previously rested as underlined accent text while trail links staye
 
 == Change
 
-* Trail links, non-link folder nodes (`.adt-breadcrumb-trail-text`), and the current crumb all use `--adt-accent` plus a resting underline.
+* Trail links, non-link folder nodes (`.valentus-breadcrumb-trail-text`), and the current crumb all use `--valentus-accent` plus a resting underline.
 * Version / component kickers (and single-version plain labels) keep accent color and chip fill on hover/open, but drop the resting underline.
 * Mirror in `site-doc-layout.css` and `site-visual.css` under both `supplemental-ui` and `ui-modules/packages/doc-layout`.
-* Docs: customization table for `adt-version-mode` `plain` no longer says “underlined”.
+* Docs: customization table for `valentus-version-mode` `plain` no longer says “underlined”.
 
 == Files
 

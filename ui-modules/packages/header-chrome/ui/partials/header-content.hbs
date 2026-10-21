@@ -1,28 +1,28 @@
-<header class="header adt-header">
-  <nav class="navbar adt-site-navbar" aria-label="Site">
-    <div class="navbar-brand adt-header-brand">
+<header class="header valentus-header">
+  <nav class="navbar valentus-site-navbar" aria-label="Site">
+    <div class="navbar-brand valentus-header-brand">
       {{!-- Logo: explicit site_home_url → external project home; otherwise this site’s start page (portable). Never fall back to absolute site.url. --}}
       {{#if site.keys.siteHomeUrl}}
-      <a class="adt-header-logo-item" href="{{{site.keys.siteHomeUrl}}}" rel="noopener" target="_blank" title="{{{or site.keys.siteHomeLabel 'Project home'}}}" aria-label="{{{or site.keys.siteHomeLabel 'Project home'}}} (opens in new tab)">
+      <a class="valentus-header-logo-item" href="{{{site.keys.siteHomeUrl}}}" rel="noopener" target="_blank" title="{{{or site.keys.siteHomeLabel 'Project home'}}}" aria-label="{{{or site.keys.siteHomeLabel 'Project home'}}} (opens in new tab)">
       {{else}}
-      <a class="adt-header-logo-item" href="{{{relativize site.homeUrl}}}" title="{{{or site.keys.siteHomeLabel 'Home'}}}" aria-label="{{{or site.keys.siteHomeLabel 'Home'}}}">
+      <a class="valentus-header-logo-item" href="{{{relativize site.homeUrl}}}" title="{{{or site.keys.siteHomeLabel 'Home'}}}" aria-label="{{{or site.keys.siteHomeLabel 'Home'}}}">
       {{/if}}
         {{#if site.keys.headerLogoDark}}
-        <img class="adt-header-logo adt-header-logo--for-light" src="{{{uiRootPath}}}/img/{{or site.keys.headerLogo 'logo.svg'}}" width="34" height="34" alt="" />
-        <img class="adt-header-logo adt-header-logo--for-dark" src="{{{uiRootPath}}}/img/{{site.keys.headerLogoDark}}" width="34" height="34" alt="" />
+        <img class="valentus-header-logo valentus-header-logo--for-light" src="{{{uiRootPath}}}/img/{{or site.keys.headerLogo 'logo.svg'}}" width="34" height="34" alt="" />
+        <img class="valentus-header-logo valentus-header-logo--for-dark" src="{{{uiRootPath}}}/img/{{site.keys.headerLogoDark}}" width="34" height="34" alt="" />
         {{else}}
-        <img class="adt-header-logo{{#if (eq site.keys.headerLogoTone 'mono')}} adt-header-logo--mono{{/if}}" src="{{{uiRootPath}}}/img/{{or site.keys.headerLogo 'logo.svg'}}" width="34" height="34" alt="" />
+        <img class="valentus-header-logo{{#if (eq site.keys.headerLogoTone 'mono')}} valentus-header-logo--mono{{/if}}" src="{{{uiRootPath}}}/img/{{or site.keys.headerLogo 'logo.svg'}}" width="34" height="34" alt="" />
         {{/if}}
       </a>
-      <a class="navbar-item adt-header-title" href="{{{relativize site.homeUrl}}}">{{or site.keys.headerDocTitle site.title}}</a>
+      <a class="navbar-item valentus-header-title" href="{{{relativize site.homeUrl}}}">{{or site.keys.headerDocTitle site.title}}</a>
     </div>
     {{!-- Site-wide search (command palette) sits in the top bar center — not tied to nav/doc column measure. --}}
     {{#if env.SITE_SEARCH_PROVIDER}}
-    <div class="adt-navbar-search">
+    <div class="valentus-navbar-search">
       {{#if env.SITE_SEARCH_CHAT}}
-      {{> adt-search-chat}}
+      {{> valentus-search-chat}}
       {{else}}
-      <div class="search adt-nav-search">
+      <div class="search valentus-nav-search">
         <div id="search-field">
           <input id="search-input" type="text" placeholder="Search" autocomplete="off" aria-label="Search">
         </div>
@@ -30,19 +30,19 @@
       {{/if}}
     </div>
     {{/if}}
-    <div id="topbar-nav" class="navbar-menu adt-topbar" role="navigation" aria-label="External links">
-      <div class="navbar-end adt-header-actions">
+    <div id="topbar-nav" class="navbar-menu valentus-topbar" role="navigation" aria-label="External links">
+      <div class="navbar-end valentus-header-actions">
         {{#if (and @root.page.origin @root.page.origin.webUrl)}}
-        <a class="navbar-item adt-header-icon-btn adt-header-vcs" href="{{{@root.page.origin.webUrl}}}" rel="noopener" target="_blank" title="Source repository" aria-label="Source repository (opens in new tab)">
-          <img class="adt-header-vcs-img" src="{{{uiRootPath}}}/img/vcs/{{adt-vcs-icon-id @root.page.origin.webUrl 'repo'}}.svg" width="24" height="24" alt="" />
+        <a class="navbar-item valentus-header-icon-btn valentus-header-vcs" href="{{{@root.page.origin.webUrl}}}" rel="noopener" target="_blank" title="Source repository" aria-label="Source repository (opens in new tab)">
+          <img class="valentus-header-vcs-img" src="{{{uiRootPath}}}/img/vcs/{{valentus-vcs-icon-id @root.page.origin.webUrl 'repo'}}.svg" width="24" height="24" alt="" />
         </a>
         {{else}}
-        <a class="navbar-item adt-header-icon-btn adt-header-vcs" href="{{{or site.keys.githubProfileUrl 'https://github.com'}}}" rel="noopener" target="_blank" title="Source host" aria-label="Source host (opens in new tab)">
-          <img class="adt-header-vcs-img" src="{{{uiRootPath}}}/img/vcs/{{adt-vcs-icon-id (or site.keys.githubProfileUrl 'https://github.com') 'github'}}.svg" width="24" height="24" alt="" />
+        <a class="navbar-item valentus-header-icon-btn valentus-header-vcs" href="{{{or site.keys.githubProfileUrl 'https://github.com'}}}" rel="noopener" target="_blank" title="Source host" aria-label="Source host (opens in new tab)">
+          <img class="valentus-header-vcs-img" src="{{{uiRootPath}}}/img/vcs/{{valentus-vcs-icon-id (or site.keys.githubProfileUrl 'https://github.com') 'github'}}.svg" width="24" height="24" alt="" />
         </a>
         {{/if}}
       </div>
     </div>
   </nav>
-  {{> adt-doc-mast}}
+  {{> valentus-doc-mast}}
 </header>

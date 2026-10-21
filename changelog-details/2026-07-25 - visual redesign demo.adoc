@@ -4,50 +4,50 @@ Session notes for branch `demo/visual-redesign`: layered visual system on Valent
 
 == Visual system
 
-* *Tokens:* Cool paper canvas; teal accent (`--adt-accent`); shared chrome/nav/footer surfaces; designed dark palette (not a hex invert of Material blue).
+* *Tokens:* Cool paper canvas; teal accent (`--valentus-accent`); shared chrome/nav/footer surfaces; designed dark palette (not a hex invert of Material blue).
 * *Type:* Plus Jakarta Sans for site title / H1–H2; Source Sans 3 for UI/body; IBM Plex Mono for code. Serif display was tried and dropped — modern sans only.
 * *Chrome:* Unified canvas-matched header + mast; sticky navbar shadow on scroll; quieter footer top rule.
 * *Nav / TOC:* Current-page highlight matches hover size (roomier accent tint). No left inset bar. Stroke caret/chevrons sized to the text line height with a tighter caret gap.
 * *Code:* Dark panels in both themes with retuned highlight colors; always-visible source toolbox chrome.
 * *Gotcha — code panel target:* Style the panel on `.listingblock > .content`, not on `pre`. An absolutely positioned toolbox fights a rounded `pre` and clips or misaligns; rounding/background on the content wrapper keeps the toolbox inside the panel.
 * *Admonitions:* Left accent border + tinted fill (no floating Material-style pills as the main look).
-* *Search:* Lives in `.adt-tool-band` above the 3-col row (`.adt-nav-search` / `.adt-tool-search`), not in the header or left nav column. Elevated field, accent focus ring only (no hover/focus fill flash). Plain `/` focuses search (ignored in inputs/textareas/selects/contenteditable); hint badge shows `/`. Replaces Ctrl/⌘K and `data-adt-modkey` FOUC.
+* *Search:* Lives in `.valentus-tool-band` above the 3-col row (`.valentus-nav-search` / `.valentus-tool-search`), not in the header or left nav column. Elevated field, accent focus ring only (no hover/focus fill flash). Plain `/` focuses search (ignored in inputs/textareas/selects/contenteditable); hint badge shows `/`. Replaces Ctrl/⌘K and `data-valentus-modkey` FOUC.
 * *Motion:* Short theme-toggle surface crossfade; sticky shadow transition.
 * *Files:* `site-visual.css` / `site-visual.js` (supplemental + `doc-layout` UI module). Override via `:root` / `html.dark-theme` custom properties without forking partials.
 
 == Layout (shell + true 3-column peers)
 
-* Outer `.adt-shell` holds `.adt-tool-band` then `.body.adt-body`.
-* Peers under `.body.adt-body` are `nav | main | TOC` (TOC lifted out of nested `.content`).
+* Outer `.valentus-shell` holds `.valentus-tool-band` then `.body.valentus-body`.
+* Peers under `.body.valentus-body` are `nav | main | TOC` (TOC lifted out of nested `.content`).
 * Columns separated by spacing only — no vertical divider rule.
-* Shell width is intrinsic (side panels + fixed `--adt-col-gap` + doc column); viewport-centered with `fit-content` + `align-self: center`.
-* Equal side rails via `--adt-side-width` (`16rem`) for both nav and TOC so the article is optically centered.
-* Tool band: search (nav-width) + `adt-read-width` (centered over doc) + TOC spacer share `--adt-tool-band` / `--adt-tool-gap`; tree, title, and TOC start on a common baseline below that band (`--adt-col-rail-top`).
-* Gotcha — search clipping: do not put the Lunr field inside `.nav-panel-menu` (`overflow-y: auto`); keep it in `.adt-tool-band` with overflow-visible ancestors.
+* Shell width is intrinsic (side panels + fixed `--valentus-col-gap` + doc column); viewport-centered with `fit-content` + `align-self: center`.
+* Equal side rails via `--valentus-side-width` (`16rem`) for both nav and TOC so the article is optically centered.
+* Tool band: search (nav-width) + `valentus-read-width` (centered over doc) + TOC spacer share `--valentus-tool-band` / `--valentus-tool-gap`; tree, title, and TOC start on a common baseline below that band (`--valentus-col-rail-top`).
+* Gotcha — search clipping: do not put the Lunr field inside `.nav-panel-menu` (`overflow-y: auto`); keep it in `.valentus-tool-band` with overflow-visible ancestors.
 
 == Read-width UI module
 
 * Standalone package `ui-modules/packages/read-width` registered in the recipe/registry.
-* Placeable partial `{{> adt-read-width}}`; demo places it in `.adt-tool-band` (centered over the article column), not inside `article.doc`.
-* Drives *doc width only* via `--adt-doc-max`:
+* Placeable partial `{{> valentus-read-width}}`; demo places it in `.valentus-tool-band` (centered over the article column), not inside `article.doc`.
+* Drives *doc width only* via `--valentus-doc-max`:
 ** narrow `68ch`
 ** comfortable `82ch`
 ** wide `100ch`
-* `--adt-col-gap` stays a constant `2rem` so nav↔doc clearance does not grow when widening.
-* `localStorage` + FOUC helper (`adt-read-width-fouc.js` / `data-adt-read-width`).
+* `--valentus-col-gap` stays a constant `2rem` so nav↔doc clearance does not grow when widening.
+* `localStorage` + FOUC helper (`valentus-read-width-fouc.js` / `data-valentus-read-width`).
 * Scripts: `pnpm build:visual-demo` / `pnpm serve:visual-demo`.
 
 == Gotchas (layout / width / scroll / worktree)
 
-* *Shell-max slack:* If `--adt-shell-max` (or the body) is larger than panels + gaps + doc, flex/grid free space makes the side panels “space out.” Derive shell max from the intrinsic sum so the shell shrink-wraps.
-* *Width transition both ways:* A jumped `flex-basis: var(--adt-doc-max)` made grow look smooth (via `max-width`) while shrink snapped. Prefer `flex: 0 1 auto` with explicit `width` / `max-width` so narrow↔comfortable↔wide animates in both directions.
+* *Shell-max slack:* If `--valentus-shell-max` (or the body) is larger than panels + gaps + doc, flex/grid free space makes the side panels “space out.” Derive shell max from the intrinsic sum so the shell shrink-wraps.
+* *Width transition both ways:* A jumped `flex-basis: var(--valentus-doc-max)` made grow look smooth (via `max-width`) while shrink snapped. Prefer `flex: 0 1 auto` with explicit `width` / `max-width` so narrow↔comfortable↔wide animates in both directions.
 * *scrollbar-gutter: stable:* Without it, short pages that never show a vertical scrollbar shift horizontal alignment vs pages that do. Keep a stable gutter on the scrolling root.
 * *Antora worktree content source:* `content.sources` with `url: .` fails when the checkout is a linked git worktree (`.git` is a file). Use `antora-playbook-visual-demo.yml` (content from sibling normal clone `../valentus-theme`, UI from this worktree), or build from a non-worktree checkout.
 
 == Breadcrumb mast polish
 
 * Trail ancestors use `font-weight: 400`; current crumb at most `500` (not bold). Component/version kickers stay as controls.
-* Hide `.adt-bc-sep` (`|` between kickers) via CSS; page-trail `/` separators unchanged.
+* Hide `.valentus-bc-sep` (`|` between kickers) via CSS; page-trail `/` separators unchanged.
 * Synced in `supplemental-ui` and `ui-modules/packages/doc-layout`.
 
 == Preview

@@ -1,49 +1,49 @@
 /* Reading width module — doc measure tokens + control chrome.
-   Place {{> adt-read-width}} in {{> adt-doc-toolbar}} (top of the article column) or anywhere in .doc.
-   data-adt-read-width only changes --adt-doc-max. Layout sizes main to the doc; --adt-col-gap stays fixed. */
+   Place {{> valentus-read-width}} in {{> valentus-doc-toolbar}} (top of the article column) or anywhere in .doc.
+   data-valentus-read-width only changes --valentus-doc-max. Layout sizes main to the doc; --valentus-col-gap stays fixed. */
 
 :root {
   /* Constant nav↔doc / doc↔TOC gap (does not scale with reading width) */
-  --adt-col-gap: 2rem;
-  --adt-doc-max: 82ch;
-  --adt-read-width-radius: 0.4rem;
-  --adt-read-width-radius-sm: 0.25rem;
-  --adt-read-width-border: var(--adt-border, #d9dee7);
-  --adt-read-width-bg: var(--adt-elevated, #fff);
-  --adt-read-width-fg: var(--adt-ink-muted, #5a6270);
-  --adt-read-width-fg-active: var(--adt-accent, #0f766e);
-  --adt-read-width-soft: var(--adt-accent-soft, rgba(15, 118, 110, 0.1));
-  --adt-read-width-ink: var(--adt-ink, #141820);
-  --adt-read-width-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  --valentus-col-gap: 2rem;
+  --valentus-doc-max: 82ch;
+  --valentus-read-width-radius: 0.4rem;
+  --valentus-read-width-radius-sm: 0.25rem;
+  --valentus-read-width-border: var(--valentus-border, #d9dee7);
+  --valentus-read-width-bg: var(--valentus-elevated, #fff);
+  --valentus-read-width-fg: var(--valentus-ink-muted, #5a6270);
+  --valentus-read-width-fg-active: var(--valentus-accent, #0f766e);
+  --valentus-read-width-soft: var(--valentus-accent-soft, rgba(15, 118, 110, 0.1));
+  --valentus-read-width-ink: var(--valentus-ink, #141820);
+  --valentus-read-width-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-html[data-adt-read-width="narrow"] {
-  --adt-doc-max: 68ch;
+html[data-valentus-read-width="narrow"] {
+  --valentus-doc-max: 68ch;
 }
 
-html[data-adt-read-width="comfortable"],
-html:not([data-adt-read-width]) {
-  --adt-doc-max: 82ch;
+html[data-valentus-read-width="comfortable"],
+html:not([data-valentus-read-width]) {
+  --valentus-doc-max: 82ch;
 }
 
-html[data-adt-read-width="wide"] {
-  --adt-doc-max: 100ch;
+html[data-valentus-read-width="wide"] {
+  --valentus-doc-max: 100ch;
 }
 
 @media screen and (min-width: 1024px) {
   /*
-   * Center column tracks --adt-doc-max. Side panels stay at fixed widths with a
-   * constant --adt-col-gap; widening the doc moves panels outward only because
+   * Center column tracks --valentus-doc-max. Side panels stay at fixed widths with a
+   * constant --valentus-col-gap; widening the doc moves panels outward only because
    * the content column grew — no flex slack between nav and the text.
    *
-   * flex-basis: auto (not var(--adt-doc-max)): the flex base size follows the
+   * flex-basis: auto (not var(--valentus-doc-max)): the flex base size follows the
    * transitioning `width`. A jumped flex-basis made shrink snap while grow still
    * looked smooth via max-width.
    */
-  main.adt-article {
+  main.valentus-article {
     flex: 0 1 auto;
-    width: var(--adt-doc-max);
-    max-width: var(--adt-doc-max);
+    width: var(--valentus-doc-max);
+    max-width: var(--valentus-doc-max);
     min-width: 0;
     transition: width 0.25s ease, max-width 0.25s ease;
   }
@@ -56,36 +56,36 @@ html[data-adt-read-width="wide"] {
 }
 
 /* Control — placement-agnostic */
-.adt-read-width {
+.valentus-read-width {
   display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
   gap: 0.1rem;
   padding: 0.15rem;
-  border: 1px solid var(--adt-read-width-border);
-  border-radius: var(--adt-read-width-radius);
-  background: var(--adt-read-width-bg);
+  border: 1px solid var(--valentus-read-width-border);
+  border-radius: var(--valentus-read-width-radius);
+  background: var(--valentus-read-width-bg);
   box-sizing: border-box;
 }
 
 /* Doc toolbar placement (Valentus default) */
-.adt-doc-toolbar > .adt-read-width,
-.adt-tool-band-center > .adt-read-width,
-article.doc > .adt-read-width {
+.valentus-doc-toolbar > .valentus-read-width,
+.valentus-tool-band-center > .valentus-read-width,
+article.doc > .valentus-read-width {
   display: flex;
   width: fit-content;
   max-width: 100%;
-  min-height: var(--adt-tool-band, 2.15rem);
+  min-height: var(--valentus-tool-band, 2.15rem);
   margin: 0;
   box-sizing: border-box;
 }
 
-article.doc > .adt-read-width {
-  margin: 0 auto var(--adt-tool-gap, 0.65rem);
+article.doc > .valentus-read-width {
+  margin: 0 auto var(--valentus-tool-gap, 0.65rem);
 }
 
-.adt-read-width-btn {
+.valentus-read-width-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -93,33 +93,33 @@ article.doc > .adt-read-width {
   height: 1.85rem;
   padding: 0;
   border: none;
-  border-radius: var(--adt-read-width-radius-sm);
+  border-radius: var(--valentus-read-width-radius-sm);
   background: transparent;
-  color: var(--adt-read-width-fg);
+  color: var(--valentus-read-width-fg);
   cursor: pointer;
-  transition: var(--adt-read-width-transition);
+  transition: var(--valentus-read-width-transition);
 }
 
-.adt-read-width-btn:hover {
-  color: var(--adt-read-width-ink);
-  background: var(--adt-read-width-soft);
+.valentus-read-width-btn:hover {
+  color: var(--valentus-read-width-ink);
+  background: var(--valentus-read-width-soft);
 }
 
-.adt-read-width-btn[aria-pressed="true"] {
-  color: var(--adt-read-width-fg-active);
-  background: var(--adt-read-width-soft);
+.valentus-read-width-btn[aria-pressed="true"] {
+  color: var(--valentus-read-width-fg-active);
+  background: var(--valentus-read-width-soft);
 }
 
-.adt-read-width-btn:focus {
+.valentus-read-width-btn:focus {
   outline: none;
 }
 
-.adt-read-width-btn:focus-visible {
-  outline: 2px solid var(--adt-read-width-fg-active);
+.valentus-read-width-btn:focus-visible {
+  outline: 2px solid var(--valentus-read-width-fg-active);
   outline-offset: 1px;
 }
 
-.adt-read-width-btn svg {
+.valentus-read-width-btn svg {
   width: 16px;
   height: 16px;
   display: block;
@@ -133,13 +133,13 @@ article.doc > .adt-read-width {
 
 /* Below the 3-col / doc-measure breakpoint, width control is a no-op — hide it. */
 @media screen and (max-width: 1023.5px) {
-  .adt-read-width {
+  .valentus-read-width {
     display: none !important;
   }
 
   /* Collapse the doc toolbar when only (hidden) read-width would show. */
-  .adt-doc-toolbar:has(.adt-read-width):not(:has(.adt-font-size)),
-  .adt-tool-band:has(.adt-read-width):not(:has(.adt-font-size)) {
+  .valentus-doc-toolbar:has(.valentus-read-width):not(:has(.valentus-font-size)),
+  .valentus-tool-band:has(.valentus-read-width):not(:has(.valentus-font-size)) {
     display: none;
   }
 }

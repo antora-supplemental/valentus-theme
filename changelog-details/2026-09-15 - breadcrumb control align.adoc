@@ -8,15 +8,15 @@
 
 == Context
 
-On hubs such as HCI Nerdz, the component kicker looked taller than Version and its label sat high in the chip. The home chip also sat flush against the component name even though Valentus already set `margin-inline-end` on `.adt-breadcrumb-home`.
+On hubs such as HCI Nerdz, the component kicker looked taller than Version and its label sat high in the chip. The home chip also sat flush against the component name even though Valentus already set `margin-inline-end` on `.valentus-breadcrumb-home`.
 
 == Cause
 
 * Component and version kickers used different `font-size` / `line-height` / padding, so the flex boxes grew unequally and the label baseline drifted.
-* Default Antora UI ships `.breadcrumbs li { margin: 0 }` at specificity `(0,1,1)`, which beat `.adt-breadcrumb-home` `(0,1,0)` and zeroed the intended gap.
+* Default Antora UI ships `.breadcrumbs li { margin: 0 }` at specificity `(0,1,1)`, which beat `.valentus-breadcrumb-home` `(0,1,0)` and zeroed the intended gap.
 
 == Changes
 
-* Introduce `--adt-bc-ctrl-h` (1.75rem) for home link + both kickers (+ plain version).
-* Lock kicker `height` / `min-height`, use `line-height: 1`, and flex-center `.adt-bc-kicker-label` / `.adt-bc-kicker-version`.
-* Raise home gap specificity to `.adt-breadcrumbs > ul > li.adt-breadcrumb-home` and set `margin-inline-end: 0.45rem`.
+* Introduce `--valentus-bc-ctrl-h` (1.75rem) for home link + both kickers (+ plain version).
+* Lock kicker `height` / `min-height`, use `line-height: 1`, and flex-center `.valentus-bc-kicker-label` / `.valentus-bc-kicker-version`.
+* Raise home gap specificity to `.valentus-breadcrumbs > ul > li.valentus-breadcrumb-home` and set `margin-inline-end: 0.45rem`.

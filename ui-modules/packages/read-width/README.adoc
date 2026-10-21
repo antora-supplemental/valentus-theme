@@ -4,14 +4,14 @@ Reusable **reading width** control for Valentus / Antora supplemental UI.
 
 == What it provides
 
-* Partial `adt-read-width` — segmented control (narrow / comfortable / wide)
-* `css/site-read-width.css` — sets `--adt-doc-max` tiers + control chrome; sizes `main` to the doc
-* `js/adt-read-width-fouc.js` — early `data-adt-read-width` from `localStorage` (orchestrator inlines in `<head>`)
+* Partial `valentus-read-width` — segmented control (narrow / comfortable / wide)
+* `css/site-read-width.css` — sets `--valentus-doc-max` tiers + control chrome; sizes `main` to the doc
+* `js/valentus-read-width-fouc.js` — early `data-valentus-read-width` from `localStorage` (orchestrator inlines in `<head>`)
 * `js/site-read-width.js` — click handling + `aria-pressed` sync
 
 Doc measure (desktop ≥`1024px`): narrow `68ch` / comfortable `82ch` / wide `100ch`.
 Below `1024px` the control is hidden (measure has no effect); pair with the `font-size` module for condensed reading.
-Column gaps (`--adt-col-gap`): constant `2rem` (nav↔doc / doc↔TOC do not grow when the measure widens).
+Column gaps (`--valentus-col-gap`): constant `2rem` (nav↔doc / doc↔TOC do not grow when the measure widens).
 The body row is intrinsic width (nav + gap + doc + gap + toc), viewport-centered; panels move only because the doc column changed.
 
 == Install (orchestrator)
@@ -20,22 +20,22 @@ Add `read-width` to your recipe or `modules` list, then place the partial wherev
 
 [source,handlebars]
 ----
-{{> adt-read-width}}
+{{> valentus-read-width}}
 ----
 
 Common placements:
 
-* Tool band above the 3-col row (Valentus demo): in `adt-tool-band.hbs`, centered over the article column
-* Above the article title: in `article.hbs`, before `.adt-page-header`
-* Header actions: inside `.adt-header-actions` / `.navbar-end`
+* Tool band above the 3-col row (Valentus demo): in `valentus-tool-band.hbs`, centered over the article column
+* Above the article title: in `article.hbs`, before `.valentus-page-header`
+* Header actions: inside `.valentus-header-actions` / `.navbar-end`
 * Mast or toolbar: any chrome partial you own
 
-When placed in `.adt-tool-band-center` (or as a direct child of `article.doc`), CSS sizes the control to the tool-band rhythm.
+When placed in `.valentus-tool-band-center` (or as a direct child of `article.doc`), CSS sizes the control to the tool-band rhythm.
 
 == Supplemental-files path (no orchestrator)
 
-1. Copy `ui/css/site-read-width.css`, `ui/js/site-read-width.js`, and `ui/partials/adt-read-width.hbs` into your supplemental UI tree.
+1. Copy `ui/css/site-read-width.css`, `ui/js/site-read-width.js`, and `ui/partials/valentus-read-width.hbs` into your supplemental UI tree.
 2. Link the stylesheet from `head-meta` (after layout CSS).
-3. Inline or port the FOUC snippet from `adt-read-width-fouc.js` into an early `<script>` in `head-meta`.
+3. Inline or port the FOUC snippet from `valentus-read-width-fouc.js` into an early `<script>` in `head-meta`.
 4. Load `site-read-width.js` from `footer-scripts`.
-5. Include `{{> adt-read-width}}` in the desired partial.
+5. Include `{{> valentus-read-width}}` in the desired partial.

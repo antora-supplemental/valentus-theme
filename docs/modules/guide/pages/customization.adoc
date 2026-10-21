@@ -11,7 +11,7 @@ Edit `supplemental-ui/css/site-extra.css` to customize the color palette.
 
 IMPORTANT: Prefer putting layout-affecting rules into the UI bundle’s compiled `site.css` (or Valentus supplemental CSS that ships in the release zip) instead of a late extra `<link>`.
 Layered stylesheets after Default UI `site.css` cause a refresh “settle” flash (FOUC).
-Valentus currently ships an *interim* paint-hold in `partials/head-meta.hbs` (`html.adt-fouc-pending`) marked pending upstream Default UI guidance / !207 / !213 — if you override `head-meta.hbs`, keep that hold (stylesheets first, then preference scripts, then release only after `document.fonts` for your linked families — or you reintroduce CSS settle and webfont FOUT / width jump).
+Valentus currently ships an *interim* paint-hold in `partials/head-meta.hbs` (`html.valentus-fouc-pending`) marked pending upstream Default UI guidance / !207 / !213 — if you override `head-meta.hbs`, keep that hold (stylesheets first, then preference scripts, then release only after `document.fonts` for your linked families — or you reintroduce CSS settle and webfont FOUT / width jump).
 
 == Overriding `head-meta.hbs` (brand overlays)
 
@@ -27,7 +27,7 @@ Required Valentus stylesheet links (order matters; match upstream `head-meta.hbs
 . `site-font-size.css`
 . `site-math.css` (when math is enabled)
 
-Also keep: paint-hold (`adt-fouc-pending`), dark-mode / read-width / font-size FOUC preference scripts, and webfont `document.fonts` release.
+Also keep: paint-hold (`valentus-fouc-pending`), dark-mode / read-width / font-size FOUC preference scripts, and webfont `document.fonts` release.
 After those, append **only** hub brand sheets (e.g. `brand.css`, `nav-typology.css`).
 Dropping layout/visual sheets while keeping a brand overlay yields a broken mast/nav even though the site “builds”.
 
@@ -51,13 +51,13 @@ Site home is an **icon-only** house chip (no “Home” word label). Separators 
 
 Intermediate trail crumbs that Antora left without a URL (nav section titles, or parents unlinked by site-nav-tree) resolve a *landing* URL from the sidebar nav (Overview/Home child, else the first page under that node) so they are clickable. The current page crumb stays plain text with ``aria-current="page"``; the house chip remains the site-home link.
 
-Helper `adt-version-mode` drives the version control (Valentus 2.0.19+; `~` menu behavior from 2.0.27+):
+Helper `valentus-version-mode` drives the version control (Valentus 2.0.19+; `~` menu behavior from 2.0.27+):
 
 | Mode | When | UI |
 | --- | --- | --- |
 | `hide` | No version on the page model | Version control omitted |
 | `plain` | Exactly one **named** version | Accent-colored plain text (not a dropdown) |
-| `menu` | Multiple versions, **or** a single implicit/unversioned (`~`) version | Dropdown; button shows **Version** for `~`/default (`adt-version-label` with `fallback="Version"`); menu rows show literal `~` |
+| `menu` | Multiple versions, **or** a single implicit/unversioned (`~`) version | Dropdown; button shows **Version** for `~`/default (`valentus-version-label` with `fallback="Version"`); menu rows show literal `~` |
 
 **Rationale:** a lone `~` still deserves a real mast segment (hiding left empty `/  /` separators when the component kicker was also suppressed). The button says “Version” for readability; the menu teaches Antora’s tilde marker.
 
@@ -195,19 +195,19 @@ This makes it easier to create multiple dark theme variants.
 
 == Side-rail panel wash (nav + sidebar TOC)
 
-Light and dark both default to a clean flat rail (`--adt-side-panel-bg: transparent`).
+Light and dark both default to a clean flat rail (`--valentus-side-panel-bg: transparent`).
 
 To enable the elevated panel treatment, add one of:
 
-* class `adt-side-panels` on `html` or `body`
-* attribute `data-adt-side-panels="true"` on `html`
+* class `valentus-side-panels` on `html` or `body`
+* attribute `data-valentus-side-panels="true"` on `html`
 
-Tokens: `--adt-side-panel-bg`, `--adt-side-panel-radius` (default `2px`), `--adt-side-panel-pad`, `--adt-nav-scroll-fade` (edge fade width).
+Tokens: `--valentus-side-panel-bg`, `--valentus-side-panel-radius` (default `2px`), `--valentus-side-panel-pad`, `--valentus-nav-scroll-fade` (edge fade width).
 
 When enabled, sidebar TOC **CONTENTS** and the nav tree menu get padding + radius so labels are not flush to the panel edge.
 The wash paints the **content-sized** menu/TOC surface (not the full-height `.nav` column).
 
-Tree-nav supports **horizontal scroll** when labels overflow. Left/right transparency fades (`adt-nav-overflow-start` / `adt-nav-overflow-end`, driven by `site-visual.js`) appear only while that edge still has overflow. Scrollbars on the tree menu are hidden; wheel/trackpad scrolling still works.
+Tree-nav supports **horizontal scroll** when labels overflow. Left/right transparency fades (`valentus-nav-overflow-start` / `valentus-nav-overflow-end`, driven by `site-visual.js`) appear only while that edge still has overflow. Scrollbars on the tree menu are hidden; wheel/trackpad scrolling still works.
 
 In-doc Asciidoctor `:toc:` (`.doc .toc` / `#toc`) is styled separately as a muted block — it is **not** part of `@antora-supplemental/page-context` metadata.
 `.page-context-table` uses its own tokens (muted type, thin inner borders, light/dark surface) and does **not** inherit doc-table zebra striping.

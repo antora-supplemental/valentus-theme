@@ -60,45 +60,45 @@ Bundled `logo-dark.svg` matches the brand drop today; replace it with a light-in
 
 The mocks below reuse the same blood-drop silhouette as filled fixtures so you can judge contrast without changing the live header.
 
-[.adt-logo-fixture-grid]
+[.valentus-logo-fixture-grid]
 ====
-[.adt-logo-fixture]
+[.valentus-logo-fixture]
 --
-[.adt-logo-fixture-label]#Brand — light bar#
+[.valentus-logo-fixture-label]#Brand — light bar#
 
-[.adt-logo-fixture-bar.adt-logo-fixture-bar--light]
+[.valentus-logo-fixture-bar.valentus-logo-fixture-bar--light]
 image::logo-strategy-brand.svg[Brand mark on light bar, 48, 48]
 --
 
-[.adt-logo-fixture]
+[.valentus-logo-fixture]
 --
-[.adt-logo-fixture-label]#Brand — dark bar#
+[.valentus-logo-fixture-label]#Brand — dark bar#
 
-[.adt-logo-fixture-bar.adt-logo-fixture-bar--dark]
+[.valentus-logo-fixture-bar.valentus-logo-fixture-bar--dark]
 image::logo-strategy-brand.svg[Brand mark on dark bar, 48, 48]
 --
 
-[.adt-logo-fixture]
+[.valentus-logo-fixture]
 --
-[.adt-logo-fixture-label]#Mono — light bar (as authored)#
+[.valentus-logo-fixture-label]#Mono — light bar (as authored)#
 
-[.adt-logo-fixture-bar.adt-logo-fixture-bar--light]
+[.valentus-logo-fixture-bar.valentus-logo-fixture-bar--light]
 image::logo-strategy-mono.svg[Mono mark on light bar, 48, 48]
 --
 
-[.adt-logo-fixture]
+[.valentus-logo-fixture]
 --
-[.adt-logo-fixture-label]#Mono — dark bar (needs invert)#
+[.valentus-logo-fixture-label]#Mono — dark bar (needs invert)#
 
-[.adt-logo-fixture-bar.adt-logo-fixture-bar--dark]
+[.valentus-logo-fixture-bar.valentus-logo-fixture-bar--dark]
 image::logo-strategy-mono.svg[Mono mark on dark bar without invert, 48, 48]
 --
 
-[.adt-logo-fixture]
+[.valentus-logo-fixture]
 --
-[.adt-logo-fixture-label]#Mono — dark bar + invert#
+[.valentus-logo-fixture-label]#Mono — dark bar + invert#
 
-[.adt-logo-fixture-bar.adt-logo-fixture-bar--dark.adt-logo-fixture-bar--mono-fixed]
+[.valentus-logo-fixture-bar.valentus-logo-fixture-bar--dark.valentus-logo-fixture-bar--mono-fixed]
 image::logo-strategy-mono.svg[Mono mark on dark bar with invert, 48, 48]
 --
 ====

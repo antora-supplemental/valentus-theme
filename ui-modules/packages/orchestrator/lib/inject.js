@@ -203,7 +203,7 @@ function composeFooterScripts (modules, uiCatalog) {
     }
   }
 
-  const marker = '{{!-- adt-ui-orchestrator:foot --}}'
+  const marker = '{{!-- valentus-ui-orchestrator:foot --}}'
   if (body.includes(marker)) {
     return body
   }

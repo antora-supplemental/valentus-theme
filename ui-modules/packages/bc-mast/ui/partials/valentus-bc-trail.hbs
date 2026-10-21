@@ -1,0 +1,14 @@
+{{#with (valentus-bc-trail-crumbs page.breadcrumbs)}}
+{{#each this}}
+<li class="valentus-breadcrumb-sep" aria-hidden="true">/</li>
+<li class="valentus-breadcrumb-trail{{#if @last}} valentus-breadcrumb-trail--current{{/if}}">
+{{~#if @last~}}
+<span class="valentus-breadcrumb-trail-text" aria-current="page">{{{./content}}}</span>
+{{~else if (and ./url (eq ./urlType 'internal'))~}}
+<a class="valentus-breadcrumb-trail-link" href="{{{relativize ./url}}}">{{{./content}}}</a>
+{{~else~}}
+<span class="valentus-breadcrumb-trail-text">{{{./content}}}</span>
+{{~/if~}}
+</li>
+{{/each}}
+{{/with}}

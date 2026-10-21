@@ -1,76 +1,76 @@
 /* Reading font-size module — doc text scale + condensed-viewport control.
-   Place {{> adt-font-size}} in .adt-doc-toolbar (alongside adt-read-width).
+   Place {{> valentus-font-size}} in .valentus-doc-toolbar (alongside valentus-read-width).
    Desktop (≥1024px) keeps read-width; this control shows only below that breakpoint.
-   data-adt-font-size scales article.doc (zoom + font-size fallback). */
+   data-valentus-font-size scales article.doc (zoom + font-size fallback). */
 
 :root {
-  --adt-doc-font-size: 0.94444rem;
-  --adt-doc-zoom: 1;
-  --adt-font-size-radius: 0.4rem;
-  --adt-font-size-radius-sm: 0.25rem;
-  --adt-font-size-border: var(--adt-border, #d9dee7);
-  --adt-font-size-bg: var(--adt-elevated, #fff);
-  --adt-font-size-fg: var(--adt-ink-muted, #5a6270);
-  --adt-font-size-fg-active: var(--adt-accent, #0f766e);
-  --adt-font-size-soft: var(--adt-accent-soft, rgba(15, 118, 110, 0.1));
-  --adt-font-size-ink: var(--adt-ink, #141820);
-  --adt-font-size-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  --valentus-doc-font-size: 0.94444rem;
+  --valentus-doc-zoom: 1;
+  --valentus-font-size-radius: 0.4rem;
+  --valentus-font-size-radius-sm: 0.25rem;
+  --valentus-font-size-border: var(--valentus-border, #d9dee7);
+  --valentus-font-size-bg: var(--valentus-elevated, #fff);
+  --valentus-font-size-fg: var(--valentus-ink-muted, #5a6270);
+  --valentus-font-size-fg-active: var(--valentus-accent, #0f766e);
+  --valentus-font-size-soft: var(--valentus-accent-soft, rgba(15, 118, 110, 0.1));
+  --valentus-font-size-ink: var(--valentus-ink, #141820);
+  --valentus-font-size-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-html[data-adt-font-size="small"] {
-  --adt-doc-font-size: 0.8125rem;
-  --adt-doc-zoom: 0.875;
+html[data-valentus-font-size="small"] {
+  --valentus-doc-font-size: 0.8125rem;
+  --valentus-doc-zoom: 0.875;
 }
 
-html[data-adt-font-size="medium"],
-html:not([data-adt-font-size]) {
-  --adt-doc-font-size: 0.94444rem;
-  --adt-doc-zoom: 1;
+html[data-valentus-font-size="medium"],
+html:not([data-valentus-font-size]) {
+  --valentus-doc-font-size: 0.94444rem;
+  --valentus-doc-zoom: 1;
 }
 
-html[data-adt-font-size="large"] {
-  --adt-doc-font-size: 1.125rem;
-  --adt-doc-zoom: 1.2;
+html[data-valentus-font-size="large"] {
+  --valentus-doc-font-size: 1.125rem;
+  --valentus-doc-zoom: 1.2;
 }
 
 /* font-size scales inherited/em text; zoom (when supported) also scales rem headings. */
 .doc {
-  font-size: var(--adt-doc-font-size) !important;
+  font-size: var(--valentus-doc-font-size) !important;
 }
 
 @supports (zoom: 1) {
   .doc {
     /* Keep Default UI body baseline; zoom alone drives small/medium/large. */
     font-size: 0.94444rem !important;
-    zoom: var(--adt-doc-zoom);
+    zoom: var(--valentus-doc-zoom);
   }
 }
 
 /* Control — visible in condensed viewports; desktop hide mirrors read-width (!important). */
-.adt-font-size {
+.valentus-font-size {
   display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
   gap: 0.1rem;
   padding: 0.15rem;
-  border: 1px solid var(--adt-font-size-border);
-  border-radius: var(--adt-font-size-radius);
-  background: var(--adt-font-size-bg);
+  border: 1px solid var(--valentus-font-size-border);
+  border-radius: var(--valentus-font-size-radius);
+  background: var(--valentus-font-size-bg);
   box-sizing: border-box;
 }
 
-.adt-doc-toolbar > .adt-font-size,
-.adt-tool-band-center > .adt-font-size {
+.valentus-doc-toolbar > .valentus-font-size,
+.valentus-tool-band-center > .valentus-font-size {
   display: flex;
   width: fit-content;
   max-width: 100%;
-  min-height: var(--adt-tool-band, 2.15rem);
+  min-height: var(--valentus-tool-band, 2.15rem);
   margin: 0;
   box-sizing: border-box;
 }
 
-.adt-font-size-btn {
+.valentus-font-size-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -78,62 +78,62 @@ html[data-adt-font-size="large"] {
   height: 1.85rem;
   padding: 0;
   border: none;
-  border-radius: var(--adt-font-size-radius-sm);
+  border-radius: var(--valentus-font-size-radius-sm);
   background: transparent;
-  color: var(--adt-font-size-fg);
+  color: var(--valentus-font-size-fg);
   cursor: pointer;
-  transition: var(--adt-font-size-transition);
+  transition: var(--valentus-font-size-transition);
 }
 
-.adt-font-size-btn:hover {
-  color: var(--adt-font-size-ink);
-  background: var(--adt-font-size-soft);
+.valentus-font-size-btn:hover {
+  color: var(--valentus-font-size-ink);
+  background: var(--valentus-font-size-soft);
 }
 
-.adt-font-size-btn[aria-pressed="true"] {
-  color: var(--adt-font-size-fg-active);
-  background: var(--adt-font-size-soft);
+.valentus-font-size-btn[aria-pressed="true"] {
+  color: var(--valentus-font-size-fg-active);
+  background: var(--valentus-font-size-soft);
 }
 
-.adt-font-size-btn:focus {
+.valentus-font-size-btn:focus {
   outline: none;
 }
 
-.adt-font-size-btn:focus-visible {
-  outline: 2px solid var(--adt-font-size-fg-active);
+.valentus-font-size-btn:focus-visible {
+  outline: 2px solid var(--valentus-font-size-fg-active);
   outline-offset: 1px;
 }
 
-.adt-font-size-glyph {
-  font-family: var(--adt-font-display, "Plus Jakarta Sans", system-ui, sans-serif);
+.valentus-font-size-glyph {
+  font-family: var(--valentus-font-display, "Plus Jakarta Sans", system-ui, sans-serif);
   font-weight: 600;
   line-height: 1;
   display: block;
 }
 
-.adt-font-size-glyph--sm {
+.valentus-font-size-glyph--sm {
   font-size: 0.7rem;
 }
 
-.adt-font-size-glyph--md {
+.valentus-font-size-glyph--md {
   font-size: 0.85rem;
 }
 
-.adt-font-size-glyph--lg {
+.valentus-font-size-glyph--lg {
   font-size: 1.05rem;
 }
 
 /* Desktop: read-width owns the tool band — force-hide text size. */
 @media screen and (min-width: 1024px) {
-  .adt-font-size {
+  .valentus-font-size {
     display: none !important;
   }
 }
 
 /* Condensed / mobile: center over content (no far-right remnant). */
 @media screen and (max-width: 1023.5px) {
-  .adt-doc-toolbar,
-  .adt-tool-band-center {
+  .valentus-doc-toolbar,
+  .valentus-tool-band-center {
     justify-content: center;
     width: 100%;
     max-width: none;

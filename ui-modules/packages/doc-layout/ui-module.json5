@@ -13,12 +13,12 @@
       stylesheets: ["css/site-doc-layout.css", "css/site-visual.css"],
     },
     foot: {
-      scripts: ["js/site-visual.js", "js/adt-table-scroll.js"],
+      scripts: ["js/site-visual.js", "js/valentus-table-scroll.js"],
     },
   },
   ui: {
     partials: {
-      provide: ["adt-doc-toolbar", "adt-tool-band"],
+      provide: ["valentus-doc-toolbar", "valentus-tool-band"],
       replace: ["body", "nav", "nav-menu", "main", "article", "footer-content", "edit-this-page"],
     },
   },

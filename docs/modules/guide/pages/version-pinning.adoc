@@ -150,7 +150,7 @@ Git tags are pure Valentus semver (`v2.0.0`, …). Release titles use the dual-a
 | Release | Should mean | Consumer can
 
 | Patch (`v2.0.1` / `2.0.1+antora.3`)
-| Bugfix; no partial/CSS/`adt-*` hook breaks
+| Bugfix; no partial/CSS/`valentus-*` hook breaks
 | Auto-adopt if pinned to `~2.0.0` via Renovate
 
 | Minor (`v2.1.0` / `2.1.0+antora.3`)
@@ -166,7 +166,7 @@ Git tags are pure Valentus semver (`v2.0.0`, …). Release titles use the dual-a
 | Review Antora upgrade notes; Valentus major may stay put
 |===
 
-Sites with forked supplemental partials should still review *patches*—renamed `adt-*` classes or header structure changes can affect overlays.
+Sites with forked supplemental partials should still review *patches*—renamed `valentus-*` classes or header structure changes can affect overlays.
 
 == Practical workflow (example)
 

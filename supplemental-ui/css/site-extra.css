@@ -252,28 +252,28 @@ html.dark-theme .doc .admonitionblock .title {
 /* Specific admonition types: tint the outer card (table), not the TIP label cell.
    One `background` only (no separate background-color fallback — that caused two-tone cards). */
 html.dark-theme .doc .admonitionblock.tip > table {
-  background: color-mix(in srgb, var(--adt-admonition-tip, #41af46) 14%, #25262b) !important;
-  border-left-color: var(--adt-admonition-tip, #41af46) !important;
+  background: color-mix(in srgb, var(--valentus-admonition-tip, #41af46) 14%, #25262b) !important;
+  border-left-color: var(--valentus-admonition-tip, #41af46) !important;
 }
 
 html.dark-theme .doc .admonitionblock.note > table {
-  background: color-mix(in srgb, var(--adt-admonition-note, #217ee7) 14%, #25262b) !important;
-  border-left-color: var(--adt-admonition-note, #217ee7) !important;
+  background: color-mix(in srgb, var(--valentus-admonition-note, #217ee7) 14%, #25262b) !important;
+  border-left-color: var(--valentus-admonition-note, #217ee7) !important;
 }
 
 html.dark-theme .doc .admonitionblock.warning > table {
-  background: color-mix(in srgb, var(--adt-admonition-warning, #e18114) 14%, #25262b) !important;
-  border-left-color: var(--adt-admonition-warning, #e18114) !important;
+  background: color-mix(in srgb, var(--valentus-admonition-warning, #e18114) 14%, #25262b) !important;
+  border-left-color: var(--valentus-admonition-warning, #e18114) !important;
 }
 
 html.dark-theme .doc .admonitionblock.caution > table {
-  background: color-mix(in srgb, var(--adt-admonition-caution, #a0439c) 14%, #25262b) !important;
-  border-left-color: var(--adt-admonition-caution, #a0439c) !important;
+  background: color-mix(in srgb, var(--valentus-admonition-caution, #a0439c) 14%, #25262b) !important;
+  border-left-color: var(--valentus-admonition-caution, #a0439c) !important;
 }
 
 html.dark-theme .doc .admonitionblock.important > table {
-  background: color-mix(in srgb, var(--adt-admonition-important, #d32f2f) 14%, #25262b) !important;
-  border-left-color: var(--adt-admonition-important, #d32f2f) !important;
+  background: color-mix(in srgb, var(--valentus-admonition-important, #d32f2f) 14%, #25262b) !important;
+  border-left-color: var(--valentus-admonition-important, #d32f2f) !important;
 }
 
 html.dark-theme .quoteblock blockquote,
@@ -400,7 +400,7 @@ html.dark-theme .footer a {
 
 /* Lunr search (@antora/lunr-extension) */
 .navbar .search,
-.adt-header-search {
+.valentus-header-search {
   position: relative;
 }
 
@@ -536,22 +536,22 @@ html.dark-theme .theme-toggle:hover {
  * Root theme transition (platform contract)
  * -----------------------------------------
  * Toggle uses View Transitions when available (see site-dark-mode.js).
- * Fallback: temporary html.adt-theme-animating for ~300ms with a universal
+ * Fallback: temporary html.valentus-theme-animating for ~300ms with a universal
  * paint transition so extension chrome that follows tokens / html.dark-theme
  * crossfades without per-widget transition rules.
  *
- * During View Transitions, html.adt-theme-vt suppresses competing CSS
- * transitions (e.g. Valentus --adt-transition at 0.2s) so chrome does not
+ * During View Transitions, html.valentus-theme-vt suppresses competing CSS
+ * transitions (e.g. Valentus --valentus-transition at 0.2s) so chrome does not
  * finish ahead of the 0.28s root snapshot crossfade.
  *
  * Extensions should style via CSS variables or html.dark-theme — do not invent
  * their own light↔dark toggle animation.
  */
 @media (prefers-reduced-motion: no-preference) {
-  html.adt-theme-animating,
-  html.adt-theme-animating *,
-  html.adt-theme-animating *::before,
-  html.adt-theme-animating *::after {
+  html.valentus-theme-animating,
+  html.valentus-theme-animating *,
+  html.valentus-theme-animating *::before,
+  html.valentus-theme-animating *::after {
     transition:
       background-color 0.28s ease,
       color 0.28s ease,
@@ -563,10 +563,10 @@ html.dark-theme .theme-toggle:hover {
       opacity 0.28s ease !important;
   }
 
-  html.adt-theme-vt,
-  html.adt-theme-vt *,
-  html.adt-theme-vt *::before,
-  html.adt-theme-vt *::after,
+  html.valentus-theme-vt,
+  html.valentus-theme-vt *,
+  html.valentus-theme-vt *::before,
+  html.valentus-theme-vt *::after,
   html:active-view-transition,
   html:active-view-transition *,
   html:active-view-transition *::before,
@@ -668,7 +668,7 @@ html.dark-theme .home-link {
 }
 
 html.dark-theme .nav-item-toggle {
-  background-color: var(--adt-nav-item-toggle);
+  background-color: var(--valentus-nav-item-toggle);
   -webkit-mask-image: url(../img/caret.svg);
   mask-image: url(../img/caret.svg);
   -webkit-mask-size: 50%;
@@ -877,9 +877,9 @@ html.dark-theme .videoblock {
 
 /* Left nav insets: match toolbar .home-link (margin = toolbar-height / 4) so tree lines up
    with the breadcrumb row home control on wide layouts (stock default UI is 0.75rem).
-   Skip .nav-tree-only / .adt-nav-tree-only: horizontal inset is set in site-doc-layout.css
+   Skip .nav-tree-only / .valentus-nav-tree-only: horizontal inset is set in site-doc-layout.css
    on .nav-panel-menu + vertical-only padding on the nav (avoids cascade conflicts). */
-.nav-menu:not(.nav-tree-only):not(.adt-nav-tree-only) {
+.nav-menu:not(.nav-tree-only):not(.valentus-nav-tree-only) {
   padding-left: calc(var(--toolbar-height) / 4);
   padding-right: 0.75rem;
 }
@@ -909,7 +909,7 @@ html.dark-theme .videoblock {
 
 /* Sticky left nav: keep viewport-height column so the project switcher stays at the
    bottom of the visible nav tree (in-flow stretch pushed it to the document bottom).
-   Authoritative offsets live in site-doc-layout.css (mast-aware --adt-mast-total). */
+   Authoritative offsets live in site-doc-layout.css (mast-aware --valentus-mast-total). */
 @media screen and (min-width: 1024px) {
   .nav-container {
     align-self: flex-start !important;
@@ -918,9 +918,9 @@ html.dark-theme .videoblock {
 
   .nav {
     position: sticky !important;
-    top: var(--adt-mast-total, var(--navbar-height)) !important;
-    height: calc(100vh - var(--adt-mast-total, var(--navbar-height))) !important;
-    max-height: calc(100vh - var(--adt-mast-total, var(--navbar-height))) !important;
+    top: var(--valentus-mast-total, var(--navbar-height)) !important;
+    height: calc(100vh - var(--valentus-mast-total, var(--navbar-height))) !important;
+    max-height: calc(100vh - var(--valentus-mast-total, var(--navbar-height))) !important;
     display: flex !important;
     flex-direction: column !important;
     min-height: 0 !important;

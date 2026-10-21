@@ -2,7 +2,7 @@
 
 const { describe, it } = require('node:test')
 const assert = require('node:assert/strict')
-const helper = require('../supplemental-ui/helpers/adt-bc-trail-crumbs')
+const helper = require('../supplemental-ui/helpers/valentus-bc-trail-crumbs')
 const { enrichCrumbUrls, landingFromNavItem } = helper
 
 function opts (page, site) {
@@ -108,7 +108,7 @@ describe('enrichCrumbUrls', () => {
   })
 })
 
-describe('adt-bc-trail-crumbs helper', () => {
+describe('valentus-bc-trail-crumbs helper', () => {
   it('enriches even when site_nav_tree is off', () => {
     const page = {
       navigation: [

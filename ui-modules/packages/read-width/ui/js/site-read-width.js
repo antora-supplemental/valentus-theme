@@ -1,10 +1,10 @@
 /**
  * Reading width control: narrow | comfortable | wide
- * Persists to localStorage (`adt-read-width`) and html[data-adt-read-width].
+ * Persists to localStorage (`valentus-read-width`) and html[data-valentus-read-width].
  */
 (function () {
   const root = document.documentElement
-  const WIDTH_KEY = 'adt-read-width'
+  const WIDTH_KEY = 'valentus-read-width'
   const WIDTHS = ['narrow', 'comfortable', 'wide']
 
   function normalizeWidth(value) {
@@ -12,15 +12,15 @@
   }
 
   function syncWidthButtons(width) {
-    document.querySelectorAll('.adt-read-width-btn').forEach((btn) => {
-      const on = btn.getAttribute('data-adt-read-width') === width
+    document.querySelectorAll('.valentus-read-width-btn').forEach((btn) => {
+      const on = btn.getAttribute('data-valentus-read-width') === width
       btn.setAttribute('aria-pressed', on ? 'true' : 'false')
     })
   }
 
   function applyReadWidth(width) {
     const next = normalizeWidth(width)
-    root.setAttribute('data-adt-read-width', next)
+    root.setAttribute('data-valentus-read-width', next)
     try {
       localStorage.setItem(WIDTH_KEY, next)
     } catch (e) {
@@ -29,13 +29,13 @@
     syncWidthButtons(next)
   }
 
-  applyReadWidth(root.getAttribute('data-adt-read-width') || 'comfortable')
+  applyReadWidth(root.getAttribute('data-valentus-read-width') || 'comfortable')
 
   document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.adt-read-width-btn')
+    const btn = e.target.closest('.valentus-read-width-btn')
     if (!btn) return
-    const group = btn.closest('.adt-read-width')
+    const group = btn.closest('.valentus-read-width')
     if (!group) return
-    applyReadWidth(btn.getAttribute('data-adt-read-width'))
+    applyReadWidth(btn.getAttribute('data-valentus-read-width'))
   })
 })()

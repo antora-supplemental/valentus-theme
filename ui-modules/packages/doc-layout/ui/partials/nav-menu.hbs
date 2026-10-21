@@ -1,8 +1,8 @@
 <div class="nav-panel-menu is-active" data-panel="menu">
-  <nav class="nav-menu nav-tree-only adt-nav-tree-only" aria-label="In this section">
+  <nav class="nav-menu nav-tree-only valentus-nav-tree-only" aria-label="In this section">
     <button class="nav-menu-toggle" aria-label="Toggle expand and collapse of all item groups" style="display: none"></button>
     {{#with @root.page.componentVersion}}
-    <p class="adt-nav-component-title"><a href="{{{relativize ./url}}}">{{./title}}</a></p>
+    <p class="valentus-nav-component-title"><a href="{{{relativize ./url}}}">{{./title}}</a></p>
     {{/with}}
     {{#with page.navigation}}
     {{> nav-tree navigation=this}}

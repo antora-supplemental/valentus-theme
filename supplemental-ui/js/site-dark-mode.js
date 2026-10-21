@@ -5,9 +5,9 @@
   const html = document.documentElement;
   const darkThemeClass = "dark-theme";
   /** Temporary class while the class-based theme crossfade runs (VT fallback). */
-  const themeAnimatingClass = "adt-theme-animating";
+  const themeAnimatingClass = "valentus-theme-animating";
   /** Temporary class during View Transitions — kills competing CSS paint transitions. */
-  const themeVtClass = "adt-theme-vt";
+  const themeVtClass = "valentus-theme-vt";
   const themeAnimMs = 300;
   const systemMq = window.matchMedia("(prefers-color-scheme: dark)");
   const reducedMotionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -48,8 +48,8 @@
 
   /**
    * Platform theme paint: View Transitions when available, else a short universal
-   * CSS transition via html.adt-theme-animating. Skipped when reduced motion.
-   * VT path also sets html.adt-theme-vt so per-widget paint transitions cannot
+   * CSS transition via html.valentus-theme-animating. Skipped when reduced motion.
+   * VT path also sets html.valentus-theme-vt so per-widget paint transitions cannot
    * race the root snapshot crossfade.
    */
   function runThemePaint(updateFn, animate) {
@@ -172,9 +172,9 @@
   }
 
   function toggleButtonClassName() {
-    const useLightNavbarChrome = document.querySelector(".header.adt-header");
+    const useLightNavbarChrome = document.querySelector(".header.valentus-header");
     if (useLightNavbarChrome) {
-      return "navbar-item adt-header-icon-btn theme-toggle";
+      return "navbar-item valentus-header-icon-btn theme-toggle";
     }
     return "navbar-item theme-toggle";
   }

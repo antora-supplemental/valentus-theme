@@ -4,103 +4,103 @@
 
 :root {
   /* Surfaces */
-  --adt-canvas: #f3f5f8;
-  --adt-elevated: #ffffff;
-  --adt-ink: #141820;
-  --adt-ink-muted: #5a6270;
-  --adt-accent: #0f766e;
-  --adt-accent-hover: #0d9488;
-  --adt-accent-soft: rgba(15, 118, 110, 0.1);
+  --valentus-canvas: #f3f5f8;
+  --valentus-elevated: #ffffff;
+  --valentus-ink: #141820;
+  --valentus-ink-muted: #5a6270;
+  --valentus-accent: #0f766e;
+  --valentus-accent-hover: #0d9488;
+  --valentus-accent-soft: rgba(15, 118, 110, 0.1);
   /* Admonition accents — alias Default UI --*-color so one override recolors pill + card.
-     Sites set --tip-color (etc.); --adt-admonition-* tracks them. */
-  --adt-admonition-tip: var(--tip-color, #41af46);
-  --adt-admonition-note: var(--note-color, #217ee7);
-  --adt-admonition-important: var(--important-color, #d32f2f);
-  --adt-admonition-warning: var(--warning-color, #e18114);
-  --adt-admonition-caution: var(--caution-color, #a0439c);
-  --adt-border: #d9dee7;
-  --adt-chrome: var(--adt-canvas);
-  --adt-chrome-border: var(--adt-border);
-  --adt-nav-bg: transparent;
-  --adt-nav-item-toggle: var(--adt-ink-muted);
-  --adt-nav-item-toggle-hover: var(--adt-ink);
+     Sites set --tip-color (etc.); --valentus-admonition-* tracks them. */
+  --valentus-admonition-tip: var(--tip-color, #41af46);
+  --valentus-admonition-note: var(--note-color, #217ee7);
+  --valentus-admonition-important: var(--important-color, #d32f2f);
+  --valentus-admonition-warning: var(--warning-color, #e18114);
+  --valentus-admonition-caution: var(--caution-color, #a0439c);
+  --valentus-border: #d9dee7;
+  --soft-nav-context: var(--valentus-canvas);
+  --valentus-chrome-border: var(--valentus-border);
+  --valentus-nav-bg: transparent;
+  --valentus-nav-item-toggle: var(--valentus-ink-muted);
+  --valentus-nav-item-toggle-hover: var(--valentus-ink);
   /* Side-rail wash (nav + sidebar TOC). Default: off (transparent) in light and dark.
-     Opt in: html.adt-side-panels / data-adt-side-panels="true". */
-  --adt-side-panel-bg: transparent;
-  --adt-side-panel-radius: 2px;
-  --adt-side-panel-pad: 0.45rem 0.55rem;
-  --adt-nav-scroll-fade: 1.25rem;
-  --adt-code-bg: #151a24;
-  --adt-code-fg: #e8ecf2;
-  --adt-code-border: rgba(20, 24, 32, 0.35);
-  --adt-radius: 0.4rem;
-  --adt-radius-sm: 0.25rem;
-  --adt-shadow-float: 0 0.35rem 1rem rgba(20, 24, 32, 0.1);
-  --adt-shadow-sticky: 0 4px 16px rgba(20, 24, 32, 0.07);
-  --adt-font: "Source Sans 3", system-ui, "Segoe UI", sans-serif;
+     Opt in: html.valentus-side-panels / data-valentus-side-panels="true". */
+  --valentus-side-panel-bg: transparent;
+  --valentus-side-panel-radius: 2px;
+  --valentus-side-panel-pad: 0.45rem 0.55rem;
+  --valentus-nav-scroll-fade: 1.25rem;
+  --valentus-code-bg: #151a24;
+  --valentus-code-fg: #e8ecf2;
+  --valentus-code-border: rgba(20, 24, 32, 0.35);
+  --valentus-radius: 0.4rem;
+  --valentus-radius-sm: 0.25rem;
+  --valentus-shadow-float: 0 0.35rem 1rem rgba(20, 24, 32, 0.1);
+  --valentus-shadow-sticky: 0 4px 16px rgba(20, 24, 32, 0.07);
+  --valentus-font: "Source Sans 3", system-ui, "Segoe UI", sans-serif;
   /* Plus Jakarta Sans — modern geometric sans used on many SaaS/docs UIs */
-  --adt-font-display: "Plus Jakarta Sans", var(--adt-font);
-  --adt-font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace;
-  --adt-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+  --valentus-font-display: "Plus Jakarta Sans", var(--valentus-font);
+  --valentus-font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace;
+  --valentus-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
     box-shadow 0.25s ease, opacity 0.2s ease;
 
   /* Bridge older layout tokens */
-  --adt-bc-kicker-fg: var(--adt-accent);
-  --adt-bc-kicker-bg: var(--adt-accent-soft);
-  --adt-bc-kicker-border: color-mix(in srgb, var(--adt-accent) 28%, transparent);
-  --adt-header-bar-bg: var(--adt-chrome);
-  --adt-header-bar-fg: var(--adt-ink);
-  --adt-header-bar-border: var(--adt-chrome-border);
-  --adt-header-bar-hover: var(--adt-accent-soft);
+  --valentus-bc-kicker-fg: var(--valentus-accent);
+  --valentus-bc-kicker-bg: var(--valentus-accent-soft);
+  --valentus-bc-kicker-border: color-mix(in srgb, var(--valentus-accent) 28%, transparent);
+  --valentus-header-bar-bg: var(--valentus-chrome);
+  --valentus-header-bar-fg: var(--valentus-ink);
+  --valentus-header-bar-border: var(--valentus-chrome-border);
+  --valentus-header-bar-hover: var(--valentus-accent-soft);
 
   /* Layout shell: body is intrinsic (nav + gap + doc + gap + toc).
-     --adt-shell-max caps the shell; read-width only changes --adt-doc-max.
+     --valentus-shell-max caps the shell; read-width only changes --valentus-doc-max.
      Footer is full-bleed chrome (not tied to shell / read-width).
-     Nav and TOC share --adt-side-width for optical centering of the article. */
-  --adt-shell-pad: 1.75rem;
-  --adt-col-gap: 2rem;
-  --adt-side-width: 16rem;
-  --adt-nav-width: var(--adt-side-width);
-  --adt-toc-width: var(--adt-side-width);
-  --adt-shell-max: calc(
-    var(--adt-nav-width) + var(--adt-col-gap) + var(--adt-doc-max) + var(--adt-col-gap) + var(--adt-toc-width) +
-      2 * var(--adt-shell-pad)
+     Nav and TOC share --valentus-side-width for optical centering of the article. */
+  --valentus-shell-pad: 1.75rem;
+  --valentus-col-gap: 2rem;
+  --valentus-side-width: 16rem;
+  --valentus-nav-width: var(--valentus-side-width);
+  --valentus-toc-width: var(--valentus-side-width);
+  --valentus-shell-max: calc(
+    var(--valentus-nav-width) + var(--valentus-col-gap) + var(--valentus-doc-max) + var(--valentus-col-gap) + var(--valentus-toc-width) +
+      2 * var(--valentus-shell-pad)
   );
-  --adt-global-rail-top: 0.85rem;
-  --adt-content-rail-top: 0;
-  --adt-tool-band: 2.15rem;
-  --adt-tool-gap: 0.65rem;
-  --adt-col-rail-top: var(--adt-global-rail-top);
-  --adt-toc-rail-top: var(--adt-col-rail-top);
-  --adt-mast-pad-h: 1.25rem;
+  --valentus-global-rail-top: 0.85rem;
+  --valentus-content-rail-top: 0;
+  --valentus-tool-band: 2.15rem;
+  --valentus-tool-gap: 0.65rem;
+  --valentus-col-rail-top: var(--valentus-global-rail-top);
+  --valentus-toc-rail-top: var(--valentus-col-rail-top);
+  --valentus-mast-pad-h: 1.25rem;
 }
 
 html.dark-theme {
-  --adt-canvas: #0b0e13;
-  --adt-elevated: #141a22;
-  --adt-ink: #e8ebf0;
-  --adt-ink-muted: #9aa3b2;
-  --adt-accent: #2dd4bf;
-  --adt-accent-hover: #5eead4;
-  --adt-accent-soft: rgba(45, 212, 191, 0.12);
-  --adt-border: rgba(255, 255, 255, 0.09);
-  --adt-chrome: var(--adt-canvas);
-  --adt-chrome-border: var(--adt-border);
-  --adt-nav-bg: transparent;
-  /* Side-rail wash stays off until html.adt-side-panels (same as light). */
-  --adt-side-panel-bg: transparent;
-  --adt-code-bg: #080b10;
-  --adt-code-fg: #e8ecf2;
-  --adt-code-border: rgba(255, 255, 255, 0.08);
-  --adt-shadow-float: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.45);
-  --adt-shadow-sticky: 0 6px 18px rgba(0, 0, 0, 0.35);
-  --adt-header-vcs-icon-filter: none;
+  --valentus-canvas: #0b0e13;
+  --valentus-elevated: #141a22;
+  --valentus-ink: #e8ebf0;
+  --valentus-ink-muted: #9aa3b2;
+  --valentus-accent: #2dd4bf;
+  --valentus-accent-hover: #5eead4;
+  --valentus-accent-soft: rgba(45, 212, 191, 0.12);
+  --valentus-border: rgba(255, 255, 255, 0.09);
+  --soft-nav-context: var(--valentus-canvas);
+  --valentus-chrome-border: var(--valentus-border);
+  --valentus-nav-bg: transparent;
+  /* Side-rail wash stays off until html.valentus-side-panels (same as light). */
+  --valentus-side-panel-bg: transparent;
+  --valentus-code-bg: #080b10;
+  --valentus-code-fg: #e8ecf2;
+  --valentus-code-border: rgba(255, 255, 255, 0.08);
+  --valentus-shadow-float: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.45);
+  --valentus-shadow-sticky: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --valentus-header-vcs-icon-filter: none;
 }
 
 /* ——— Page canvas & type ——— */
 html {
   color-scheme: light;
-  background-color: var(--adt-canvas);
+  background-color: var(--valentus-canvas);
   /* Reserve scrollbar lane so short/long pages share the same content width.
      Prefer gutter over overflow-y: scroll (always-on bar); older browsers just skip this. */
   scrollbar-gutter: stable;
@@ -112,9 +112,9 @@ html.dark-theme {
 
 html,
 html body {
-  background-color: var(--adt-canvas) !important;
-  color: var(--adt-ink);
-  transition: var(--adt-transition);
+  background-color: var(--valentus-canvas) !important;
+  color: var(--valentus-ink);
+  transition: var(--valentus-transition);
 }
 
 body,
@@ -128,7 +128,7 @@ textarea,
 .breadcrumbs,
 .doc,
 footer.footer {
-  font-family: var(--adt-font) !important;
+  font-family: var(--valentus-font) !important;
 }
 
 code,
@@ -137,112 +137,112 @@ pre,
 .spectrum,
 .doc .conum,
 .doc .source-toolbox {
-  font-family: var(--adt-font-mono) !important;
+  font-family: var(--valentus-font-mono) !important;
 }
 
-a.adt-header-title,
+a.valentus-header-title,
 .doc h1,
 .doc h1.page,
-.doc .adt-page-title,
+.doc .valentus-page-title,
 .doc h2 {
-  font-family: var(--adt-font-display) !important;
+  font-family: var(--valentus-font-display) !important;
   letter-spacing: -0.015em;
 }
 
-a.adt-header-title {
+a.valentus-header-title {
   font-weight: 600;
   font-size: 1.2rem;
 }
 
 .doc h1,
 .doc h1.page,
-.doc .adt-page-title {
+.doc .valentus-page-title {
   font-weight: 700;
-  color: var(--adt-ink) !important;
+  color: var(--valentus-ink) !important;
 }
 
 .doc h2:not(.discrete) {
   font-weight: 650;
-  color: var(--adt-ink) !important;
+  color: var(--valentus-ink) !important;
   border-bottom: none !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
   padding: 0.15rem 0 0 !important;
-  box-shadow: inset 0 -1px 0 var(--adt-border);
+  box-shadow: inset 0 -1px 0 var(--valentus-border);
 }
 
 .doc h3,
 .doc h4,
 .doc h5,
 .doc h6 {
-  font-family: var(--adt-font) !important;
+  font-family: var(--valentus-font) !important;
   font-weight: 700;
-  color: var(--adt-ink) !important;
+  color: var(--valentus-ink) !important;
 }
 
 .doc {
-  color: var(--adt-ink) !important;
+  color: var(--valentus-ink) !important;
   line-height: 1.65;
 }
 
 .doc p,
 .doc li {
-  color: color-mix(in srgb, var(--adt-ink) 92%, var(--adt-ink-muted));
+  color: color-mix(in srgb, var(--valentus-ink) 92%, var(--valentus-ink-muted));
 }
 
 .doc a {
-  color: var(--adt-accent) !important;
+  color: var(--valentus-accent) !important;
   text-underline-offset: 0.12em;
 }
 
 .doc a:hover,
 .doc a:focus {
-  color: var(--adt-accent-hover) !important;
+  color: var(--valentus-accent-hover) !important;
 }
 
 /* ——— Unified chrome ——— */
-.adt-site-navbar {
-  background: var(--adt-chrome) !important;
-  border-bottom-color: var(--adt-chrome-border) !important;
-  transition: var(--adt-transition);
+.valentus-site-navbar {
+  background: var(--valentus-chrome) !important;
+  border-bottom-color: var(--valentus-chrome-border) !important;
+  transition: var(--valentus-transition);
 }
 
-.adt-site-navbar.is-scrolled {
-  box-shadow: var(--adt-shadow-sticky);
+.valentus-site-navbar.is-scrolled {
+  box-shadow: var(--valentus-shadow-sticky);
 }
 
-.adt-doc-mast {
-  background: var(--adt-chrome) !important;
-  border-bottom: 1px solid var(--adt-chrome-border) !important;
+.valentus-doc-mast {
+  background: var(--valentus-chrome) !important;
+  border-bottom: 1px solid var(--valentus-chrome-border) !important;
 }
 
 .nav,
 .nav-panel-menu,
 .nav-panel-explore,
 .toolbar {
-  background: var(--adt-nav-bg) !important;
-  border-color: var(--adt-border) !important;
-  color: var(--adt-ink-muted) !important;
+  background: var(--valentus-nav-bg) !important;
+  border-color: var(--valentus-border) !important;
+  color: var(--valentus-ink-muted) !important;
   box-shadow: none !important;
 }
 
-/* Opt-in side-rail panel wash (light + dark) — see --adt-side-panel-bg. */
-html.adt-side-panels,
-body.adt-side-panels,
-html[data-adt-side-panels='true'] {
-  --adt-side-panel-bg: color-mix(in srgb, var(--adt-ink) 4.5%, var(--adt-elevated));
+/* Opt-in side-rail panel wash (light + dark) — see --valentus-side-panel-bg. */
+html.valentus-side-panels,
+body.valentus-side-panels,
+html[data-valentus-side-panels='true'] {
+  --valentus-side-panel-bg: color-mix(in srgb, var(--valentus-ink) 4.5%, var(--valentus-elevated));
 }
 
-html.dark-theme.adt-side-panels,
-html.dark-theme[data-adt-side-panels='true'],
-body.adt-side-panels html.dark-theme {
-  --adt-side-panel-bg: var(--adt-elevated);
+html.dark-theme.valentus-side-panels,
+html.dark-theme[data-valentus-side-panels='true'],
+body.valentus-side-panels html.dark-theme {
+  --valentus-side-panel-bg: var(--valentus-elevated);
 }
 
 @media screen and (min-width: 1024px) {
   /*
    * Side-rail panel wash: paint the content-sized menu/TOC surface — not the
-   * full-height .nav column. Default transparent; html.adt-side-panels enables wash.
+   * full-height .nav column. Default transparent; html.valentus-side-panels enables wash.
    */
   .nav,
   .nav-panel-menu {
@@ -250,7 +250,7 @@ body.adt-side-panels html.dark-theme {
   }
 
   /*
-   * Panel fills the fixed --adt-nav-width column (not shrink-to-fit).
+   * Panel fills the fixed --valentus-nav-width column (not shrink-to-fit).
    * align-self:flex-start let max-content labels grow the elevated wash past
    * .nav-container, so overflow-x:auto on nav.nav-menu never engaged.
    */
@@ -267,8 +267,8 @@ body.adt-side-panels html.dark-theme {
   }
 
   .nav nav.nav-menu {
-    background: var(--adt-side-panel-bg, transparent);
-    border-radius: var(--adt-side-panel-radius);
+    background: var(--valentus-side-panel-bg, transparent);
+    border-radius: var(--valentus-side-panel-radius);
     /* Keep mast-aligned horizontal rail pad; add vertical inset so labels
        are not flush to the colored panel edge. */
     padding-top: 0.45rem !important;
@@ -279,36 +279,36 @@ body.adt-side-panels html.dark-theme {
     min-width: 0;
   }
 
-  .body.adt-body > aside.toc.sidebar .toc-menu,
+  .body.valentus-body > aside.toc.sidebar .toc-menu,
   aside.toc.sidebar .toc-menu {
-    background: var(--adt-side-panel-bg);
-    border-radius: var(--adt-side-panel-radius);
-    padding: var(--adt-side-panel-pad);
+    background: var(--valentus-side-panel-bg);
+    border-radius: var(--valentus-side-panel-radius);
+    padding: var(--valentus-side-panel-pad);
     box-sizing: border-box;
     align-self: flex-start;
     width: 100%;
   }
 }
 
-/* Condensed / mobile drawer: --adt-nav-bg is transparent on desktop so the
+/* Condensed / mobile drawer: --valentus-nav-bg is transparent on desktop so the
    nav blends with the canvas. Below 1024px the nav overlays the article, so
    it needs an opaque fill (light + dark) or page text shows through.
    Override on :root and html.dark-theme (not bare html) so specificity beats
    the transparent token defaults. The fill is the canvas itself — darker
-   than the bright --adt-elevated white that floated over the light-grey
+   than the bright --valentus-elevated white that floated over the light-grey
    page, without going darker than the page base; a soft edge shadow keeps
    the overlay layer readable. */
 @media screen and (max-width: 1023.5px) {
   :root,
   html.dark-theme {
-    --adt-nav-bg: var(--adt-canvas);
+    --valentus-nav-bg: var(--valentus-canvas);
   }
 
   .nav-container,
   .nav,
   .nav .panels,
   .nav-panel-menu {
-    background: var(--adt-nav-bg) !important;
+    background: var(--valentus-nav-bg) !important;
   }
 
   .nav-container {
@@ -318,14 +318,14 @@ body.adt-side-panels html.dark-theme {
 
 @media screen and (min-width: 1024px) {
   /*
-   * Shell: .adt-shell > .body.adt-body (nav | main | TOC peers).
-   * Read-width lives in .adt-doc-toolbar at the top of the article column.
-   * Footer stays outside .adt-shell (sibling under body); shell flex-grows to pin it.
-   * Width is intrinsic (panels + fixed --adt-col-gap + doc column); viewport-centered
-   * via align-self + margin-inline:auto. Main shrink-wraps to --adt-doc-max (no flex grow).
+   * Shell: .valentus-shell > .body.valentus-body (nav | main | TOC peers).
+   * Read-width lives in .valentus-doc-toolbar at the top of the article column.
+   * Footer stays outside .valentus-shell (sibling under body); shell flex-grows to pin it.
+   * Width is intrinsic (panels + fixed --valentus-col-gap + doc column); viewport-centered
+   * via align-self + margin-inline:auto. Main shrink-wraps to --valentus-doc-max (no flex grow).
    * Columns separated by gap only — no vertical rule between nav and content.
    */
-  .adt-shell {
+  .valentus-shell {
     display: flex;
     flex-direction: column;
     align-self: center;
@@ -333,17 +333,17 @@ body.adt-side-panels html.dark-theme {
     width: fit-content;
     max-width: 100%;
     margin-inline: auto;
-    padding-inline: var(--adt-shell-pad);
+    padding-inline: var(--valentus-shell-pad);
     box-sizing: border-box;
     overflow: visible;
   }
 
-  .body.adt-body {
+  .body.valentus-body {
     display: flex;
     flex-direction: row;
     align-items: stretch;
     align-self: stretch;
-    gap: var(--adt-col-gap);
+    gap: var(--valentus-col-gap);
     width: 100%;
     max-width: none;
     margin-inline: 0;
@@ -353,34 +353,34 @@ body.adt-side-panels html.dark-theme {
   }
 
   .nav-container {
-    width: var(--adt-nav-width) !important;
-    flex: 0 0 var(--adt-nav-width) !important;
+    width: var(--valentus-nav-width) !important;
+    flex: 0 0 var(--valentus-nav-width) !important;
     min-width: 0 !important;
-    max-width: var(--adt-nav-width) !important;
+    max-width: var(--valentus-nav-width) !important;
     border-right: none !important;
     box-shadow: none !important;
     overflow-x: hidden;
   }
 
-  main.adt-article {
+  main.valentus-article {
     /* flex-basis: auto so width/max-width transitions drive both grow and shrink */
     flex: 0 1 auto;
-    width: var(--adt-doc-max);
-    max-width: var(--adt-doc-max);
+    width: var(--valentus-doc-max);
+    max-width: var(--valentus-doc-max);
     min-width: 0;
     transition: width 0.25s ease, max-width 0.25s ease;
   }
 
   /* TOC is a body peer now — not nested in main > .content */
-  main.adt-article > .content {
+  main.valentus-article > .content {
     display: block;
   }
 
-  .body.adt-body > aside.toc.sidebar {
-    flex: 0 0 var(--adt-toc-width) !important;
-    width: var(--adt-toc-width) !important;
+  .body.valentus-body > aside.toc.sidebar {
+    flex: 0 0 var(--valentus-toc-width) !important;
+    width: var(--valentus-toc-width) !important;
     order: 0 !important;
-    padding-top: var(--adt-toc-rail-top);
+    padding-top: var(--valentus-toc-rail-top);
     padding-right: 0.35rem;
     box-sizing: border-box;
   }
@@ -390,58 +390,58 @@ body.adt-side-panels html.dark-theme {
     width: 100%;
     max-width: none;
     margin-inline: 0;
-    padding-left: calc(var(--adt-shell-pad) + var(--adt-footer-pad-h, 1.5rem));
-    padding-right: calc(var(--adt-shell-pad) + var(--adt-footer-pad-h, 1.5rem));
+    padding-left: calc(var(--valentus-shell-pad) + var(--valentus-footer-pad-h, 1.5rem));
+    padding-right: calc(var(--valentus-shell-pad) + var(--valentus-footer-pad-h, 1.5rem));
     box-sizing: border-box;
   }
 }
 
 footer.footer {
-  background: var(--adt-chrome) !important;
-  color: var(--adt-ink-muted) !important;
-  border-top: 1px solid var(--adt-border);
+  background: var(--valentus-chrome) !important;
+  color: var(--valentus-ink-muted) !important;
+  border-top: 1px solid var(--valentus-border);
 }
 
 footer.footer a {
-  color: var(--adt-accent) !important;
+  color: var(--valentus-accent) !important;
 }
 
 /* ——— Navbar search (site-wide command; width independent of doc/nav columns) ——— */
-.adt-nav-search,
-.adt-tool-search {
+.valentus-nav-search,
+.valentus-tool-search {
   position: relative;
   z-index: 21;
   overflow: visible;
   background: transparent !important;
 }
 
-.adt-nav-search:hover,
-.adt-nav-search:focus,
-.adt-nav-search:focus-within,
-.adt-tool-search:hover,
-.adt-tool-search:focus,
-.adt-tool-search:focus-within {
+.valentus-nav-search:hover,
+.valentus-nav-search:focus,
+.valentus-nav-search:focus-within,
+.valentus-tool-search:hover,
+.valentus-tool-search:focus,
+.valentus-tool-search:focus-within {
   background: transparent !important;
 }
 
-.adt-nav-search #search-field,
-.adt-tool-search #search-field {
+.valentus-nav-search #search-field,
+.valentus-tool-search #search-field {
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
 }
 
-.adt-nav-search #search-input,
-.adt-tool-search #search-input {
+.valentus-nav-search #search-input,
+.valentus-tool-search #search-input {
   width: 100%;
   max-width: none;
-  height: var(--adt-tool-band, 2.15rem);
+  height: var(--valentus-tool-band, 2.15rem);
   padding: 0 1.85rem 0 0.75rem;
-  border: 1px solid var(--adt-border) !important;
-  border-radius: var(--adt-radius) !important;
-  background: var(--adt-elevated) !important;
-  color: var(--adt-ink) !important;
+  border: 1px solid var(--valentus-border) !important;
+  border-radius: var(--valentus-radius) !important;
+  background: var(--valentus-elevated) !important;
+  color: var(--valentus-ink) !important;
   font-size: 0.875rem;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   box-sizing: border-box;
@@ -449,28 +449,28 @@ footer.footer a {
   user-select: text;
 }
 
-.adt-nav-search #search-input:hover,
-.adt-nav-search #search-input:focus,
-.adt-tool-search #search-input:hover,
-.adt-tool-search #search-input:focus {
-  background: var(--adt-elevated) !important;
+.valentus-nav-search #search-input:hover,
+.valentus-nav-search #search-input:focus,
+.valentus-tool-search #search-input:hover,
+.valentus-tool-search #search-input:focus {
+  background: var(--valentus-elevated) !important;
 }
 
-.adt-nav-search #search-input::placeholder,
-.adt-tool-search #search-input::placeholder {
-  color: var(--adt-ink-muted);
+.valentus-nav-search #search-input::placeholder,
+.valentus-tool-search #search-input::placeholder {
+  color: var(--valentus-ink-muted);
   opacity: 0.85;
 }
 
-.adt-nav-search #search-input:focus,
-.adt-tool-search #search-input:focus {
+.valentus-nav-search #search-input:focus,
+.valentus-tool-search #search-input:focus {
   outline: none;
-  border-color: var(--adt-accent) !important;
-  box-shadow: 0 0 0 3px var(--adt-accent-soft);
+  border-color: var(--valentus-accent) !important;
+  box-shadow: 0 0 0 3px var(--valentus-accent-soft);
 }
 
-.adt-nav-search #search-field::after,
-.adt-tool-search #search-field::after {
+.valentus-nav-search #search-field::after,
+.valentus-tool-search #search-field::after {
   content: "/";
   position: absolute;
   right: 0.45rem;
@@ -478,10 +478,10 @@ footer.footer a {
   transform: translateY(-50%);
   font-size: 0.7rem;
   font-weight: 600;
-  font-family: var(--adt-font-mono);
+  font-family: var(--valentus-font-mono);
   letter-spacing: 0;
-  color: var(--adt-ink-muted);
-  border: 1px solid var(--adt-border);
+  color: var(--valentus-ink-muted);
+  border: 1px solid var(--valentus-border);
   border-radius: 0.25rem;
   padding: 0.08rem 0.35rem;
   pointer-events: none;
@@ -490,30 +490,30 @@ footer.footer a {
 }
 
 @media (pointer: coarse) {
-  .adt-nav-search #search-field::after,
-  .adt-tool-search #search-field::after {
+  .valentus-nav-search #search-field::after,
+  .valentus-tool-search #search-field::after {
     content: none;
     display: none;
   }
 
-  .adt-nav-search #search-input,
-  .adt-tool-search #search-input {
+  .valentus-nav-search #search-input,
+  .valentus-tool-search #search-input {
     padding-right: 0.75rem;
   }
 }
 
 /* Dropdown opens from navbar search — overflow ancestors stay visible.
    Lunr mounts .search-result-dropdown-menu on #search-input.parentNode
-   (search-ui.js), which is .adt-search-input-wrap — NOT #search-field.
+   (search-ui.js), which is .valentus-search-input-wrap — NOT #search-field.
    overflow:hidden on the wrap (or compound) clips absolute results below the field.
    Clip typed text on #search-input itself (search-chat CSS), not the wrap.
 
    Plain (non-compound) field: left-align under the input.
    Compound: antora-search-chat owns edge alignment (right:0 + width:100cqi so the
    panel matches the full pill — do not force left:0 here or the right edge goes tight). */
-.adt-nav-search .search-result-dropdown-menu,
-.adt-tool-search .search-result-dropdown-menu,
-.adt-navbar-search .search-result-dropdown-menu {
+.valentus-nav-search .search-result-dropdown-menu,
+.valentus-tool-search .search-result-dropdown-menu,
+.valentus-navbar-search .search-result-dropdown-menu {
   left: 0;
   right: auto;
   z-index: 40;
@@ -521,8 +521,8 @@ footer.footer a {
   max-width: min(36rem, 90vw);
 }
 
-.adt-search-compound .search-result-dropdown-menu,
-.adt-search-input-wrap > .search-result-dropdown-menu {
+.valentus-search-compound .search-result-dropdown-menu,
+.valentus-search-input-wrap > .search-result-dropdown-menu {
   left: auto;
   right: 0;
   z-index: 40;
@@ -532,126 +532,126 @@ footer.footer a {
   box-sizing: border-box;
 }
 
-.adt-search-compound,
-.adt-search-input-wrap,
-.adt-navbar-search #search-field {
+.valentus-search-compound,
+.valentus-search-input-wrap,
+.valentus-navbar-search #search-field {
   overflow: visible !important;
 }
 
 /* Collapsed search popover: results stay inside the compound/popover width. */
-.adt-search-chat.is-collapsed .search-result-dropdown-menu {
+.valentus-search-chat.is-collapsed .search-result-dropdown-menu {
   width: 100cqi;
   min-width: 100cqi;
   max-width: 100cqi;
 }
 
-.header.adt-header .navbar .navbar-end .adt-header-icon-btn,
-.header.adt-header .navbar .navbar-end .theme-toggle.adt-header-icon-btn {
-  border-radius: var(--adt-radius-sm) !important;
-  transition: var(--adt-transition);
+.header.valentus-header .navbar .navbar-end .valentus-header-icon-btn,
+.header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn {
+  border-radius: var(--valentus-radius-sm) !important;
+  transition: var(--valentus-transition);
 }
 
 /* End-controls strip + brand stay in lockstep with the sticky navbar fade.
    Keep paint transparent so antora-dark-mode’s solid .navbar-menu fill never
-   flashes a different shade while --adt-chrome transitions. */
-.header.adt-header .navbar-menu.adt-topbar,
-.header.adt-header .adt-topbar .navbar-end,
-.header.adt-header .adt-header-actions {
+   flashes a different shade while --valentus-chrome transitions. */
+.header.valentus-header .navbar-menu.valentus-topbar,
+.header.valentus-header .valentus-topbar .navbar-end,
+.header.valentus-header .valentus-header-actions {
   background: transparent !important;
-  transition: var(--adt-transition);
+  transition: var(--valentus-transition);
 }
 
-.adt-header-vcs .adt-header-vcs-img,
-.adt-header-icon-btn.adt-header-vcs .adt-header-vcs-img {
+.valentus-header-vcs .valentus-header-vcs-img,
+.valentus-header-icon-btn.valentus-header-vcs .valentus-header-vcs-img {
   transition: filter 0.28s ease;
 }
 
-.adt-header-logo-item {
-  border-radius: var(--adt-radius-sm);
-  transition: var(--adt-transition);
+.valentus-header-logo-item {
+  border-radius: var(--valentus-radius-sm);
+  transition: var(--valentus-transition);
 }
 
-/* Root theme crossfade (html.adt-theme-animating / View Transitions) ships in
+/* Root theme crossfade (html.valentus-theme-animating / View Transitions) ships in
    antora-dark-mode site-extra.css — not a Valentus per-widget selector list. */
 
 /* ——— Breadcrumbs / mast accents ——— */
-.adt-breadcrumb-trail .adt-breadcrumb-trail-link,
-.adt-breadcrumb-trail--current .adt-breadcrumb-trail-link,
-.adt-breadcrumb-trail--current .adt-breadcrumb-trail-text,
-.adt-breadcrumb-trail-text,
-.adt-breadcrumb-edit .adt-edit-inline-link {
-  color: var(--adt-accent) !important;
+.valentus-breadcrumb-trail .valentus-breadcrumb-trail-link,
+.valentus-breadcrumb-trail--current .valentus-breadcrumb-trail-link,
+.valentus-breadcrumb-trail--current .valentus-breadcrumb-trail-text,
+.valentus-breadcrumb-trail-text,
+.valentus-breadcrumb-edit .valentus-edit-inline-link {
+  color: var(--valentus-accent) !important;
 }
 
 /* Home chip uses accent ink (matches pre-copyable-path chip). */
-.adt-breadcrumb-home-link {
-  color: var(--adt-accent) !important;
+.valentus-breadcrumb-home-link {
+  color: var(--valentus-accent) !important;
 }
 
-.adt-breadcrumb-home-link:hover,
-.adt-breadcrumb-home-link:focus-visible {
-  color: var(--adt-accent) !important;
+.valentus-breadcrumb-home-link:hover,
+.valentus-breadcrumb-home-link:focus-visible {
+  color: var(--valentus-accent) !important;
 }
 
-.adt-breadcrumb-trail .adt-breadcrumb-trail-link,
-.adt-breadcrumb-trail--current .adt-breadcrumb-trail-link,
-.adt-breadcrumb-trail--current .adt-breadcrumb-trail-text {
+.valentus-breadcrumb-trail .valentus-breadcrumb-trail-link,
+.valentus-breadcrumb-trail--current .valentus-breadcrumb-trail-link,
+.valentus-breadcrumb-trail--current .valentus-breadcrumb-trail-text {
   font-weight: 400 !important;
   text-decoration: underline;
   text-underline-offset: 0.12em;
 }
 
-.adt-breadcrumb-trail:not(.adt-breadcrumb-trail--current) .adt-breadcrumb-trail-text {
+.valentus-breadcrumb-trail:not(.valentus-breadcrumb-trail--current) .valentus-breadcrumb-trail-text {
   font-weight: 400 !important;
   text-decoration: none;
 }
 
-.adt-breadcrumb-sep {
-  color: var(--adt-ink-muted) !important;
+.valentus-breadcrumb-sep {
+  color: var(--valentus-ink-muted) !important;
 }
 
-.adt-bc-sep {
+.valentus-bc-sep {
   display: none !important;
 }
 
-.adt-bc-kicker {
-  border-radius: var(--adt-radius-sm);
+.valentus-bc-kicker {
+  border-radius: var(--valentus-radius-sm);
 }
 
 /* Mast dropdowns: accent label at rest; chip fill on hover/open (no underline — trail owns that). */
-.adt-bc-kicker {
-  color: var(--adt-accent) !important;
+.valentus-bc-kicker {
+  color: var(--valentus-accent) !important;
   background: transparent !important;
   border-color: transparent !important;
   text-decoration: none;
   font-weight: 500 !important;
 }
 
-.adt-bc-kicker:hover,
-.adt-bc-kicker[aria-expanded='true'] {
-  color: var(--adt-bc-kicker-fg) !important;
-  background: var(--adt-bc-kicker-bg) !important;
-  border-color: var(--adt-bc-kicker-border) !important;
+.valentus-bc-kicker:hover,
+.valentus-bc-kicker[aria-expanded='true'] {
+  color: var(--valentus-bc-kicker-fg) !important;
+  background: var(--valentus-bc-kicker-bg) !important;
+  border-color: var(--valentus-bc-kicker-border) !important;
   text-decoration: none;
 }
 
-.adt-bc-version-plain {
+.valentus-bc-version-plain {
   display: inline-flex;
   align-items: center;
   box-sizing: border-box;
-  height: var(--adt-bc-ctrl-h, 1.75rem);
-  min-height: var(--adt-bc-ctrl-h, 1.75rem);
+  height: var(--valentus-bc-ctrl-h, 1.75rem);
+  min-height: var(--valentus-bc-ctrl-h, 1.75rem);
   padding: 0 0.35rem;
   font-size: 0.8125rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   line-height: 1;
-  color: var(--adt-accent);
+  color: var(--valentus-accent);
   text-decoration: none;
 }
 
-.adt-bc-kicker--version {
+.valentus-bc-kicker--version {
   font-variant-numeric: tabular-nums;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.8125rem !important;
@@ -659,25 +659,25 @@ footer.footer a {
   line-height: 1 !important;
 }
 
-.adt-bc-dropdown {
-  background: var(--adt-elevated) !important;
-  border: 1px solid var(--adt-border) !important;
-  border-radius: var(--adt-radius) !important;
-  box-shadow: var(--adt-shadow-float) !important;
+.valentus-bc-dropdown {
+  background: var(--valentus-elevated) !important;
+  border: 1px solid var(--valentus-border) !important;
+  border-radius: var(--valentus-radius) !important;
+  box-shadow: var(--valentus-shadow-float) !important;
 }
 
-.adt-bc-menu-item a {
-  color: var(--adt-ink) !important;
+.valentus-bc-menu-item a {
+  color: var(--valentus-ink) !important;
 }
 
-.adt-bc-menu-item a.is-current,
-.adt-bc-menu-item a.is-current:hover {
-  background: var(--adt-accent-soft) !important;
-  color: var(--adt-accent) !important;
+.valentus-bc-menu-item a.is-current,
+.valentus-bc-menu-item a.is-current:hover {
+  background: var(--valentus-accent-soft) !important;
+  color: var(--valentus-accent) !important;
 }
 
-.adt-nav-component-title {
-  color: var(--adt-ink) !important;
+.valentus-nav-component-title {
+  color: var(--valentus-ink) !important;
   font-weight: 650;
   letter-spacing: 0.01em;
 }
@@ -687,13 +687,13 @@ footer.footer a {
    normal / hover / current so soft-fill never breaks tree vertical rhythm;
    current differs by accent color + weight only. */
 /*
- * Horizontal scroll + edge fades (site-visual.js toggles .adt-nav-overflow-*).
+ * Horizontal scroll + edge fades (site-visual.js toggles .valentus-nav-overflow-*).
  * Fades appear only when that edge still has overflow; mask soft-clips
  * overflowing labels and their highlight fill together.
  * Hide scrollbars — wheel/trackpad + edge fades remain the affordance.
  */
 nav.nav-menu.nav-tree-only,
-nav.nav-menu.adt-nav-tree-only {
+nav.nav-menu.valentus-nav-tree-only {
   overflow-x: auto;
   overflow-y: auto;
   -webkit-mask-image: none;
@@ -703,66 +703,66 @@ nav.nav-menu.adt-nav-tree-only {
 }
 
 nav.nav-menu.nav-tree-only::-webkit-scrollbar,
-nav.nav-menu.adt-nav-tree-only::-webkit-scrollbar {
+nav.nav-menu.valentus-nav-tree-only::-webkit-scrollbar {
   display: none;
   width: 0;
   height: 0;
 }
 
-nav.nav-menu.nav-tree-only.adt-nav-overflow-end:not(.adt-nav-overflow-start),
-nav.nav-menu.adt-nav-tree-only.adt-nav-overflow-end:not(.adt-nav-overflow-start) {
+nav.nav-menu.nav-tree-only.valentus-nav-overflow-end:not(.valentus-nav-overflow-start),
+nav.nav-menu.valentus-nav-tree-only.valentus-nav-overflow-end:not(.valentus-nav-overflow-start) {
   -webkit-mask-image: linear-gradient(
     to right,
-    #000 calc(100% - var(--adt-nav-scroll-fade, 1.25rem)),
+    #000 calc(100% - var(--valentus-nav-scroll-fade, 1.25rem)),
     transparent 100%
   );
   mask-image: linear-gradient(
     to right,
-    #000 calc(100% - var(--adt-nav-scroll-fade, 1.25rem)),
+    #000 calc(100% - var(--valentus-nav-scroll-fade, 1.25rem)),
     transparent 100%
   );
 }
 
-nav.nav-menu.nav-tree-only.adt-nav-overflow-start:not(.adt-nav-overflow-end),
-nav.nav-menu.adt-nav-tree-only.adt-nav-overflow-start:not(.adt-nav-overflow-end) {
+nav.nav-menu.nav-tree-only.valentus-nav-overflow-start:not(.valentus-nav-overflow-end),
+nav.nav-menu.valentus-nav-tree-only.valentus-nav-overflow-start:not(.valentus-nav-overflow-end) {
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0,
-    #000 var(--adt-nav-scroll-fade, 1.25rem),
+    #000 var(--valentus-nav-scroll-fade, 1.25rem),
     #000 100%
   );
   mask-image: linear-gradient(
     to right,
     transparent 0,
-    #000 var(--adt-nav-scroll-fade, 1.25rem),
+    #000 var(--valentus-nav-scroll-fade, 1.25rem),
     #000 100%
   );
 }
 
-nav.nav-menu.nav-tree-only.adt-nav-overflow-start.adt-nav-overflow-end,
-nav.nav-menu.adt-nav-tree-only.adt-nav-overflow-start.adt-nav-overflow-end {
+nav.nav-menu.nav-tree-only.valentus-nav-overflow-start.valentus-nav-overflow-end,
+nav.nav-menu.valentus-nav-tree-only.valentus-nav-overflow-start.valentus-nav-overflow-end {
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0,
-    #000 var(--adt-nav-scroll-fade, 1.25rem),
-    #000 calc(100% - var(--adt-nav-scroll-fade, 1.25rem)),
+    #000 var(--valentus-nav-scroll-fade, 1.25rem),
+    #000 calc(100% - var(--valentus-nav-scroll-fade, 1.25rem)),
     transparent 100%
   );
   mask-image: linear-gradient(
     to right,
     transparent 0,
-    #000 var(--adt-nav-scroll-fade, 1.25rem),
-    #000 calc(100% - var(--adt-nav-scroll-fade, 1.25rem)),
+    #000 var(--valentus-nav-scroll-fade, 1.25rem),
+    #000 calc(100% - var(--valentus-nav-scroll-fade, 1.25rem)),
     transparent 100%
   );
 }
 
 nav.nav-menu.nav-tree-only .nav-item > .nav-link,
-nav.nav-menu.adt-nav-tree-only .nav-item > .nav-link,
+nav.nav-menu.valentus-nav-tree-only .nav-item > .nav-link,
 nav.nav-menu.nav-tree-only .nav-item > .nav-text,
-nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text {
-  color: var(--adt-ink-muted) !important;
-  border-radius: var(--adt-radius-sm);
+nav.nav-menu.valentus-nav-tree-only .nav-item > .nav-text {
+  color: var(--valentus-ink-muted) !important;
+  border-radius: var(--valentus-radius-sm);
   /* Extra rem beyond the caret glyph so toggle and label don’t kiss */
   margin-left: calc(0.85em + 0.55rem) !important;
   /* Intrinsic width so long/nowrap labels expand the nav scrollport */
@@ -771,28 +771,28 @@ nav.nav-menu.adt-nav-tree-only .nav-item > .nav-text {
   max-width: none !important;
   padding: 0.12rem 0.4rem !important;
   overflow: visible;
-  transition: var(--adt-transition);
+  transition: var(--valentus-transition);
 }
 
 nav.nav-menu.nav-tree-only .nav-item > .nav-link:hover,
-nav.nav-menu.adt-nav-tree-only .nav-item > .nav-link:hover {
-  color: var(--adt-ink) !important;
-  background: var(--adt-accent-soft);
+nav.nav-menu.valentus-nav-tree-only .nav-item > .nav-link:hover {
+  color: var(--valentus-ink) !important;
+  background: var(--valentus-accent-soft);
   text-decoration: none;
 }
 
 /* Soft-fill only on the link/label box — not nested .nav-text (that hugged glyphs).
    Same padding as hover (inherited from base row); accent + weight mark current. */
 nav.nav-menu.nav-tree-only .nav-item.is-current-page > .nav-link,
-nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-link {
-  color: var(--adt-accent) !important;
+nav.nav-menu.valentus-nav-tree-only .nav-item.is-current-page > .nav-link {
+  color: var(--valentus-accent) !important;
   font-weight: 600 !important;
-  background: var(--adt-accent-soft);
+  background: var(--valentus-accent-soft);
 }
 
 nav.nav-menu.nav-tree-only .nav-item.is-current-page > .nav-link .nav-text,
-nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-link .nav-text {
-  color: var(--adt-accent) !important;
+nav.nav-menu.valentus-nav-tree-only .nav-item.is-current-page > .nav-link .nav-text {
+  color: var(--valentus-accent) !important;
   font-weight: 600 !important;
   background: none !important;
   padding: 0 !important;
@@ -801,7 +801,7 @@ nav.nav-menu.adt-nav-tree-only .nav-item.is-current-page > .nav-link .nav-text {
 
 /* Nav expanders: stroke chevron sized to the text line, aligned with label padding */
 nav.nav-menu.nav-tree-only .nav-item-toggle,
-nav.nav-menu.adt-nav-tree-only .nav-item-toggle {
+nav.nav-menu.valentus-nav-tree-only .nav-item-toggle {
   position: absolute;
   left: 0.15rem;
   top: 0.2rem;
@@ -813,7 +813,7 @@ nav.nav-menu.adt-nav-tree-only .nav-item-toggle {
   outline: none;
   line-height: 1;
   cursor: pointer;
-  color: var(--adt-nav-item-toggle);
+  color: var(--valentus-nav-item-toggle);
   background-color: currentColor !important;
   background-image: none !important;
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 3.5L11 8L6 12.5' stroke='black' stroke-width='1.85' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -831,24 +831,24 @@ nav.nav-menu.adt-nav-tree-only .nav-item-toggle {
 }
 
 nav.nav-menu.nav-tree-only .nav-item-toggle:hover,
-nav.nav-menu.adt-nav-tree-only .nav-item-toggle:hover {
-  color: var(--adt-nav-item-toggle-hover);
+nav.nav-menu.valentus-nav-tree-only .nav-item-toggle:hover {
+  color: var(--valentus-nav-item-toggle-hover);
   opacity: 1;
 }
 
 nav.nav-menu.nav-tree-only .nav-item.is-active > .nav-item-toggle,
-nav.nav-menu.adt-nav-tree-only .nav-item.is-active > .nav-item-toggle {
+nav.nav-menu.valentus-nav-tree-only .nav-item.is-active > .nav-item-toggle {
   transform: rotate(90deg);
 }
 
 html.dark-theme nav.nav-menu.nav-tree-only .nav-item-toggle,
-html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item-toggle {
+html.dark-theme nav.nav-menu.valentus-nav-tree-only .nav-item-toggle {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 3.5L11 8L6 12.5' stroke='black' stroke-width='1.85' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 3.5L11 8L6 12.5' stroke='black' stroke-width='1.85' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 .toc .toc-menu h3 {
-  color: var(--adt-ink) !important;
+  color: var(--valentus-ink) !important;
   font-weight: 650;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -857,8 +857,8 @@ html.dark-theme nav.nav-menu.adt-nav-tree-only .nav-item-toggle {
 
 /* Always give sidebar CONTENTS a little inset + radius (even when panel wash is off). */
 aside.toc.sidebar .toc-menu {
-  padding: var(--adt-side-panel-pad, 0.45rem 0.55rem);
-  border-radius: var(--adt-side-panel-radius, 2px);
+  padding: var(--valentus-side-panel-pad, 0.45rem 0.55rem);
+  border-radius: var(--valentus-side-panel-radius, 2px);
   box-sizing: border-box;
 }
 
@@ -871,12 +871,12 @@ aside.toc.sidebar .toc-menu {
 .doc #toc {
   margin: 0.65rem 0 1rem;
   padding: 0.45rem 0.55rem;
-  border: 1px solid color-mix(in srgb, var(--adt-ink-muted) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--valentus-ink-muted) 22%, transparent);
   border-radius: 2px;
   background: transparent;
   font-size: 0.82em;
   line-height: 1.35;
-  color: var(--adt-ink-muted);
+  color: var(--valentus-ink-muted);
 }
 
 .doc .toc:not(.sidebar) #toctitle,
@@ -890,7 +890,7 @@ aside.toc.sidebar .toc-menu {
   font-weight: 550;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: var(--adt-ink-muted);
+  color: var(--valentus-ink-muted);
   border: none;
   background: none;
 }
@@ -903,14 +903,14 @@ aside.toc.sidebar .toc-menu {
 
 .doc .toc:not(.sidebar) a,
 .doc #toc a {
-  color: var(--adt-ink-muted) !important;
+  color: var(--valentus-ink-muted) !important;
   text-decoration: none;
   font-weight: 400;
 }
 
 .doc .toc:not(.sidebar) a:hover,
 .doc #toc a:hover {
-  color: var(--adt-accent) !important;
+  color: var(--valentus-accent) !important;
   text-decoration: underline;
   text-underline-offset: 0.12em;
 }
@@ -925,16 +925,16 @@ html.dark-theme .doc #toc {
 /* page-context extension markup — theme token bridge (extension ships baseline CSS).
    Independent of .tableblock / dark-mode zebra; light mode gets a subtle surface. */
 .doc .page-context {
-  --page-context-fg: color-mix(in srgb, var(--adt-ink-muted) 82%, transparent);
-  --page-context-label: color-mix(in srgb, var(--adt-ink-muted) 72%, transparent);
-  --page-context-border: color-mix(in srgb, var(--adt-ink-muted) 16%, transparent);
-  --page-context-divider: color-mix(in srgb, var(--adt-ink-muted) 12%, transparent);
-  --page-context-bg: color-mix(in srgb, var(--adt-ink-muted) 3.5%, var(--adt-elevated));
+  --page-context-fg: color-mix(in srgb, var(--valentus-ink-muted) 82%, transparent);
+  --page-context-label: color-mix(in srgb, var(--valentus-ink-muted) 72%, transparent);
+  --page-context-border: color-mix(in srgb, var(--valentus-ink-muted) 16%, transparent);
+  --page-context-divider: color-mix(in srgb, var(--valentus-ink-muted) 12%, transparent);
+  --page-context-bg: color-mix(in srgb, var(--valentus-ink-muted) 3.5%, var(--valentus-elevated));
 }
 
 html.dark-theme .doc .page-context {
-  --page-context-fg: color-mix(in srgb, var(--adt-ink-muted) 90%, transparent);
-  --page-context-label: color-mix(in srgb, var(--adt-ink-muted) 80%, transparent);
+  --page-context-fg: color-mix(in srgb, var(--valentus-ink-muted) 90%, transparent);
+  --page-context-label: color-mix(in srgb, var(--valentus-ink-muted) 80%, transparent);
   --page-context-border: rgba(255, 255, 255, 0.1);
   --page-context-divider: rgba(255, 255, 255, 0.08);
   --page-context-bg: rgba(255, 255, 255, 0.02);
@@ -1021,26 +1021,26 @@ html.dark-theme .doc table.page-context-table > tbody > tr > td {
 }
 
 .toc .toc-menu a {
-  color: var(--adt-ink-muted) !important;
-  border-left: 2px solid var(--adt-border) !important;
-  border-radius: 0 var(--adt-radius-sm) var(--adt-radius-sm) 0;
-  transition: var(--adt-transition);
+  color: var(--valentus-ink-muted) !important;
+  border-left: 2px solid var(--valentus-border) !important;
+  border-radius: 0 var(--valentus-radius-sm) var(--valentus-radius-sm) 0;
+  transition: var(--valentus-transition);
 }
 
 .toc .toc-menu a:hover {
-  color: var(--adt-accent) !important;
-  background: var(--adt-accent-soft);
+  color: var(--valentus-accent) !important;
+  background: var(--valentus-accent-soft);
 }
 
 .toc .toc-menu a.is-active {
-  border-left-color: var(--adt-accent) !important;
-  color: var(--adt-ink) !important;
-  background: var(--adt-accent-soft);
+  border-left-color: var(--valentus-accent) !important;
+  color: var(--valentus-ink) !important;
+  background: var(--valentus-accent-soft);
   font-weight: 600;
 }
 
 .sidebar.toc .toc-menu a:focus {
-  background: var(--adt-accent-soft);
+  background: var(--valentus-accent-soft);
 }
 
 /* ——— Code blocks (dark panels in both themes) ———
@@ -1055,9 +1055,9 @@ html.dark-theme .doc table.page-context-table > tbody > tr > td {
 .doc .listingblock > .content,
 .doc .literalblock > .content {
   position: relative;
-  background: var(--adt-code-bg) !important;
-  border: 1px solid var(--adt-code-border) !important;
-  border-radius: var(--adt-radius) !important;
+  background: var(--valentus-code-bg) !important;
+  border: 1px solid var(--valentus-code-border) !important;
+  border-radius: var(--valentus-radius) !important;
   overflow: hidden;
 }
 
@@ -1065,7 +1065,7 @@ html.dark-theme .doc table.page-context-table > tbody > tr > td {
 .doc .literalblock pre,
 .doc pre.highlight > code {
   background: transparent !important;
-  color: var(--adt-code-fg) !important;
+  color: var(--valentus-code-fg) !important;
   box-shadow: none !important;
   border: none !important;
   border-radius: 0 !important;
@@ -1092,12 +1092,12 @@ html.dark-theme .doc table.page-context-table > tbody > tr > td {
   width: 100%;
   margin: 0;
   padding: 0.4rem 0.75rem;
-  color: color-mix(in srgb, var(--adt-code-fg) 72%, transparent) !important;
-  background: color-mix(in srgb, var(--adt-code-bg) 82%, #000) !important;
+  color: color-mix(in srgb, var(--valentus-code-fg) 72%, transparent) !important;
+  background: color-mix(in srgb, var(--valentus-code-bg) 82%, #000) !important;
   border: none;
-  border-bottom: 1px solid var(--adt-code-border);
+  border-bottom: 1px solid var(--valentus-code-border);
   border-radius: 0;
-  font-family: var(--adt-font-mono) !important;
+  font-family: var(--valentus-font-mono) !important;
   z-index: 1;
 }
 
@@ -1135,20 +1135,20 @@ html.dark-theme .doc table.page-context-table > tbody > tr > td {
 .doc dd code,
 .doc thead code,
 .doc .colist > table code {
-  color: var(--adt-ink) !important;
-  background: var(--adt-accent-soft) !important;
-  border: 1px solid color-mix(in srgb, var(--adt-accent) 22%, transparent);
-  border-radius: var(--adt-radius-sm);
+  color: var(--valentus-ink) !important;
+  background: var(--valentus-accent-soft) !important;
+  border: 1px solid color-mix(in srgb, var(--valentus-accent) 22%, transparent);
+  border-radius: var(--valentus-radius-sm);
   font-size: 0.9em;
   padding: 0.1em 0.35em;
 }
 
 .doc kbd {
-  background: var(--adt-elevated) !important;
-  border: 1px solid var(--adt-border) !important;
-  border-radius: var(--adt-radius-sm) !important;
-  box-shadow: 0 1px 0 var(--adt-border) !important;
-  color: var(--adt-ink) !important;
+  background: var(--valentus-elevated) !important;
+  border: 1px solid var(--valentus-border) !important;
+  border-radius: var(--valentus-radius-sm) !important;
+  box-shadow: 0 1px 0 var(--valentus-border) !important;
+  color: var(--valentus-ink) !important;
 }
 
 /* Syntax colors tuned for dark code panels */
@@ -1214,10 +1214,10 @@ html.dark-theme .doc table.page-context-table > tbody > tr > td {
 .doc .admonitionblock > table {
   border-collapse: separate;
   border-spacing: 0;
-  background: var(--adt-elevated) !important;
-  border: 1px solid var(--adt-border) !important;
+  background: var(--valentus-elevated) !important;
+  border: 1px solid var(--valentus-border) !important;
   border-left-width: 3px !important;
-  border-radius: var(--adt-radius) !important;
+  border-radius: var(--valentus-radius) !important;
 }
 
 .doc .admonitionblock td.icon {
@@ -1238,11 +1238,11 @@ html.dark-theme .doc table.page-context-table > tbody > tr > td {
   border: none !important;
   border-radius: 0 !important;
   padding: 0.25rem 1rem 0.95rem !important;
-  color: var(--adt-ink) !important;
+  color: var(--valentus-ink) !important;
 }
 
 .doc .admonitionblock td.icon i {
-  border-radius: var(--adt-radius-sm) !important;
+  border-radius: var(--valentus-radius-sm) !important;
   height: auto !important;
   min-height: 1.35rem;
   padding: 0.15rem 0.45rem !important;
@@ -1250,110 +1250,110 @@ html.dark-theme .doc table.page-context-table > tbody > tr > td {
   letter-spacing: 0.04em;
 }
 
-/* Override Default UI hardcoded pill colors so they track --adt-admonition-* */
+/* Override Default UI hardcoded pill colors so they track --valentus-admonition-* */
 .doc .admonitionblock td.icon i.icon-tip {
-  background-color: var(--adt-admonition-tip) !important;
+  background-color: var(--valentus-admonition-tip) !important;
 }
 
 .doc .admonitionblock td.icon i.icon-note {
-  background-color: var(--adt-admonition-note) !important;
+  background-color: var(--valentus-admonition-note) !important;
 }
 
 .doc .admonitionblock td.icon i.icon-important {
-  background-color: var(--adt-admonition-important) !important;
+  background-color: var(--valentus-admonition-important) !important;
 }
 
 .doc .admonitionblock td.icon i.icon-warning {
-  background-color: var(--adt-admonition-warning) !important;
+  background-color: var(--valentus-admonition-warning) !important;
 }
 
 .doc .admonitionblock td.icon i.icon-caution {
-  background-color: var(--adt-admonition-caution) !important;
+  background-color: var(--valentus-admonition-caution) !important;
 }
 
 .doc .admonitionblock.note > table {
-  border-left-color: var(--adt-admonition-note) !important;
-  background: color-mix(in srgb, var(--adt-admonition-note) 7%, var(--adt-elevated)) !important;
+  border-left-color: var(--valentus-admonition-note) !important;
+  background: color-mix(in srgb, var(--valentus-admonition-note) 7%, var(--valentus-elevated)) !important;
 }
 
 .doc .admonitionblock.tip > table {
-  border-left-color: var(--adt-admonition-tip) !important;
-  background: color-mix(in srgb, var(--adt-admonition-tip) 8%, var(--adt-elevated)) !important;
+  border-left-color: var(--valentus-admonition-tip) !important;
+  background: color-mix(in srgb, var(--valentus-admonition-tip) 8%, var(--valentus-elevated)) !important;
 }
 
 .doc .admonitionblock.important > table {
-  border-left-color: var(--adt-admonition-important) !important;
-  background: color-mix(in srgb, var(--adt-admonition-important) 8%, var(--adt-elevated)) !important;
+  border-left-color: var(--valentus-admonition-important) !important;
+  background: color-mix(in srgb, var(--valentus-admonition-important) 8%, var(--valentus-elevated)) !important;
 }
 
 .doc .admonitionblock.warning > table {
-  border-left-color: var(--adt-admonition-warning) !important;
-  background: color-mix(in srgb, var(--adt-admonition-warning) 9%, var(--adt-elevated)) !important;
+  border-left-color: var(--valentus-admonition-warning) !important;
+  background: color-mix(in srgb, var(--valentus-admonition-warning) 9%, var(--valentus-elevated)) !important;
 }
 
 .doc .admonitionblock.caution > table {
-  border-left-color: var(--adt-admonition-caution) !important;
-  background: color-mix(in srgb, var(--adt-admonition-caution) 8%, var(--adt-elevated)) !important;
+  border-left-color: var(--valentus-admonition-caution) !important;
+  background: color-mix(in srgb, var(--valentus-admonition-caution) 8%, var(--valentus-elevated)) !important;
 }
 
 /* ——— Other content blocks ——— */
 .doc .sidebarblock {
-  background: var(--adt-elevated) !important;
-  border: 1px solid var(--adt-border) !important;
-  border-radius: var(--adt-radius) !important;
+  background: var(--valentus-elevated) !important;
+  border: 1px solid var(--valentus-border) !important;
+  border-radius: var(--valentus-radius) !important;
   padding: 1rem 1.25rem !important;
 }
 
 .doc .exampleblock > .content,
 .doc details.result > .content {
-  background: var(--adt-elevated) !important;
-  border: 1px solid var(--adt-border) !important;
-  border-radius: var(--adt-radius) !important;
+  background: var(--valentus-elevated) !important;
+  border: 1px solid var(--valentus-border) !important;
+  border-radius: var(--valentus-radius) !important;
 }
 
 .doc .quoteblock,
 .doc .verseblock {
-  background: var(--adt-elevated) !important;
-  border-left: 3px solid var(--adt-accent) !important;
-  color: var(--adt-ink-muted) !important;
-  border-radius: 0 var(--adt-radius) var(--adt-radius) 0;
+  background: var(--valentus-elevated) !important;
+  border-left: 3px solid var(--valentus-accent) !important;
+  color: var(--valentus-ink-muted) !important;
+  border-radius: 0 var(--valentus-radius) var(--valentus-radius) 0;
 }
 
 .doc table.tableblock,
 .doc table.tableblock > * > tr > * {
-  border-color: var(--adt-border) !important;
+  border-color: var(--valentus-border) !important;
 }
 
 .doc table.stripes-all > tbody > tr,
 .doc table.stripes-even > tbody > tr:nth-of-type(2n),
 .doc table.stripes-odd > tbody > tr:nth-of-type(odd),
 .doc table.stripes-hover > tbody > tr:hover {
-  background: var(--adt-accent-soft) !important;
+  background: var(--valentus-accent-soft) !important;
 }
 
 nav.pagination {
-  border-top: 1px solid var(--adt-border) !important;
+  border-top: 1px solid var(--valentus-border) !important;
 }
 
 nav.pagination a {
-  color: var(--adt-accent) !important;
+  color: var(--valentus-accent) !important;
 }
 
 /* ——— Dark mode: tame site-extra hardcodes ——— */
 html.dark-theme a {
-  color: var(--adt-accent) !important;
+  color: var(--valentus-accent) !important;
 }
 
 html.dark-theme a:hover,
 html.dark-theme a:focus {
-  color: var(--adt-accent-hover) !important;
+  color: var(--valentus-accent-hover) !important;
 }
 
 html.dark-theme .navbar,
 html.dark-theme .navbar .navbar-menu {
-  background-color: var(--adt-chrome) !important;
-  color: var(--adt-ink) !important;
-  border-color: var(--adt-border) !important;
+  background-color: var(--valentus-chrome) !important;
+  color: var(--valentus-ink) !important;
+  border-color: var(--valentus-border) !important;
 }
 
 html.dark-theme .content,
@@ -1366,7 +1366,7 @@ html.dark-theme .doc h5,
 html.dark-theme .doc h6,
 html.dark-theme .doc .title,
 html.dark-theme .doc .heading {
-  color: var(--adt-ink) !important;
+  color: var(--valentus-ink) !important;
 }
 
 html.dark-theme .nav .title,
@@ -1375,7 +1375,7 @@ html.dark-theme .nav .nav-link,
 html.dark-theme .nav .nav-text,
 html.dark-theme .toc.sidebar,
 html.dark-theme .toc.sidebar a {
-  color: var(--adt-ink-muted) !important;
+  color: var(--valentus-ink-muted) !important;
 }
 
 html.dark-theme .exampleblock:not(.tile),
@@ -1387,9 +1387,9 @@ html.dark-theme .doc .sidebarblock,
 html.dark-theme .doc .sidebarblock > .content,
 html.dark-theme .doc .exampleblock:not(.tile),
 html.dark-theme .doc .exampleblock:not(.tile) > .content {
-  background-color: var(--adt-elevated) !important;
-  background: var(--adt-elevated) !important;
-  border-color: var(--adt-border) !important;
+  background-color: var(--valentus-elevated) !important;
+  background: var(--valentus-elevated) !important;
+  border-color: var(--valentus-border) !important;
 }
 
 /* Admonitions: one card (table) wraps label + body; neutralize cell washes */
@@ -1402,37 +1402,37 @@ html.dark-theme .doc .admonitionblock td.content {
 }
 
 html.dark-theme .doc .admonitionblock > table {
-  border: 1px solid var(--adt-border) !important;
+  border: 1px solid var(--valentus-border) !important;
   border-left-width: 3px !important;
-  background: var(--adt-elevated) !important;
+  background: var(--valentus-elevated) !important;
 }
 
 html.dark-theme .doc .admonitionblock.note > table {
-  border-left-color: var(--adt-admonition-note) !important;
-  background: color-mix(in srgb, var(--adt-admonition-note) 12%, var(--adt-elevated)) !important;
+  border-left-color: var(--valentus-admonition-note) !important;
+  background: color-mix(in srgb, var(--valentus-admonition-note) 12%, var(--valentus-elevated)) !important;
 }
 
 html.dark-theme .doc .admonitionblock.tip > table {
-  border-left-color: var(--adt-admonition-tip) !important;
-  background: color-mix(in srgb, var(--adt-admonition-tip) 12%, var(--adt-elevated)) !important;
+  border-left-color: var(--valentus-admonition-tip) !important;
+  background: color-mix(in srgb, var(--valentus-admonition-tip) 12%, var(--valentus-elevated)) !important;
 }
 
 html.dark-theme .doc .admonitionblock.important > table {
-  border-left-color: var(--adt-admonition-important) !important;
-  background: color-mix(in srgb, var(--adt-admonition-important) 12%, var(--adt-elevated)) !important;
+  border-left-color: var(--valentus-admonition-important) !important;
+  background: color-mix(in srgb, var(--valentus-admonition-important) 12%, var(--valentus-elevated)) !important;
 }
 
 html.dark-theme .doc .admonitionblock.warning > table {
-  border-left-color: var(--adt-admonition-warning) !important;
-  background: color-mix(in srgb, var(--adt-admonition-warning) 12%, var(--adt-elevated)) !important;
+  border-left-color: var(--valentus-admonition-warning) !important;
+  background: color-mix(in srgb, var(--valentus-admonition-warning) 12%, var(--valentus-elevated)) !important;
 }
 
 html.dark-theme .doc .admonitionblock.caution > table {
-  border-left-color: var(--adt-admonition-caution) !important;
-  background: color-mix(in srgb, var(--adt-admonition-caution) 12%, var(--adt-elevated)) !important;
+  border-left-color: var(--valentus-admonition-caution) !important;
+  background: color-mix(in srgb, var(--valentus-admonition-caution) 12%, var(--valentus-elevated)) !important;
 }
 
-/* Keep listing/literal panels on --adt-code-bg (not elevated); neutralize site-extra */
+/* Keep listing/literal panels on --valentus-code-bg (not elevated); neutralize site-extra */
 html.dark-theme .doc .listingblock,
 html.dark-theme .doc .literalblock {
   background: transparent !important;
@@ -1441,8 +1441,8 @@ html.dark-theme .doc .literalblock {
 
 html.dark-theme .doc .listingblock > .content,
 html.dark-theme .doc .literalblock > .content {
-  background: var(--adt-code-bg) !important;
-  border-color: var(--adt-code-border) !important;
+  background: var(--valentus-code-bg) !important;
+  border-color: var(--valentus-code-border) !important;
 }
 
 html.dark-theme .doc .listingblock pre:not(.highlight),
@@ -1452,35 +1452,35 @@ html.dark-theme .doc .listingblock pre,
 html.dark-theme .doc .listingblock pre.highlight,
 html.dark-theme .doc .listingblock pre.highlight code {
   background: transparent !important;
-  color: var(--adt-code-fg) !important;
+  color: var(--valentus-code-fg) !important;
 }
 
 html.dark-theme .doc .sect1,
 html.dark-theme .doc .sect2,
 html.dark-theme .doc .sect3,
 html.dark-theme .doc .sect4 {
-  border-color: var(--adt-border) !important;
+  border-color: var(--valentus-border) !important;
 }
 
 /* Scrollbars */
 @media (pointer: fine) {
   @supports (scrollbar-width: thin) {
     html {
-      scrollbar-color: color-mix(in srgb, var(--adt-ink-muted) 55%, transparent) var(--adt-canvas);
+      scrollbar-color: color-mix(in srgb, var(--valentus-ink-muted) 55%, transparent) var(--valentus-canvas);
     }
   }
 }
 
 /* Content viewport — wide tables scroll inside the article, not over the TOC.
-   Overflow lives on the wrapper (adt-table-scroll.js), never on the <table>. */
-main.adt-article,
-main.adt-article > .content {
+   Overflow lives on the wrapper (valentus-table-scroll.js), never on the <table>. */
+main.valentus-article,
+main.valentus-article > .content {
   min-width: 0;
   max-width: 100%;
 }
 
 .doc .tablecontainer,
-.doc .adt-table-scroll {
+.doc .valentus-table-scroll {
   display: block;
   max-width: 100%;
   overflow-x: auto;
@@ -1488,7 +1488,7 @@ main.adt-article > .content {
 }
 
 .doc .tablecontainer > table.tableblock,
-.doc .adt-table-scroll > table.tableblock {
+.doc .valentus-table-scroll > table.tableblock {
   max-width: none;
 }
 

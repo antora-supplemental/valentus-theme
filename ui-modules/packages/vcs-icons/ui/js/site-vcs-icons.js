@@ -2,7 +2,7 @@
 
 /**
  * @deprecated Antora hubs: use `@antora-supplemental/page-edit` (baked Edit + icons)
- * and the `adt-vcs-icon-id` Handlebars helper for header marks. This script is no
+ * and the `valentus-vcs-icon-id` Handlebars helper for header marks. This script is no
  * longer loaded by Valentus footer-scripts; kept only for optional Download-button
  * replacement on Default UI leftovers.
  */
@@ -42,10 +42,10 @@
   function setVcsImageSrc(img, base, iconId) {
     img.onerror = function adtVcsPathRetry() {
       img.onerror = null;
-      if (img.getAttribute("data-adt-vcs-path-retry") === "1") return;
+      if (img.getAttribute("data-valentus-vcs-path-retry") === "1") return;
       const altBase = document.querySelector("#site-script")?.dataset?.uiRootPath;
       if (!altBase || altBase === base) return;
-      img.setAttribute("data-adt-vcs-path-retry", "1");
+      img.setAttribute("data-valentus-vcs-path-retry", "1");
       img.src = vcsIconUrl(altBase, iconId);
     };
     img.src = vcsIconUrl(base, iconId);

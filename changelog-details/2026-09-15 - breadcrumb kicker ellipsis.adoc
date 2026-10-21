@@ -8,7 +8,7 @@
 
 == Context
 
-Long component titles in the mast kicker were clipped flush at the chip edge with no trailing ellipsis, even though `text-overflow: ellipsis` was already declared on `.adt-bc-kicker-label`.
+Long component titles in the mast kicker were clipped flush at the chip edge with no trailing ellipsis, even though `text-overflow: ellipsis` was already declared on `.valentus-bc-kicker-label`.
 
 == Cause
 
@@ -16,8 +16,8 @@ Long component titles in the mast kicker were clipped flush at the chip edge wit
 
 == Changes
 
-* `.adt-bc-kicker-label` / `.adt-bc-kicker-version` use `display: block`, `white-space: nowrap`, `flex: 1 1 auto`, and `min-width: 0` so the label shrinks beside the chevron and ellipsis paints.
-* Vertical centering stays on the parent `.adt-bc-kicker` (`inline-flex` + `align-items: center` + locked `--adt-bc-ctrl-h`).
+* `.valentus-bc-kicker-label` / `.valentus-bc-kicker-version` use `display: block`, `white-space: nowrap`, `flex: 1 1 auto`, and `min-width: 0` so the label shrinks beside the chevron and ellipsis paints.
+* Vertical centering stays on the parent `.valentus-bc-kicker` (`inline-flex` + `align-items: center` + locked `--valentus-bc-ctrl-h`).
 
 == Files
 

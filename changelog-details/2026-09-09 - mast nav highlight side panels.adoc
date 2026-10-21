@@ -4,9 +4,9 @@
 
 == Summary
 
-Mast version control is mode-aware (`hide` / `plain` / `menu`). Kickers look like links until hover. Nav current-row highlights clip with overflowing labels. Side-rail panel wash is optional in light mode (`adt-side-panels`). In-doc TOC is styled as its own muted block, separate from page-context metadata tables.
+Mast version control is mode-aware (`hide` / `plain` / `menu`). Kickers look like links until hover. Nav current-row highlights clip with overflowing labels. Side-rail panel wash is optional in light mode (`valentus-side-panels`). In-doc TOC is styled as its own muted block, separate from page-context metadata tables.
 
 == Options
 
-* `html.adt-side-panels` / `body.adt-side-panels` / `html[data-adt-side-panels=true]` — enable light-mode nav/TOC panel wash (`--adt-side-panel-bg`).
-* `--adt-side-panel-radius` (default `2px`), `--adt-side-panel-pad`, `--adt-nav-scroll-fade`.
+* `html.valentus-side-panels` / `body.valentus-side-panels` / `html[data-valentus-side-panels=true]` — enable light-mode nav/TOC panel wash (`--valentus-side-panel-bg`).
+* `--valentus-side-panel-radius` (default `2px`), `--valentus-side-panel-pad`, `--valentus-nav-scroll-fade`.

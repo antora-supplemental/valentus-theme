@@ -4,11 +4,11 @@
 
 == Summary
 
-The `adt-read-width` segmented control keeps a rounded selector bar and slightly rounded button hit areas. The three measure icons were also rounded (`<rect … rx="1">`), which nested soft corners inside soft chrome and weakened the “column width” metaphor.
+The `valentus-read-width` segmented control keeps a rounded selector bar and slightly rounded button hit areas. The three measure icons were also rounded (`<rect … rx="1">`), which nested soft corners inside soft chrome and weakened the “column width” metaphor.
 
 == Change
 
-* Remove `rx` from the narrow / comfortable / wide SVG rectangles in `adt-read-width.hbs`.
+* Remove `rx` from the narrow / comfortable / wide SVG rectangles in `valentus-read-width.hbs`.
 * Set icon stroke joins to miter (butt caps) so stroked corners stay crisp.
 * Edit the `read-width` UI module source and mirror into `supplemental-ui` (bundled consumer).
 

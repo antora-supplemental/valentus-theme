@@ -9,6 +9,6 @@ Tree-nav labels (especially nav-typology nowrap rows) must be reachable via hori
 == Behavior
 
 * `nav.nav-menu` is `overflow-x/y: auto`; links use `width: max-content` so long labels widen the scrollport.
-* `site-visual.js` toggles `adt-nav-overflow-start` / `adt-nav-overflow-end` from `scrollLeft` / `scrollWidth`.
+* `site-visual.js` toggles `valentus-nav-overflow-start` / `valentus-nav-overflow-end` from `scrollLeft` / `scrollWidth`.
 * CSS `mask-image` fades only the overflowing edge(s); both edges fade when scrolled mid-content; no fade when fully scrolled into view or when nothing overflows.
 * The same mask soft-clips active-row highlight fill with the text.

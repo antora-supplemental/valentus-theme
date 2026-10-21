@@ -2,34 +2,34 @@
 
 == Problem
 
-Search lived in the left nav column (`.adt-nav-search` inside `.nav-panel-menu`). That panel uses `overflow-y: auto`, so the Lunr results dropdown was clipped at the column boundary.
+Search lived in the left nav column (`.valentus-nav-search` inside `.nav-panel-menu`). That panel uses `overflow-y: auto`, so the Lunr results dropdown was clipped at the column boundary.
 
-`adt-read-width` sat inside `article.doc` in the center column, so the control was part of the 3-col measure rather than a chrome tool above it.
+`valentus-read-width` sat inside `article.doc` in the center column, so the control was part of the 3-col measure rather than a chrome tool above it.
 
 == Fix
 
-Introduce `.adt-shell` wrapping:
+Introduce `.valentus-shell` wrapping:
 
-* `.adt-tool-band` — full shell width above the columns: search (left, nav-width) + read-width (centered over the doc column) + TOC-width spacer
-* `.body.adt-body` — peers only: `nav | main | TOC`
+* `.valentus-tool-band` — full shell width above the columns: search (left, nav-width) + read-width (centered over the doc column) + TOC-width spacer
+* `.body.valentus-body` — peers only: `nav | main | TOC`
 
-Search keeps `/` focus shortcut and the `/` hint badge. Equal `--adt-side-width` for nav/TOC is unchanged. Tool-band ancestors use `overflow: visible` and a raised `z-index` so the dropdown can paint over the columns.
+Search keeps `/` focus shortcut and the `/` hint badge. Equal `--valentus-side-width` for nav/TOC is unchanged. Tool-band ancestors use `overflow: visible` and a raised `z-index` so the dropdown can paint over the columns.
 
 == DOM (desktop)
 
 ----
-.adt-shell
-  .adt-tool-band
-    .search.adt-nav-search.adt-tool-search
-    .adt-tool-band-center > .adt-read-width
-    .adt-tool-toc-slot
-  .body.adt-body
+.valentus-shell
+  .valentus-tool-band
+    .search.valentus-nav-search.valentus-tool-search
+    .valentus-tool-band-center > .valentus-read-width
+    .valentus-tool-toc-slot
+  .body.valentus-body
     .nav-container > … > nav.nav-tree-only
-    main.adt-article > … > article.doc
+    main.valentus-article > … > article.doc
     aside.toc.sidebar
 ----
 
 == Files
 
-* Partials: `adt-tool-band.hbs`, `body.hbs`, `nav-menu.hbs`, `article.hbs` (supplemental + `doc-layout` module)
+* Partials: `valentus-tool-band.hbs`, `body.hbs`, `nav-menu.hbs`, `article.hbs` (supplemental + `doc-layout` module)
 * CSS: `site-doc-layout.css`, `site-visual.css`, `site-read-width.css`, `site-extra.css`

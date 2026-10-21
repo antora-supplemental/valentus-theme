@@ -16,7 +16,7 @@ This approach means you don't need to fork or rebuild the Antora Default UI.
 This Handlebars partial is injected into the `<head>` of every page.
 It:
 
-. Applies the interim paint-hold (`html.adt-fouc-pending`)
+. Applies the interim paint-hold (`html.valentus-fouc-pending`)
 . Loads the Valentus stylesheet chain (`site-extra`, `site-doc-layout`, `site-visual`, `site-read-width`, `site-font-size`, `site-math`)
 . Runs preference FOUC scripts (dark mode, read-width, font-size) and releases paint after webfonts
 

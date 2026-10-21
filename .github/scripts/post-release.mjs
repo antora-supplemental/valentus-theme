@@ -98,7 +98,7 @@ function lineEntry(tagName, version, antora = ANTORA_MAJOR) {
 
 function updateRollingRelease(tagName, commitSha, assetPath, title, notes) {
   shQuiet(`gh release delete ${tagName} --yes --cleanup-tag -R ${REPO}`);
-  const notesFile = join(tmpdir(), `adt-release-notes-${tagName}.md`);
+  const notesFile = join(tmpdir(), `valentus-release-notes-${tagName}.md`);
   writeFileSync(notesFile, notes);
   try {
     sh(
@@ -204,7 +204,7 @@ for (const line of minorLinesFromTags(tags, major)) {
     continue;
   }
 
-  const tmp = mkdtempSync(join(tmpdir(), "adt-line-"));
+  const tmp = mkdtempSync(join(tmpdir(), "valentus-line-"));
   sh(`gh release download ${highest} -p ui-bundle.zip -D "${tmp}" -R ${REPO}`);
   updateRollingRelease(
     tag,

@@ -4,7 +4,7 @@
 
 == Summary
 
-`.page-context-table` must not inherit Valentus/dark-mode doc table zebra (`html.dark-theme table tbody tr:nth-child(even)`). Theme tokens now give light mode a subtle surface wash + thin outer/inner borders, muted type at in-doc TOC scale, and explicit transparent row resets. Side-rail panel background applies to the nav menu (padded, 2px radius) instead of the full-height `.nav` column so dark panels match content size; light remains clean unless `adt-side-panels` is on.
+`.page-context-table` must not inherit Valentus/dark-mode doc table zebra (`html.dark-theme table tbody tr:nth-child(even)`). Theme tokens now give light mode a subtle surface wash + thin outer/inner borders, muted type at in-doc TOC scale, and explicit transparent row resets. Side-rail panel background applies to the nav menu (padded, 2px radius) instead of the full-height `.nav` column so dark panels match content size; light remains clean unless `valentus-side-panels` is on.
 
 == Related
 

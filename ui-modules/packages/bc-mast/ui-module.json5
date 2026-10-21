@@ -10,12 +10,12 @@
   conflicts: [],
   slots: {
     foot: {
-      scripts: ["js/site-adt-accordion.js"],
+      scripts: ["js/site-valentus-accordion.js"],
     },
   },
   ui: {
     partials: {
-      provide: ["adt-bc-cluster", "adt-bc-trail", "adt-doc-mast"],
+      provide: ["valentus-bc-cluster", "valentus-bc-trail", "valentus-doc-mast"],
       replace: ["breadcrumbs"],
     },
   },

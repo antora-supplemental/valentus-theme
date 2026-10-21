@@ -40,7 +40,7 @@ For each row: the stock behavior, what Valentus does, and the upstream tracker.
 
 | Condensed (mobile) nav drawer shows page content through a transparent panel
 | Valentus desktop tokens set nav background transparent for a flush side column; same token applied to the overlay drawer
-| Opaque `--adt-nav-bg` / elevated fill below 1024px; desktop stays transparent
+| Opaque `--valentus-nav-bg` / elevated fill below 1024px; desktop stays transparent
 | Valentus-only (Default UI `--nav-background` is already opaque panel color)
 
 | Search field overlaps site title at high zoom / narrow width
@@ -60,7 +60,7 @@ For each row: the stock behavior, what Valentus does, and the upstream tracker.
 
 | Footer sits under short content instead of the viewport bottom
 | Default UI does not flex-grow the body column between header and footer
-| Valentus shell: `min-height` + flex grow on `.adt-shell` / `.body.adt-body` so `footer.footer` stays at the viewport bottom
+| Valentus shell: `min-height` + flex grow on `.valentus-shell` / `.body.valentus-body` so `footer.footer` stays at the viewport bottom
 | https://gitlab.com/antora/antora-ui-default/-/merge_requests/211[!211]
 
 | TOC “On this page” heading and article title use different top spacing, so supplemental themes cannot share one rail inset token
@@ -75,7 +75,7 @@ For each row: the stock behavior, what Valentus does, and the upstream tracker.
 
 | Brief layout “settle” / FOUC on refresh when theme or brand CSS loads *after* `site.css`
 | Default UI emits one `site.css`; supplemental UI (and site brand overlays) often add more `<link rel="stylesheet">` layers that reflow chrome after first paint
-| *Interim hack:* paint-hold (`html.adt-fouc-pending`) in Valentus `head-meta` until layered CSS + preference FOUC scripts finish; remove when upstream ships single-pass tokens / documented no-cascade path. Sites that override `head-meta.hbs` must copy the pattern
+| *Interim hack:* paint-hold (`html.valentus-fouc-pending`) in Valentus `head-meta` until layered CSS + preference FOUC scripts finish; remove when upstream ships single-pass tokens / documented no-cascade path. Sites that override `head-meta.hbs` must copy the pattern
 | Prefer `@import` into UI-build `site.css` over post-`site.css` links: https://gitlab.com/antora/antora-ui-default/-/merge_requests/213[!213]. Dark-mode FOUC script: https://gitlab.com/antora/antora-ui-default/-/merge_requests/207[!207]
 |===
 
@@ -83,7 +83,7 @@ For each row: the stock behavior, what Valentus does, and the upstream tracker.
 
 These are intentional differentiators — useful when proposing Valentus as a richer default, not as Default UI patches.
 
-* *Read-width control (desktop)* — tiers set `--adt-doc-max` with a shrink-wrapping 3-column shell.
+* *Read-width control (desktop)* — tiers set `--valentus-doc-max` with a shrink-wrapping 3-column shell.
 * *Font-size switcher (condensed)* — read-width is weak on mobile; Valentus swaps in a small/medium/large text control in the tool band.
 * *Breadcrumb mast* — component/version kickers with stroke chevrons, home control, edit affordances.
 * *Search or Ask omnibox* — https://github.com/antora-supplemental/antora-search-chat[`antora-search-chat`] wraps `@antora/lunr-extension` (no fork): conjoined scope select, dual-tone placeholders, optional Ask backends.
