@@ -13,7 +13,7 @@
       stylesheets: ["css/site-doc-layout.css", "css/site-visual.css"],
     },
     foot: {
-      scripts: ["js/site-visual.js", "js/valentus-table-scroll.js"],
+      scripts: ["js/site-page-toc.js", "js/site-visual.js", "js/valentus-table-scroll.js"],
     },
   },
   ui: {

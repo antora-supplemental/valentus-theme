@@ -21,6 +21,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
+== 3.0.8 — 2026-10-21
+
+=== Fixed
+
+* **Zoned page TOC:** `data-page-toc-root` on the body zone; `site-page-toc.js` rebuilds the aside Contents list after Default UI `site.js` (recreates the rail when needed). Exposes `window.ValentusPageToc.rebuild` for `@antora-supplemental/soft-nav-page-toc`. **UI bundle rebuild required.**
+
 == 3.0.7 — 2026-10-21
 
 * **Source line above the title:** `.page-context-source-line` in `[data-zone="header"]` uses tight margin below the muted Source row and generous margin under `.valentus-page-header` (matches `@antora-supplemental/page-edit` **0.3.3**). **UI bundle rebuild required** for published `ui-bundle.zip`.
@@ -48,6 +54,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 === Fixed
 
 * **Mobile nav drawer:** condensed overlay nav paints `var(--valentus-canvas)` directly so supplemental brand layers that re-set `--valentus-nav-bg: transparent` after `site-visual.css` no longer leave the site-nav-tree drawer fully transparent.
+
+== 3.0.8 — 2026-10-21
+
+=== Fixed
+
+* **Zoned page TOC:** `data-page-toc-root` on the body zone; `site-page-toc.js` rebuilds the aside Contents list after Default UI `site.js` (recreates the rail when needed). Exposes `window.ValentusPageToc.rebuild` for `@antora-supplemental/soft-nav-page-toc`. **UI bundle rebuild required.**
 
 == 3.0.2 — 2026-10-21
 
