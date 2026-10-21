@@ -41,9 +41,22 @@
       })
     })
   }
-  if (doc.readyState === 'loading') {
-    doc.addEventListener('DOMContentLoaded', initBreadcrumbDropdowns)
-  } else {
+  function start () {
     initBreadcrumbDropdowns()
+  }
+
+  if (typeof adtChromeBind === 'function') {
+    adtChromeBind({ onBoot: start, onLoaded: start })
+  } else {
+    function onSoftNavLoaded (fn) {
+      if (window.SoftNav && typeof SoftNav.on === 'function') SoftNav.on('loaded', fn)
+      else doc.addEventListener('soft-nav:loaded', function (e) { fn(e.detail || {}) })
+    }
+    if (doc.readyState === 'loading') {
+      doc.addEventListener('DOMContentLoaded', start)
+    } else {
+      start()
+    }
+    onSoftNavLoaded(start)
   }
 })()
