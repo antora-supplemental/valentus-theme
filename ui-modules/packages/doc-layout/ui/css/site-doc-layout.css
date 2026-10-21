@@ -456,7 +456,8 @@ a.valentus-header-title:focus {
   fill: none;
 }
 
-/* Theme toggle matches other header icon buttons (dark-mode JS adds valentus-header-icon-btn). */
+/* Theme toggle matches GitHub icon btn (site-extra .theme-toggle padding/height neutralized). */
+.header.valentus-header .navbar .navbar-end button.theme-toggle,
 .header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn {
   min-width: var(--valentus-header-ctrl) !important;
   min-height: var(--valentus-header-ctrl) !important;
@@ -470,20 +471,26 @@ a.valentus-header-title:focus {
   flex-shrink: 0;
   border: none;
   border-radius: 0.2rem;
+  font-size: inherit;
+  line-height: 1;
+  text-transform: none;
   color: var(--valentus-header-bar-fg) !important;
   background: transparent !important;
   cursor: pointer;
 }
 
+.header.valentus-header .navbar .navbar-end button.theme-toggle:hover,
 .header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn:hover {
   background: var(--valentus-header-bar-hover) !important;
 }
 
+.header.valentus-header .navbar .navbar-end button.theme-toggle:focus,
 .header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn:focus {
   outline: none;
   background: transparent !important;
 }
 
+.header.valentus-header .navbar .navbar-end button.theme-toggle:focus-visible,
 .header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn:focus-visible {
   background: var(--valentus-header-bar-hover) !important;
   outline: 2px solid var(--valentus-header-bar-fg);
@@ -885,7 +892,7 @@ html.dark-theme .valentus-breadcrumb-trail-text {
   color: var(--valentus-accent);
 }
 
-/* Source line: “Source: View | Edit” (from @antora-supplemental/page-edit) sits directly under the page title,
+/* Source line: “Source:” + VCS mark + View | Edit (from @antora-supplemental/page-edit) sits directly under the page title,
    above the page-context lead (byline + metadata table). Same position on every page; never a table row.
    Wraps onto its own line on narrow screens. */
 .page-context-source-line,
