@@ -23,6 +23,10 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+== [3.0.0] - 2026-10-21
+
+Public label: *3.0.0+antora.3* (Antora 3).
+
 === Changed
 
 * **Breaking:** theme layout namespace `adt-*` → `valentus-*` (CSS variables, classes, partials, helpers, and `data-valentus-*` hooks). Custom supplemental UI that copied Valentus hooks must rename in lockstep (see `antora-ui-chassis` `packages/soft-nav-context/NAMING.adoc`).
