@@ -15,11 +15,15 @@ on:
     branches: [main, master]
     paths:
       - "lib/**"
+      - "bin/**"
       - "ui/**"
       - "supplemental-ui/**"
       - "ui-modules/**"
       - "packages/**"
       - "demo/**"
+      - "scripts/**"
+      - "playbook.fragment.yml"
+      - "playbook*.yml"
       - "package.json"
       - "pnpm-lock.yaml"
       - "package-lock.json"
