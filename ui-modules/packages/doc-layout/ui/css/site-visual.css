@@ -20,6 +20,8 @@
   --valentus-admonition-caution: var(--caution-color, #a0439c);
   --valentus-border: #d9dee7;
   --soft-nav-context: var(--valentus-canvas);
+  /* Opaque top-bar / mast surface (was --adt-chrome before 3.0.0; keep defined or bars go transparent). */
+  --valentus-chrome: var(--valentus-canvas);
   --valentus-chrome-border: var(--valentus-border);
   --valentus-nav-bg: transparent;
   --valentus-nav-item-toggle: var(--valentus-ink-muted);
@@ -85,6 +87,8 @@ html.dark-theme {
   --valentus-accent-soft: rgba(45, 212, 191, 0.12);
   --valentus-border: rgba(255, 255, 255, 0.09);
   --soft-nav-context: var(--valentus-canvas);
+  /* Opaque top-bar / mast surface (was --adt-chrome before 3.0.0; keep defined or bars go transparent). */
+  --valentus-chrome: var(--valentus-canvas);
   --valentus-chrome-border: var(--valentus-border);
   --valentus-nav-bg: transparent;
   /* Side-rail wash stays off until html.valentus-side-panels (same as light). */

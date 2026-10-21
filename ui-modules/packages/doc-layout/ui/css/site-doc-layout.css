@@ -20,6 +20,8 @@
   --valentus-accent-soft: rgba(15, 118, 110, 0.1);
   --valentus-border: #d9dee7;
   --soft-nav-context: var(--valentus-canvas);
+  /* Opaque top-bar / mast surface (was --adt-chrome before 3.0.0; keep defined or bars go transparent). */
+  --valentus-chrome: var(--valentus-canvas);
   --valentus-chrome-border: var(--valentus-border);
   /* Component + version breadcrumb kickers (same color for both) */
   --valentus-bc-kicker-fg: var(--valentus-accent);
@@ -82,6 +84,8 @@ html.dark-theme {
   --valentus-accent-soft: rgba(45, 212, 191, 0.12);
   --valentus-border: rgba(255, 255, 255, 0.09);
   --soft-nav-context: var(--valentus-canvas);
+  /* Opaque top-bar / mast surface (was --adt-chrome before 3.0.0; keep defined or bars go transparent). */
+  --valentus-chrome: var(--valentus-canvas);
   --valentus-chrome-border: var(--valentus-border);
   --valentus-bc-kicker-fg: var(--valentus-accent);
   --valentus-bc-kicker-bg: var(--valentus-accent-soft);
