@@ -7,7 +7,7 @@ That is separate from gallery classification topics (`antora-theme`, `antora-lig
 
 == Why
 
-GitHub Search (`topic:valentus-theme`) is the fastest way to find every docs playbook that depends on this theme when chasing regressions (for example font-size chrome, `head-meta` overlays, or rolling `v2` pins).
+GitHub Search (`topic:valentus-theme`) is the fastest way to find every docs playbook that depends on this theme when chasing regressions (for example font-size chrome, `head-meta` overlays, or rolling `v3` pins).
 
 Without the product topic, dependents only show up via brittle code search for the release URL.
 
@@ -24,7 +24,7 @@ On the repository that owns the Antora playbook:
 Tag the **provider** your playbook declares.
 
 * **No compose pack:** tag `valentus-theme` when this bundle URL (or vendored supplemental-ui) is yours.
-* **facto-stack hub:** tag `facto-stack` **only**. The pack is the provider and pairs with this bundle, so the hub does *not* also carry `valentus-theme`, and not linkinator, page-edit, antora-search-chat, nav-typology, page-context, site-nav-tree, soft-nav-page-toc, or any other member. The bundle URL is a rolling `v2` asset with no pin to bump.
+* **facto-stack hub:** tag `facto-stack` **only**. The pack is the provider and pairs with this bundle, so the hub does *not* also carry `valentus-theme`, and not linkinator, page-edit, antora-search-chat, nav-typology, page-context, site-nav-tree, soft-nav-page-toc, or any other member. The bundle URL is a rolling `v3` asset with no pin to bump.
 
 Hub checklist: link:https://docs.antora-supplemental.org/docs/hub-github-topics/[Hub GitHub topics^].
 

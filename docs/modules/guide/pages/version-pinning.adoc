@@ -66,11 +66,11 @@ ui:
 ----
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v2.0.0/ui-bundle.zip
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v3.0.0/ui-bundle.zip
     snapshot: true
 ----
 
-Pin URLs use the *semver tag* (`v2.0.0`), not the `+antora.N` label.
+Pin URLs use the *semver tag* (`v3.0.0`), not the `+antora.N` label.
 *Gets:* nothing new until you change the URL.
 *Risk:* lowest—you know exactly what CI builds.
 *Good for:* sites with heavy supplemental overrides that assume specific partials, CSS, or JS.
@@ -83,14 +83,15 @@ Use the maintainer rolling tag for the Valentus major line you want:
 ----
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v2/ui-bundle.zip
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v3/ui-bundle.zip
     snapshot: true
 ----
 
-*Gets:* latest **v2.x.x** (minors and patches within Valentus major 2) on each build.
-*Risk:* low for most sites—semver contract keeps minors additive; Valentus majors get a new line tag (`v3`, …).
+*Gets:* latest **v3.x.x** (minors and patches within Valentus major 3) on each build.
+*Risk:* low for most sites—semver contract keeps minors additive; Valentus majors get a new line tag (`v4`, …).
 *Good for:* most production sites that want fixes without hand-editing the playbook every patch.
 
+Stay on Valentus 2.x with `.../v2/ui-bundle.zip` until you port supplemental hooks for the 3.0.0 `valentus-*` rename.
 Stay on Valentus 1.x (pre-redesign) with `.../v1/ui-bundle.zip` until you schedule a migration.
 
 This is the **recommended default** and what install docs show for current releases.
@@ -125,6 +126,12 @@ This theme publishes **moving** Git tags and prerelease aliases (updated by the 
 [cols="2,3", options="header"]
 |===
 | Pin URL | Resolves to
+
+| `.../releases/download/v3.0/ui-bundle.zip`
+| Latest **v3.0.x** patch
+
+| `.../releases/download/v3/ui-bundle.zip`
+| Latest **v3.x.x** (minor + patch within Valentus major 3)
 
 | `.../releases/download/v2.0/ui-bundle.zip`
 | Latest **v2.0.x** patch
@@ -172,13 +179,13 @@ Sites with forked supplemental partials should still review *patches*—renamed 
 
 For a site with deep supplemental overlays:
 
-. Pin rolling line `v2` in `antora-playbook.yml` (or exact `v2.0.0` if overrides are brittle). Stay on `v1` until you port overlays for the redesign.
-. Add Renovate with `~2.0.0` or `~2.1.0` on the playbook URL (see `examples/renovate.json`).
+. Pin rolling line `v3` in `antora-playbook.yml` (or exact `v3.0.0` if overrides are brittle). Stay on `v2` until you port `valentus-*` hooks; stay on `v1` for the pre-redesign line.
+. Add Renovate with `~3.0.0` on the playbook URL (see `examples/renovate.json`).
 . On each Renovate PR: read the theme changelog (including the `+antora.N` label), run `antora` locally, spot-check header, nav, tool-band, and dark mode.
 . Bump Valentus minor/major only when you schedule it—treat like a small migration (port supplemental JS/CSS if needed).
 
 == Related
 
-* xref:installation.adoc[Installation] — `v2` rolling-line quick start
+* xref:installation.adoc[Installation] — `v3` rolling-line quick start
 * xref:configuration.adoc#site-keys[Configuration — `site.keys`] — branding without header forks
 * link:https://github.com/antora-supplemental/valentus-theme/releases[GitHub Releases]

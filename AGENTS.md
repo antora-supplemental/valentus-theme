@@ -4,7 +4,7 @@ Project facts for agents. Workstation/env facts live only in `$CODE_ROOT/MEMORIE
 
 ## Consumers / pin
 
-Docs hubs pin Valentus `ui-bundle.zip` (prefer rolling `.../releases/download/v2/ui-bundle.zip` + `snapshot: true`):
+Docs hubs pin Valentus `ui-bundle.zip` (prefer rolling `.../releases/download/v3/ui-bundle.zip` + `snapshot: true`):
 
 - `FoodTruckNerdz/docs` (also `site/release_info.json` label)
 - `antora-supplemental/docs`
@@ -12,7 +12,7 @@ Docs hubs pin Valentus `ui-bundle.zip` (prefer rolling `.../releases/download/v2
 - `dev-centr/docs`
 - HCI Nerdz docs, connectome-fs docs, and other org hubs using the same pattern
 
-After a Valentus patch release: update any exact pins / `release_info` label, then `gh workflow run` (or push) so Antora re-fetches the rolling `v2` asset.
+After a Valentus patch release: update any exact pins / `release_info` label, then `gh workflow run` (or push) so Antora re-fetches the rolling `v3` asset.
 
 ## Antora UI quirks
 
