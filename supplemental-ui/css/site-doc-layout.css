@@ -456,8 +456,9 @@ a.valentus-header-title:focus {
   fill: none;
 }
 
-/* Theme toggle matches other header icon buttons (dark-mode JS adds valentus-header-icon-btn). */
-.header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn {
+/* Theme toggle matches other header icon buttons (JS adds valentus-header-icon-btn; button.theme-toggle covers stale bundle JS). */
+.header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn,
+.header.valentus-header .navbar .navbar-end button.theme-toggle {
   min-width: var(--valentus-header-ctrl) !important;
   min-height: var(--valentus-header-ctrl) !important;
   width: var(--valentus-header-ctrl) !important;
@@ -475,16 +476,19 @@ a.valentus-header-title:focus {
   cursor: pointer;
 }
 
-.header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn:hover {
+.header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn:hover,
+.header.valentus-header .navbar .navbar-end button.theme-toggle:hover {
   background: var(--valentus-header-bar-hover) !important;
 }
 
-.header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn:focus {
+.header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn:focus,
+.header.valentus-header .navbar .navbar-end button.theme-toggle:focus {
   outline: none;
   background: transparent !important;
 }
 
-.header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn:focus-visible {
+.header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn:focus-visible,
+.header.valentus-header .navbar .navbar-end button.theme-toggle:focus-visible {
   background: var(--valentus-header-bar-hover) !important;
   outline: 2px solid var(--valentus-header-bar-fg);
   outline-offset: 2px;

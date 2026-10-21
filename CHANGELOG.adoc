@@ -21,6 +21,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
+== 3.0.4 — 2026-10-21
+
+=== Fixed
+
+* **Header theme toggle (production hubs):** pin `antora-dark-mode` **v1.4.6** in release merge (v1.4.5 `ui-bundle.zip` still shipped pre-Valentus toggle JS/CSS). `site-doc-layout.css` sizes `button.theme-toggle` like other header icon controls when JS omits `valentus-header-icon-btn`. Rebuild rolling `v3` `ui-bundle.zip`.
+
 == 3.0.3 — 2026-10-21
 
 === Fixed
