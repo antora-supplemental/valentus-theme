@@ -881,6 +881,21 @@ html.dark-theme .valentus-breadcrumb-trail-text {
   color: var(--valentus-accent);
 }
 
+/* Source line: “Source: View | Edit” (from @antora-supplemental/page-edit) sits directly under the page title,
+   above the page-context lead (byline + metadata table). Same position on every page; never a table row.
+   Wraps onto its own line on narrow screens. */
+.page-context-source-line,
+.doc .page-context-source-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  margin: 0 0 0.5rem;
+  font-size: 0.82em;
+  line-height: 1.35;
+  color: var(--valentus-ink-muted, #6b7380);
+}
+
 /* “View | Edit” in page-context lead table (from @antora-supplemental/page-edit); breadcrumb stub is empty. */
 .page-context-source-actions,
 .doc .page-context-source-actions,
