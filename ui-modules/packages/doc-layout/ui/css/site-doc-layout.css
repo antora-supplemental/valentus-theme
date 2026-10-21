@@ -902,6 +902,15 @@ html.dark-theme .valentus-breadcrumb-trail-text {
   color: var(--valentus-accent);
 }
 
+/* Zoned article contract (`article.hbs`: header / meta / body / footer). */
+.doc[data-zone-root] .doc-zone--meta:empty {
+  display: none;
+}
+
+.doc[data-zone-root] .doc-zone--header .page-context-source-line {
+  margin-top: 0.35rem;
+}
+
 /* Source line: “Source:” + VCS mark + View | Edit (from @antora-supplemental/page-edit) sits directly under the page title,
    above the page-context lead (byline + metadata table). Same position on every page; never a table row.
    Wraps onto its own line on narrow screens. */
