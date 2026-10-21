@@ -172,9 +172,11 @@
   }
 
   function toggleButtonClassName() {
-    const useLightNavbarChrome = document.querySelector(".header.valentus-header");
-    if (useLightNavbarChrome) {
+    if (document.querySelector(".header.valentus-header")) {
       return "navbar-item valentus-header-icon-btn theme-toggle";
+    }
+    if (document.querySelector(".header.adt-header")) {
+      return "navbar-item adt-header-icon-btn theme-toggle";
     }
     return "navbar-item theme-toggle";
   }
@@ -187,6 +189,7 @@
 
     const existingToggle = document.getElementById("theme-toggle");
     if (existingToggle) {
+      existingToggle.className = toggleButtonClassName();
       if (existingToggle.dataset.adtThemeBound !== "1") {
         existingToggle.dataset.adtThemeBound = "1";
         existingToggle.addEventListener("click", toggleTheme);

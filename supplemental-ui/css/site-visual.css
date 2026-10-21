@@ -550,6 +550,7 @@ footer.footer a {
 }
 
 .header.valentus-header .navbar .navbar-end .valentus-header-icon-btn,
+.header.valentus-header .navbar .navbar-end button.theme-toggle,
 .header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn {
   border-radius: var(--valentus-radius-sm) !important;
   transition: var(--valentus-transition);

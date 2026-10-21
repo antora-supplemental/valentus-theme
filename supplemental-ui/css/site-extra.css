@@ -483,7 +483,8 @@ html.dark-theme .home-link {
    Light-mode navbar tone: playbook site.keys.dark_mode_navbar → meta[name=dm-navbar] → html[data-dm-navbar].
    dark (default): Antora default UI black top bar — inherit white icon from navbar.
    light: light top bar — dark icon; set dark_mode_navbar: light or meta content="light". */
-.theme-toggle {
+/* Default UI navbar only — Valentus header uses .valentus-header-icon-btn (site-doc-layout.css). */
+.theme-toggle:not(.valentus-header-icon-btn) {
   background: none;
   border: 0;
   cursor: pointer;
@@ -496,23 +497,23 @@ html.dark-theme .home-link {
   height: 100%;
 }
 
-.navbar .theme-toggle {
+.navbar .theme-toggle:not(.valentus-header-icon-btn) {
   text-transform: none;
 }
 
-html:not(.dark-theme):not([data-dm-navbar="light"]) .theme-toggle:hover {
+html:not(.dark-theme):not([data-dm-navbar="light"]) .theme-toggle:not(.valentus-header-icon-btn):hover {
   background-color: #1f2125;
 }
 
-html[data-dm-navbar="light"]:not(.dark-theme) .theme-toggle {
+html[data-dm-navbar="light"]:not(.dark-theme) .theme-toggle:not(.valentus-header-icon-btn) {
   color: #1a1a1a;
 }
 
-html[data-dm-navbar="light"]:not(.dark-theme) .theme-toggle:hover {
+html[data-dm-navbar="light"]:not(.dark-theme) .theme-toggle:not(.valentus-header-icon-btn):hover {
   background-color: rgba(0, 0, 0, 0.07);
 }
 
-.theme-toggle .theme-icon {
+.theme-toggle:not(.valentus-header-icon-btn) .theme-icon {
   width: 18px;
   height: 18px;
   display: block;
@@ -523,13 +524,21 @@ html[data-dm-navbar="light"]:not(.dark-theme) .theme-toggle:hover {
   stroke-linejoin: round;
 }
 
-.theme-toggle .theme-icon path,
-.theme-toggle .theme-icon circle {
+.theme-toggle:not(.valentus-header-icon-btn) .theme-icon path,
+.theme-toggle:not(.valentus-header-icon-btn) .theme-icon circle {
   fill: none;
 }
 
-html.dark-theme .theme-toggle:hover {
+html.dark-theme .theme-toggle:not(.valentus-header-icon-btn):hover {
   background-color: #2c2e33;
+}
+
+/* Valentus header: square icon control even when JS omits valentus-header-icon-btn (stale bundle). */
+.header.valentus-header .navbar .navbar-end button.theme-toggle {
+  padding: 0;
+  height: auto;
+  min-height: 0;
+  font-size: inherit;
 }
 
 /*
