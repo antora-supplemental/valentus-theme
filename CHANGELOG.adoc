@@ -23,6 +23,10 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == [Unreleased]
 
+=== Fixed
+
+* **Pages demo build:** pin `@antora-supplemental/antora-search-chat` at `v0.1.20` so `{{> valentus-search-chat}}` resolves (demo still used `v0.1.4` / `adt-search-chat` partial stem).
+
 == [3.0.0] - 2026-10-21
 
 Public label: *3.0.0+antora.3* (Antora 3).
