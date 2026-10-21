@@ -595,11 +595,15 @@ footer.footer a {
 
 .adt-breadcrumb-trail .adt-breadcrumb-trail-link,
 .adt-breadcrumb-trail--current .adt-breadcrumb-trail-link,
-.adt-breadcrumb-trail--current .adt-breadcrumb-trail-text,
-.adt-breadcrumb-trail-text {
+.adt-breadcrumb-trail--current .adt-breadcrumb-trail-text {
   font-weight: 400 !important;
   text-decoration: underline;
   text-underline-offset: 0.12em;
+}
+
+.adt-breadcrumb-trail:not(.adt-breadcrumb-trail--current) .adt-breadcrumb-trail-text {
+  font-weight: 400 !important;
+  text-decoration: none;
 }
 
 .adt-breadcrumb-sep {

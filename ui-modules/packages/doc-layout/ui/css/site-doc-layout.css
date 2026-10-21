@@ -854,15 +854,20 @@ main.adt-article > .content > article.doc {
   overflow: hidden;
 }
 
-/* Trail: accent + underline for links, folder nodes, and current page (uniform mast). */
+/* Trail: accent + underline for visitable links and current page; plain folder labels stay un-underlined. */
 .adt-breadcrumb-trail .adt-breadcrumb-trail-link,
 .adt-breadcrumb-trail--current .adt-breadcrumb-trail-link,
-.adt-breadcrumb-trail--current .adt-breadcrumb-trail-text,
-.adt-breadcrumb-trail-text {
+.adt-breadcrumb-trail--current .adt-breadcrumb-trail-text {
   color: var(--adt-accent);
   font-weight: 400;
   text-decoration: underline;
   text-underline-offset: 0.12em;
+}
+
+.adt-breadcrumb-trail:not(.adt-breadcrumb-trail--current) .adt-breadcrumb-trail-text {
+  color: var(--adt-accent);
+  font-weight: 400;
+  text-decoration: none;
 }
 
 .adt-breadcrumb-trail .adt-breadcrumb-trail-link:hover {

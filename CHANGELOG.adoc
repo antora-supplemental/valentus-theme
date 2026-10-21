@@ -28,6 +28,10 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Docs: removed in-repo `docs/modules/ROOT/` fixture pages (canonical copy in `antora-supplemental/demo-data` `demo-pages`). GitHub Pages and local playbooks compose `demo-data` @ `v0.3.5` (`branches: []` on tag sources); guide-only nav in `docs/antora.yml`. Extension fixtures nest under **Extensions** in `demo-pages` nav (v0.3.3+ **Core** / **Extensions** hierarchy).
 * Pages deploy: `scripts/legacy-theme-demo-redirects.mjs` stubs `/theme-demo/…` → `/demo-pages/…` after Antora build.
 
+=== Fixed
+
+* Breadcrumb trail — non-visitable intermediate folder crumbs (`.adt-breadcrumb-trail-text` without a URL) keep accent color but no resting underline; links and the current page stay underlined.
+
 == [2.1.7] - 2026-10-17
 
 Public label: *2.1.7+antora.3* (Antora 3).
