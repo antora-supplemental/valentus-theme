@@ -109,6 +109,8 @@ jobs:
           rm -rf build/ui-bundle
           mkdir -p build/ui-bundle
           unzip -o dark-mode-ui-bundle.zip -d build/ui-bundle
+          unzip_status=$?
+          if [ "$unzip_status" -gt 1 ]; then exit "$unzip_status"; fi
           node scripts/sync-dark-mode.mjs
           cp -r supplemental-ui/* build/ui-bundle/
           cd build/ui-bundle
