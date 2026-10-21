@@ -1,0 +1,18 @@
+﻿= 3.0.1 — left nav sticky on .nav-container
+:navtitle: 3.0.1 nav sticky
+:description: Make the desktop left nav rail stay fixed while the page scrolls.
+
+== Summary
+
+The 2.x/3.x doc layout set `position: sticky` on `.nav`, a child of `.nav-container`. `.nav-container` is `align-self: flex-start`, so its box is only as tall as the nav; a sticky child cannot travel outside its parent, so on any page taller than the viewport the nav tree scrolled away. DevCentr docs masked this with a hub-local `site-nav-column-scroll.css` that made `.nav-container` sticky; hubs without that file (antora-supplemental) showed the bug.
+
+== Fix
+
+* Desktop (`min-width: 1024px`): `.nav-container` is `position: sticky` at `--valentus-chrome-sticky-top`, `height`/`max-height` `100vh` (and `100dvh` when supported) minus that offset, `overflow: hidden`.
+* `.nav` is `position: static` and fills the container as a flex column; `.nav-panel-menu` stays the vertical scrollport.
+* Mobile overlay rules are unchanged.
+* Mirrored in `supplemental-ui` and `ui-modules/packages/doc-layout`.
+
+== Deploy
+
+Rebuild and republish the rolling `v3` `ui-bundle.zip`; hubs pick it up on the next Antora build (`snapshot: true`). Hubs can then drop any local nav-column sticky override.

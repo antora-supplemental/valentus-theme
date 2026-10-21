@@ -456,7 +456,8 @@ a.valentus-header-title:focus {
   fill: none;
 }
 
-/* Theme toggle matches other header icon buttons (dark-mode JS adds valentus-header-icon-btn). */
+/* Theme toggle matches GitHub icon btn (site-extra .theme-toggle padding/height neutralized). */
+.header.valentus-header .navbar .navbar-end button.theme-toggle,
 .header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn {
   min-width: var(--valentus-header-ctrl) !important;
   min-height: var(--valentus-header-ctrl) !important;
@@ -470,20 +471,26 @@ a.valentus-header-title:focus {
   flex-shrink: 0;
   border: none;
   border-radius: 0.2rem;
+  font-size: inherit;
+  line-height: 1;
+  text-transform: none;
   color: var(--valentus-header-bar-fg) !important;
   background: transparent !important;
   cursor: pointer;
 }
 
+.header.valentus-header .navbar .navbar-end button.theme-toggle:hover,
 .header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn:hover {
   background: var(--valentus-header-bar-hover) !important;
 }
 
+.header.valentus-header .navbar .navbar-end button.theme-toggle:focus,
 .header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn:focus {
   outline: none;
   background: transparent !important;
 }
 
+.header.valentus-header .navbar .navbar-end button.theme-toggle:focus-visible,
 .header.valentus-header .navbar .navbar-end .theme-toggle.valentus-header-icon-btn:focus-visible {
   background: var(--valentus-header-bar-hover) !important;
   outline: 2px solid var(--valentus-header-bar-fg);
@@ -578,37 +585,20 @@ html.dark-theme .valentus-doc-mast {
     align-items: flex-start;
   }
 
-  /* Sticky lives on .nav-container (a flex item of .body), NOT on .nav. The container is
-     align-self:flex-start, so its box is only as tall as its content; a sticky child inside it
-     has no scroll travel and the rail scrolls away with the page. Making the container itself
-     sticky lets it ride the full height of .body. .nav is a plain flex column inside it. */
   .nav-container {
     display: flex !important;
     flex-direction: column !important;
     align-self: flex-start !important;
-    position: sticky !important;
-    top: var(--valentus-chrome-sticky-top) !important;
-    height: calc(100vh - var(--valentus-chrome-sticky-top)) !important;
-    max-height: calc(100vh - var(--valentus-chrome-sticky-top)) !important;
     min-height: 0 !important;
-    overflow: hidden !important;
     padding-top: var(--valentus-col-rail-top);
     box-sizing: border-box;
   }
 
-  @supports (height: 100dvh) {
-    .nav-container {
-      height: calc(100dvh - var(--valentus-chrome-sticky-top)) !important;
-      max-height: calc(100dvh - var(--valentus-chrome-sticky-top)) !important;
-    }
-  }
-
-  .nav-container .nav {
-    position: static !important;
-    top: auto !important;
-    flex: 1 1 auto !important;
-    height: auto !important;
-    max-height: 100% !important;
+  .nav {
+    position: sticky !important;
+    top: var(--valentus-chrome-sticky-top) !important;
+    height: calc(100vh - var(--valentus-chrome-sticky-top)) !important;
+    max-height: calc(100vh - var(--valentus-chrome-sticky-top)) !important;
     display: flex !important;
     flex-direction: column !important;
     min-height: 0 !important;
