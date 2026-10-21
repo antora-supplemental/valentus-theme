@@ -108,8 +108,10 @@ jobs:
           curl -L -o dark-mode-ui-bundle.zip "$DARK_MODE_BUNDLE_URL"
           rm -rf build/ui-bundle
           mkdir -p build/ui-bundle
+          set +e
           unzip -o dark-mode-ui-bundle.zip -d build/ui-bundle
           unzip_status=$?
+          set -e
           if [ "$unzip_status" -gt 1 ]; then exit "$unzip_status"; fi
           node scripts/sync-dark-mode.mjs
           cp -r supplemental-ui/* build/ui-bundle/

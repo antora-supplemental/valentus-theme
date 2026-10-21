@@ -21,6 +21,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
+== 3.0.6 — 2026-10-21
+
+=== Fixed
+
+* **Release CI:** disable `set -e` around dark-mode `unzip` so exit code 1 (path warnings) does not abort before rolling `ui-bundle.zip` upload.
+
 == 3.0.5 — 2026-10-21
 
 === Fixed
