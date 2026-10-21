@@ -106,8 +106,9 @@ jobs:
         run: |
           DARK_MODE_BUNDLE_URL="https://github.com/antora-supplemental/antora-dark-mode/releases/download/${{ steps.darkmode.outputs.version }}/ui-bundle.zip"
           curl -L -o dark-mode-ui-bundle.zip "$DARK_MODE_BUNDLE_URL"
+          rm -rf build/ui-bundle
           mkdir -p build/ui-bundle
-          unzip dark-mode-ui-bundle.zip -d build/ui-bundle
+          unzip -o dark-mode-ui-bundle.zip -d build/ui-bundle
           node scripts/sync-dark-mode.mjs
           cp -r supplemental-ui/* build/ui-bundle/
           cd build/ui-bundle
