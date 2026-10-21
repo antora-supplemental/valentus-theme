@@ -1,0 +1,51 @@
+# Optional: after extension / theme / compose-pack code changes, poke aggregated docs hubs.
+# Copy to antora-supplemental/* extension repos as .github/workflows/notify-docs-hub-extension.yml
+#
+# Manual / agent (same auth as CI secret):
+#   gh api repos/antora-supplemental/docs/dispatches -f event_type=extension-updated ...
+# Or: ./scripts/notify-docs-hub.sh extension-updated
+#
+# Requires secret DOCS_DISPATCH_TOKEN (PAT/App with repository_dispatch on the hub).
+# If unset, the job no-ops (safe for forks).
+
+name: Notify docs hub (extension)
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - "lib/**"
+      - "ui/**"
+      - "supplemental-ui/**"
+      - "ui-modules/**"
+      - "packages/**"
+      - "demo/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "package-lock.json"
+  release:
+    types: [published]
+  workflow_dispatch:
+
+env:
+  DOCS_HUB: antora-supplemental/docs
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch extension-updated
+        env:
+          GH_TOKEN: ${{ secrets.DOCS_DISPATCH_TOKEN }}
+          EVENT_TYPE: extension-updated
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "DOCS_DISPATCH_TOKEN not set; skip (use gh api or org secret)."
+            exit 0
+          fi
+          gh api "repos/${DOCS_HUB}/dispatches" \
+            -f "event_type=${EVENT_TYPE}" \
+            -f "client_payload[source]=${{ github.repository }}" \
+            -f "client_payload[ref]=${{ github.ref }}" \
+            -f "client_payload[sha]=${{ github.sha }}" \
+            -f "client_payload[event]=${{ github.event_name }}"
