@@ -30,6 +30,8 @@ runtime:
 
 antora:
   extensions:
+    - require: "@antora-supplemental/color-scheme"
+      toggle: placed
     - require: ./ui-modules/packages/orchestrator/lib/index.js
       registry: ./ui-modules/registry.json5
       recipe: valentus-site

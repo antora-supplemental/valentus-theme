@@ -21,6 +21,19 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
+== 4.0.0 — 2026-10-25
+
+=== Changed (breaking)
+
+* **Color scheme moved to chassis:** the light/dark *mechanism* (no-FOUC head hook, `antora-theme-mode` persistence, system preference, override expiry, crossfade, toggle behavior and a11y) is now the Antora extension `@antora-supplemental/color-scheme` from `antora-ui-chassis` (tag `color-scheme-v0.1.2`). **Playbooks must add** `- require: "@antora-supplemental/color-scheme"` with `toggle: placed` and pin it in `package.json`. Without it there is no toggle and no dark scheme.
+* **Paint:** vendored `site-extra.css` is now Valentus-owned `css/site-paint.css` (Default UI dark overrides + toggle look). Its theme-transition block moved to chassis; classes are `color-scheme-animating` / `color-scheme-vt` (were `valentus-theme-*`).
+* **Body kit:** `header-content.hbs` places `<button id="theme-toggle">` at the start of `.navbar-end`.
+* **Removed:** `js/site-dark-mode.js`, the inline theme FOUC script in `head-meta.hbs`, `scripts/sync-dark-mode.mjs`, `pnpm dark-mode:sync`. `localStorage` keys are unchanged.
+* **Release bundle base:** Default UI instead of the `antora-dark-mode` bundle (release CI and playbooks).
+* **UI modules:** `doc-layout` ships `site-paint.css`; `header-chrome` / `doc-layout` recommend `color-scheme`; `pairsWith` points at chassis.
+
+Detail: `changelog-details/2026-10-25 - color scheme to chassis.adoc`. **UI bundle rebuild required.**
+
 == 3.0.8 — 2026-10-21
 
 === Fixed

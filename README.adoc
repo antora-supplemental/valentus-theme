@@ -17,7 +17,7 @@ ifdef::env-github[]
 <br />
 <h3 align="center">Valentus Theme</h3>
 <p align="center">
-Composed Antora doc-site chrome (pair with antora-dark-mode).<br />
+Composed Antora doc-site chrome (color scheme via the chassis color-scheme extension).<br />
 <a href="https://antora-supplemental.github.io/docs/docs/theme-products.html"><strong>Theme products ·</strong></a>
 <br /><br />
 <a href="https://antora-supplemental.github.io/valentus-theme/">View demo</a>
@@ -42,7 +42,7 @@ ifdef::env-github[]
 <br />
 <h3 align="center">Valentus Theme</h3>
 <p align="center">
-Composed Antora doc-site chrome (pair with antora-dark-mode).<br />
+Composed Antora doc-site chrome (color scheme via the chassis color-scheme extension).<br />
 <a href="https://antora-supplemental.github.io/docs/docs/theme-products.html"><strong>Theme products ·</strong></a>
 <br /><br />
 <a href="https://antora-supplemental.github.io/valentus-theme/">View demo</a>
@@ -62,7 +62,7 @@ image:https://img.shields.io/github/license/antora-supplemental/valentus-theme.s
 
 = Valentus Theme
 
-Composed Antora doc-site chrome (pair with antora-dark-mode).
+Composed Antora doc-site chrome (color scheme via the chassis color-scheme extension).
 
 link:https://antora-supplemental.github.io/valentus-theme/[View demo] ·
 link:https://antora-supplemental.github.io/docs/docs/theme-products.html[Theme products] ·
@@ -71,10 +71,11 @@ endif::[]
 
 == About The Project
 
-Composed Antora doc-site chrome with **bundled dark mode**: breadcrumb mast, header, layout, VCS icons, and the theme toggle.
+Composed Antora doc-site chrome: breadcrumb mast, header, layout, VCS icons, the placed theme toggle, and the light/dark paint.
+The color scheme *mechanism* (no-FOUC hook, persistence, system preference, toggle behavior) is the chassis extension link:https://github.com/antora-supplemental/antora-ui-chassis/tree/main/packages/color-scheme[`@antora-supplemental/color-scheme`] — add it to your playbook.
 
 Successor to the former `antora-dark-theme` monolithic package — use the Valentus release `ui-bundle.zip` for the full stack.
-Dark-mode-only sites (other themes / Default UI): link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode].
+`antora-dark-mode` is deprecated; its mechanism moved to `@antora-supplemental/color-scheme` and its palette to Valentus `site-paint.css`.
 
 **Changelog:** link:CHANGELOG.adoc[CHANGELOG.adoc] and link:changelog-details/[`changelog-details/`].
 
@@ -96,6 +97,17 @@ ui:
     url: https://github.com/antora-supplemental/valentus-theme/releases/download/v3/ui-bundle.zip
     snapshot: true
   supplemental_files: ./supplemental-ui-overrides   # optional branding only
+antora:
+  extensions:
+    - require: "@antora-supplemental/color-scheme"
+      toggle: placed
+----
+
+Pin the extension in `package.json`:
+
+[source,json]
+----
+"@antora-supplemental/color-scheme": "github:antora-supplemental/antora-ui-chassis#color-scheme-v0.1.2&path:packages/color-scheme"
 ----
 
 Add the GitHub topic `valentus-theme` on your playbook repository so dependents stay rediscoverable (`gh search repos --topic valentus-theme`). Guide: `docs/modules/guide/pages/github-topics.adoc`.
@@ -111,7 +123,7 @@ ui:
   supplemental_files: ./path/to/valentus-theme/supplemental-ui
 ----
 
-The `supplemental-ui/` tree vendors dark mode assets (`site-extra.css`, `site-dark-mode.js`). Run `pnpm dark-mode:sync` after updating `antora-dark-mode`.
+Both forms need the `@antora-supplemental/color-scheme` extension (above). `supplemental-ui/css/site-paint.css` holds the Default UI dark palette and toggle look; there is no vendored dark-mode copy any more.
 
 ++++
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -129,7 +141,6 @@ Local preview requires at least one Git commit on `HEAD` (Antora reads `content.
 [source,shell]
 ----
 pnpm install
-pnpm dark-mode:sync
 pnpm build:local
 ----
 
@@ -137,9 +148,9 @@ pnpm build:local
 
 Composable chrome via `ui-modules/` and the orchestrator extension — see `ui-modules/README.adoc`.
 
-=== Dark mode only (slipstream)
+=== Color scheme on other themes
 
-Sites that need dark mode on a *different* theme bundle (not Valentus chrome) should use link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] as an overlay — not this package.
+Sites on a *different* theme bundle use `@antora-supplemental/color-scheme` (`toggle: auto`) plus that theme's own paint. The deprecated `antora-dark-mode` overlay is no longer needed.
 
 ++++
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

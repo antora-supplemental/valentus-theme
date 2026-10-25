@@ -7,7 +7,7 @@ This guide covers common customization scenarios.
 
 == Changing Colors
 
-Edit `supplemental-ui/css/site-extra.css` to customize the color palette.
+Edit `supplemental-ui/css/site-paint.css` (Default UI dark overrides) and the `--valentus-*` tokens in `site-visual.css` to customize the palette.
 
 IMPORTANT: Prefer putting layout-affecting rules into the UI bundle’s compiled `site.css` (or Valentus supplemental CSS that ships in the release zip) instead of a late extra `<link>`.
 Layered stylesheets after Default UI `site.css` cause a refresh “settle” flash (FOUC).
@@ -20,20 +20,20 @@ Hubs often override `supplemental-ui/partials/head-meta.hbs` for fonts, favicons
 
 Required Valentus stylesheet links (order matters; match upstream `head-meta.hbs`):
 
-. `site-extra.css`
+. `site-paint.css`
 . `site-doc-layout.css`
 . `site-visual.css`
 . `site-read-width.css`
 . `site-font-size.css`
 . `site-math.css` (when math is enabled)
 
-Also keep: paint-hold (`valentus-fouc-pending`), dark-mode / read-width / font-size FOUC preference scripts, and webfont `document.fonts` release.
+Also keep: paint-hold (`valentus-fouc-pending`), the dm-navbar hook, read-width / font-size FOUC preference scripts (the color scheme hook comes from the chassis extension), and webfont `document.fonts` release.
 After those, append **only** hub brand sheets (e.g. `brand.css`, `nav-typology.css`).
 Dropping layout/visual sheets while keeping a brand overlay yields a broken mast/nav even though the site “builds”.
 
 == Supplemental footer scripts (do not double-load)
 
-Valentus `footer-scripts.hbs` already loads `site.js` and the theme’s footer scripts (dark mode, accordion, visual, read-width, font-size, math, …).
+Valentus `footer-scripts.hbs` already loads `site.js` and the theme’s footer scripts (accordion, visual, read-width, font-size, math, …).
 
 If your hub overrides `footer-content.hbs` or adds another footer partial, **do not** re-emit:
 
@@ -129,46 +129,17 @@ html.dark-theme .my-custom-element {
 
 == Toggle Button Position
 
-By default, the toggle button is inserted at the beginning of `.navbar-end`.
-
-To change its position, modify the `ensureToggleButton()` function in `site-dark-mode.js`:
-
-[source,javascript]
-----
-// Insert at the end instead of the beginning
-navbarEnd.appendChild(button);
-----
+Valentus places `<button id="theme-toggle">` at the start of `.navbar-end` in `header-content.hbs`; the chassis extension (`toggle: placed`) binds it.
+To move it, override `header-content.hbs` and put the button where you want — keep `id="theme-toggle"`.
 
 == Custom Toggle Button
 
-If you want to use your own toggle button markup, add an element with `id="theme-toggle"` anywhere in your page:
-
-[source,html]
-----
-<button id="theme-toggle" aria-label="Toggle dark mode">
-  🌙
-</button>
-----
-
-The script will detect it and attach the click handler automatically instead of creating its own button.
+Any element with `id="theme-toggle"` is bound by `@antora-supplemental/color-scheme`: it gets the sun/moon icon, `aria-label`, `title`, `aria-pressed` and click handling.
+With `toggle: auto` the extension creates one in `.navbar-end` when none is present.
 
 == Disable System Preference Detection
 
-To always start in light mode regardless of system preference, modify the inline script in `head-meta.hbs`:
-
-[source,handlebars]
-----
-<script>
-(function () {
-  const themeKey = 'antora-theme';
-  const savedTheme = localStorage.getItem(themeKey);
-  // Only apply dark mode if explicitly saved
-  if (savedTheme === 'dark') {
-    document.documentElement.classList.add('dark-theme');
-  }
-})();
-</script>
-----
+Not an option of the chassis extension. Set an explicit mode instead, for example `ColorScheme.set('light')` from a site script.
 
 == CSS Custom Properties
 

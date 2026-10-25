@@ -1,6 +1,6 @@
 = Troubleshooting
 :navtitle: Troubleshooting
-:description: Solutions to common issues with the Antora Dark Theme.
+:description: Solutions to common issues with Valentus.
 
 This page covers common issues and their solutions.
 
@@ -18,13 +18,7 @@ ui:
   supplemental_files: ./node_modules/valentus-theme/supplemental-ui
 ----
 
-. *Different UI bundle structure* - The toggle button is injected into `.navbar-end`. If your UI bundle has a different navbar structure, modify the selector in `site-dark-mode.js`:
-+
-[source,javascript]
-----
-// Change this line to match your navbar structure
-const navbarEnd = document.querySelector('.navbar-end');
-----
+. *Color scheme extension missing* - Add `- require: "@antora-supplemental/color-scheme"` (with `toggle: placed`) under `antora.extensions` and install the package. Without it there is no toggle and no dark scheme.
 
 . *JavaScript error* - Check the browser console for errors that might prevent the script from running.
 
@@ -38,7 +32,7 @@ const navbarEnd = document.querySelector('.navbar-end');
 
 . *Incognito/private mode* - Some browsers restrict `localStorage` in private browsing.
 
-. *Content Security Policy* - If your site has a strict CSP, it might block the inline script. Add the script hash to your CSP or move the script to an external file.
+. *Content Security Policy* - If your site has a strict CSP, it might block the inline color scheme head hook (`<script data-color-scheme-head>`). Add the script hash to your CSP or move the script to an external file.
 
 To test if `localStorage` is working:
 
@@ -80,7 +74,7 @@ supplemental-ui/partials/head-meta.hbs
 
 *Solution:* The CSS covers the most common Antora elements, but custom extensions or modified UI bundles may have additional elements.
 
-Add styles for unstyled elements in `site-extra.css`:
+Add styles for unstyled elements in `site-paint.css` (or your brand overlay):
 
 [source,css]
 ----
@@ -98,7 +92,7 @@ TIP: Use browser DevTools to inspect the unstyled element and find its CSS class
 
 *Solution:* The theme includes styles for highlight.js code blocks. If you're using a different syntax highlighter (like Prism or Rouge), you may need to add custom styles or use a dark-compatible theme for that highlighter.
 
-For highlight.js, ensure the dark theme styles are present in `site-extra.css`:
+For highlight.js, ensure the dark theme styles are present in `site-paint.css`:
 
 [source,css]
 ----

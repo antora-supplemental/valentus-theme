@@ -1,0 +1,35 @@
+= 4.0.0 — color scheme from chassis
+:navtitle: 4.0.0 color scheme
+:description: Valentus drops its vendored antora-dark-mode copy and uses the chassis color-scheme extension.
+
+== Summary
+
+`antora-dark-mode` is merged into `@antora-supplemental/color-scheme` (antora-ui-chassis) and deprecated. Responsibilities are layered:
+
+* *Chassis* — mechanism only, no colors: head hook, persistence (`antora-theme-mode`, legacy `antora-theme`, `antora-theme-system-snapshot`), system preference, crossfade, toggle behavior/a11y, `window.ColorScheme`, SoftNav rebinding.
+* *Paint (Valentus)* — `site-paint.css` and the `--valentus-*` tokens.
+* *Body kit (Valentus)* — the placed `#theme-toggle` in `header-content.hbs`.
+
+== Migration
+
+[source,yaml]
+----
+antora:
+  extensions:
+    - require: "@antora-supplemental/color-scheme"
+      toggle: placed
+----
+
+[source,json]
+----
+"@antora-supplemental/color-scheme": "github:antora-supplemental/antora-ui-chassis#color-scheme-v0.1.2&path:packages/color-scheme"
+----
+
+* Hub `head-meta.hbs` overrides: replace `css/site-extra.css` with `css/site-paint.css`; drop the inline theme script (keep the dm-navbar one).
+* Hub `footer-scripts.hbs` overrides: drop `js/site-dark-mode.js`.
+* CSS using `html.valentus-theme-animating` / `valentus-theme-vt`: rename to `color-scheme-animating` / `color-scheme-vt`.
+* `#theme-selector` is no longer removed by script.
+
+== Verified
+
+Local build (`antora-playbook-local.yml`), Chromium: light/dark system preference, click and keyboard toggle (focus kept), persistence across reload, legacy `antora-theme` migration, `aria-label` / `aria-pressed`; axe reports no violations on `#theme-toggle` in either scheme.

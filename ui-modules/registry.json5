@@ -1,4 +1,4 @@
-// Valentus UI module catalog — chrome, composed layout, and bundled dark mode assets in release ui-bundle.zip.
+// Valentus UI module catalog — chrome, composed layout and paint; color scheme mechanism is the chassis color-scheme extension.
 {
   schema: "1.0",
   repository: "https://github.com/antora-supplemental/valentus-theme",
@@ -47,9 +47,9 @@
   ],
   pairsWith: [
     {
-      id: "dark-mode",
-      repository: "https://github.com/antora-supplemental/antora-dark-mode",
-      description: "Bundled in valentus-theme ui-bundle.zip; use antora-dark-mode separately only for slipstream overlay on other themes.",
+      id: "color-scheme",
+      repository: "https://github.com/antora-supplemental/antora-ui-chassis",
+      description: "Chassis Antora extension (@antora-supplemental/color-scheme): FOUC hook, persistence, toggle behavior. Valentus places the toggle (toggle: placed) and paints it. Replaces deprecated antora-dark-mode.",
     },
   ],
 }

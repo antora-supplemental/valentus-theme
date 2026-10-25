@@ -1,4 +1,4 @@
-/* antora-doc-layout: layered after antora default UI and site-extra.css (dark theme).
+/* antora-doc-layout: layered after antora default UI and site-paint.css (dark palette).
    Source Sans 3 + Plus Jakarta Sans (headings), a doc mast (breadcrumbs) instead of a separate
    in-article toolbar, and a sidebar with component label + page navigation tree. */
 
@@ -388,7 +388,7 @@ a.valentus-header-title:focus {
   opacity: 0.9;
 }
 
-/* Header end controls (GitHub, theme) — one shape; beats site-extra .theme-toggle:hover colors. */
+/* Header end controls (GitHub, theme) — one shape; beats site-paint .theme-toggle:hover colors. */
 .header.valentus-header .navbar .navbar-end .valentus-header-icon-btn {
   min-width: var(--valentus-header-ctrl) !important;
   min-height: var(--valentus-header-ctrl) !important;
@@ -1514,7 +1514,7 @@ nav.nav-menu.valentus-nav-tree-only > .nav-list {
   text-decoration: underline;
 }
 
-/* Dark nav link color (site-extra.css is overwritten by sync-valentus-theme.cjs) */
+/* Dark nav link color (overrides site-paint.css defaults) */
 html.dark-theme .nav .valentus-nav-component-title,
 html.dark-theme .nav .valentus-nav-component-title a {
   color: var(--valentus-ink);

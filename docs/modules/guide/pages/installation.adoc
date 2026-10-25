@@ -1,10 +1,10 @@
 = Installation
 :navtitle: Installation
-:description: Install Valentus Theme using the release UI bundle (chrome + bundled dark mode).
+:description: Install Valentus Theme: release UI bundle plus the chassis color-scheme extension.
 
 == Release UI bundle (recommended)
 
-**Use `ui-bundle.zip` from GitHub Releases.** One pinned `ui.bundle.url`; doc-site chrome and dark mode are pre-merged.
+**Use `ui-bundle.zip` from GitHub Releases.** One pinned `ui.bundle.url` for the chrome and paint, plus the `@antora-supplemental/color-scheme` extension for the light/dark mechanism.
 
 Successor to the former `antora-dark-theme` package — migrate playbook URLs to Valentus.
 
@@ -21,6 +21,17 @@ ui:
   bundle:
     url: https://github.com/antora-supplemental/valentus-theme/releases/download/v3/ui-bundle.zip
     snapshot: true
+antora:
+  extensions:
+    - require: "@antora-supplemental/color-scheme"
+      toggle: placed
+----
++
+and in `package.json` devDependencies:
++
+[source,json]
+----
+"@antora-supplemental/color-scheme": "github:antora-supplemental/antora-ui-chassis#color-scheme-v0.1.2&path:packages/color-scheme"
 ----
 
 For floating, line-pin, dual-axis labels (`2.0.0+antora.3`), or Renovate strategies see xref:version-pinning.adoc[Version Pinning].
@@ -64,13 +75,24 @@ ui:
   bundle:
     url: https://github.com/antora-supplemental/valentus-theme/releases/download/v3/ui-bundle.zip
     snapshot: true
+antora:
+  extensions:
+    - require: "@antora-supplemental/color-scheme"
+      toggle: placed
+----
++
+and in `package.json` devDependencies:
++
+[source,json]
+----
+"@antora-supplemental/color-scheme": "github:antora-supplemental/antora-ui-chassis#color-scheme-v0.1.2&path:packages/color-scheme"
 ----
 
 Remove `antora-dark-theme` from `package.json` if present; use the release bundle URL or `pnpm add -D valentus-theme` for supplemental vendoring.
 
-Canonical homes are the **antora-supplemental** org repositories (`valentus-theme`, `antora-dark-mode`).
+Canonical homes are the **antora-supplemental** org repositories (`valentus-theme`, `antora-ui-chassis`). `antora-dark-mode` is deprecated.
 Personal forks of the old `antora-dark-theme` name are obsolete — do not pin them.
-Dark-mode-only migration copy: link:https://antora-supplemental.github.io/antora-dark-mode/antora-dark-mode/guide/legacy-names.html[Legacy names & migration^].
+Old dark-mode migration copy: link:https://antora-supplemental.github.io/antora-dark-mode/antora-dark-mode/guide/legacy-names.html[Legacy names & migration^].
 
 [[overrides-on-bundle]]
 === Overrides
@@ -81,7 +103,7 @@ See xref:configuration.adoc#virtual-supplemental-files[virtual supplemental file
 == Vendor `supplemental-ui` (forks)
 
 Copy `supplemental-ui/` from this repository into git for a maintained fork.
-Run `pnpm dark-mode:sync` to refresh vendored dark mode CSS/JS from link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode].
+There is no vendored dark-mode copy; keep the `@antora-supplemental/color-scheme` extension in the playbook.
 
 == Verify
 

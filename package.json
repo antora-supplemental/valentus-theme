@@ -1,7 +1,7 @@
 {
   "name": "valentus-theme",
-  "version": "3.0.8",
-  "description": "Valentus — composed Antora doc-site chrome with bundled dark mode (mast, header, layout, toggle).",
+  "version": "4.0.0",
+  "description": "Valentus — composed Antora doc-site chrome (mast, header, layout, toggle placement, paint); color scheme mechanism from @antora-supplemental/color-scheme.",
   "private": true,
   "keywords": [
     "antora",
@@ -33,11 +33,11 @@
     "serve:visual-demo": "pnpm build:visual-demo && npx http-server build/site -p 8081 -o",
     "clean": "rimraf build .cache",
     "ui-modules:validate": "node ui-modules/scripts/validate-ui-modules.mjs",
-    "dark-mode:sync": "node scripts/sync-dark-mode.mjs",
     "themed-svg:sync": "node scripts/sync-themed-svg-runtime.mjs",
     "test": "node --test test/*.test.js"
   },
   "devDependencies": {
+    "@antora-supplemental/color-scheme": "github:antora-supplemental/antora-ui-chassis#color-scheme-v0.1.2&path:packages/color-scheme",
     "@dev-centr/themed-svg": "0.1.1",
     "@antora-supplemental/antora-search-chat": "github:antora-supplemental/antora-search-chat#v0.1.20",
     "@antora/lunr-extension": "1.0.0-alpha.12",

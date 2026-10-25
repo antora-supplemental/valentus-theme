@@ -1,139 +1,42 @@
 = How It Works
 :navtitle: How It Works
-:description: Technical explanation of how the Antora Dark Theme works.
+:description: How Valentus layers chassis, paint and body kit on the Antora Default UI.
 
-This page explains the technical implementation of the dark theme.
+Valentus overlays the Antora Default UI bundle with supplemental files; the color scheme mechanism is the chassis Antora extension `@antora-supplemental/color-scheme`.
 
-== Overview
+== Layers
 
-The theme uses Antora's https://docs.antora.org/antora/latest/playbook/ui-supplemental-files/[supplemental UI feature] to overlay additional files onto the default UI bundle.
-This approach means you don't need to fork or rebuild the Antora Default UI.
+[cols="1,3",options="header"]
+|===
+| Layer | What
 
-== The Four Key Files
+| Chassis — `@antora-supplemental/color-scheme`
+| Inline head hook (no FOUC): reads `antora-theme-mode`, sets `html.dark-theme`, `data-theme`, `data-color-scheme-mode`. `js/color-scheme.js`: persistence, live system preference, override expiry, View Transition crossfade, toggle binding and a11y, `window.ColorScheme` API, SoftNav rebinding. `css/color-scheme.css`: `color-scheme` property and transition rules. No colors.
 
-=== 1. head-meta.hbs (FOUC Prevention + CSS chain)
+| Paint — Valentus
+| `site-paint.css` (Default UI dark overrides + toggle look) and the `--valentus-*` light/dark tokens in `site-visual.css` / `site-doc-layout.css`.
 
-This Handlebars partial is injected into the `<head>` of every page.
-It:
+| Body kit — Valentus
+| Partials: header (places `#theme-toggle`), mast, layout, footer.
+|===
+
+== head-meta.hbs
 
 . Applies the interim paint-hold (`html.valentus-fouc-pending`)
-. Loads the Valentus stylesheet chain (`site-extra`, `site-doc-layout`, `site-visual`, `site-read-width`, `site-font-size`, `site-math`)
-. Runs preference FOUC scripts (dark mode, read-width, font-size) and releases paint after webfonts
+. Loads the Valentus stylesheet chain (`site-paint`, `site-doc-layout`, `site-visual`, `site-read-width`, `site-font-size`, `site-math`)
+. Maps `site.keys.darkModeNavbar` to `html[data-dm-navbar]`, runs read-width / font-size FOUC scripts and releases paint after webfonts
 
-Hub overrides must keep that full chain — see xref:customization.adoc[Customization].
-Simplified illustration (not the full production partial):
+The color scheme head hook is injected by the extension right after `site.css` (in `head-styles`), so it runs before any Valentus CSS.
+Hub overrides must keep the full chain — see xref:customization.adoc[Customization].
 
-[source,handlebars]
-----
-<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-extra.css">
-<script>
-(function () {
-  const themeKey = 'antora-theme';
-  const savedTheme = localStorage.getItem(themeKey);
-  if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.classList.add('dark-theme');
-  }
-})();
-</script>
-----
+== footer-scripts.hbs
 
-The preference script runs before the page paints so dark mode does not flash light-first.
+Loads `site.js`, highlight.js and Valentus scripts (accordion, visual, read-width, font-size, math, …). The extension appends `js/color-scheme.js` (deferred).
+Hubs that override footer partials must **not** load `site.js` (or these Valentus scripts) a second time.
 
-=== 2. footer-scripts.hbs (Script Loading)
+== Sequence of events
 
-This partial is injected at the end of the page body.
-It loads:
-
-* The main Antora site script (`site.js`)
-* highlight.js for syntax highlighting
-* Valentus scripts (dark mode, VCS icons, accordion, visual, read-width, font-size, math, …)
-
-Hubs that override footer partials must **not** load `site.js` (or these Valentus scripts) a second time — duplicate handlers break nav expand/collapse.
-Add only hub-specific companions after the theme list (see xref:customization.adoc[Customization]).
-
-=== 3. site-dark-mode.js (Toggle Logic)
-
-This JavaScript module handles:
-
-* *Button injection* - Creates and inserts the toggle button into `.navbar-end`
-* *Click handling* - Switches between light and dark themes
-* *Persistence* - Saves preference to `localStorage`
-* *Icon updates* - Shows sun icon in dark mode, moon icon in light mode
-
-Key functions:
-
-[source,javascript]
-----
-// Apply theme and update button icon
-function applyTheme(theme) {
-  if (theme === 'dark') {
-    document.documentElement.classList.add('dark-theme');
-  } else {
-    document.documentElement.classList.remove('dark-theme');
-  }
-  updateButtonIcon(theme);
-  localStorage.setItem('antora-theme', theme);
-}
-
-// Toggle between themes
-function toggleTheme() {
-  const isDark = document.documentElement.classList.contains('dark-theme');
-  applyTheme(isDark ? 'light' : 'dark');
-}
-----
-
-=== 4. site-extra.css (Dark Styles)
-
-All dark mode styles use the selector prefix `html.dark-theme`:
-
-[source,css]
-----
-html.dark-theme body {
-  background-color: #1a1b1e;
-  color: #c1c2c5;
-}
-
-html.dark-theme .navbar {
-  background-color: #141517;
-}
-----
-
-This explicit selector approach works because the Antora Default UI's compiled CSS doesn't use CSS custom properties for theming.
-Our dark styles simply override the default light styles when the `dark-theme` class is present.
-
-== Why This Approach?
-
-=== No UI Bundle Modification
-
-The standard way to customize Antora's appearance is to fork the https://gitlab.com/antora/antora-ui-default[Antora Default UI] and rebuild the UI bundle.
-This works but has downsides:
-
-* You must maintain your fork
-* UI updates require manual merging
-* Build complexity increases
-
-The supplemental UI approach avoids all of this.
-Your dark theme overlays the standard UI bundle, and you can update the UI bundle independently.
-
-=== CSS Specificity
-
-Dark mode styles use `html.dark-theme` as a prefix, which provides enough specificity to override the default UI styles without using `!important`.
-
-=== No JavaScript Framework
-
-The toggle script is vanilla JavaScript with no dependencies.
-It's small (~2KB) and works in all modern browsers.
-
-== Sequence of Events
-
-When a page loads:
-
-. Browser starts parsing HTML
-. `<head>` is processed, loading `head-meta.hbs`
-. Inline script checks `localStorage` and system preference
-. If dark mode should be active, `dark-theme` class is added to `<html>` immediately
-. CSS loads with dark mode already applied (no flash)
-. Page renders in the correct theme
-. Footer scripts load, including `site-dark-mode.js`
-. Toggle button is injected into navbar
-. User can now toggle between themes
+. `<head>`: `site.css`, then the color scheme hook sets `html.dark-theme` before first paint
+. Valentus CSS loads with the right scheme already applied
+. Footer: `color-scheme.js` binds the placed `#theme-toggle`
+. Toggle click: `ColorScheme.toggle()` persists `antora-theme-mode` and crossfades

@@ -2,7 +2,7 @@
  * Valentus visual polish: sticky header shadow + search UX helpers +
  * tree-nav horizontal scroll edge fades.
  * Root light↔dark transition lives in antora-dark-mode (View Transitions +
- * html.valentus-theme-animating fallback). Reading width: site-read-width.js.
+ * html.color-scheme-animating fallback). Reading width: site-read-width.js.
  */
 (function () {
   const nav = document.querySelector('.valentus-site-navbar')

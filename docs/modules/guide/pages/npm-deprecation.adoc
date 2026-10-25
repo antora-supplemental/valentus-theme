@@ -34,7 +34,7 @@ ui:
   supplemental_files: ./supplemental-ui-overrides
 ----
 
-Rebuild and verify the dark-mode toggle in the navbar.
+Rebuild and verify the theme toggle in the navbar.
 
 == Lessons learned
 

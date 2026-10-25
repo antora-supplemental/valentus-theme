@@ -6,7 +6,7 @@
   description: "Component/version kickers in the breadcrumb row, trail fragments, doc mast wrapper, and accordion behavior.",
   repository: "https://github.com/antora-supplemental/valentus-theme",
   requires: ["edit-crumb"],
-  recommends: ["dark-mode"],
+  recommends: [],
   conflicts: [],
   slots: {
     foot: {

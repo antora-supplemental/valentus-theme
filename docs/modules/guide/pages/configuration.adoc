@@ -83,7 +83,7 @@ You only write snake_case in the playbook; the theme templates already use the c
 
 | `dark_mode_navbar`
 | `light`
-| Light-mode top bar tone for the bundled dark-mode toggle. `light` (Valentus default) — dark icon on the light header strip. `dark` — inherit navbar foreground (Antora default UI black bar). See link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] customization guide.
+| Light-mode top bar tone for the theme toggle (exposed as `html[data-dm-navbar]` for paint). `light` (Valentus default) — dark icon on the light header strip. `dark` — inherit navbar foreground (Antora default UI black bar). See link:https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] customization guide.
 |===
 
 Example—custom logo without overriding `partials/header-content.hbs`:
@@ -168,52 +168,43 @@ The theme automatically detects your preference in this order:
 
 === Storage Key
 
-The theme stores your preference in `localStorage` under the key `antora-theme`.
-Values are either `light` or `dark`.
+The chassis `@antora-supplemental/color-scheme` extension stores the preference in `localStorage` under `antora-theme-mode` (`system`, `light` or `dark`). A legacy `antora-theme` value is migrated on first read.
+Prefer the runtime API: `ColorScheme.set('dark' | 'light' | 'system')`, `ColorScheme.toggle()`, `ColorScheme.subscribe(fn)`.
 
 To programmatically set the theme:
 
 [source,javascript]
 ----
 // Set dark mode
-localStorage.setItem('antora-theme', 'dark');
+localStorage.setItem('antora-theme-mode', 'dark');
 location.reload();
 
 // Set light mode
-localStorage.setItem('antora-theme', 'light');
+localStorage.setItem('antora-theme-mode', 'light');
 location.reload();
 
 // Clear preference (use system default)
-localStorage.removeItem('antora-theme');
+localStorage.setItem('antora-theme-mode', 'system');
 location.reload();
 ----
 
 == File Structure
 
-The supplemental UI consists of four files:
+Color scheme files are split by layer:
 
-[source]
-----
-supplemental-ui/
-├── css/
-│   └── site-extra.css      # Dark mode CSS styles
-├── js/
-│   └── site-dark-mode.js   # Toggle button logic
-└── partials/
-    ├── footer-scripts.hbs  # Loads the dark mode script
-    └── head-meta.hbs       # Loads CSS and prevents FOUC
-----
+[cols="1,1,3",options="header"]
+|===
+| Layer | File | Role
 
-Each file serves a specific purpose:
+| Chassis (`@antora-supplemental/color-scheme`)
+| `css/color-scheme.css`, `js/color-scheme.js`, inline head hook
+| No-FOUC `html.dark-theme` / `data-theme`, persistence, system preference, toggle behavior and a11y. No colors.
 
-`site-extra.css`::
-Contains all dark mode styles using the `html.dark-theme` selector prefix.
+| Paint (Valentus)
+| `supplemental-ui/css/site-paint.css` (+ `--valentus-*` tokens in `site-visual.css` / `site-doc-layout.css`)
+| Light and dark palettes, Default UI dark overrides, toggle look.
 
-`site-dark-mode.js`::
-Injects the toggle button and handles theme switching logic.
-
-`head-meta.hbs`::
-Handlebars partial injected into `<head>` that loads CSS and prevents flash of unstyled content.
-
-`footer-scripts.hbs`::
-Handlebars partial that loads the JavaScript at the end of the page body.
+| Body kit (Valentus)
+| `supplemental-ui/partials/header-content.hbs`
+| Places `<button id="theme-toggle">` at the start of `.navbar-end` (`toggle: placed`).
+|===

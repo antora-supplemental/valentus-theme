@@ -2,7 +2,7 @@
 :navtitle: Value Proposition
 :description: Why Valentus — UX fixes that originate in Antora Default UI / lunr, and Valentus-only chrome.
 
-Valentus is composed Antora doc-site chrome with bundled dark mode.
+Valentus is composed Antora doc-site chrome with light/dark paint (mechanism: chassis `@antora-supplemental/color-scheme`).
 Part of its value as a candidate *default* UI is that it already ships practical fixes for long-standing Default UI and Lunr pain — not only brand polish.
 
 This page lists those items for pitching and for tracking upstream reports.
@@ -70,7 +70,7 @@ For each row: the stock behavior, what Valentus does, and the upstream tracker.
 
 | Dark mode in Default UI itself
 | Stock Default UI is light-only
-| *Ship today via supplemental packages* — Valentus (bundled) or `antora-dark-mode` (overlay). Upstream proposal https://gitlab.com/antora/antora-ui-default/-/merge_requests/207[!207] remains open; prefer the org packages over waiting on merge, and prefer proposing Valentus as a richer *default* rather than merging the old monolithic experiment into Default UI as-is
+| *Ship today via supplemental packages* — chassis `@antora-supplemental/color-scheme` (mechanism) + Valentus paint; `antora-dark-mode` is deprecated. Upstream proposal https://gitlab.com/antora/antora-ui-default/-/merge_requests/207[!207] remains open; prefer the org packages over waiting on merge, and prefer proposing Valentus as a richer *default* rather than merging the old monolithic experiment into Default UI as-is
 | https://gitlab.com/antora/antora-ui-default/-/merge_requests/207[!207]
 
 | Brief layout “settle” / FOUC on refresh when theme or brand CSS loads *after* `site.css`
@@ -89,7 +89,7 @@ These are intentional differentiators — useful when proposing Valentus as a ri
 * *Search or Ask omnibox* — https://github.com/antora-supplemental/antora-search-chat[`antora-search-chat`] wraps `@antora/lunr-extension` (no fork): conjoined scope select, dual-tone placeholders, optional Ask backends.
 * *Dual-tone scope labels* — closed control shows muted current component/version names from the Antora page model; menu options like *This component — \{title\}*. Complements lunr facet work (https://gitlab.com/antora/antora-lunr-extension/-/work_items/87[#87]) without waiting on it.
 * *Scope caret polish* — reliable SVG-mask caret instead of fragile CSS-gradient triangles (search-chat).
-* *Bundled dark mode* — https://github.com/antora-supplemental/antora-dark-mode[antora-dark-mode] merged into the release bundle.
+* *Color scheme* — mechanism from chassis `@antora-supplemental/color-scheme` (successor of `antora-dark-mode`); Valentus places and paints the toggle.
 * *Brand-first header logo* — tone strategies (`brand` / `mono`), optional light/dark asset pair.
 * *UI modules* — composable chrome packages + orchestrator (see xref:ui-modules.adoc[UI Modules]).
 * *Fragment jump offset without `.toolbar`* — Default UI `03-fragment-jumper.js` subtracts `.toolbar` height; Valentus replaced the toolbar with sticky navbar + doc mast, so hash/TOC jump offset should use that chrome (Valentus-local until upstream gains a toolbar-less fallback).

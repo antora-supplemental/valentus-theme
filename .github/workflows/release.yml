@@ -87,33 +87,16 @@ jobs:
           fi
           echo "$NOTES" > release_notes.md
 
-      - name: Resolve antora-dark-mode pin
-        id: darkmode
-        run: |
-          DM_VERSION=$(grep -oE 'antora-dark-mode/releases/download/v[0-9]+\.[0-9]+\.[0-9]+' antora-playbook.yml | head -1 | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
-          if [ -z "$DM_VERSION" ]; then
-            echo "Could not read antora-dark-mode version from antora-playbook.yml"
-            exit 1
-          fi
-          echo "version=v${DM_VERSION}" >> "$GITHUB_OUTPUT"
-          echo "Using antora-dark-mode ${DM_VERSION}"
-
-      - name: Fetch antora-dark-mode for vendor sync
-        run: |
-          git clone --depth 1 --branch ${{ steps.darkmode.outputs.version }} https://github.com/antora-supplemental/antora-dark-mode.git ../antora-dark-mode
-
       - name: Build Antora UI Bundle
         run: |
-          DARK_MODE_BUNDLE_URL="https://github.com/antora-supplemental/antora-dark-mode/releases/download/${{ steps.darkmode.outputs.version }}/ui-bundle.zip"
-          curl -L -o dark-mode-ui-bundle.zip "$DARK_MODE_BUNDLE_URL"
+          curl -fL -o default-ui-bundle.zip "https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable"
           rm -rf build/ui-bundle
           mkdir -p build/ui-bundle
           set +e
-          unzip -o dark-mode-ui-bundle.zip -d build/ui-bundle
+          unzip -o default-ui-bundle.zip -d build/ui-bundle
           unzip_status=$?
           set -e
           if [ "$unzip_status" -gt 1 ]; then exit "$unzip_status"; fi
-          node scripts/sync-dark-mode.mjs
           cp -r supplemental-ui/* build/ui-bundle/
           cd build/ui-bundle
           zip -r ../../ui-bundle.zip .

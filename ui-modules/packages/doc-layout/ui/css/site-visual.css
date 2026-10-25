@@ -1,4 +1,4 @@
-/* Valentus visual system — loads after site-extra + site-doc-layout.
+/* Valentus visual system — loads after site-paint + site-doc-layout.
    Opinionated palette, type, chrome, nav/TOC, code, admonitions, search, motion.
    Consumers override via :root / html.dark-theme custom properties. */
 
@@ -577,8 +577,8 @@ footer.footer a {
   transition: var(--valentus-transition);
 }
 
-/* Root theme crossfade (html.valentus-theme-animating / View Transitions) ships in
-   antora-dark-mode site-extra.css — not a Valentus per-widget selector list. */
+/* Root theme crossfade (html.color-scheme-animating / View Transitions) ships in
+   @antora-supplemental/color-scheme (chassis) — not a Valentus per-widget selector list. */
 
 /* ——— Breadcrumbs / mast accents ——— */
 .valentus-breadcrumb-trail .valentus-breadcrumb-trail-link,
@@ -1345,7 +1345,7 @@ nav.pagination a {
   color: var(--valentus-accent) !important;
 }
 
-/* ——— Dark mode: tame site-extra hardcodes ——— */
+/* ——— Dark mode: tame site-paint hardcodes ——— */
 html.dark-theme a {
   color: var(--valentus-accent) !important;
 }
@@ -1438,7 +1438,7 @@ html.dark-theme .doc .admonitionblock.caution > table {
   background: color-mix(in srgb, var(--valentus-admonition-caution) 12%, var(--valentus-elevated)) !important;
 }
 
-/* Keep listing/literal panels on --valentus-code-bg (not elevated); neutralize site-extra */
+/* Keep listing/literal panels on --valentus-code-bg (not elevated); neutralize site-paint */
 html.dark-theme .doc .listingblock,
 html.dark-theme .doc .literalblock {
   background: transparent !important;

@@ -1,5 +1,5 @@
 # Valentus demo site (GitHub Pages)
-# Layered build (dark-mode base + supplemental) — same merge as release CI.
+# Layered build (Default UI base + supplemental) — same merge as release CI.
 # Consumers: pin valentus-theme ui-bundle.zip (see README / installation.adoc).
 site:
   title: Valentus Theme
@@ -26,7 +26,7 @@ content:
 
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/antora-dark-mode/releases/download/v1.4.6/ui-bundle.zip
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
     snapshot: true
   supplemental_files: ./supplemental-ui
 
@@ -38,6 +38,8 @@ runtime:
 
 antora:
   extensions:
+    - require: "@antora-supplemental/color-scheme"
+      toggle: placed
     - require: "@antora/lunr-extension"
       index_latest_only: true
       index_by_heading: true

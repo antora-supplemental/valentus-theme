@@ -3,7 +3,7 @@
 :description: Manifest-driven, composable Antora UI modules installed via the ui-orchestrator extension.
 :page-tags: ui-modules, orchestrator, extensions
 
-This repository is evolving from a monolithic supplemental UI overlay into **composable UI modules** — reusable chrome components (dark mode, breadcrumb mast, header, layout) that you enable à la carte via manifests, without npm.
+This repository is evolving from a monolithic supplemental UI overlay into **composable UI modules** — reusable chrome components (breadcrumb mast, header, layout) that you enable à la carte via manifests, without npm.
 
 == Why manifests instead of npm only
 
@@ -37,7 +37,6 @@ antora:
     - require: ./ui-modules/packages/orchestrator/lib/index.js
       registry: ./ui-modules/registry.json5
       modules:
-        - dark-mode
         - bc-mast
         - edit-crumb
 ----
@@ -50,9 +49,6 @@ Conflicts fail the build with a clear error.
 [cols="2,4", options="header"]
 |===
 | Module id | Purpose
-
-| `dark-mode`
-| CSS overrides, FOUC script, navbar theme toggle
 
 | `vcs-icons`
 | Provider SVG assets + URL detection for repo/edit icons
@@ -67,7 +63,7 @@ Conflicts fail the build with a clear error.
 | Site navbar, logo slot, doc mast include, Source Sans 3
 
 | `doc-layout`
-| Body/nav/article layout and `site-doc-layout.css`
+| Body/nav/article layout, `site-doc-layout.css` and `site-paint.css` (light/dark paint)
 |===
 
 == Recipes
@@ -75,7 +71,7 @@ Conflicts fail the build with a clear error.
 Pre-defined combinations live under `ui-modules/recipes/`:
 
 * `doc-site` — full chrome stack (this demo site's layout)
-* `dark-mode-only` — toggle + styles on stock Default UI
+* Color scheme is not a UI module: add the chassis `@antora-supplemental/color-scheme` extension (`toggle: placed`) next to the orchestrator.
 
 == Validate and generate registry index
 

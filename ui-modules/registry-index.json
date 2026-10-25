@@ -1,22 +1,20 @@
 {
   "schema": "1.0",
-  "generatedAt": "2026-06-09T05:36:25.872Z",
+  "generatedAt": "2026-10-25T09:58:40.734Z",
   "repository": "https://github.com/antora-supplemental/valentus-theme",
   "source": "ui-modules/registry.json5",
   "modules": [
     {
       "id": "vcs-icons",
       "name": "VCS provider icons",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "type": "ui-module",
-      "description": "Provider SVG assets and JS to map repository URLs to icons in header and edit links.",
+      "description": "Provider SVG assets + Handlebars helper valentus-vcs-icon-id (bake icon at generate time). Edit injection lives in @antora-supplemental/page-edit.",
       "repository": "https://github.com/antora-supplemental/valentus-theme",
       "manifestPath": "packages/vcs-icons/ui-module.json5",
       "modulePath": "packages/vcs-icons",
       "requires": [],
-      "recommends": [
-        "dark-mode"
-      ],
+      "recommends": [],
       "conflicts": [],
       "partials": {
         "provide": [],
@@ -24,12 +22,10 @@
       },
       "slots": {
         "foot": {
-          "scripts": [
-            "js/site-vcs-icons.js"
-          ]
+          "scripts": []
         }
       },
-      "uiFileCount": 10,
+      "uiFileCount": 11,
       "install": {
         "orchestrator": {
           "registry": "./ui-modules/registry.json5",
@@ -51,9 +47,7 @@
       "requires": [
         "edit-crumb"
       ],
-      "recommends": [
-        "dark-mode"
-      ],
+      "recommends": [],
       "conflicts": [],
       "partials": {
         "provide": [
@@ -72,7 +66,7 @@
           ]
         }
       },
-      "uiFileCount": 5,
+      "uiFileCount": 8,
       "install": {
         "orchestrator": {
           "registry": "./ui-modules/registry.json5",
@@ -84,10 +78,10 @@
     },
     {
       "id": "edit-crumb",
-      "name": "Edit in breadcrumb",
-      "version": "1.0.0",
+      "name": "Edit breadcrumb stub",
+      "version": "1.1.0",
       "type": "ui-module",
-      "description": "Inline edit link partial for breadcrumb rows (pairs with bc-mast or custom breadcrumbs).",
+      "description": "Empty edit-breadcrumb partial for backward compatibility. Real Edit control: @antora-supplemental/page-edit into page-context lead.",
       "repository": "https://github.com/antora-supplemental/valentus-theme",
       "manifestPath": "packages/edit-crumb/ui-module.json5",
       "modulePath": "packages/edit-crumb",
@@ -127,7 +121,7 @@
       ],
       "recommends": [
         "vcs-icons",
-        "dark-mode"
+        "color-scheme"
       ],
       "conflicts": [],
       "partials": {
@@ -143,14 +137,14 @@
           "links": [
             "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">",
             "<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>",
-            "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap\">"
+            "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap\">"
           ],
           "fragments": [
             "snippets/repo-meta.hbs"
           ]
         }
       },
-      "uiFileCount": 5,
+      "uiFileCount": 6,
       "install": {
         "orchestrator": {
           "registry": "./ui-modules/registry.json5",
@@ -173,11 +167,16 @@
         "header-chrome"
       ],
       "recommends": [
-        "dark-mode"
+        "color-scheme",
+        "read-width",
+        "font-size"
       ],
       "conflicts": [],
       "partials": {
-        "provide": [],
+        "provide": [
+          "valentus-doc-toolbar",
+          "valentus-tool-band"
+        ],
         "replace": [
           "body",
           "nav",
@@ -191,16 +190,113 @@
       "slots": {
         "head": {
           "stylesheets": [
-            "css/site-doc-layout.css"
+            "css/site-paint.css",
+            "css/site-doc-layout.css",
+            "css/site-visual.css"
+          ]
+        },
+        "foot": {
+          "scripts": [
+            "js/site-page-toc.js",
+            "js/site-visual.js",
+            "js/valentus-table-scroll.js"
           ]
         }
       },
-      "uiFileCount": 9,
+      "uiFileCount": 16,
       "install": {
         "orchestrator": {
           "registry": "./ui-modules/registry.json5",
           "modules": [
             "doc-layout"
+          ]
+        }
+      }
+    },
+    {
+      "id": "read-width",
+      "name": "Reading width control",
+      "version": "1.0.0",
+      "type": "ui-module",
+      "description": "Optional reading-measure control (narrow / comfortable / wide). Provides partial valentus-read-width for placement anywhere; persists via localStorage and data-valentus-read-width.",
+      "repository": "https://github.com/antora-supplemental/valentus-theme",
+      "manifestPath": "packages/read-width/ui-module.json5",
+      "modulePath": "packages/read-width",
+      "requires": [],
+      "recommends": [],
+      "conflicts": [],
+      "partials": {
+        "provide": [
+          "valentus-read-width"
+        ],
+        "replace": []
+      },
+      "slots": {
+        "head": {
+          "scripts": [
+            "js/valentus-read-width-fouc.js"
+          ],
+          "stylesheets": [
+            "css/site-read-width.css"
+          ]
+        },
+        "foot": {
+          "scripts": [
+            "js/site-read-width.js"
+          ]
+        }
+      },
+      "uiFileCount": 4,
+      "install": {
+        "orchestrator": {
+          "registry": "./ui-modules/registry.json5",
+          "modules": [
+            "read-width"
+          ]
+        }
+      }
+    },
+    {
+      "id": "font-size",
+      "name": "Reading font size control",
+      "version": "1.0.0",
+      "type": "ui-module",
+      "description": "Optional text-size control for condensed / mobile viewports (small / medium / large). Provides partial valentus-font-size; persists via localStorage and data-valentus-font-size. Complements read-width (desktop measure).",
+      "repository": "https://github.com/antora-supplemental/valentus-theme",
+      "manifestPath": "packages/font-size/ui-module.json5",
+      "modulePath": "packages/font-size",
+      "requires": [],
+      "recommends": [
+        "read-width"
+      ],
+      "conflicts": [],
+      "partials": {
+        "provide": [
+          "valentus-font-size"
+        ],
+        "replace": []
+      },
+      "slots": {
+        "head": {
+          "scripts": [
+            "js/valentus-font-size-fouc.js"
+          ],
+          "stylesheets": [
+            "css/site-font-size.css"
+          ]
+        },
+        "foot": {
+          "scripts": [
+            "js/site-font-size.js"
+          ]
+        }
+      },
+      "uiFileCount": 4,
+      "install": {
+        "orchestrator": {
+          "registry": "./ui-modules/registry.json5",
+          "modules": [
+            "font-size"
           ]
         }
       }
@@ -212,13 +308,15 @@
       "name": "Valentus doc site chrome",
       "version": "1.0.0",
       "type": "ui-recipe",
-      "description": "Composed doc-site layout: mast, header, VCS icons, and body chrome. Pair with antora-dark-mode for dark styling.",
+      "description": "Composed doc-site layout (pair with the @antora-supplemental/color-scheme chassis extension): mast, header, VCS icons, and body chrome.",
       "modules": [
         "vcs-icons",
         "bc-mast",
         "edit-crumb",
         "header-chrome",
-        "doc-layout"
+        "doc-layout",
+        "read-width",
+        "font-size"
       ],
       "manifestPath": "recipes/valentus-site.json5",
       "install": {

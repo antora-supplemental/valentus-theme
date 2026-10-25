@@ -1,7 +1,7 @@
 {{!--
   HACK (interim paint-hold): hide the document until layered supplemental CSS has
   loaded, preference attrs are set, and web fonts are ready. Default UI paints
-  site.css first; Valentus then applies site-extra / layout / visual / read-width /
+  site.css first; Valentus then applies site-paint / layout / visual / read-width /
   font-size (and often a site brand overlay). Google Fonts use display=swap, so
   releasing before font files arrive causes a FOUT width jump on refresh.
 
@@ -16,7 +16,7 @@ html.valentus-fouc-pending { visibility: hidden !important; }
 <script>
 document.documentElement.classList.add('valentus-fouc-pending')
 </script>
-<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-extra.css">
+<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-paint.css">
 <meta name="dm-navbar" content="{{or site.keys.darkModeNavbar 'light'}}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,29 +27,13 @@ document.documentElement.classList.add('valentus-fouc-pending')
 <link rel="stylesheet" href="{{{uiRootPath}}}/css/site-font-size.css">
 <link rel="stylesheet" href="{{{uiRootPath}}}/css/site-math.css">
 <link rel="stylesheet" href="{{{uiRootPath}}}/css/site-themed-svg.css">
-{{!-- Preference FOUC: after stylesheet links so the parser has applied the cascade. --}}
+{{!-- Color scheme: html.dark-theme / data-theme come from the chassis
+  @antora-supplemental/color-scheme head hook (playbook extension). Valentus only
+  maps its dm-navbar key to the html hook here. --}}
 <script>
 (function () {
-  const dmNavbar = document.querySelector('meta[name="dm-navbar"]')
-  if (dmNavbar && dmNavbar.content) {
-    document.documentElement.dataset.dmNavbar = dmNavbar.content
-  }
-  const MODE = 'antora-theme-mode'
-  const LEGACY = 'antora-theme'
-  function mode() {
-    const m = localStorage.getItem(MODE)
-    if (m === 'system' || m === 'dark' || m === 'light') return m
-    const o = localStorage.getItem(LEGACY)
-    if (o === 'dark' || o === 'light') return o
-    return 'system'
-  }
-  function isDark() {
-    const m = mode()
-    if (m === 'dark') return true
-    if (m === 'light') return false
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-  }
-  if (isDark()) document.documentElement.classList.add('dark-theme')
+  var m = document.querySelector('meta[name="dm-navbar"]')
+  if (m && m.content) document.documentElement.dataset.dmNavbar = m.content
 })()
 </script>
 {{!-- read-width FOUC (same as ui-modules/packages/read-width/ui/js/valentus-read-width-fouc.js) --}}

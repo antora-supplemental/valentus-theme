@@ -6,7 +6,7 @@
   description: "Sticky site navbar with logo slot, doc title, search slot, VCS link, and doc mast include.",
   repository: "https://github.com/antora-supplemental/valentus-theme",
   requires: ["bc-mast"],
-  recommends: ["vcs-icons", "dark-mode"],
+  recommends: ["vcs-icons", "color-scheme"],
   conflicts: [],
   slots: {
     head: {

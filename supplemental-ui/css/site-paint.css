@@ -1,3 +1,7 @@
+/* Valentus paint: Default UI dark-theme palette + .theme-toggle look.
+ * Mechanism (html.dark-theme, data-theme, persistence, toggle behavior, theme
+ * crossfade) is @antora-supplemental/color-scheme (antora-ui-chassis).
+ * Formerly the vendored antora-dark-mode site-extra.css. */
 /* Dark mode styles for Antora default UI */
 html.dark-theme,
 html.dark-theme body {
@@ -541,54 +545,6 @@ html.dark-theme .theme-toggle:not(.valentus-header-icon-btn):hover {
   font-size: inherit;
 }
 
-/*
- * Root theme transition (platform contract)
- * -----------------------------------------
- * Toggle uses View Transitions when available (see site-dark-mode.js).
- * Fallback: temporary html.valentus-theme-animating for ~300ms with a universal
- * paint transition so extension chrome that follows tokens / html.dark-theme
- * crossfades without per-widget transition rules.
- *
- * During View Transitions, html.valentus-theme-vt suppresses competing CSS
- * transitions (e.g. Valentus --valentus-transition at 0.2s) so chrome does not
- * finish ahead of the 0.28s root snapshot crossfade.
- *
- * Extensions should style via CSS variables or html.dark-theme — do not invent
- * their own light↔dark toggle animation.
- */
-@media (prefers-reduced-motion: no-preference) {
-  html.valentus-theme-animating,
-  html.valentus-theme-animating *,
-  html.valentus-theme-animating *::before,
-  html.valentus-theme-animating *::after {
-    transition:
-      background-color 0.28s ease,
-      color 0.28s ease,
-      border-color 0.28s ease,
-      fill 0.28s ease,
-      stroke 0.28s ease,
-      box-shadow 0.28s ease,
-      filter 0.28s ease,
-      opacity 0.28s ease !important;
-  }
-
-  html.valentus-theme-vt,
-  html.valentus-theme-vt *,
-  html.valentus-theme-vt *::before,
-  html.valentus-theme-vt *::after,
-  html:active-view-transition,
-  html:active-view-transition *,
-  html:active-view-transition *::before,
-  html:active-view-transition *::after {
-    transition: none !important;
-  }
-
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation-duration: 0.28s;
-  }
-}
-
 /* VCS repo logo (valentus-theme replaces Download) — true 1:1 square, compact */
 .navbar .vcs-repo-logo {
   padding: 0 0.5rem 0 0;
@@ -974,7 +930,7 @@ html.dark-theme .videoblock {
 }
 
 /* Doc home: .openblock.cards + .exampleblock.tile
-   Bundled in supplemental site-extra.css so Antora prebuilds pick it up. */
+   Bundled in supplemental site-paint.css so Antora prebuilds pick it up. */
 :root {
   --doc-tile-radius: 0.5rem;
   --doc-tile-border-color: var(--panel-border-color);
