@@ -962,3 +962,11 @@ html.dark-theme {
 .doc .hljs-meta {
   color: var(--vp-syntax-meta) !important;
 }
+
+/* Markup tags, names, and attributes: without this the Default UI's navy
+   (#000080) shows on the dark code panel in both schemes. */
+.doc .hljs-tag,
+.doc .hljs-name,
+.doc .hljs-attribute {
+  color: var(--vp-syntax-string) !important;
+}

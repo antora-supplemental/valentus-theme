@@ -21,6 +21,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
+== Unreleased
+
+=== Fixed
+
+* **Valentus Paint:** highlight.js markup tags, names and attributes (`.hljs-tag`, `.hljs-name`, `.hljs-attribute`) fell through to the Default UI's navy (`#000080`) on the dark code panel, about 1.1:1 contrast in both schemes. They now use the paint's string color, matching how dark mode already showed names and attributes.
+
 == 4.0.0 — 2026-10-25
 
 === Changed (breaking)
