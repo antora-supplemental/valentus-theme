@@ -1,0 +1,25 @@
+{
+  id: "valentus-paint",
+  name: "Valentus Paint",
+  version: "4.0.0",
+  type: "ui-paint",
+  description: "Valentus light and dark palette: the full --cs-* token contract plus Default UI / content / highlight.js paint rules. Works on Valentus Layout or the plain Antora Default UI.",
+  repository: "https://github.com/antora-supplemental/valentus-theme",
+  layer: "paint",
+  main: "paint/lib/index.js",
+  requires: ["color-scheme"],
+  tokens: { sets: "cs" },
+  paint: {
+    css: "paint/css/valentus-paint.css",
+    // Layout class prefixes this paint may style (validate-paint.mjs --extra).
+    extraSelectors: [".valentus-", ".cards", ".tile"],
+    livePaintId: "valentus",
+  },
+  slots: {
+    head: {
+      stylesheets: ["css/valentus-paint.css"],
+      at: "color-scheme:paint-slot",
+      after: ["css/site.css", "css/color-scheme.css"],
+    },
+  },
+}

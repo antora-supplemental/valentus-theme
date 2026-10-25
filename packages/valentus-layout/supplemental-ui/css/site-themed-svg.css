@@ -1,0 +1,8 @@
+/* Themed SVG host layout. Example palettes for the Valentus docs live in Valentus Paint. */
+
+.imageblock.themed-svg themed-svg,
+.imageblock.themed-svg img {
+  display: block;
+  width: 100%;
+  height: auto;
+}

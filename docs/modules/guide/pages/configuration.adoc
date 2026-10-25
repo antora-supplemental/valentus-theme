@@ -201,10 +201,10 @@ Color scheme files are split by layer:
 | No-FOUC `html.dark-theme` / `data-theme`, persistence, system preference, toggle behavior and a11y. No colors.
 
 | Paint (Valentus)
-| `supplemental-ui/css/site-paint.css` (+ `--valentus-*` tokens in `site-visual.css` / `site-doc-layout.css`)
+| `paint/css/valentus-paint.css` (`--cs-*` tokens; layout CSS reads them)
 | Light and dark palettes, Default UI dark overrides, toggle look.
 
 | Body kit (Valentus)
-| `supplemental-ui/partials/header-content.hbs`
+| `packages/valentus-layout/supplemental-ui/partials/header-content.hbs`
 | Places `<button id="theme-toggle">` at the start of `.navbar-end` (`toggle: placed`).
 |===

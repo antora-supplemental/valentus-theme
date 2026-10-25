@@ -1,0 +1,32 @@
+= Valentus Layout
+
+The layout half of Valentus 4: partials, helpers, JS and layout CSS in `supplemental-ui/`.
+It sets no palette. Color rules read the `--cs-*` contract from
+`@antora-supplemental/color-scheme` and fall back to system colors (`Canvas`,
+`CanvasText`, `GrayText`, `LinkText`), so it renders without a paint.
+
+Pair it with a paint:
+
+* *Valentus Paint* (repo root `paint/`): the classic Valentus look.
+* `@antora-supplemental/default-paint`: Default UI colors in the Valentus layout.
+
+[source,yaml]
+----
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+  supplemental_files: ./path/to/valentus-theme/packages/valentus-layout/supplemental-ui
+antora:
+  extensions:
+    - require: "@antora-supplemental/color-scheme"
+      toggle: placed
+    - require: ./path/to/valentus-theme/paint/lib/index.js   # or @antora-supplemental/default-paint
+----
+
+Paints link at `{{!-- color-scheme:paint-slot --}}` in `partials/head-meta.hbs`,
+before the layout CSS, so layout rules win (same cascade as Valentus 3).
+Hub overrides of `head-meta.hbs` must keep that marker.
+
+The logo fixture swatches (`.valentus-logo-fixture-bar--light/--dark`) keep fixed
+colors on purpose: they preview the logo on each scheme's surface.

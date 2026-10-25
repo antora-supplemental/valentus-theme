@@ -15,7 +15,7 @@ This page covers common issues and their solutions.
 [source,yaml]
 ----
 ui:
-  supplemental_files: ./node_modules/valentus-theme/supplemental-ui
+  supplemental_files: ./node_modules/valentus-theme/packages/valentus-layout/supplemental-ui
 ----
 
 . *Color scheme extension missing* - Add `- require: "@antora-supplemental/color-scheme"` (with `toggle: placed`) under `antora.extensions` and install the package. Without it there is no toggle and no dark scheme.
@@ -53,7 +53,7 @@ console.log(localStorage.getItem('test')); // Should print "value"
 +
 [source]
 ----
-supplemental-ui/partials/head-meta.hbs
+packages/valentus-layout/supplemental-ui/partials/head-meta.hbs
 ----
 
 . *CSP blocking inline script* - The FOUC prevention relies on an inline script in `<head>`. If blocked by CSP, add the script's hash to your policy.
@@ -74,7 +74,7 @@ supplemental-ui/partials/head-meta.hbs
 
 *Solution:* The CSS covers the most common Antora elements, but custom extensions or modified UI bundles may have additional elements.
 
-Add styles for unstyled elements in `site-paint.css` (or your brand overlay):
+Add styles for unstyled elements in your paint or brand overlay, using `--cs-*` tokens:
 
 [source,css]
 ----
@@ -92,7 +92,7 @@ TIP: Use browser DevTools to inspect the unstyled element and find its CSS class
 
 *Solution:* The theme includes styles for highlight.js code blocks. If you're using a different syntax highlighter (like Prism or Rouge), you may need to add custom styles or use a dark-compatible theme for that highlighter.
 
-For highlight.js, ensure the dark theme styles are present in `site-paint.css`:
+For highlight.js, ensure the dark theme styles are present in your paint (Valentus Paint ships them):
 
 [source,css]
 ----

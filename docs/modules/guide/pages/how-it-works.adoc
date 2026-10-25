@@ -14,7 +14,7 @@ Valentus overlays the Antora Default UI bundle with supplemental files; the colo
 | Inline head hook (no FOUC): reads `antora-theme-mode`, sets `html.dark-theme`, `data-theme`, `data-color-scheme-mode`. `js/color-scheme.js`: persistence, live system preference, override expiry, View Transition crossfade, toggle binding and a11y, `window.ColorScheme` API, SoftNav rebinding. `css/color-scheme.css`: `color-scheme` property and transition rules. No colors.
 
 | Paint — Valentus
-| `site-paint.css` (Default UI dark overrides + toggle look) and the `--valentus-*` light/dark tokens in `site-visual.css` / `site-doc-layout.css`.
+| Valentus Paint (`paint/css/valentus-paint.css`): `--cs-*` light/dark token values, Default UI and content colors, toggle look. The layout reads only tokens.
 
 | Body kit — Valentus
 | Partials: header (places `#theme-toggle`), mast, layout, footer.
@@ -23,7 +23,7 @@ Valentus overlays the Antora Default UI bundle with supplemental files; the colo
 == head-meta.hbs
 
 . Applies the interim paint-hold (`html.valentus-fouc-pending`)
-. Loads the Valentus stylesheet chain (`site-paint`, `site-doc-layout`, `site-visual`, `site-read-width`, `site-font-size`, `site-math`)
+. Loads the Valentus stylesheet chain (paint slot, `valentus-chrome`, `site-doc-layout`, `site-visual`, `site-read-width`, `site-font-size`, `site-math`)
 . Maps `site.keys.darkModeNavbar` to `html[data-dm-navbar]`, runs read-width / font-size FOUC scripts and releases paint after webfonts
 
 The color scheme head hook is injected by the extension right after `site.css` (in `head-styles`), so it runs before any Valentus CSS.

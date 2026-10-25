@@ -1,0 +1,258 @@
+/* Valentus Layout: chrome rules split out of the v3 site-paint.css (VCS link,
+ * header search box, float groups, nav spacing, project cards). Layout only:
+ * colors come from the --cs-* paint contract (@antora-supplemental/color-scheme).
+ * Loads right after the paint slot, where v3 loaded site-paint.css. */
+html.dark-theme .doc details>summary {
+  cursor: pointer;
+}
+
+/* Lunr search (@antora/lunr-extension) */
+.navbar .search,
+.valentus-header-search {
+  position: relative;
+}
+
+#search-field {
+  display: flex;
+}
+
+.navbar .theme-toggle:not(.valentus-header-icon-btn) {
+  text-transform: none;
+}
+
+/* Valentus header: square icon control even when JS omits valentus-header-icon-btn (stale bundle). */
+.header.valentus-header .navbar .navbar-end button.theme-toggle {
+  padding: 0;
+  height: auto;
+  min-height: 0;
+  font-size: inherit;
+}
+
+/* VCS repo logo (valentus-theme replaces Download) — true 1:1 square, compact */
+.navbar .vcs-repo-logo {
+  padding: 0 0.5rem 0 0;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.navbar .vcs-repo-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  color: inherit;
+  opacity: 0.9;
+}
+
+.navbar .vcs-repo-link:hover {
+  opacity: 1;
+  background-color: var(--cs-hover, rgba(0, 0, 0, 0.1));
+}
+
+html.dark-theme .navbar .vcs-repo-link:hover {
+  background-color: var(--cs-hover, rgba(0, 0, 0, 0.1));
+}
+
+/* Logo: strict 1:1 placeholder; img loads SVG (white icons for dark navbar) */
+.navbar .vcs-logo {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  max-width: 24px;
+  max-height: 24px;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar .vcs-logo-img {
+  width: 24px;
+  height: 24px;
+  display: block;
+  object-fit: contain;
+}
+
+/* Light theme: if you change the navbar to a light top bar, uncomment below so the (white) logo stays visible. */
+html:not(.dark-theme) .navbar .vcs-logo-img {
+  /* filter: invert(1); */
+}
+
+/* Float group layout for alternating content */
+.float-group::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.float-group .left {
+  float: left;
+  max-width: 45%;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+}
+
+.float-group .right {
+  float: right;
+  max-width: 45%;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+.float-group .right.text-right {
+  text-align: right;
+}
+
+/* Left nav insets: match toolbar .home-link (margin = toolbar-height / 4) so tree lines up
+   with the breadcrumb row home control on wide layouts (stock default UI is 0.75rem).
+   Skip .nav-tree-only / .valentus-nav-tree-only: horizontal inset is set in site-doc-layout.css
+   on .nav-panel-menu + vertical-only padding on the nav (avoids cascade conflicts). */
+.nav-menu:not(.nav-tree-only):not(.valentus-nav-tree-only) {
+  padding-left: calc(var(--toolbar-height) / 4);
+  padding-right: 0.75rem;
+}
+
+.nav-panel-explore .components {
+  padding-left: calc(var(--toolbar-height) / 4);
+  padding-right: 0.75rem;
+}
+
+/* Nav tree: one label column for every row (aligns multi-line and leaf vs. folder;
+   same idea as default UI nav.css; keeps older core bundles useful until upgraded). */
+.nav .nav-item {
+  position: relative;
+}
+
+.nav .nav-item > .nav-link,
+.nav .nav-item > .nav-text {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  text-indent: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  padding-left: calc(var(--nav-line-height) * 1em + 0.15em);
+}
+
+/* Sticky left nav: keep viewport-height column so the project switcher stays at the
+   bottom of the visible nav tree (in-flow stretch pushed it to the document bottom).
+   Authoritative offsets live in site-doc-layout.css (mast-aware --valentus-mast-total). */
+@media screen and (min-width: 1024px) {
+  .nav-container {
+    align-self: flex-start !important;
+    min-height: 0 !important;
+  }
+
+  .nav {
+    position: sticky !important;
+    top: var(--valentus-mast-total, var(--navbar-height)) !important;
+    height: calc(100vh - var(--valentus-mast-total, var(--navbar-height))) !important;
+    max-height: calc(100vh - var(--valentus-mast-total, var(--navbar-height))) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+  }
+
+  .nav .panels {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    position: relative !important;
+  }
+
+  .nav-panel-menu {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow-y: auto !important;
+  }
+
+  /* Project switcher drawer: flex footer within the sticky nav column. */
+  .nav-panel-explore {
+    position: static !important;
+    flex: 0 0 auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+  }
+
+  .nav-panel-explore:not(:first-child) {
+    max-height: var(--nav-panel-explore-height) !important;
+  }
+}
+
+/* Bundle default uses overflow-y: scroll on nav panels; prefer scrollbar only when needed. */
+.nav-panel-menu,
+.nav-panel-explore .components {
+  overflow-y: auto !important;
+}
+
+.doc .openblock.cards {
+  margin: 1.5rem 0 0;
+}
+
+.doc .openblock.cards > .content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1.25rem;
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* Win over any later dark rules that set display/background on .openblock > .content */
+html.dark-theme .doc .openblock.cards > .content {
+  display: grid !important;
+  background: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.doc .openblock.cards .exampleblock.tile {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.doc .openblock.cards .exampleblock.tile > .content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 7.5rem;
+  margin: 0;
+  background: var(--doc-tile-background);
+  border: 1px solid var(--doc-tile-border-color);
+  border-radius: var(--doc-tile-radius);
+  box-shadow: var(--doc-tile-shadow);
+  padding: 1.25rem 1.25rem 1rem;
+  transition: var(--doc-tile-transition);
+}
+
+.doc .openblock.cards .exampleblock.tile > .content > :last-child:not(:only-child) {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+/* Beat generic `html.dark-theme .doc .exampleblock > .content` !important for project tiles */
+html.dark-theme .doc .openblock.cards .exampleblock.tile > .content {
+  background: var(--doc-tile-background) !important;
+  background-color: var(--doc-tile-background) !important;
+  border-color: var(--doc-tile-border-color) !important;
+}

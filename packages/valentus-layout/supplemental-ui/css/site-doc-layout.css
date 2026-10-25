@@ -1,4 +1,4 @@
-/* antora-doc-layout: layered after antora default UI and site-paint.css (dark palette).
+/* antora-doc-layout: layered after antora default UI and the paint (Valentus Paint or another --cs-* paint).
    Source Sans 3 + Plus Jakarta Sans (headings), a doc mast (breadcrumbs) instead of a separate
    in-article toolbar, and a sidebar with component label + page navigation tree. */
 
@@ -11,14 +11,14 @@
   --valentus-font-display: "Plus Jakarta Sans", var(--valentus-font);
   --valentus-font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace;
   /* Surfaces — site-visual.css may refine; keep sensible defaults if visual CSS is omitted */
-  --valentus-canvas: #f3f5f8;
-  --valentus-elevated: #ffffff;
-  --valentus-ink: #141820;
-  --valentus-ink-muted: #5a6270;
-  --valentus-accent: #0f766e;
-  --valentus-accent-hover: #0d9488;
-  --valentus-accent-soft: rgba(15, 118, 110, 0.1);
-  --valentus-border: #d9dee7;
+  --valentus-canvas: var(--cs-canvas, Canvas);
+  --valentus-elevated: var(--cs-elevated, Canvas);
+  --valentus-ink: var(--cs-ink, CanvasText);
+  --valentus-ink-muted: var(--cs-ink-muted, GrayText);
+  --valentus-accent: var(--cs-accent, LinkText);
+  --valentus-accent-hover: var(--cs-accent-hover, LinkText);
+  --valentus-accent-soft: var(--cs-accent-soft, transparent);
+  --valentus-border: var(--cs-border, GrayText);
   --soft-nav-context: var(--valentus-canvas);
   /* Opaque top-bar / mast surface (was --adt-chrome before 3.0.0; keep defined or bars go transparent). */
   --valentus-chrome: var(--valentus-canvas);
@@ -75,14 +75,6 @@
 }
 
 html.dark-theme {
-  --valentus-canvas: #0b0e13;
-  --valentus-elevated: #141a22;
-  --valentus-ink: #e8ebf0;
-  --valentus-ink-muted: #9aa3b2;
-  --valentus-accent: #2dd4bf;
-  --valentus-accent-hover: #5eead4;
-  --valentus-accent-soft: rgba(45, 212, 191, 0.12);
-  --valentus-border: rgba(255, 255, 255, 0.09);
   --soft-nav-context: var(--valentus-canvas);
   /* Opaque top-bar / mast surface (was --adt-chrome before 3.0.0; keep defined or bars go transparent). */
   --valentus-chrome: var(--valentus-canvas);
@@ -327,7 +319,7 @@ html.dark-theme .valentus-header-logo--mono {
   margin-bottom: 0.4rem;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--valentus-header-bar-fg, #1f2933);
+  color: var(--valentus-header-bar-fg);
 }
 
 .valentus-logo-fixture-bar {
@@ -388,7 +380,7 @@ a.valentus-header-title:focus {
   opacity: 0.9;
 }
 
-/* Header end controls (GitHub, theme) — one shape; beats site-paint .theme-toggle:hover colors. */
+/* Header end controls (GitHub, theme) — one shape; beats paint .theme-toggle:hover colors. */
 .header.valentus-header .navbar .navbar-end .valentus-header-icon-btn {
   min-width: var(--valentus-header-ctrl) !important;
   min-height: var(--valentus-header-ctrl) !important;
@@ -782,7 +774,7 @@ main.valentus-article > .content > article.doc {
   margin-left: calc(-1.5ex - 0.7em);
   margin-top: -0.35em;
   box-sizing: content-box;
-  color: var(--valentus-ink-muted, #5b6472);
+  color: var(--valentus-ink-muted);
   text-decoration: none !important;
   z-index: 1;
 }
@@ -812,7 +804,7 @@ main.valentus-article > .content > article.doc {
 .doc h5 .anchor:focus-visible,
 .doc h6 .anchor:focus-visible {
   opacity: 1;
-  color: var(--valentus-accent, #0d6e6e) !important;
+  color: var(--valentus-accent) !important;
 }
 
 /* ——— Breadcrumb row in mast ——— */
@@ -932,7 +924,7 @@ html.dark-theme .valentus-breadcrumb-trail-text {
   margin: 0 0 0.2rem;
   font-size: 0.82em;
   line-height: 1.35;
-  color: var(--valentus-ink-muted, #6b7380);
+  color: var(--valentus-ink-muted);
 }
 
 .doc .page-context-source-line + .valentus-page-header,
@@ -1514,7 +1506,7 @@ nav.nav-menu.valentus-nav-tree-only > .nav-list {
   text-decoration: underline;
 }
 
-/* Dark nav link color (overrides site-paint.css defaults) */
+/* Dark nav link color (overrides paint defaults) */
 html.dark-theme .nav .valentus-nav-component-title,
 html.dark-theme .nav .valentus-nav-component-title a {
   color: var(--valentus-ink);

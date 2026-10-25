@@ -1,0 +1,86 @@
+= Migrating to Valentus 4
+:description: Valentus 4 splits layout from paint on the --cs-* contract and moves the color scheme mechanism to chassis.
+
+Valentus 4 is three layers:
+
+[cols="1,2,2"]
+|===
+| Layer | What | Where
+
+| Mechanism
+| Light/dark switching, persistence, toggle behavior, live paint
+| `@antora-supplemental/color-scheme` (antora-ui-chassis)
+
+| Layout
+| Partials, helpers, JS, layout CSS; reads `--cs-*`
+| `packages/valentus-layout/supplemental-ui` (this repo)
+
+| Paint
+| Token values (`:root` / `html.dark-theme`) and content colors
+| Valentus Paint, `paint/` (this repo); or any `--cs-*` paint such as `@antora-supplemental/default-paint`
+|===
+
+== Release bundle users
+
+`ui-bundle.zip` still contains layout plus Valentus Paint, so the site looks the same.
+Add the chassis extension if you have not (required since 4.0.0):
+
+[source,yaml]
+----
+antora:
+  extensions:
+    - require: "@antora-supplemental/color-scheme"
+      toggle: placed
+----
+
+The release also ships `valentus-layout-bundle.zip` (layout only). Use it with a paint extension.
+
+== Git overlay users
+
+* `supplemental_files: .../valentus-theme/supplemental-ui` becomes `.../valentus-theme/packages/valentus-layout/supplemental-ui`.
+* Add the paint after color-scheme: `- require: .../valentus-theme/paint/lib/index.js` (Valentus look) or `@antora-supplemental/default-paint`.
+
+== Removed and renamed
+
+* `css/site-paint.css` is gone. Its colors are in `paint/css/valentus-paint.css`; its layout rules (VCS repo link, float groups, cards) are in `css/valentus-chrome.css`.
+* Hex colors in `site-doc-layout.css`, `site-visual.css`, `site-read-width.css`, `site-font-size.css` and `site-themed-svg.css` now read tokens. The highlight.js palette and themed-SVG tokens moved to the paint.
+* `head-meta.hbs` has `{{!-- color-scheme:paint-slot --}}` where `site-paint.css` was linked. *Hub overrides of `head-meta.hbs`*: replace the `site-paint.css` link with that marker plus `<link rel="stylesheet" href="{{{uiRootPath}}}/css/valentus-chrome.css">`.
+
+== Token contract
+
+Read colors as `var(--cs-name, system-fallback)`. Paints set, for light (`:root`) and dark (`html.dark-theme`):
+
+* core: `--cs-canvas`, `--cs-elevated`, `--cs-ink`, `--cs-ink-muted`, `--cs-border`, `--cs-accent`
+* accents: `--cs-accent-hover`, `--cs-accent-soft`, `--cs-hover`
+* code: `--cs-code-bg`, `--cs-code-fg`
+* callouts: `--cs-admonition-note`, `-tip`, `-important`, `-warning`, `-caution`
+
+The six core tokens are also set as `--valentus-canvas`, `-elevated`, `-ink`, `-ink-muted`, `-border`, `-accent`. Extensions such as antora-search-chat and antora-diagram-engines read those names; they are part of the contract, not deprecated.
+
+Brand overlays that re-tint Valentus: override `--cs-*` (both schemes) instead of `--valentus-*`.
+
+== Writing a paint
+
+A paint styles only shared hooks: token blocks, Default UI chrome, Asciidoctor content, highlight.js and the chassis toggle. Check it with the chassis validator:
+
+[source,console]
+----
+node node_modules/@antora-supplemental/color-scheme/scripts/validate-paint.mjs my-paint.css --strict
+----
+
+Layout-specific classes must be declared (`--extra=.my-layout-`), as Valentus Paint does for `.valentus-`.
+
+== Live paint previews
+
+Register Valentus Paint as a live paint (color-scheme 0.2.0+) to preview it on other layouts:
+
+[source,yaml]
+----
+    - require: "@antora-supplemental/color-scheme"
+      live_paint:
+        enabled: true
+        paints:
+          valentus: css/valentus-paint.css
+----
+
+For cross-site iframes, pass `?paint=valentus` in the iframe `src`; third-party cookies are often blocked.

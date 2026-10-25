@@ -1,7 +1,7 @@
 {
   "name": "valentus-theme",
   "version": "4.0.0",
-  "description": "Valentus — composed Antora doc-site chrome (mast, header, layout, toggle placement, paint); color scheme mechanism from @antora-supplemental/color-scheme.",
+  "description": "Valentus: Antora doc-site layout (packages/valentus-layout) and Valentus Paint (paint/), split on the --cs-* token contract of @antora-supplemental/color-scheme.",
   "private": true,
   "keywords": [
     "antora",
@@ -20,7 +20,8 @@
   "license": "MIT",
   "author": "Ryan Johnson (https://github.com/AMDphreak)",
   "files": [
-    "supplemental-ui/**/*",
+    "paint/**/*",
+    "packages/valentus-layout/**/*",
     "ui-modules/**/*"
   ],
   "scripts": {
@@ -34,7 +35,9 @@
     "clean": "rimraf build .cache",
     "ui-modules:validate": "node ui-modules/scripts/validate-ui-modules.mjs",
     "themed-svg:sync": "node scripts/sync-themed-svg-runtime.mjs",
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js paint/test/*.test.js",
+    "paint:validate": "node node_modules/@antora-supplemental/color-scheme/scripts/validate-paint.mjs paint/css/valentus-paint.css --strict --extra=.valentus-,.cards,.tile",
+    "paint:bake": "node scripts/bake-paint.mjs"
   },
   "devDependencies": {
     "@antora-supplemental/color-scheme": "github:antora-supplemental/antora-ui-chassis#color-scheme-v0.1.2&path:packages/color-scheme",
@@ -54,5 +57,6 @@
       "puppeteer"
     ]
   },
-  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319"
+  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319",
+  "main": "paint/lib/index.js"
 }

@@ -1,6 +1,6 @@
 {
   "schema": "1.0",
-  "generatedAt": "2026-10-25T09:58:40.734Z",
+  "generatedAt": "2026-10-25T10:42:02.504Z",
   "repository": "https://github.com/antora-supplemental/valentus-theme",
   "source": "ui-modules/registry.json5",
   "modules": [
@@ -190,7 +190,7 @@
       "slots": {
         "head": {
           "stylesheets": [
-            "css/site-paint.css",
+            "css/valentus-chrome.css",
             "css/site-doc-layout.css",
             "css/site-visual.css"
           ]

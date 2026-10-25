@@ -1,7 +1,7 @@
 {{!--
   HACK (interim paint-hold): hide the document until layered supplemental CSS has
   loaded, preference attrs are set, and web fonts are ready. Default UI paints
-  site.css first; Valentus then applies site-paint / layout / visual / read-width /
+  site.css first; Valentus then applies the paint (slot) / layout / visual / read-width /
   font-size (and often a site brand overlay). Google Fonts use display=swap, so
   releasing before font files arrive causes a FOUT width jump on refresh.
 
@@ -16,7 +16,8 @@ html.valentus-fouc-pending { visibility: hidden !important; }
 <script>
 document.documentElement.classList.add('valentus-fouc-pending')
 </script>
-<link rel="stylesheet" href="{{{uiRootPath}}}/css/site-paint.css">
+{{!-- color-scheme:paint-slot --}}
+<link rel="stylesheet" href="{{{uiRootPath}}}/css/valentus-chrome.css">
 <meta name="dm-navbar" content="{{or site.keys.darkModeNavbar 'light'}}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -1,24 +1,24 @@
-/* Valentus visual system — loads after site-paint + site-doc-layout.
+/* Valentus visual system — loads after the paint (slot) + site-doc-layout.
    Opinionated palette, type, chrome, nav/TOC, code, admonitions, search, motion.
    Consumers override via :root / html.dark-theme custom properties. */
 
 :root {
   /* Surfaces */
-  --valentus-canvas: #f3f5f8;
-  --valentus-elevated: #ffffff;
-  --valentus-ink: #141820;
-  --valentus-ink-muted: #5a6270;
-  --valentus-accent: #0f766e;
-  --valentus-accent-hover: #0d9488;
-  --valentus-accent-soft: rgba(15, 118, 110, 0.1);
+  --valentus-canvas: var(--cs-canvas, Canvas);
+  --valentus-elevated: var(--cs-elevated, Canvas);
+  --valentus-ink: var(--cs-ink, CanvasText);
+  --valentus-ink-muted: var(--cs-ink-muted, GrayText);
+  --valentus-accent: var(--cs-accent, LinkText);
+  --valentus-accent-hover: var(--cs-accent-hover, LinkText);
+  --valentus-accent-soft: var(--cs-accent-soft, transparent);
   /* Admonition accents — alias Default UI --*-color so one override recolors pill + card.
      Sites set --tip-color (etc.); --valentus-admonition-* tracks them. */
-  --valentus-admonition-tip: var(--tip-color, #41af46);
-  --valentus-admonition-note: var(--note-color, #217ee7);
-  --valentus-admonition-important: var(--important-color, #d32f2f);
-  --valentus-admonition-warning: var(--warning-color, #e18114);
-  --valentus-admonition-caution: var(--caution-color, #a0439c);
-  --valentus-border: #d9dee7;
+  --valentus-admonition-tip: var(--cs-admonition-tip, var(--tip-color, GrayText));
+  --valentus-admonition-note: var(--cs-admonition-note, var(--note-color, GrayText));
+  --valentus-admonition-important: var(--cs-admonition-important, var(--important-color, GrayText));
+  --valentus-admonition-warning: var(--cs-admonition-warning, var(--warning-color, GrayText));
+  --valentus-admonition-caution: var(--cs-admonition-caution, var(--caution-color, GrayText));
+  --valentus-border: var(--cs-border, GrayText);
   --soft-nav-context: var(--valentus-canvas);
   /* Opaque top-bar / mast surface (was --adt-chrome before 3.0.0; keep defined or bars go transparent). */
   --valentus-chrome: var(--valentus-canvas);
@@ -32,8 +32,8 @@
   --valentus-side-panel-radius: 2px;
   --valentus-side-panel-pad: 0.45rem 0.55rem;
   --valentus-nav-scroll-fade: 1.25rem;
-  --valentus-code-bg: #151a24;
-  --valentus-code-fg: #e8ecf2;
+  --valentus-code-bg: var(--cs-code-bg, Canvas);
+  --valentus-code-fg: var(--cs-code-fg, CanvasText);
   --valentus-code-border: rgba(20, 24, 32, 0.35);
   --valentus-radius: 0.4rem;
   --valentus-radius-sm: 0.25rem;
@@ -78,14 +78,6 @@
 }
 
 html.dark-theme {
-  --valentus-canvas: #0b0e13;
-  --valentus-elevated: #141a22;
-  --valentus-ink: #e8ebf0;
-  --valentus-ink-muted: #9aa3b2;
-  --valentus-accent: #2dd4bf;
-  --valentus-accent-hover: #5eead4;
-  --valentus-accent-soft: rgba(45, 212, 191, 0.12);
-  --valentus-border: rgba(255, 255, 255, 0.09);
   --soft-nav-context: var(--valentus-canvas);
   /* Opaque top-bar / mast surface (was --adt-chrome before 3.0.0; keep defined or bars go transparent). */
   --valentus-chrome: var(--valentus-canvas);
@@ -93,8 +85,6 @@ html.dark-theme {
   --valentus-nav-bg: transparent;
   /* Side-rail wash stays off until html.valentus-side-panels (same as light). */
   --valentus-side-panel-bg: transparent;
-  --valentus-code-bg: #080b10;
-  --valentus-code-fg: #e8ecf2;
   --valentus-code-border: rgba(255, 255, 255, 0.08);
   --valentus-shadow-float: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.45);
   --valentus-shadow-sticky: 0 6px 18px rgba(0, 0, 0, 0.35);
@@ -719,12 +709,12 @@ nav.nav-menu.nav-tree-only.valentus-nav-overflow-end:not(.valentus-nav-overflow-
 nav.nav-menu.valentus-nav-tree-only.valentus-nav-overflow-end:not(.valentus-nav-overflow-start) {
   -webkit-mask-image: linear-gradient(
     to right,
-    #000 calc(100% - var(--valentus-nav-scroll-fade, 1.25rem)),
+    black calc(100% - var(--valentus-nav-scroll-fade, 1.25rem)),
     transparent 100%
   );
   mask-image: linear-gradient(
     to right,
-    #000 calc(100% - var(--valentus-nav-scroll-fade, 1.25rem)),
+    black calc(100% - var(--valentus-nav-scroll-fade, 1.25rem)),
     transparent 100%
   );
 }
@@ -734,14 +724,14 @@ nav.nav-menu.valentus-nav-tree-only.valentus-nav-overflow-start:not(.valentus-na
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0,
-    #000 var(--valentus-nav-scroll-fade, 1.25rem),
-    #000 100%
+    black var(--valentus-nav-scroll-fade, 1.25rem),
+    black 100%
   );
   mask-image: linear-gradient(
     to right,
     transparent 0,
-    #000 var(--valentus-nav-scroll-fade, 1.25rem),
-    #000 100%
+    black var(--valentus-nav-scroll-fade, 1.25rem),
+    black 100%
   );
 }
 
@@ -750,15 +740,15 @@ nav.nav-menu.valentus-nav-tree-only.valentus-nav-overflow-start.valentus-nav-ove
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0,
-    #000 var(--valentus-nav-scroll-fade, 1.25rem),
-    #000 calc(100% - var(--valentus-nav-scroll-fade, 1.25rem)),
+    black var(--valentus-nav-scroll-fade, 1.25rem),
+    black calc(100% - var(--valentus-nav-scroll-fade, 1.25rem)),
     transparent 100%
   );
   mask-image: linear-gradient(
     to right,
     transparent 0,
-    #000 var(--valentus-nav-scroll-fade, 1.25rem),
-    #000 calc(100% - var(--valentus-nav-scroll-fade, 1.25rem)),
+    black var(--valentus-nav-scroll-fade, 1.25rem),
+    black calc(100% - var(--valentus-nav-scroll-fade, 1.25rem)),
     transparent 100%
   );
 }
@@ -1099,7 +1089,7 @@ html.dark-theme .doc table.page-context-table > tbody > tr > td {
   margin: 0;
   padding: 0.4rem 0.75rem;
   color: color-mix(in srgb, var(--valentus-code-fg) 72%, transparent) !important;
-  background: color-mix(in srgb, var(--valentus-code-bg) 82%, #000) !important;
+  background: color-mix(in srgb, var(--valentus-code-bg) 82%, black) !important;
   border: none;
   border-bottom: 1px solid var(--valentus-code-border);
   border-radius: 0;
@@ -1157,53 +1147,7 @@ html.dark-theme .doc table.page-context-table > tbody > tr > td {
   color: var(--valentus-ink) !important;
 }
 
-/* Syntax colors tuned for dark code panels */
-.doc .hljs-comment,
-.doc .hljs-quote {
-  color: #8b95a8 !important;
-  font-style: italic;
-}
-
-.doc .hljs-keyword,
-.doc .hljs-selector-tag,
-.doc .hljs-subst {
-  color: #7dd3c7 !important;
-  font-weight: 500;
-}
-
-.doc .hljs-string,
-.doc .hljs-doctag {
-  color: #f0b27a !important;
-}
-
-.doc .hljs-number,
-.doc .hljs-literal,
-.doc .hljs-variable,
-.doc .hljs-template-variable,
-.doc .hljs-tag .hljs-attr {
-  color: #9db7ff !important;
-}
-
-.doc .hljs-title,
-.doc .hljs-section,
-.doc .hljs-selector-id {
-  color: #e8ecf2 !important;
-  font-weight: 600;
-}
-
-.doc .hljs-type,
-.doc .hljs-class .hljs-title {
-  color: #f9a8d4 !important;
-}
-
-.doc .hljs-built_in,
-.doc .hljs-builtin-name {
-  color: #67e8f9 !important;
-}
-
-.doc .hljs-meta {
-  color: #94a3b8 !important;
-}
+/* Syntax colors: paint layer (Valentus Paint .doc .hljs-* rules). */
 
 /* ——— Admonitions: one bordered card wraps TIP/NOTE label + body ——— */
 .doc .admonitionblock {
@@ -1345,7 +1289,7 @@ nav.pagination a {
   color: var(--valentus-accent) !important;
 }
 
-/* ——— Dark mode: tame site-paint hardcodes ——— */
+/* ——— Dark mode: tame paint defaults ——— */
 html.dark-theme a {
   color: var(--valentus-accent) !important;
 }
@@ -1438,7 +1382,7 @@ html.dark-theme .doc .admonitionblock.caution > table {
   background: color-mix(in srgb, var(--valentus-admonition-caution) 12%, var(--valentus-elevated)) !important;
 }
 
-/* Keep listing/literal panels on --valentus-code-bg (not elevated); neutralize site-paint */
+/* Keep listing/literal panels on --valentus-code-bg (not elevated); neutralize paint listing colors */
 html.dark-theme .doc .listingblock,
 html.dark-theme .doc .literalblock {
   background: transparent !important;

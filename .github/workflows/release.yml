@@ -97,7 +97,11 @@ jobs:
           unzip_status=$?
           set -e
           if [ "$unzip_status" -gt 1 ]; then exit "$unzip_status"; fi
-          cp -r supplemental-ui/* build/ui-bundle/
+          cp -r packages/valentus-layout/supplemental-ui/* build/ui-bundle/
+          # Layout-only bundle (pair with any --cs-* paint, e.g. default-paint)
+          (cd build/ui-bundle && zip -qr ../../valentus-layout-bundle.zip .)
+          # Full Valentus bundle: bake Valentus Paint in at the paint slot
+          node scripts/bake-paint.mjs build/ui-bundle
           cd build/ui-bundle
           zip -r ../../ui-bundle.zip .
           cd ../..
@@ -108,7 +112,9 @@ jobs:
           tag_name: ${{ env.RELEASE_TAG }}
           name: ${{ steps.label.outputs.label }}
           body_path: release_notes.md
-          files: ui-bundle.zip
+          files: |
+            ui-bundle.zip
+            valentus-layout-bundle.zip
           overwrite_files: true
           make_latest: true
         env:

@@ -43,8 +43,8 @@ If that is not set, the script tries to derive the repo root from the "Edit this
 
 To use your own logo for a given provider (e.g. GitHub), replace the file in your **supplemental UI** (or in a fork of this theme):
 
-* Path: `supplemental-ui/img/vcs/<provider>.svg`
-* Example: `supplemental-ui/img/vcs/github.svg`
+* Path: `packages/valentus-layout/supplemental-ui/img/vcs/<provider>.svg`
+* Example: `packages/valentus-layout/supplemental-ui/img/vcs/github.svg`
 
 Use a square viewBox (e.g. `viewBox="0 0 24 24"`) so it scales cleanly in the 24×24 px display area.
 The logo inherits the navbar text color; use `currentColor` in the SVG if you want it to follow the theme.
@@ -82,7 +82,7 @@ If the logo still doesn’t appear, ensure `.navbar .navbar-end` exists and that
 
 == Breadcrumb “Edit” link (optional partial)
 
-The theme ships `supplemental-ui/partials/edit-breadcrumb.hbs` for sites that add that partial to a custom `breadcrumbs` (for example, `+{{> edit-breadcrumb}}+` next to the rest of the trail).
+The theme ships `packages/valentus-layout/supplemental-ui/partials/edit-breadcrumb.hbs` for sites that add that partial to a custom `breadcrumbs` (for example, `+{{> edit-breadcrumb}}+` next to the rest of the trail).
 It **prefers** `page.editUrl` (https) over `page.fileUri` (file) when the usual public-edit conditions hold, and falls back to the file URL for local work when there is no web edit URL (same ordering as a well-formed `edit-this-page` override).
 `site-vcs-icons.js` maps to set the correct `img/vcs/<provider>.svg` from each link’s URL (GitHub, GitLab, and others), instead of a generic `code.svg` when the `href` is an `https` edit link.
 
@@ -92,9 +92,9 @@ It **prefers** `page.editUrl` (https) over `page.fileUri` (file) when the usual 
 |===
 | File | Role
 
-| `supplemental-ui/partials/head-meta.hbs` | Emits `<meta name="antora-repo-url" content="{{page.origin.webUrl}}">` when the page has an origin.
-| `supplemental-ui/js/site-vcs-icons.js` | `replaceDownloadWithVcsLogo()` replaces the default Download button when present; `applyVcsIcons()` maps edit/header/repo `img` tags to `img/vcs/*.svg` by URL. `getRepoUrl()` uses meta, then edit/blob links. Asset base path falls back to the script’s URL when needed for local viewing.
-| `supplemental-ui/img/vcs/*.svg` | One SVG per provider (and `repo.svg` fallback).
-| `supplemental-ui/css/site-paint.css` | Hides the default Download button until JS runs (avoids flash). `.vcs-repo-logo`, `.vcs-repo-link`, `.vcs-logo` (div proportions and mask) and hover.
-| `supplemental-ui/partials/edit-breadcrumb.hbs` (optional) | Breadcrumb “Edit” link; prefers `page.editUrl` over `fileUri`. Pair with your custom `breadcrumbs` partial.
+| `packages/valentus-layout/supplemental-ui/partials/head-meta.hbs` | Emits `<meta name="antora-repo-url" content="{{page.origin.webUrl}}">` when the page has an origin.
+| `packages/valentus-layout/supplemental-ui/js/site-vcs-icons.js` | `replaceDownloadWithVcsLogo()` replaces the default Download button when present; `applyVcsIcons()` maps edit/header/repo `img` tags to `img/vcs/*.svg` by URL. `getRepoUrl()` uses meta, then edit/blob links. Asset base path falls back to the script’s URL when needed for local viewing.
+| `packages/valentus-layout/supplemental-ui/img/vcs/*.svg` | One SVG per provider (and `repo.svg` fallback).
+| `packages/valentus-layout/supplemental-ui/css/valentus-chrome.css` | Hides the default Download button until JS runs (avoids flash). `.vcs-repo-logo`, `.vcs-repo-link`, `.vcs-logo` (div proportions and mask) and hover.
+| `packages/valentus-layout/supplemental-ui/partials/edit-breadcrumb.hbs` (optional) | Breadcrumb “Edit” link; prefers `page.editUrl` over `fileUri`. Pair with your custom `breadcrumbs` partial.
 |===

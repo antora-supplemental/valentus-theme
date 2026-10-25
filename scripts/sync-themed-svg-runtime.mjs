@@ -9,5 +9,5 @@ if (metadata.version !== '0.1.1') {
 
 copyFileSync(
   resolve(packageRoot, 'browser/themed-svg-element.js'),
-  resolve('supplemental-ui/js/themed-svg-element.js'),
+  resolve('packages/valentus-layout/supplemental-ui/js/themed-svg-element.js'),
 )

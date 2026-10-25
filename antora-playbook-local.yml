@@ -21,7 +21,7 @@ ui:
   bundle:
     url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
     snapshot: true
-  supplemental_files: ./supplemental-ui
+  supplemental_files: ./packages/valentus-layout/supplemental-ui
 
 output:
   dir: ./build/site
@@ -33,6 +33,8 @@ antora:
   extensions:
     - require: "@antora-supplemental/color-scheme"
       toggle: placed
+    # Valentus Paint (repo root ./paint): links css/valentus-paint.css at the layout paint slot
+    - require: ./paint/lib/index.js
     - require: "@antora/lunr-extension"
       index_latest_only: true
       index_by_heading: true

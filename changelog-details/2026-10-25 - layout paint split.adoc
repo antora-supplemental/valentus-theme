@@ -1,0 +1,26 @@
+= 4.0.0 — layout / paint split
+:navtitle: 4.0.0 layout / paint split
+
+== Summary
+
+Layout and theming are separate packages in one repo, joined by the `--cs-*` token contract that `@antora-supplemental/color-scheme` documents.
+
+* *Valentus Layout* — `packages/valentus-layout/`. Reads `var(--cs-*, system color)`; no palette.
+* *Valentus Paint* — `paint/` (repo identity). Token values in `:root` and `html.dark-theme`, the six `--valentus-*` core aliases, `--vp-*` constants, and paint rules for Default UI chrome, content blocks and highlight.js.
+
+== Why one repo
+
+The layout stays in this repo as a package instead of a new repo: every Valentus release changes both halves together, the release workflow, docs site and UI-module sources already live here, and the layout is still installable on its own (git path, `valentus-layout-bundle.zip`, or the registry manifest's `path`). A separate repo can come later if a third party ships a paint for it.
+
+== Verification
+
+Built with Antora on the same content (index, configuration, code blocks, admonitions, tables) and screenshotted light and dark at 1280px:
+
+* Layout + Valentus Paint vs 3.x/4.0 pre-split: 0 differing pixels on all 10 shots; axe results identical.
+* Layout + default-paint and Default UI + Valentus Paint: render normally, no new axe failures relative to their bases (Default UI + Valentus Paint matches plain Default UI counts in light and dark; the pre-split paint added 1 dark contrast failure on index and 32 on code blocks).
+
+== Files
+
+* Removed `css/site-paint.css`; added `css/valentus-chrome.css`, `paint/css/valentus-paint.css`, `paint/lib/index.js`, `paint/test/`, `scripts/bake-paint.mjs`, both `ui-component.json5` manifests, `docs/.../v4-migration.adoc`.
+* `head-meta.hbs`: paint-slot marker.
+* Playbooks, release and notify workflows, tests, `sync-themed-svg-runtime.mjs`, `ui-modules` doc-layout copy and index.

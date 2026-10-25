@@ -2,7 +2,7 @@
 
 const { describe, it } = require('node:test')
 const assert = require('node:assert/strict')
-const helper = require('../supplemental-ui/helpers/valentus-bc-trail-crumbs')
+const helper = require('../packages/valentus-layout/supplemental-ui/helpers/valentus-bc-trail-crumbs')
 const { enrichCrumbUrls, landingFromNavItem } = helper
 
 function opts (page, site) {

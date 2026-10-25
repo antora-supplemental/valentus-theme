@@ -1,0 +1,13 @@
+{
+  "name": "@antora-supplemental/valentus-layout",
+  "version": "4.0.0",
+  "description": "Valentus Layout: Antora doc-site layout (supplemental UI) that reads the --cs-* color contract; pair with any paint.",
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antora-supplemental/valentus-theme.git",
+    "directory": "packages/valentus-layout"
+  },
+  "files": ["supplemental-ui/**/*", "ui-component.json5", "README.adoc"]
+}

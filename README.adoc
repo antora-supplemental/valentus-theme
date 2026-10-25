@@ -75,7 +75,9 @@ Composed Antora doc-site chrome: breadcrumb mast, header, layout, VCS icons, the
 The color scheme *mechanism* (no-FOUC hook, persistence, system preference, toggle behavior) is the chassis extension link:https://github.com/antora-supplemental/antora-ui-chassis/tree/main/packages/color-scheme[`@antora-supplemental/color-scheme`] — add it to your playbook.
 
 Successor to the former `antora-dark-theme` monolithic package — use the Valentus release `ui-bundle.zip` for the full stack.
-`antora-dark-mode` is deprecated; its mechanism moved to `@antora-supplemental/color-scheme` and its palette to Valentus `site-paint.css`.
+`antora-dark-mode` is deprecated; its mechanism moved to `@antora-supplemental/color-scheme`.
+
+Valentus 4 is two packages joined by the `--cs-*` token contract: *Valentus Layout* (`packages/valentus-layout/`) and *Valentus Paint* (`paint/`). Mix either with other layers, e.g. Valentus Layout with `@antora-supplemental/default-paint`, or the plain Default UI with Valentus Paint. Upgrade notes: `docs/modules/guide/pages/v4-migration.adoc`.
 
 **Changelog:** link:CHANGELOG.adoc[CHANGELOG.adoc] and link:changelog-details/[`changelog-details/`].
 
@@ -120,10 +122,15 @@ ui:
   bundle:
     url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
     snapshot: true
-  supplemental_files: ./path/to/valentus-theme/supplemental-ui
+  supplemental_files: ./path/to/valentus-theme/packages/valentus-layout/supplemental-ui
+antora:
+  extensions:
+    - require: "@antora-supplemental/color-scheme"
+      toggle: placed
+    - require: ./path/to/valentus-theme/paint/lib/index.js   # Valentus Paint (or another --cs-* paint)
 ----
 
-Both forms need the `@antora-supplemental/color-scheme` extension (above). `supplemental-ui/css/site-paint.css` holds the Default UI dark palette and toggle look; there is no vendored dark-mode copy any more.
+Both forms need the `@antora-supplemental/color-scheme` extension. The release `ui-bundle.zip` already contains Valentus Paint; `valentus-layout-bundle.zip` is the layout alone.
 
 ++++
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

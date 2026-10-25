@@ -7,7 +7,7 @@ This guide covers common customization scenarios.
 
 == Changing Colors
 
-Edit `supplemental-ui/css/site-paint.css` (Default UI dark overrides) and the `--valentus-*` tokens in `site-visual.css` to customize the palette.
+Colors live in the paint (`paint/css/valentus-paint.css`). To re-tint, override the `--cs-*` tokens for both `:root` and `html.dark-theme` in a brand stylesheet, or swap the paint (e.g. `@antora-supplemental/default-paint`). See xref:v4-migration.adoc#token-contract[Token contract].
 
 IMPORTANT: Prefer putting layout-affecting rules into the UI bundle’s compiled `site.css` (or Valentus supplemental CSS that ships in the release zip) instead of a late extra `<link>`.
 Layered stylesheets after Default UI `site.css` cause a refresh “settle” flash (FOUC).
@@ -15,12 +15,13 @@ Valentus currently ships an *interim* paint-hold in `partials/head-meta.hbs` (`h
 
 == Overriding `head-meta.hbs` (brand overlays)
 
-Hubs often override `supplemental-ui/partials/head-meta.hbs` for fonts, favicons, or brand CSS.
+Hubs often override `packages/valentus-layout/supplemental-ui/partials/head-meta.hbs` for fonts, favicons, or brand CSS.
 **Copy the full Valentus CSS chain**, then add brand overlays only — do not replace the partial with a minimal dark-mode stub.
 
 Required Valentus stylesheet links (order matters; match upstream `head-meta.hbs`):
 
-. `site-paint.css`
+. `+{{!-- color-scheme:paint-slot --}}+` (paint extensions link here)
+. `valentus-chrome.css`
 . `site-doc-layout.css`
 . `site-visual.css`
 . `site-read-width.css`
@@ -187,5 +188,5 @@ Lead markup: seamless outer `.page-context-lead` (holds byline) + inner `.page-c
 == VCS Repo Logo (Download button replacement)
 
 The theme replaces the default UI's nonfunctional "Download" button with a version control provider logo that links to the docs repository.
-Provider is detected by domain (GitHub, GitLab, Bitbucket, Gitea, Codeberg, Forgejo, SourceHut); you can change or add logos by replacing or adding SVGs under `supplemental-ui/img/vcs/`.
+Provider is detected by domain (GitHub, GitLab, Bitbucket, Gitea, Codeberg, Forgejo, SourceHut); you can change or add logos by replacing or adding SVGs under `packages/valentus-layout/supplemental-ui/img/vcs/`.
 See xref:vcs-repo-logo.adoc[VCS Repo Logo] for detection rules and how to customize or hide the logo.

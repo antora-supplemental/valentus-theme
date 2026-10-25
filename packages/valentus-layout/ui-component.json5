@@ -1,0 +1,21 @@
+{
+  id: "valentus-layout",
+  name: "Valentus Layout",
+  version: "4.0.0",
+  type: "ui-layout",
+  description: "Valentus doc-site layout for the Antora Default UI: breadcrumb mast, header, nav/article/TOC layout, VCS icons, read-width, font-size, math, themed SVG hosts. Colors come from any paint that sets the --cs-* contract (Valentus Paint, default-paint, ...).",
+  repository: "https://github.com/antora-supplemental/valentus-theme",
+  layer: "layout",
+  path: "packages/valentus-layout/supplemental-ui",
+  requires: ["color-scheme"],
+  recommends: ["valentus-paint"],
+  tokens: { reads: "cs", fallback: "system-colors" },
+  slots: {
+    head: {
+      // Paints are linked at {{!-- color-scheme:paint-slot --}} in head-meta.hbs,
+      // before these, so layout rules win over paint rules.
+      paintSlot: "color-scheme:paint-slot",
+      stylesheets: ["css/valentus-chrome.css", "css/site-doc-layout.css", "css/site-visual.css", "css/site-read-width.css", "css/site-font-size.css", "css/site-math.css", "css/site-themed-svg.css"],
+    },
+  },
+}

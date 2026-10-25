@@ -17,7 +17,7 @@ After a Valentus patch release: update any exact pins / `release_info` label, th
 ## Antora UI quirks
 
 - Default `site.js` nav panel: `mousedown` with `detail > 1` → `preventDefault()` so double-clicking nav labels does not select text. Nested `#search-input` under `[data-panel=menu]` cannot select-on-dblclick unless Valentus stops propagation at `#search-field` (`site-visual.js` / `site-search-chat.js`). Tool-band search outside the panel avoids the handler.
-- Hub overrides of `head-meta.hbs` must keep the full Valentus CSS chain (`site-paint`, `site-doc-layout`, `site-visual`, `site-read-width`, `site-font-size`, `site-math`) + paint-hold / FOUC scripts; brand overlays only after that. Detail: docs guide Customization.
+- Hub overrides of `head-meta.hbs` must keep the full Valentus CSS chain (the `color-scheme:paint-slot` marker, `valentus-chrome`, `site-doc-layout`, `site-visual`, `site-read-width`, `site-font-size`, `site-math`) + paint-hold / FOUC scripts; brand overlays only after that. Detail: docs guide Customization.
 - Do not re-load `site.js` or Valentus footer scripts from hub `footer-content.hbs` when theme `footer-scripts.hbs` already injects them (double handlers → broken nav expand).
 - Mast version control (`valentus-version-mode`): hide when only `~` / unversioned; plain text for one named version; menu when multiple. Do not reintroduce a lone “Default” chip via hub overrides.
 - Playbook YAML uses snake_case (`header_logo_dark`, `dark_mode_navbar`). Antora camelCases those names in the UI model (`headerLogoDark`, `darkModeNavbar`). Handlebars must read camelCase.
@@ -25,4 +25,10 @@ After a Valentus patch release: update any exact pins / `release_info` label, th
 
 ## Math
 
-KaTeX via `supplemental-ui/js/site-math.js` + `css/site-math.css`. Playbooks still need `asciidoc.attributes.stem: latexmath`.
+KaTeX via `packages/valentus-layout/supplemental-ui/js/site-math.js` + `css/site-math.css`. Playbooks still need `asciidoc.attributes.stem: latexmath`.
+
+## Layout / paint split (4.0)
+
+- Layout (`packages/valentus-layout/`) never hard-codes colors: use `var(--cs-*, system color)`. Values go in `paint/css/valentus-paint.css` (`:root` + `html.dark-theme` only).
+- Check the paint with chassis `validate-paint.mjs --strict --extra=.valentus-,.cards,.tile`.
+- Mirror layout CSS edits into `ui-modules/packages/doc-layout/ui/css/`.
