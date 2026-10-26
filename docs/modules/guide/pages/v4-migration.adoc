@@ -109,7 +109,7 @@ Layout-specific classes must be declared (`--extra=.my-layout-`), as Valentus Pa
 
 == Live paint previews
 
-Register Valentus Paint as a live paint (color-scheme 0.3.0+, through light-dark-mode) to preview it on other layouts. With more than two schemes the chassis also builds a picker page, `_/color-schemes.html`, linked from the footer:
+Register Valentus Paint as a live paint (color-scheme 0.3.0+, through light-dark-mode) to preview it on other layouts. Live paint is a preview feature with no picker UI. Valentus Paint declares two color schemes (`light`, `dark`) in its `@color-schemes` manifest, so no color scheme picker link appears; a paint with more than two schemes gets `_/color-schemes.html`, linked from the footer (color-scheme 0.4.0+).
 
 [source,yaml]
 ----
@@ -120,7 +120,6 @@ Register Valentus Paint as a live paint (color-scheme 0.3.0+, through light-dark
           paints:
             valentus:
               href: css/valentus-paint.css
-              slots: [light, dark]
 ----
 
 For cross-site iframes, pass `?paint=valentus` in the iframe `src`; third-party cookies are often blocked.

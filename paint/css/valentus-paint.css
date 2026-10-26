@@ -9,6 +9,11 @@
  *    which reads the --cs-* tokens.
  * Black-alpha shadows (rgba(0, 0, 0, a)) stay inline; they are not palette.
  */
+/* Schemes this paint provides (read by @antora-supplemental/color-scheme): light
+   is the :root block, dark the html.dark-theme block. */
+/* @color-schemes
+{ "light": { "label": "Light" }, "dark": { "label": "Dark" } }
+*/
 :root {
   --cs-canvas: #f3f5f8;
   --cs-elevated: #ffffff;

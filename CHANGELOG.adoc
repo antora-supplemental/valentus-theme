@@ -21,6 +21,12 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
+== Unreleased
+
+=== Added
+
+* **Paint:** `paint/css/valentus-paint.css` declares its color schemes in a `@color-schemes` manifest (`light`, `dark`) for `@antora-supplemental/color-scheme` 0.4.0. With two schemes no color scheme picker link appears. Colors are unchanged. The v4 migration guide's live paint example drops the 0.3.0 `slots` key.
+
 == 4.1.0 — 2026-10-25
 
 === Upgrade note
