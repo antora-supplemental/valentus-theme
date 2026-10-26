@@ -65,10 +65,10 @@
   "main": "paint/lib/index.js",
   "antoraRegistry": {
     "provides": {
-      "valentus-layout-markup": "4"
+      "valentus-layout-markup": "4",
+      "antora-ui-model": "3"
     },
     "uses": {
-      "antora-ui-model": "3",
       "color-scheme-tokens": "^0.5"
     },
     "worksWith": {
