@@ -1,6 +1,6 @@
 {
   "schema": "1.0",
-  "generatedAt": "2026-10-26T03:38:13.418Z",
+  "generatedAt": "2026-10-26T06:21:58.633Z",
   "repository": "https://github.com/antora-supplemental/valentus-theme",
   "source": "ui-modules/registry.json5",
   "modules": [
@@ -199,11 +199,12 @@
           "scripts": [
             "js/site-page-toc.js",
             "js/site-visual.js",
-            "js/valentus-table-scroll.js"
+            "js/valentus-table-scroll.js",
+            "js/valentus-breadcrumb-scroll.js"
           ]
         }
       },
-      "uiFileCount": 16,
+      "uiFileCount": 17,
       "install": {
         "orchestrator": {
           "registry": "./ui-modules/registry.json5",

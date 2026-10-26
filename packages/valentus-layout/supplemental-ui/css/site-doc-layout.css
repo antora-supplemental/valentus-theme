@@ -824,10 +824,10 @@ main.valentus-article > .content > article.doc {
 
 .valentus-breadcrumbs > ul {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  /* Row gap only when wrapping. Separators are real "/" text nodes (copyable). */
-  row-gap: 0.25rem;
+  /* One line; overflow scrolls (see Breadcrumb scroller). Separators are real "/" text nodes (copyable). */
+  row-gap: 0;
   column-gap: 0;
   list-style: none;
   margin: 0;
@@ -1671,4 +1671,81 @@ footer.footer {
 footer.footer > p {
   margin: 0;
   max-width: 100%;
+}
+
+/* --- Breadcrumb scroller: one line, H-scroll with no visible scrollbar, edge fades ---
+ * js/valentus-breadcrumb-scroll.js toggles .is-overflowing / .is-fade-start / .is-fade-end.
+ * Fades are a mask on the scroller (alpha only), so text itself goes transparent over any
+ * paint or background - no overlay colors. Each edge fades whenever text is hidden past it. */
+.valentus-doc-mast-center,
+.valentus-breadcrumbs {
+  min-width: 0;
+}
+
+.valentus-breadcrumbs > ul {
+  --valentus-bc-fade: 1.75rem;
+  --valentus-bc-fade-start: 0px;
+  --valentus-bc-fade-end: 0px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  white-space: nowrap;
+  /* Room for underlines and focus rings inside the clip. */
+  padding-block: 0.15rem;
+  border-radius: 0.2rem;
+}
+
+.valentus-breadcrumbs > ul::-webkit-scrollbar {
+  display: none;
+}
+
+.valentus-breadcrumbs > ul > li {
+  flex: 0 0 auto;
+  max-width: none;
+}
+
+.valentus-breadcrumbs > ul > .valentus-breadcrumb-trail {
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.valentus-breadcrumbs > ul.is-fade-start {
+  --valentus-bc-fade-start: var(--valentus-bc-fade);
+}
+
+.valentus-breadcrumbs > ul.is-fade-end {
+  --valentus-bc-fade-end: var(--valentus-bc-fade);
+}
+
+.valentus-breadcrumbs > ul.is-fade-start,
+.valentus-breadcrumbs > ul.is-fade-end {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black var(--valentus-bc-fade-start), black calc(100% - var(--valentus-bc-fade-end)), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, black var(--valentus-bc-fade-start), black calc(100% - var(--valentus-bc-fade-end)), transparent 100%);
+}
+
+/* An open component/version menu floats in the viewport; drop the mask so it is not clipped. */
+.valentus-breadcrumbs > ul.is-menu-open {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.valentus-bc-dropdown.valentus-bc-dropdown--floating {
+  position: fixed;
+  margin-top: 0.2rem;
+}
+
+/* Inset ring: the mask would hide an outside outline. */
+.valentus-breadcrumbs > ul:focus-visible {
+  outline: 2px solid var(--valentus-accent, Highlight);
+  outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .valentus-breadcrumbs > ul {
+    scroll-behavior: smooth;
+  }
 }

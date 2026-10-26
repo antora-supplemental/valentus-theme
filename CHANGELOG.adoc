@@ -21,6 +21,11 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
+== Unreleased
+
+=== Added
+
+* **Layout - breadcrumbs:** the mast breadcrumb stays on one line on mobile and desktop. When it is wider than the mast it scrolls sideways with no visible scrollbar. Edge fades show where text is hidden: each edge fades on its own whenever text is hidden past it, so both edges fade mid-scroll. The fades are a CSS `mask-image` on the scroller (no overlay colors), so they work over any paint. On load the trail scrolls to the end so the current page shows. When it overflows the scroller can be reached with the keyboard (`tabindex="0"`, `aria-label="Breadcrumb"`, inset focus ring). Focusing a crumb scrolls it into view, and `prefers-reduced-motion` turns smooth scrolling off. The component and version menus float in the viewport, so the scroller does not clip them. It runs again on SoftNav page swaps. New `js/valentus-breadcrumb-scroll.js`, loaded from `footer-scripts.hbs` and mirrored in the `doc-layout` UI module. Trail crumbs no longer truncate with an ellipsis.
 == 4.2.0 — 2026-10-25
 
 === Changed
