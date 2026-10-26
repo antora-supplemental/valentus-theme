@@ -3,10 +3,17 @@
 :description: Three ways to brand the Valentus header — light/dark asset pairs, single-file colored marks, and mono silhouettes — and how the demo site exercises them without two logos in the chrome.
 
 The site header shows **one** logo at a time.
-Valentus itself uses a solid red blood-drop *brand* mark (`logo.svg`), so the live demo uses a single asset that already has contrast on light and dark bars (no pair, no invert).
+
+[IMPORTANT]
+====
+Valentus does not ship a brand logo.
+The bundles (`ui-bundle.zip` and `valentus-layout-bundle.zip`) contain a neutral *placeholder logo* (a six-petal rosette) and matching favicons.
+Replace them with your own mark; see <<replace>>.
+The red blood drop on this site is the Valentus *demo* brand and lives under `docs/brand/`, outside the bundle.
+====
 
 Pair and mono strategies are shown below as **fixture previews** on mocked header strips — not as competing chrome logos.
-Toggle the real theme control to confirm the live brand mark; use the mocks to compare pair and mono contrast.
+Toggle the real theme control to confirm the live (demo) brand mark; use the mocks to compare pair and mono contrast.
 
 == Choose a strategy
 
@@ -29,16 +36,89 @@ Toggle the real theme control to confirm the live brand mark; use the mocks to c
 
 Do not combine pair and mono for the same mark: pair mode swaps authored assets; mono applies a CSS invert to one asset.
 
-== Live demo: brand (Valentus mark)
+== Placeholder logo (default)
 
-This documentation site sets:
+With no `header_logo` key, the header renders the placeholder as an inline SVG painted with `currentColor`.
+It takes the header text color, so it follows the paint in light and dark mode with no extra assets.
+Set `--valentus-logo-placeholder` in a brand stylesheet to tint it, for example `--valentus-logo-placeholder: var(--cs-accent)`.
+
+The bundle also ships these placeholder files under `img/`.
+Each one says `Placeholder logo - replace with your own` in its `<title>`.
+
+[cols="2,3", options="header"]
+|===
+| File | Role
+
+| `img/logo.svg`
+| Placeholder for `header_logo: logo.svg` (neutral gray; lighter gray under `prefers-color-scheme: dark`)
+
+| `img/logo-dark.svg`
+| Light-ink placeholder for pair mode (`header_logo_dark: logo-dark.svg`)
+
+| `img/logo-mono.svg`
+| Single-ink `currentColor` variant for badges and inline use
+
+| `img/favicon.svg`, `img/favicon.ico`
+| Browser tab icon (linked by `partials/head-icons.hbs`)
+
+| `img/apple-touch-icon.png`
+| 180×180 home-screen icon
+|===
+
+The bundle has no `og:image` (social card) asset; add one in your own `head-meta` overlay if you need one.
+
+[[replace]]
+== Replace the placeholder with your logo
+
+. Put your files in your playbook's supplemental directory, for example `supplemental-ui/img/mybrand.svg`.
+. Point the header at it with `site.keys.header_logo` (and optionally `header_logo_dark` or `header_logo_tone`).
+. Replace the favicons: ship your own `img/favicon.svg`, `img/favicon.ico` and `img/apple-touch-icon.png` (same paths override the bundled files), or set `site.keys.favicon` to another basename under `img/`.
 
 [source,yaml]
 ----
 site:
   keys:
-    header_logo: logo.svg
-    # header_logo_tone defaults to brand — no filter, no dark asset
+    header_logo: mybrand.svg
+    favicon: mybrand-favicon.svg
+ui:
+  bundle:
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v4/ui-bundle.zip
+    snapshot: true
+  supplemental_files: ./supplemental-ui
+----
+
+To swap only a couple of files without a directory, use xref:configuration.adoc#virtual-supplemental-files[virtual supplemental files]:
+
+[source,yaml]
+----
+ui:
+  supplemental_files:
+    - path: img/logo.svg
+      contents: ./branding/logo.svg
+    - path: img/favicon.svg
+      contents: ./branding/favicon.svg
+----
+
+With `path: img/logo.svg`, also set `header_logo: logo.svg`.
+Otherwise the header keeps rendering the inline placeholder.
+
+== Live demo: brand (Valentus blood drop)
+
+This documentation site layers its brand over the placeholder.
+`docs/brand/supplemental-ui/` holds the blood drop (`img/valentus-drop.svg`, `img/valentus-drop-dark.svg`, `img/valentus-favicon.svg`), and the demo playbooks load `docs/brand/lib/brand-overlay.js`.
+That extension adds the directory as a second supplemental layer, because Antora accepts only one `supplemental_files` directory.
+Consumers do not need this extension; one supplemental directory or virtual entries are enough.
+
+[source,yaml]
+----
+site:
+  keys:
+    header_logo: valentus-drop.svg
+    favicon: valentus-favicon.svg
+    # header_logo_tone defaults to brand: no filter, no dark asset
+antora:
+  extensions:
+    - require: ./docs/brand/lib/brand-overlay.js
 ----
 
 The header renders one `<img>` element; the solid red drop stays visible on both the light and dark top bars.
@@ -50,11 +130,9 @@ Pair example (when you need authored light/dark strokes):
 ----
 site:
   keys:
-    header_logo: logo.svg
-    header_logo_dark: logo-dark.svg
+    header_logo: mybrand.svg
+    header_logo_dark: mybrand-dark.svg
 ----
-
-Bundled `logo-dark.svg` matches the brand drop today; replace it with a light-ink outline if you opt into pair mode for a different mark.
 
 == Fixtures: brand and mono (not in chrome)
 

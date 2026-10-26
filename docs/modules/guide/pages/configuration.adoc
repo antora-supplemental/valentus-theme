@@ -42,8 +42,12 @@ You only write snake_case in the playbook; the theme templates already use the c
 | Key | Default | Purpose
 
 | `header_logo`
-| `logo.svg`
-| Basename of the header mark under `img/` (for example `mybrand.svg` → `img/mybrand.svg`). Drop the SVG in supplemental or use a virtual `supplemental_files` entry. Used on the light bar (and as the only mark when `header_logo_dark` is unset).
+| _(none: inline placeholder)_
+| When unset, the header shows the neutral placeholder logo (inline SVG, `currentColor`); replace it, see xref:header-logo.adoc#replace[Replace the placeholder]. Basename of the header mark under `img/` (for example `mybrand.svg` → `img/mybrand.svg`). Drop the SVG in supplemental or use a virtual `supplemental_files` entry. Used on the light bar (and as the only mark when `header_logo_dark` is unset).
+
+| `favicon`
+| _(none: `img/favicon.svg` + `img/favicon.ico` placeholders)_
+| Optional basename under `img/` for the browser tab icon. Or override the placeholder files at the same paths.
 
 | `header_logo_dark`
 | _(none)_
@@ -109,7 +113,7 @@ Place `mybrand.svg` at `supplemental-ui-overrides/img/mybrand.svg`, or use xref:
 
 Pick one strategy (do not combine pair + mono on the same mark):
 
-* *Pair* — outline / ink marks: set `header_logo` + `header_logo_dark` (Valentus demo uses this).
+* *Pair* — outline / ink marks: set `header_logo` + `header_logo_dark`.
 * *Brand* — colored single file: omit `header_logo_dark`; leave tone at default `brand`.
 * *Mono* — single-ink silhouette: omit `header_logo_dark`; set `header_logo_tone: mono`.
 
