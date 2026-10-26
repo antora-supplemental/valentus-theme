@@ -25,6 +25,10 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 * Registry metadata: `antora-ui-model@3` moves from `antoraRegistry.uses` to `provides`. Valentus renders the Antora UI model itself, so the registry no longer pulls in the Default UI to satisfy it. Metadata only, no runtime change, no release.
 
+== 4.3.0 — 2026-10-26
+
+Minor release: upstreamed hub chrome fixes (inline code in titles, independent nav scroll, math after soft nav, Contents box without headings, opt-in breadcrumb component filter via `valentus_bc_components: site-nav-tree`). Details: `changelog-details/history/2026-10-26 - 4.3.0 upstreamed hub chrome fixes.adoc`.
+
 == 4.2.2 — 2026-10-26
 
 Patch release: versioned asset links. Details: `changelog-details/history/2026-10-26 - 4.2.2 versioned asset links.adoc`.

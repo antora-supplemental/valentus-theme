@@ -10,7 +10,7 @@
   conflicts: [],
   slots: {
     head: {
-      stylesheets: ["css/valentus-chrome.css", "css/site-doc-layout.css", "css/site-visual.css"],
+      stylesheets: ["css/valentus-chrome.css", "css/site-doc-layout.css", "css/site-visual.css", "css/site-inline-title-code.css"],
     },
     foot: {
       scripts: ["js/site-page-toc.js", "js/site-visual.js", "js/valentus-table-scroll.js", "js/valentus-breadcrumb-scroll.js"],

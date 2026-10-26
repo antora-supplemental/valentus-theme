@@ -1,0 +1,16 @@
+= 4.3.0 — upstreamed hub chrome fixes
+:page-date: 2026-10-26
+
+Fixes that consumer hubs (first OpenShellOrg docs) carried in `supplemental-ui`, generalized into Valentus.
+
+== What shipped
+
+* *Inline code in chrome titles*: new `css/site-inline-title-code.css` (linked from `head-meta.hbs`, and from the `doc-layout` ui-module head slot) styles backtick `<code>` in the page H1, side-nav labels, and breadcrumb trail.
+* *Independent nav / article scroll*: `site-doc-layout.css` no longer forces `overscroll-behavior: auto` on `.nav-panel-menu`; it is `contain`, so scrolling the nav to its end does not start scrolling the page. On desktop the tree (`nav.nav-menu.nav-tree-only`) grows with its content and the menu panel is the only vertical scrollport (also the SoftNav scroll-restore key). Explore list and TOC list still chain.
+* *Math after soft navigation*: `js/site-math.js` re-runs KaTeX auto-render on `SoftNav.on('loaded')` / `soft-nav:loaded`. Dataset marker renamed `data-adt-katex` -> `data-valentus-katex`.
+* *Contents box without section headings*: `js/site-page-toc.js` keeps the aside with a single entry pointing at the page title (id `main-article` when the H1 has none) instead of removing it. Opt out with `data-empty="remove"` on `aside.toc.sidebar`. It also rebuilds on soft navigation.
+* *Breadcrumb component filter (opt-in)*: helper `valentus-bc-component-listed`. Set site key `valentus_bc_components: site-nav-tree` to limit the component dropdown to the roots published by `@antora-supplemental/site-nav-tree` (`site_nav_tree_include` / `_exclude`) plus the current component. Without the key, nothing changes.
+
+== Release
+
+Git tag `v4.3.0`, public label `4.3.0+antora.3`, same release workflow as 4.2.2.

@@ -68,4 +68,14 @@
   } else {
     start()
   }
+
+  // Soft / in-page navigation (SoftNav or any router emitting soft-nav:loaded) swaps the
+  // article without a full page load; re-run auto-render on the new content.
+  function onSoftNavLoaded (fn) {
+    if (window.SoftNav && typeof window.SoftNav.on === 'function') window.SoftNav.on('loaded', fn)
+    else document.addEventListener('soft-nav:loaded', fn)
+  }
+  onSoftNavLoaded(function () {
+    start()
+  })
 })()

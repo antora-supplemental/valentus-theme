@@ -1,0 +1,34 @@
+/* Valentus: inline <code> in chrome titles (page H1, side nav, breadcrumb trail).
+   Antora/Asciidoctor emit <code> for backticks in doctitles and nav xref labels;
+   Valentus templates render those fields with triple mustache, so style them here. */
+
+.nav .nav-link code,
+.nav .nav-text code,
+.valentus-breadcrumb-trail-text code,
+.valentus-breadcrumb-trail-link code,
+.doc .valentus-page-title code,
+.valentus-article .valentus-page-title code {
+  font-family: var(--monospace-font-family, "IBM Plex Mono", "Roboto Mono", ui-monospace, monospace);
+  font-size: 0.92em;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.nav .nav-link code,
+.nav .nav-text code,
+.valentus-breadcrumb-trail-text code,
+.valentus-breadcrumb-trail-link code {
+  color: inherit;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  border-radius: 0.2em;
+  padding: 0.05em 0.25em;
+}
+
+.doc .valentus-page-title code,
+.valentus-article .valentus-page-title code {
+  color: inherit;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  border-radius: 0.2em;
+  padding: 0.05em 0.3em;
+  font-weight: 600;
+}

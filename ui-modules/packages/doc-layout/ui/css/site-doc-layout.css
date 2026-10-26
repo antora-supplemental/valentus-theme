@@ -652,10 +652,14 @@ html.dark-theme .valentus-doc-mast {
   overflow-y: auto !important;
 }
 
-/* Default UI sets overscroll-behavior: none (and -ms-scroll-chaining: none) on nav panels and
-   the TOC list. That traps the mouse wheel even when the panel has nothing left to scroll.
-   Restore scroll chaining so the page moves when the pointer is over a sidebar. */
-.nav-panel-menu,
+/* Independent column scroll: the nav menu panel is its own scrollport and must not chain
+   wheel/touch scroll into the article (scrolling the nav to its end used to start moving
+   the page). The explore list and TOC list still chain so short lists do not trap the wheel. */
+.nav-panel-menu {
+  overscroll-behavior: contain !important;
+  -ms-scroll-chaining: none !important;
+}
+
 .nav-panel-explore .components,
 .toc.sidebar .toc-menu ul {
   overscroll-behavior: auto !important;
@@ -1481,6 +1485,23 @@ nav.nav-menu.valentus-nav-tree-only {
   overflow-x: auto;
   overflow-y: auto;
   padding: 0 var(--valentus-global-rail-hpad) 0.5rem var(--valentus-global-rail-hpad) !important;
+}
+
+/* Desktop: [data-panel=menu] (.nav-panel-menu) is the ONLY vertical scrollport in the rail
+   (it is also the SoftNav scroll-restore key). The tree grows with its content instead of
+   becoming a nested scroller; otherwise neither box scrolls cleanly and the wheel chains
+   to the page. */
+@media screen and (min-width: 1024px) {
+  body.valentus-body .nav nav.nav-menu.nav-tree-only,
+  body.valentus-body .nav nav.nav-menu.valentus-nav-tree-only,
+  nav.nav-menu.nav-tree-only,
+  nav.nav-menu.valentus-nav-tree-only {
+    flex: 0 0 auto;
+    height: auto;
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
 }
 
 /* Antora Default UI sets .nav-list { margin-left: .75rem } for nesting.

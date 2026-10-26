@@ -1,6 +1,6 @@
 {
   "schema": "1.0",
-  "generatedAt": "2026-10-26T06:21:58.633Z",
+  "generatedAt": "2026-10-26T23:43:45.607Z",
   "repository": "https://github.com/antora-supplemental/valentus-theme",
   "source": "ui-modules/registry.json5",
   "modules": [
@@ -66,7 +66,7 @@
           ]
         }
       },
-      "uiFileCount": 8,
+      "uiFileCount": 9,
       "install": {
         "orchestrator": {
           "registry": "./ui-modules/registry.json5",
@@ -192,7 +192,8 @@
           "stylesheets": [
             "css/valentus-chrome.css",
             "css/site-doc-layout.css",
-            "css/site-visual.css"
+            "css/site-visual.css",
+            "css/site-inline-title-code.css"
           ]
         },
         "foot": {
@@ -204,7 +205,7 @@
           ]
         }
       },
-      "uiFileCount": 17,
+      "uiFileCount": 18,
       "install": {
         "orchestrator": {
           "registry": "./ui-modules/registry.json5",

@@ -86,6 +86,15 @@
     return mergeHeadingsInDocumentOrder(lists)
   }
 
+  function ensureTitleAnchor (article) {
+    var h1 =
+      article.querySelector('h1.page, h1.valentus-page-title, h1') ||
+      document.querySelector('h1.valentus-page-title, h1.page')
+    if (!h1) return null
+    if (!h1.id) h1.id = 'main-article'
+    return h1
+  }
+
   function parsePx (el, prop) {
     return parseFloat(window.getComputedStyle(el)[prop])
   }
@@ -132,8 +141,18 @@
 
     var headings = collectHeadings(article, levels)
     if (!headings.length) {
-      removeAside(aside)
-      return
+      // Keep the Contents box on pages without section headings: one entry that jumps
+      // to the page title. Opt out per page/site with data-empty="remove" on the aside.
+      if (aside.dataset.empty === 'remove') {
+        removeAside(aside)
+        return
+      }
+      var anchor = ensureTitleAnchor(article)
+      if (!anchor) {
+        removeAside(aside)
+        return
+      }
+      headings = [anchor]
     }
 
     var linkByHash = {}
@@ -246,5 +265,12 @@
     document.addEventListener('DOMContentLoaded', rebuildPageToc)
   } else {
     rebuildPageToc()
+  }
+
+  // SoftNav swaps the article only; rebuild so the aside never shows the previous page.
+  if (window.SoftNav && typeof window.SoftNav.on === 'function') {
+    window.SoftNav.on('loaded', rebuildPageToc)
+  } else {
+    document.addEventListener('soft-nav:loaded', rebuildPageToc)
   }
 })()
