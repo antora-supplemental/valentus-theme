@@ -53,6 +53,14 @@ jobs:
       - name: Legacy /theme-demo/ redirects to /demo-pages/
         run: node scripts/legacy-theme-demo-redirects.mjs
 
+      - name: Contrast check (every color scheme)
+        # Report-only until the existing findings are triaged: annotations and
+        # the job summary list every error and warning; the build stays green.
+        uses: antora-supplemental/antora-ui-chassis/packages/contrast-check@contrast-check-v0.1.0
+        with:
+          site: ${{ steps.antora.outputs.site-path }}
+          max-pages: "15"
+          fail-on: none
       - name: Setup Pages
         uses: actions/configure-pages@v6
 
