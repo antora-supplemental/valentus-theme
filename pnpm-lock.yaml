@@ -11,6 +11,9 @@ importers:
       '@antora-supplemental/antora-search-chat':
         specifier: github:antora-supplemental/antora-search-chat#v0.1.20
         version: https://codeload.github.com/antora-supplemental/antora-search-chat/tar.gz/4f6e1194f70c055b8befa150f8f1babbdf957ae6(@antora/lunr-extension@1.0.0-alpha.12)
+      '@antora-supplemental/asset-fingerprint':
+        specifier: github:antora-supplemental/antora-ui-chassis#asset-fingerprint-v0.1.0&path:packages/asset-fingerprint
+        version: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/bd25a012cfe5bee46832f8b901b32290d6a76dc8#path:packages/asset-fingerprint
       '@antora-supplemental/brand-placeholder':
         specifier: github:antora-supplemental/antora-ui-chassis#brand-placeholder-v0.1.0&path:packages/brand-placeholder
         version: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/67b6c8d768b5ed1d5360cf6452c60f2f608ed1aa#path:packages/brand-placeholder
@@ -53,6 +56,12 @@ packages:
     engines: {node: '>=18'}
     peerDependencies:
       '@antora/lunr-extension': '>=1.0.0-alpha.12'
+
+  '@antora-supplemental/asset-fingerprint@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/bd25a012cfe5bee46832f8b901b32290d6a76dc8#path:packages/asset-fingerprint':
+    resolution: {path: packages/asset-fingerprint, tarball: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/bd25a012cfe5bee46832f8b901b32290d6a76dc8}
+    version: 0.1.0
+    engines: {node: '>=18'}
+    hasBin: true
 
   '@antora-supplemental/brand-placeholder@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/67b6c8d768b5ed1d5360cf6452c60f2f608ed1aa#path:packages/brand-placeholder':
     resolution: {path: packages/brand-placeholder, tarball: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/67b6c8d768b5ed1d5360cf6452c60f2f608ed1aa}
@@ -1281,6 +1290,8 @@ snapshots:
   '@antora-supplemental/antora-search-chat@https://codeload.github.com/antora-supplemental/antora-search-chat/tar.gz/4f6e1194f70c055b8befa150f8f1babbdf957ae6(@antora/lunr-extension@1.0.0-alpha.12)':
     dependencies:
       '@antora/lunr-extension': 1.0.0-alpha.12
+
+  '@antora-supplemental/asset-fingerprint@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/bd25a012cfe5bee46832f8b901b32290d6a76dc8#path:packages/asset-fingerprint': {}
 
   '@antora-supplemental/brand-placeholder@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/67b6c8d768b5ed1d5360cf6452c60f2f608ed1aa#path:packages/brand-placeholder': {}
 

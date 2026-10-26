@@ -21,6 +21,14 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
+== 4.2.2 — 2026-10-26
+
+Patch release: versioned asset links. Details: `changelog-details/history/2026-10-26 - 4.2.2 versioned asset links.adoc`.
+
+=== Added
+
+* **Versioned asset links (cache-busting):** the demo site runs the new chassis extension `@antora-supplemental/asset-fingerprint` (`asset-fingerprint-v0.1.0`) last, so every CSS and JS URL in the built HTML carries `?v=<content hash>` and deploys show up at once instead of after GitHub Pages' 4-hour browser cache. The guide's Installation page documents it for consumer sites (one playbook line, any theme). The UI bundle itself is unchanged.
+
 == 4.2.1 — 2026-10-26
 
 Patch release: breadcrumb sideways scroll and the corrected chassis pins. Details: `changelog-details/history/2026-10-26 - 4.2.1 breadcrumb scroll and pins.adoc`.

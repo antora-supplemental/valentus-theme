@@ -105,6 +105,25 @@ See xref:configuration.adoc#virtual-supplemental-files[virtual supplemental file
 Copy `supplemental-ui/` from this repository into git for a maintained fork.
 There is no vendored dark-mode copy; keep the `@antora-supplemental/color-scheme` extension in the playbook.
 
+== Versioned asset links (cache-busting)
+
+Static hosts serve `_/css/site.css` and `_/js/site.js` under the same name with a cache lifetime (GitHub Pages: 4 hours), so after you deploy a fix, visitors can see the old styles for hours. Add the chassis https://github.com/antora-supplemental/antora-ui-chassis/tree/main/packages/asset-fingerprint[asset-fingerprint] extension *last* in your playbook. After Antora writes the site it adds `?v=<content hash>` to every CSS and JS URL, so a changed file gets a new URL at once and an unchanged one stays cached. The Valentus demo uses it.
+
+[source,json]
+----
+"@antora-supplemental/asset-fingerprint": "github:antora-supplemental/antora-ui-chassis#asset-fingerprint-v0.1.0&path:packages/asset-fingerprint"
+----
+
+[source,yaml]
+----
+antora:
+  extensions:
+    # ... your other extensions ...
+    - require: '@antora-supplemental/asset-fingerprint'
+----
+
+It reads the built files, not the UI bundle, so it works with the Valentus release bundle, a vendored `supplemental-ui`, or any other theme. Without the extension: `npx asset-fingerprint build/site` after the build. Options (include/exclude globs, hash length, fonts, images) are in the package README.
+
 == Verify
 
 Open the built site and use the sun/moon navbar toggle; preference should persist across pages.

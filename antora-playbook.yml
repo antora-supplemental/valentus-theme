@@ -55,6 +55,8 @@ antora:
       snippet_length: 200
     # Wrap lunr with Search/Ask UI (phase 1 stub — no API keys; see @antora-supplemental/antora-search-chat)
     - require: "@antora-supplemental/antora-search-chat"
+    # Last: ?v=<content hash> on CSS/JS URLs so deploys show up at once (chassis asset-fingerprint).
+    - require: "@antora-supplemental/asset-fingerprint"
 
 asciidoc:
   extensions:

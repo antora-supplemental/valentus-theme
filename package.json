@@ -1,6 +1,6 @@
 {
   "name": "valentus-theme",
-  "version": "4.2.1",
+  "version": "4.2.2",
   "description": "Valentus: Antora doc-site layout (packages/valentus-layout) and Valentus Paint (paint/), split on the --cs-* token contract of @antora-supplemental/color-scheme.",
   "private": true,
   "keywords": [
@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@antora-supplemental/antora-search-chat": "github:antora-supplemental/antora-search-chat#v0.1.20",
+    "@antora-supplemental/asset-fingerprint": "github:antora-supplemental/antora-ui-chassis#asset-fingerprint-v0.1.0&path:packages/asset-fingerprint",
     "@antora-supplemental/brand-placeholder": "github:antora-supplemental/antora-ui-chassis#brand-placeholder-v0.1.0&path:packages/brand-placeholder",
     "@antora-supplemental/color-scheme": "github:antora-supplemental/antora-ui-chassis#color-scheme-v0.5.3&path:packages/color-scheme",
     "@antora-supplemental/light-dark-mode": "github:antora-supplemental/antora-ui-chassis#light-dark-mode-v0.1.3&path:packages/light-dark-mode",

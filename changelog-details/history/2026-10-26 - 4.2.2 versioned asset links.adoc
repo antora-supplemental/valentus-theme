@@ -1,0 +1,12 @@
+= 4.2.2 — versioned asset links
+:page-date: 2026-10-26
+
+== What shipped
+
+* The demo playbook runs `@antora-supplemental/asset-fingerprint` (chassis `asset-fingerprint-v0.1.0`) as its last extension: CSS/JS URLs in the built HTML get `?v=<content hash>`.
+* Installation guide: new section *Versioned asset links (cache-busting)* for consumer sites.
+* Why a chassis package and not Valentus partials: the hash has to be of the built files, which partials cannot see at UI-bundle build time for site-specific assets (search index, supplemental files). A post-build extension works for every theme; Skittles adopts the same package and drops its `scripts/cache-bust.mjs`.
+
+== Release
+
+Git tag `v4.2.2`, public label `4.2.2+antora.3`, same workflow as 4.2.1.
