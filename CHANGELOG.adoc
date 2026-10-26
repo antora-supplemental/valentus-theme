@@ -26,6 +26,7 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 === Fixed
 
 * **Valentus Paint:** highlight.js markup tags, names and attributes (`.hljs-tag`, `.hljs-name`, `.hljs-attribute`) fell through to the Default UI's navy (`#000080`) on the dark code panel, about 1.1:1 contrast in both schemes. They now use the paint's string color, matching how dark mode already showed names and attributes.
+* **Valentus Paint:** light-mode accent links fell short of WCAG AA. `--cs-accent` moves from `#0f766e` to `#0e7068` (4.74:1 on the current-page nav and `.bare` link background, was 4.37:1) and `--cs-accent-hover` from `#0d9488` to `#0c625b` (hovered body links were 3.74:1 on white, now 7.21:1; at least 5.26:1 on every Valentus background). `--cs-accent-soft` is unchanged, so highlighted backgrounds look the same. axe reports 0 color-contrast failures on the five test pages, light and dark.
 
 == 4.0.0 — 2026-10-25
 
