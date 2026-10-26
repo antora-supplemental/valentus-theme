@@ -1,0 +1,29 @@
+= 2026-10-25
+
+== Placeholder logo replaces the shipped brand mark
+
+A theme should not hand its own brand to every consumer site.
+Valentus 4.0.0 shipped its red blood drop as `img/logo.svg` in both release bundles, so any site without its own logo showed the Valentus brand.
+
+=== What ships now
+
+* Header with no `header_logo`: inline `partials/valentus-logo-placeholder.hbs`, a six-petal rosette in `currentColor` (header text color, light and dark).
+* `img/logo.svg` (neutral gray, lighter under `prefers-color-scheme: dark`), `img/logo-dark.svg` (light ink for pair mode), `img/logo-mono.svg` (`currentColor`).
+* `img/favicon.svg`, `img/favicon.ico` (16/32/48), `img/apple-touch-icon.png` (180), linked by `partials/head-icons.hbs`; `site.keys.favicon` overrides the icon basename.
+* Every placeholder SVG carries `Placeholder logo - replace with your own` in its `<title>`.
+* No `og:image` existed before; none is added.
+
+=== Demo site
+
+The blood drop lives in `docs/brand/supplemental-ui/img/`.
+The demo playbooks load `docs/brand/lib/brand-overlay.js`, which layers that directory over `ui.supplemental_files` (Antora accepts one supplemental directory).
+
+=== Verification
+
+* Box build of a plain consumer playbook (no logo keys): inline placeholder in the header, placeholder favicons; demo playbook: blood drop in header and favicon.
+* axe (WCAG 2.0/2.1 A/AA) on the site header: no violations in light or dark, both builds. Placeholder ink is the header text color (about 17:1 on both bars).
+* `pnpm test`, `pnpm ui-modules:validate`, `pnpm paint:validate` pass.
+
+=== Version
+
+Recommended *4.1.0*: additive keys, files and partials; the visible default mark changes, so not a patch.

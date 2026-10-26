@@ -21,6 +21,24 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
+== Unreleased
+
+Recommended release: *4.1.0* (new placeholder assets, `favicon` key and `head-icons` partial; no removed keys or partials, but the bundled mark changes, which is more than a patch).
+
+=== Changed
+
+* **Placeholder logo instead of the Valentus brand:** the bundles no longer ship the blood-drop mark. With no `site.keys.header_logo`, the header renders a neutral six-petal placeholder as inline SVG in `currentColor`, so it follows the header text color in light and dark paint (tint with `--valentus-logo-placeholder`). `img/logo.svg` and `img/logo-dark.svg` are now placeholders too. Sites that set `header_logo: logo.svg` and relied on the bundled drop now get the placeholder; ship your own `img/logo.svg`.
+
+=== Added
+
+* `img/logo-mono.svg` (`currentColor`), `img/favicon.svg`, `img/favicon.ico`, `img/apple-touch-icon.png` placeholders and a `partials/head-icons.hbs` that links them. New key `site.keys.favicon` points at another `img/` basename. Same files in the `header-chrome` ui-module (new partial `valentus-logo-placeholder`).
+* Guide *Header logo*: how to replace the placeholder (`header_logo` + `ui.supplemental_files`, or virtual entries); short note in the README.
+
+=== Docs / demo
+
+* The blood drop moved to `docs/brand/supplemental-ui/img/` (`valentus-drop.svg`, `valentus-drop-dark.svg`, `valentus-favicon.svg`). Demo playbooks load `docs/brand/lib/brand-overlay.js` (a second supplemental layer) and set `header_logo: valentus-drop.svg`, so the demo site looks the same, now with a blood-drop favicon.
+* See link:changelog-details/2026-10-25%20-%20placeholder%20logo.adoc[Detailed notes: 2026-10-25 placeholder logo].
+
 == 4.0.0 — 2026-10-25
 
 === Changed (breaking)
