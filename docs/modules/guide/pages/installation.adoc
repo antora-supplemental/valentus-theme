@@ -31,7 +31,7 @@ and in `package.json` devDependencies:
 +
 [source,json]
 ----
-"@antora-supplemental/light-dark-mode": "github:antora-supplemental/antora-ui-chassis#light-dark-mode-v0.1.0&path:packages/light-dark-mode"
+"@antora-supplemental/light-dark-mode": "github:antora-supplemental/antora-ui-chassis#light-dark-mode-v0.1.3&path:packages/light-dark-mode"
 ----
 
 For floating, line-pin, dual-axis labels (`2.0.0+antora.3`), or Renovate strategies see xref:version-pinning.adoc[Version Pinning].
@@ -85,7 +85,7 @@ and in `package.json` devDependencies:
 +
 [source,json]
 ----
-"@antora-supplemental/light-dark-mode": "github:antora-supplemental/antora-ui-chassis#light-dark-mode-v0.1.0&path:packages/light-dark-mode"
+"@antora-supplemental/light-dark-mode": "github:antora-supplemental/antora-ui-chassis#light-dark-mode-v0.1.3&path:packages/light-dark-mode"
 ----
 
 Remove `antora-dark-theme` from `package.json` if present; use the release bundle URL or `pnpm add -D valentus-theme` for supplemental vendoring.

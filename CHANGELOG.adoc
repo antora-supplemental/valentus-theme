@@ -26,6 +26,10 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 === Added
 
 * **Layout - breadcrumbs:** the mast breadcrumb stays on one line on mobile and desktop. When it is wider than the mast it scrolls sideways with no visible scrollbar. Edge fades show where text is hidden: each edge fades on its own whenever text is hidden past it, so both edges fade mid-scroll. The fades are a CSS `mask-image` on the scroller (no overlay colors), so they work over any paint. On load the trail scrolls to the end so the current page shows. When it overflows the scroller can be reached with the keyboard (`tabindex="0"`, `aria-label="Breadcrumb"`, inset focus ring). Focusing a crumb scrolls it into view, and `prefers-reduced-motion` turns smooth scrolling off. The component and version menus float in the viewport, so the scroller does not clip them. It runs again on SoftNav page swaps. New `js/valentus-breadcrumb-scroll.js`, loaded from `footer-scripts.hbs` and mirrored in the `doc-layout` UI module. Trail crumbs no longer truncate with an ellipsis.
+=== Fixed
+
+* **Chassis pins:** 4.2.0 shipped with the old pins by mistake. Its changelog and commit 9703f3a say `@antora-supplemental/color-scheme` was bumped to color-scheme-v0.5.1, but `package.json` and `pnpm-lock.yaml` still pinned color-scheme-v0.4.0, so the 4.2.0 bundles do not include it. Now pinned to `color-scheme-v0.5.3` and `light-dark-mode-v0.1.3`, with the lockfile updated. `antoraRegistry.uses` `color-scheme-tokens` moves from `>=0.4` to `^0.5`. Install snippets in the README, Installation and v4 migration guides now show `light-dark-mode-v0.1.3`. Paint validate, tests, `brand:validate` and both builds pass. The light/dark toggle works on the demo. With two schemes there is still no picker link, as expected.
+
 == 4.2.0 — 2026-10-25
 
 === Changed
