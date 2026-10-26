@@ -7,15 +7,9 @@
       {{else}}
       <a class="valentus-header-logo-item" href="{{{relativize site.homeUrl}}}" title="{{{or site.keys.siteHomeLabel 'Home'}}}" aria-label="{{{or site.keys.siteHomeLabel 'Home'}}}">
       {{/if}}
-        {{#if site.keys.headerLogoDark}}
-        <img class="valentus-header-logo valentus-header-logo--for-light" src="{{{uiRootPath}}}/img/{{or site.keys.headerLogo 'logo.svg'}}" width="34" height="34" alt="" />
-        <img class="valentus-header-logo valentus-header-logo--for-dark" src="{{{uiRootPath}}}/img/{{site.keys.headerLogoDark}}" width="34" height="34" alt="" />
-        {{else if site.keys.headerLogo}}
-        <img class="valentus-header-logo{{#if (eq site.keys.headerLogoTone 'mono')}} valentus-header-logo--mono{{/if}}" src="{{{uiRootPath}}}/img/{{site.keys.headerLogo}}" width="34" height="34" alt="" />
-        {{else}}
-        {{!-- No header_logo: neutral placeholder (replace with your own; see guide Header logo). --}}
-        {{> valentus-logo-placeholder}}
-        {{/if}}
+        {{!-- Logo: chassis @antora-supplemental/brand-placeholder resolves site.keys.header_logo
+          (and header_logo_dark / header_logo_tone), else the shared placeholder. Valentus ships no logo. --}}
+        {{> brand-logo base="valentus-header-logo"}}
       </a>
       <a class="navbar-item valentus-header-title" href="{{{relativize site.homeUrl}}}">{{or site.keys.headerDocTitle site.title}}</a>
     </div>

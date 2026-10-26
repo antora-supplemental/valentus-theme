@@ -41,6 +41,8 @@ runtime:
 
 antora:
   extensions:
+    # Shared placeholder logo + favicons from the chassis (Valentus ships none)
+    - require: "@antora-supplemental/brand-placeholder"
     # Valentus brand overlay (demo/docs only; not in the shipped bundle)
     - require: ./docs/brand/lib/brand-overlay.js
     - require: "@antora-supplemental/light-dark-mode"

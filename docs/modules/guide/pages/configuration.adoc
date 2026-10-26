@@ -43,7 +43,7 @@ You only write snake_case in the playbook; the theme templates already use the c
 
 | `header_logo`
 | _(none: inline placeholder)_
-| When unset, the header shows the neutral placeholder logo (inline SVG, `currentColor`); replace it, see xref:header-logo.adoc#replace[Replace the placeholder]. Basename of the header mark under `img/` (for example `mybrand.svg` → `img/mybrand.svg`). Drop the SVG in supplemental or use a virtual `supplemental_files` entry. Used on the light bar (and as the only mark when `header_logo_dark` is unset).
+| When unset, the header shows the shared chassis placeholder logo (inline SVG, `currentColor`, from `@antora-supplemental/brand-placeholder`); replace it, see xref:header-logo.adoc#replace[Replace the placeholder]. Basename of the header mark under `img/` (for example `mybrand.svg` → `img/mybrand.svg`). Drop the SVG in supplemental or use a virtual `supplemental_files` entry. Used on the light bar (and as the only mark when `header_logo_dark` is unset).
 
 | `favicon`
 | _(none: `img/favicon.svg` + `img/favicon.ico` placeholders)_

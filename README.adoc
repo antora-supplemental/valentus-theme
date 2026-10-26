@@ -164,7 +164,7 @@ Sites on a *different* theme bundle use `@antora-supplemental/color-scheme` (`to
 ++++
 === Logo
 
-Valentus ships a neutral placeholder logo and favicons, not a brand mark.
+Valentus ships no brand mark: the header and favicons show the shared chassis placeholder (`@antora-supplemental/brand-placeholder`) until your site sets its own.
 Replace them with your own via `site.keys.header_logo` and `ui.supplemental_files`; see the https://antora-supplemental.github.io/valentus-theme/valentus-theme/guide/header-logo.html#replace[Header logo guide].
 The blood drop is the Valentus demo-site brand only (`docs/brand/`).
 

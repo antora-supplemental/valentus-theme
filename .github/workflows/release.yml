@@ -44,6 +44,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
+      - name: Validate theme ships no brand logo
+        run: pnpm brand:validate
+
       - name: Verify package version matches tag
         run: |
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
@@ -98,6 +101,8 @@ jobs:
           set -e
           if [ "$unzip_status" -gt 1 ]; then exit "$unzip_status"; fi
           cp -r packages/valentus-layout/supplemental-ui/* build/ui-bundle/
+          # Shared placeholder logo + favicons from the chassis (themes ship no logo; sites override)
+          node node_modules/@antora-supplemental/brand-placeholder/scripts/bake.mjs build/ui-bundle
           # Layout-only bundle (pair with any --cs-* paint, e.g. default-paint)
           (cd build/ui-bundle && zip -qr ../../valentus-layout-bundle.zip .)
           # Full Valentus bundle: bake Valentus Paint in at the paint slot

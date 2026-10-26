@@ -23,6 +23,14 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 
 == Unreleased
 
+Recommended release: *4.2.0* (minor). The shipped header and favicons are unchanged pixel for pixel, but the files now come from a chassis package.
+
+=== Changed
+
+* **Logo:** the placeholder logo and favicons move to the shared chassis package `@antora-supplemental/brand-placeholder` (pinned at `brand-placeholder-v0.1.0`). Valentus removes its own copies (`img/logo*.svg`, `img/favicon.*`, `img/apple-touch-icon.png`, `partials/head-icons.hbs`, `partials/valentus-logo-placeholder.hbs`) and renders the header logo through the chassis `brand-logo` partial. The release workflow bakes the chassis files into both zips. Consumer and demo builds were pixel-compared before and after: 0 changed pixels, light and dark. Details: `changelog-details/2026-10-25 - placeholder logo to chassis.adoc`.
+* **Rule:** themes ship no brand logo. Sites set it; the release fails when `pnpm brand:validate` finds logo-like files in the theme.
+* **Upgrade note:** a site override of `partials/valentus-logo-placeholder.hbs` no longer applies. Override `partials/brand-placeholder-logo.hbs`, or set `site.keys.header_logo`.
+
 === Added
 
 * **Paint:** `paint/css/valentus-paint.css` declares its color schemes in a `@color-schemes` manifest (`light`, `dark`) for `@antora-supplemental/color-scheme` 0.4.0. With two schemes no color scheme picker link appears. Colors are unchanged. The v4 migration guide's live paint example drops the 0.3.0 `slots` key.

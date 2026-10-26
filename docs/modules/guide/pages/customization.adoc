@@ -15,7 +15,7 @@ Valentus currently ships an *interim* paint-hold in `partials/head-meta.hbs` (`h
 
 == Overriding `head-meta.hbs` (brand overlays)
 
-Hubs often override `packages/valentus-layout/supplemental-ui/partials/head-meta.hbs` for fonts or brand CSS. Favicons and the header logo are neutral placeholders; replace them as described in xref:header-logo.adoc#replace[Replace the placeholder].
+Hubs often override `packages/valentus-layout/supplemental-ui/partials/head-meta.hbs` for fonts or brand CSS. Favicons and the header logo are the shared chassis placeholders (`@antora-supplemental/brand-placeholder`), not part of Valentus; replace them as described in xref:header-logo.adoc#replace[Replace the placeholder].
 **Copy the full Valentus CSS chain**, then add brand overlays only — do not replace the partial with a minimal dark-mode stub.
 
 Required Valentus stylesheet links (order matters; match upstream `head-meta.hbs`):

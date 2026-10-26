@@ -6,9 +6,10 @@ The site header shows **one** logo at a time.
 
 [IMPORTANT]
 ====
-Valentus does not ship a brand logo.
-The bundles (`ui-bundle.zip` and `valentus-layout-bundle.zip`) contain a neutral *placeholder logo* (a six-petal rosette) and matching favicons.
-Replace them with your own mark; see <<replace>>.
+Valentus does not ship a brand logo, and no theme on the chassis may.
+The placeholder logo (a six-petal rosette) and matching favicons come from the shared chassis package `@antora-supplemental/brand-placeholder`.
+Valentus bakes them into both bundles (`ui-bundle.zip` and `valentus-layout-bundle.zip`) at release time and renders them through the chassis `brand-logo` and `head-icons` partials.
+The site replaces them with its own mark; see <<replace>>.
 The red blood drop on this site is the Valentus *demo* brand and lives under `docs/brand/`, outside the bundle.
 ====
 
@@ -40,9 +41,9 @@ Do not combine pair and mono for the same mark: pair mode swaps authored assets;
 
 With no `header_logo` key, the header renders the placeholder as an inline SVG painted with `currentColor`.
 It takes the header text color, so it follows the paint in light and dark mode with no extra assets.
-Set `--valentus-logo-placeholder` in a brand stylesheet to tint it, for example `--valentus-logo-placeholder: var(--cs-accent)`.
+Set `--valentus-logo-placeholder` in a site stylesheet to tint it, for example `--valentus-logo-placeholder: var(--cs-accent)`.
 
-The bundle also ships these placeholder files under `img/`.
+The bundle also carries these chassis placeholder files under `img/`.
 Each one says `Placeholder logo - replace with your own` in its `<title>`.
 
 [cols="2,3", options="header"]
@@ -64,6 +65,15 @@ Each one says `Placeholder logo - replace with your own` in its `<title>`.
 | `img/apple-touch-icon.png`
 | 180×180 home-screen icon
 |===
+
+Override order: the site first (`site.keys.*` and same-path files in `ui.supplemental_files`), then the chassis placeholder.
+A theme cannot sit in between; the chassis validator (`pnpm brand:validate` in this repo) fails a theme release that ships logo-like files.
+
+=== How a newer placeholder reaches your site
+
+Valentus pins the chassis package by git tag in `devDependencies` (for example `#brand-placeholder-v0.1.0`) and copies its files into each release zip.
+A new chassis placeholder reaches sites when Valentus bumps that pin and releases.
+Sites on the rolling `v4` URL with `snapshot: true` pick it up on their next build; sites pinned to an exact version (`v4.2.0`) get it when they move the pin.
 
 The bundle has no `og:image` (social card) asset; add one in your own `head-meta` overlay if you need one.
 

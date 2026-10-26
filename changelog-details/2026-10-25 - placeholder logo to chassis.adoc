@@ -1,0 +1,24 @@
+= Placeholder logo moves to the chassis
+:revdate: 2026-10-25
+
+== Why
+
+Ryan wanted one placeholder logo for every theme on the chassis, with no theme able to ship its own brand.
+A theme may show a real logo only on its own demo site, from outside the shipped bundle.
+
+== What changed
+
+* New chassis package `@antora-supplemental/brand-placeholder` (`antora-ui-chassis`, tag `brand-placeholder-v0.1.0`) holds the placeholder SVGs, favicons, `head-icons.hbs`, `brand-logo.hbs` and `brand-placeholder-logo.hbs`, a bake script, an Antora extension and a theme validator.
+* Valentus deletes its own copies and pins the package in `devDependencies`.
+* `header-content.hbs` (layout and `header-chrome` module) calls `{{> brand-logo base="valentus-header-logo"}}`, which renders the same classes and sizes as before.
+* `release.yml` runs `pnpm brand:validate`, then bakes the chassis `ui/` into the bundle after the layout copy, so both zips carry it.
+* The four playbooks load the chassis extension, because they layer the theme from a directory instead of a zip. The demo keeps the blood drop through `docs/brand/lib/brand-overlay.js`.
+
+== Verification
+
+* Consumer build (no brand keys, no overlay) and demo build, before and after, with Playwright full-page screenshots of five pages in light and dark: 0 changed pixels across 20 pairs.
+* `pnpm test`, `pnpm ui-modules:validate`, `pnpm paint:validate`, `pnpm brand:validate` pass.
+
+== Override order
+
+Site (`site.keys`, `ui.supplemental_files`), then the chassis placeholder.
