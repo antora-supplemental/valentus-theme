@@ -39,4 +39,4 @@ Hubs that override footer partials must **not** load `site.js` (or these Valentu
 . `<head>`: `site.css`, then the color scheme hook sets `html.dark-theme` before first paint
 . Valentus CSS loads with the right scheme already applied
 . Footer: `color-scheme.js` binds the placed `#theme-toggle`
-. Toggle click: `ColorScheme.toggle()` persists `antora-theme-mode` and crossfades
+. Toggle click: `LightDarkMode.toggle()` persists `antora-theme-mode` and crossfades

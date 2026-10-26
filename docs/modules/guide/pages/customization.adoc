@@ -140,7 +140,7 @@ With `toggle: auto` the extension creates one in `.navbar-end` when none is pres
 
 == Disable System Preference Detection
 
-Not an option of the chassis extension. Set an explicit mode instead, for example `ColorScheme.set('light')` from a site script.
+Not an option of the chassis extension. Set an explicit mode instead, for example `LightDarkMode.set('light')` from a site script.
 
 == CSS Custom Properties
 

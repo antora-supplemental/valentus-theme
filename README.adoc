@@ -96,12 +96,12 @@ Git tags stay pure semver (`v3.0.0`); pin URLs use those tags. Details: `docs/mo
 ----
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v3/ui-bundle.zip
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v4/ui-bundle.zip
     snapshot: true
   supplemental_files: ./supplemental-ui-overrides   # optional branding only
 antora:
   extensions:
-    - require: "@antora-supplemental/color-scheme"
+    - require: "@antora-supplemental/light-dark-mode"
       toggle: placed
 ----
 
@@ -109,7 +109,7 @@ Pin the extension in `package.json`:
 
 [source,json]
 ----
-"@antora-supplemental/color-scheme": "github:antora-supplemental/antora-ui-chassis#color-scheme-v0.1.2&path:packages/color-scheme"
+"@antora-supplemental/light-dark-mode": "github:antora-supplemental/antora-ui-chassis#light-dark-mode-v0.1.0&path:packages/light-dark-mode"
 ----
 
 Add the GitHub topic `valentus-theme` on your playbook repository so dependents stay rediscoverable (`gh search repos --topic valentus-theme`). Guide: `docs/modules/guide/pages/github-topics.adoc`.
@@ -125,7 +125,7 @@ ui:
   supplemental_files: ./path/to/valentus-theme/packages/valentus-layout/supplemental-ui
 antora:
   extensions:
-    - require: "@antora-supplemental/color-scheme"
+    - require: "@antora-supplemental/light-dark-mode"
       toggle: placed
     - require: ./path/to/valentus-theme/paint/lib/index.js   # Valentus Paint (or another --cs-* paint)
 ----

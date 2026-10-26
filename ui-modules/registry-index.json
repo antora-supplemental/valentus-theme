@@ -1,6 +1,6 @@
 {
   "schema": "1.0",
-  "generatedAt": "2026-10-25T10:42:02.504Z",
+  "generatedAt": "2026-10-26T01:33:48.379Z",
   "repository": "https://github.com/antora-supplemental/valentus-theme",
   "source": "ui-modules/registry.json5",
   "modules": [
@@ -144,7 +144,7 @@
           ]
         }
       },
-      "uiFileCount": 6,
+      "uiFileCount": 7,
       "install": {
         "orchestrator": {
           "registry": "./ui-modules/registry.json5",

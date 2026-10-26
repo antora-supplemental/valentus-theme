@@ -38,7 +38,7 @@ runtime:
 
 antora:
   extensions:
-    - require: "@antora-supplemental/color-scheme"
+    - require: "@antora-supplemental/light-dark-mode"
       toggle: placed
     # Valentus Paint (repo root ./paint): links css/valentus-paint.css at the layout paint slot
     - require: ./paint/lib/index.js

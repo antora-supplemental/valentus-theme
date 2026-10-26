@@ -1,5 +1,5 @@
 = Migrating to Valentus 4
-:description: Valentus 4 splits layout from paint on the --cs-* contract and moves the color scheme mechanism to chassis.
+:description: Valentus 4 splits layout from paint on the --cs-* contract and moves light/dark mode to antora-ui-chassis.
 
 Valentus 4 is three layers:
 
@@ -8,8 +8,8 @@ Valentus 4 is three layers:
 | Layer | What | Where
 
 | Mechanism
-| Light/dark switching, persistence, toggle behavior, live paint
-| `@antora-supplemental/color-scheme` (antora-ui-chassis)
+| Light/dark switching, persistence, system preference, the toggle (`@antora-supplemental/light-dark-mode`); the `--cs-*` contract, live paint and the picker page (`@antora-supplemental/color-scheme`, registered by light-dark-mode)
+| antora-ui-chassis
 
 | Layout
 | Partials, helpers, JS, layout CSS; reads `--cs-*`
@@ -23,22 +23,59 @@ Valentus 4 is three layers:
 == Release bundle users
 
 `ui-bundle.zip` still contains layout plus Valentus Paint, so the site looks the same.
-Add the chassis extension if you have not (required since 4.0.0):
+Add the chassis extension (required since 4.0.0):
 
 [source,yaml]
 ----
 antora:
   extensions:
-    - require: "@antora-supplemental/color-scheme"
+    - require: "@antora-supplemental/light-dark-mode"
       toggle: placed
+----
+
+and pin it in `package.json` devDependencies:
+
+[source,json]
+----
+"@antora-supplemental/light-dark-mode": "github:antora-supplemental/antora-ui-chassis#light-dark-mode-v0.1.0&path:packages/light-dark-mode"
 ----
 
 The release also ships `valentus-layout-bundle.zip` (layout only). Use it with a paint extension.
 
+If you tried a 4.0 pre-release with `- require: "@antora-supplemental/color-scheme"`, replace it with `@antora-supplemental/light-dark-mode`. light-dark-mode registers color-scheme itself; move any `live_paint` block under `color_scheme:`. The runtime API is `LightDarkMode.mode/isDark/set/toggle/subscribe` (was `ColorScheme.*` for light/dark).
+
+== Toggle designs
+
+Valentus Layout supports both chassis toggle designs:
+
+[cols="1,2,2"]
+|===
+| `toggle_placement` | Look | Partial
+
+| `navbar` (default)
+| Sun/moon icon button in the top bar, same size as the other header icon buttons
+| `light-dark-toggle.hbs` (Valentus), rendered by `{{> light-dark-navbar-slot}}` in `header-content.hbs`
+
+| `footer`
+| Labeled Light / Dark / Auto switch in the footer
+| `{{> light-dark-footer-slot}}` in `footer-content.hbs`
+|===
+
+[source,yaml]
+----
+antora:
+  extensions:
+    - require: "@antora-supplemental/light-dark-mode"
+      toggle: placed
+      toggle_placement: footer
+----
+
+Override order for these partials is site (`supplemental_files`), then theme (Valentus), then chassis default. Hub overrides of `header-content.hbs` or `footer-content.hbs` should keep the slot partial calls.
+
 == Git overlay users
 
 * `supplemental_files: .../valentus-theme/supplemental-ui` becomes `.../valentus-theme/packages/valentus-layout/supplemental-ui`.
-* Add the paint after color-scheme: `- require: .../valentus-theme/paint/lib/index.js` (Valentus look) or `@antora-supplemental/default-paint`.
+* Add the paint after light-dark-mode: `- require: .../valentus-theme/paint/lib/index.js` (Valentus look) or `@antora-supplemental/default-paint`.
 
 == Removed and renamed
 
@@ -72,15 +109,18 @@ Layout-specific classes must be declared (`--extra=.my-layout-`), as Valentus Pa
 
 == Live paint previews
 
-Register Valentus Paint as a live paint (color-scheme 0.2.0+) to preview it on other layouts:
+Register Valentus Paint as a live paint (color-scheme 0.3.0+, through light-dark-mode) to preview it on other layouts. With more than two schemes the chassis also builds a picker page, `_/color-schemes.html`, linked from the footer:
 
 [source,yaml]
 ----
-    - require: "@antora-supplemental/color-scheme"
-      live_paint:
-        enabled: true
-        paints:
-          valentus: css/valentus-paint.css
+    - require: "@antora-supplemental/light-dark-mode"
+      color_scheme:
+        live_paint:
+          enabled: true
+          paints:
+            valentus:
+              href: css/valentus-paint.css
+              slots: [light, dark]
 ----
 
 For cross-site iframes, pass `?paint=valentus` in the iframe `src`; third-party cookies are often blocked.

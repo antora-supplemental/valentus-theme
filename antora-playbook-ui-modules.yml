@@ -30,7 +30,7 @@ runtime:
 
 antora:
   extensions:
-    - require: "@antora-supplemental/color-scheme"
+    - require: "@antora-supplemental/light-dark-mode"
       toggle: placed
     - require: ./ui-modules/packages/orchestrator/lib/index.js
       registry: ./ui-modules/registry.json5

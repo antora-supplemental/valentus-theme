@@ -41,6 +41,6 @@ See xref:installation.adoc[Installation] and xref:ui-modules.adoc[UI Modules].
 ----
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v3/ui-bundle.zip
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v4/ui-bundle.zip
     snapshot: true
 ----

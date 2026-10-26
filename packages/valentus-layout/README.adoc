@@ -19,7 +19,7 @@ ui:
   supplemental_files: ./path/to/valentus-theme/packages/valentus-layout/supplemental-ui
 antora:
   extensions:
-    - require: "@antora-supplemental/color-scheme"
+    - require: "@antora-supplemental/light-dark-mode"
       toggle: placed
     - require: ./path/to/valentus-theme/paint/lib/index.js   # or @antora-supplemental/default-paint
 ----

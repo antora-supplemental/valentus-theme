@@ -14,7 +14,7 @@
  *
  *   antora:
  *     extensions:
- *       - require: '@antora-supplemental/color-scheme'
+ *       - require: '@antora-supplemental/light-dark-mode'
  *       - require: '@antora-supplemental/valentus-paint'
  */
 

@@ -13,7 +13,7 @@ Sites use the *release UI bundle* only:
 ----
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v3/ui-bundle.zip
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v4/ui-bundle.zip
     snapshot: true
 ----
 
@@ -100,7 +100,7 @@ site:
 
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v3/ui-bundle.zip
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v4/ui-bundle.zip
     snapshot: true
   supplemental_files: ./supplemental-ui-overrides
 ----
@@ -124,7 +124,7 @@ When you only need one or two files (not a full supplemental directory), use Ant
 ----
 ui:
   bundle:
-    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v3/ui-bundle.zip
+    url: https://github.com/antora-supplemental/valentus-theme/releases/download/v4/ui-bundle.zip
     snapshot: true
   supplemental_files:
     - path: img/logo.svg
@@ -169,7 +169,7 @@ The theme automatically detects your preference in this order:
 === Storage Key
 
 The chassis `@antora-supplemental/color-scheme` extension stores the preference in `localStorage` under `antora-theme-mode` (`system`, `light` or `dark`). A legacy `antora-theme` value is migrated on first read.
-Prefer the runtime API: `ColorScheme.set('dark' | 'light' | 'system')`, `ColorScheme.toggle()`, `ColorScheme.subscribe(fn)`.
+Prefer the runtime API: `LightDarkMode.set('dark' | 'light' | 'system')`, `LightDarkMode.toggle()`, `LightDarkMode.subscribe(fn)`.
 
 To programmatically set the theme:
 

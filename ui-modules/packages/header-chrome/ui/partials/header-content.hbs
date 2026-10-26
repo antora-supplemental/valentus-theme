@@ -32,7 +32,7 @@
     {{/if}}
     <div id="topbar-nav" class="navbar-menu valentus-topbar" role="navigation" aria-label="External links">
       <div class="navbar-end valentus-header-actions">
-        <button id="theme-toggle" class="navbar-item valentus-header-icon-btn theme-toggle" type="button" aria-label="Switch color scheme"></button>
+        {{> light-dark-navbar-slot}}
         {{#if (and @root.page.origin @root.page.origin.webUrl)}}
         <a class="navbar-item valentus-header-icon-btn valentus-header-vcs" href="{{{@root.page.origin.webUrl}}}" rel="noopener" target="_blank" title="Source repository" aria-label="Source repository (opens in new tab)">
           <img class="valentus-header-vcs-img" src="{{{uiRootPath}}}/img/vcs/{{valentus-vcs-icon-id @root.page.origin.webUrl 'repo'}}.svg" width="24" height="24" alt="" />

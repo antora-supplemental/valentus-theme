@@ -21,20 +21,13 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
-== Unreleased
-
-=== Fixed
-
-* **Valentus Paint:** highlight.js markup tags, names and attributes (`.hljs-tag`, `.hljs-name`, `.hljs-attribute`) fell through to the Default UI's navy (`#000080`) on the dark code panel, about 1.1:1 contrast in both schemes. They now use the paint's string color, matching how dark mode already showed names and attributes.
-* **Valentus Paint:** light-mode accent links fell short of WCAG AA. `--cs-accent` moves from `#0f766e` to `#0e7068` (4.74:1 on the current-page nav and `.bare` link background, was 4.37:1) and `--cs-accent-hover` from `#0d9488` to `#0c625b` (hovered body links were 3.74:1 on white, now 7.21:1; at least 5.26:1 on every Valentus background). `--cs-accent-soft` is unchanged, so highlighted backgrounds look the same. axe reports 0 color-contrast failures on the five test pages, light and dark.
-
 == 4.0.0 — 2026-10-25
 
 === Changed (breaking)
 
-* **Color scheme moved to chassis:** the light/dark *mechanism* (no-FOUC head hook, `antora-theme-mode` persistence, system preference, override expiry, crossfade, toggle behavior and a11y) is now the Antora extension `@antora-supplemental/color-scheme` from `antora-ui-chassis` (tag `color-scheme-v0.1.2`). **Playbooks must add** `- require: "@antora-supplemental/color-scheme"` with `toggle: placed` and pin it in `package.json`. Without it there is no toggle and no dark scheme.
+* **Light/dark mode moved to chassis:** the light/dark *mechanism* (no-FOUC head hook, `antora-theme-mode` persistence, system preference, override expiry, crossfade, toggle behavior and a11y) is now the Antora extension `@antora-supplemental/light-dark-mode` from `antora-ui-chassis` (tag `light-dark-mode-v0.1.0`), which registers `@antora-supplemental/color-scheme` (tag `color-scheme-v0.3.0`) for the `--cs-*` contract and live paint. **Playbooks must add** `- require: "@antora-supplemental/light-dark-mode"` with `toggle: placed` and pin it in `package.json`. Without it there is no toggle and no dark scheme.
+* **Toggle designs:** `header-content.hbs` calls `{{> light-dark-navbar-slot}}` and `footer-content.hbs` calls `{{> light-dark-footer-slot}}`. New `partials/light-dark-toggle.hbs` is the Valentus top-bar icon button (same size as the other header icon buttons); `toggle_placement: footer` shows the chassis Light / Dark / Auto switch in the footer instead. Override order: site, then theme, then chassis. Same change in the `header-chrome` and `doc-layout` ui-modules.
 * **Paint:** vendored `site-extra.css` is now Valentus-owned `css/site-paint.css` (Default UI dark overrides + toggle look). Its theme-transition block moved to chassis; classes are `color-scheme-animating` / `color-scheme-vt` (were `valentus-theme-*`).
-* **Body kit:** `header-content.hbs` places `<button id="theme-toggle">` at the start of `.navbar-end`.
 * **Removed:** `js/site-dark-mode.js`, the inline theme FOUC script in `head-meta.hbs`, `scripts/sync-dark-mode.mjs`, `pnpm dark-mode:sync`. `localStorage` keys are unchanged.
 * **Release bundle base:** Default UI instead of the `antora-dark-mode` bundle (release CI and playbooks).
 * **Layout / paint split:** Valentus is now *Valentus Layout* (`packages/valentus-layout/supplemental-ui`: partials, helpers, JS, layout CSS) and *Valentus Paint* (`paint/`: an Antora extension plus `css/valentus-paint.css`). Layout colors read the `--cs-*` contract from `@antora-supplemental/color-scheme` with system-color fallbacks; the paint sets the values for light and dark. `site-paint.css` is removed (colors moved to the paint; layout rules to `css/valentus-chrome.css`). `head-meta.hbs` has a `{{!-- color-scheme:paint-slot --}}` marker where `site-paint.css` loaded. Layout + Valentus Paint renders pixel-identical to the pre-split theme in light and dark.
@@ -42,6 +35,11 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * **Release assets:** `ui-bundle.zip` bakes Valentus Paint in (`scripts/bake-paint.mjs`); new `valentus-layout-bundle.zip` is layout only.
 * **Registry:** `packages/valentus-layout/ui-component.json5` (layer `layout`) and `paint/ui-component.json5` (layer `paint`).
 * **UI modules:** `doc-layout` ships `valentus-chrome.css` in place of `site-paint.css`; `header-chrome` / `doc-layout` recommend `color-scheme`; `pairsWith` points at chassis.
+
+=== Fixed
+
+* **Valentus Paint:** highlight.js markup tags, names and attributes (`.hljs-tag`, `.hljs-name`, `.hljs-attribute`) fell through to the Default UI's navy (`#000080`) on the dark code panel, about 1.1:1 contrast in both schemes. They now use the paint's string color, matching how dark mode already showed names and attributes.
+* **Valentus Paint:** light-mode accent links fell short of WCAG AA. `--cs-accent` moves from `#0f766e` to `#0e7068` (4.74:1 on the current-page nav and `.bare` link background, was 4.37:1) and `--cs-accent-hover` from `#0d9488` to `#0c625b` (hovered body links were 3.74:1 on white, now 7.21:1; at least 5.26:1 on every Valentus background). `--cs-accent-soft` is unchanged, so highlighted backgrounds look the same. axe reports 0 color-contrast failures on the five test pages, light and dark.
 
 Detail: `changelog-details/2026-10-25 - color scheme to chassis.adoc`, `changelog-details/2026-10-25 - layout paint split.adoc`. **UI bundle rebuild required.**
 

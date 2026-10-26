@@ -18,7 +18,7 @@ ui:
   supplemental_files: ./node_modules/valentus-theme/packages/valentus-layout/supplemental-ui
 ----
 
-. *Color scheme extension missing* - Add `- require: "@antora-supplemental/color-scheme"` (with `toggle: placed`) under `antora.extensions` and install the package. Without it there is no toggle and no dark scheme.
+. *Color scheme extension missing* - Add `- require: "@antora-supplemental/light-dark-mode"` (with `toggle: placed`) under `antora.extensions` and install the package. Without it there is no toggle and no dark scheme.
 
 . *JavaScript error* - Check the browser console for errors that might prevent the script from running.
 
@@ -32,7 +32,7 @@ ui:
 
 . *Incognito/private mode* - Some browsers restrict `localStorage` in private browsing.
 
-. *Content Security Policy* - If your site has a strict CSP, it might block the inline color scheme head hook (`<script data-color-scheme-head>`). Add the script hash to your CSP or move the script to an external file.
+. *Content Security Policy* - If your site has a strict CSP, it might block the inline color scheme head hook (`<script data-light-dark-mode-head>`). Add the script hash to your CSP or move the script to an external file.
 
 To test if `localStorage` is working:
 
