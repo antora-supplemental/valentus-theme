@@ -1,6 +1,6 @@
 {
   "name": "valentus-theme",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "Valentus: Antora doc-site layout (packages/valentus-layout) and Valentus Paint (paint/), split on the --cs-* token contract of @antora-supplemental/color-scheme.",
   "private": true,
   "keywords": [

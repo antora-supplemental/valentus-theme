@@ -21,9 +21,7 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
-== Unreleased
-
-Recommended release: *4.2.0* (minor). The shipped header and favicons are unchanged pixel for pixel, but the files now come from a chassis package.
+== 4.2.0 — 2026-10-25
 
 === Changed
 
