@@ -21,9 +21,11 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
-== Unreleased
+== 4.1.0 — 2026-10-25
 
-Recommended release: *4.1.0* (new placeholder assets, `favicon` key and `head-icons` partial; no removed keys or partials, but the bundled mark changes, which is more than a patch).
+=== Upgrade note
+
+* **`header_logo: logo.svg` without your own file:** before 4.1.0, `img/logo.svg` in the bundle was the Valentus blood drop, so a site that set `header_logo: logo.svg` but never shipped its own `img/logo.svg` showed the drop. From 4.1.0 that file is the neutral placeholder, so those sites now show the placeholder. Ship your own `img/logo.svg` through `ui.supplemental_files` (or point `header_logo` at your own file) to keep a real logo. Sites that already ship their own logo file are unaffected.
 
 === Changed
 
