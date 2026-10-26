@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-labelledby="t">
+  <title id="t">Placeholder logo - replace with your own</title>
+  <!-- Valentus placeholder logo, replace with your own.
+       Generic six-petal rosette; deliberately neutral, not a brand mark.
+       How to replace: docs guide "Header logo" (header-logo.adoc). -->
+  <g fill="currentColor">
+    <path d="M24 2.5C30 8 30 15 24 20.5C18 15 18 8 24 2.5Z"/>
+    <path d="M24 2.5C30 8 30 15 24 20.5C18 15 18 8 24 2.5Z" transform="rotate(60 24 24)"/>
+    <path d="M24 2.5C30 8 30 15 24 20.5C18 15 18 8 24 2.5Z" transform="rotate(120 24 24)"/>
+    <path d="M24 2.5C30 8 30 15 24 20.5C18 15 18 8 24 2.5Z" transform="rotate(180 24 24)"/>
+    <path d="M24 2.5C30 8 30 15 24 20.5C18 15 18 8 24 2.5Z" transform="rotate(240 24 24)"/>
+    <path d="M24 2.5C30 8 30 15 24 20.5C18 15 18 8 24 2.5Z" transform="rotate(300 24 24)"/>
+  </g>
+</svg>

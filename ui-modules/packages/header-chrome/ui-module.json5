@@ -20,7 +20,7 @@
   },
   ui: {
     partials: {
-      provide: [],
+      provide: ["valentus-logo-placeholder"],
       replace: ["header", "header-content", "head-title"],
     },
   },

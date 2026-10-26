@@ -1,6 +1,6 @@
 {
   "schema": "1.0",
-  "generatedAt": "2026-10-26T01:33:48.379Z",
+  "generatedAt": "2026-10-26T03:21:05.358Z",
   "repository": "https://github.com/antora-supplemental/valentus-theme",
   "source": "ui-modules/registry.json5",
   "modules": [
@@ -125,7 +125,9 @@
       ],
       "conflicts": [],
       "partials": {
-        "provide": [],
+        "provide": [
+          "valentus-logo-placeholder"
+        ],
         "replace": [
           "header",
           "header-content",
@@ -144,7 +146,7 @@
           ]
         }
       },
-      "uiFileCount": 7,
+      "uiFileCount": 9,
       "install": {
         "orchestrator": {
           "registry": "./ui-modules/registry.json5",

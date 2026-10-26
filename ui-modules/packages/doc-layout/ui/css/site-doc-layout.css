@@ -285,6 +285,13 @@ html.valentus-chrome-scroll-away {
   object-fit: contain;
 }
 
+/* Placeholder logo (no site.keys.header_logo): inline SVG painted with currentColor,
+   so it follows the header text color in light and dark paint. Override the tint with
+   --valentus-logo-placeholder (for example var(--cs-accent)). */
+.valentus-header-logo--placeholder {
+  color: var(--valentus-logo-placeholder, var(--valentus-header-bar-fg, currentColor));
+}
+
 /* Light/dark asset pair (site.keys.header_logo_dark): show one mark per theme. */
 .valentus-header-logo--for-dark {
   display: none;

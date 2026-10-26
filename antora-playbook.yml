@@ -11,7 +11,10 @@ site:
     Sitemap: https://antora-supplemental.github.io/valentus-theme/sitemap.xml
   keys:
     dark_mode_navbar: light
-    header_logo: logo.svg
+    # Valentus brand (demo only): blood drop from docs/brand via brand-overlay.js.
+    # Consumers get the neutral placeholder; see guide Header logo.
+    header_logo: valentus-drop.svg
+    favicon: valentus-favicon.svg
 
 content:
   sources:
@@ -38,6 +41,8 @@ runtime:
 
 antora:
   extensions:
+    # Valentus brand overlay (demo/docs only; not in the shipped bundle)
+    - require: ./docs/brand/lib/brand-overlay.js
     - require: "@antora-supplemental/light-dark-mode"
       toggle: placed
     # Valentus Paint (repo root ./paint): links css/valentus-paint.css at the layout paint slot

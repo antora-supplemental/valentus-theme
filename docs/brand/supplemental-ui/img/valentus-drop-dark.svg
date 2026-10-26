@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <!-- Valentus brand mark (demo/docs site only; not shipped in the bundle): solid red blood drop (same asset as valentus-drop.svg; kept for pair demos) -->
+  <path fill="#C62828"
+        d="M24 5.5c0 0 13.5 15.5 13.5 25.5 0 7.456-6.044 13.5-13.5 13.5S10.5 38.456 10.5 31
+           C10.5 21 24 5.5 24 5.5z"/>
+</svg>
