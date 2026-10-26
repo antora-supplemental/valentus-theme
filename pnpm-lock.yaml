@@ -13,13 +13,13 @@ importers:
         version: https://codeload.github.com/antora-supplemental/antora-search-chat/tar.gz/4f6e1194f70c055b8befa150f8f1babbdf957ae6(@antora/lunr-extension@1.0.0-alpha.12)
       '@antora-supplemental/brand-placeholder':
         specifier: github:antora-supplemental/antora-ui-chassis#brand-placeholder-v0.1.0&path:packages/brand-placeholder
-        version: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/c33fdd58439edd55fc61107a01423d759d03ef9d#path:packages/brand-placeholder
+        version: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/67b6c8d768b5ed1d5360cf6452c60f2f608ed1aa#path:packages/brand-placeholder
       '@antora-supplemental/color-scheme':
-        specifier: github:antora-supplemental/antora-ui-chassis#color-scheme-v0.3.0&path:packages/color-scheme
-        version: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/a92b6a10fdfca6a48ef6ba80ea1d0603c7c6dbd7#path:packages/color-scheme
+        specifier: github:antora-supplemental/antora-ui-chassis#color-scheme-v0.4.0&path:packages/color-scheme
+        version: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/3ed7182d5279f70917c06972d41e64c58b12848a#path:packages/color-scheme
       '@antora-supplemental/light-dark-mode':
-        specifier: github:antora-supplemental/antora-ui-chassis#light-dark-mode-v0.1.0&path:packages/light-dark-mode
-        version: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/a92b6a10fdfca6a48ef6ba80ea1d0603c7c6dbd7#path:packages/light-dark-mode
+        specifier: github:antora-supplemental/antora-ui-chassis#light-dark-mode-v0.1.2&path:packages/light-dark-mode
+        version: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/3ed7182d5279f70917c06972d41e64c58b12848a#path:packages/light-dark-mode
       '@antora/lunr-extension':
         specifier: 1.0.0-alpha.12
         version: 1.0.0-alpha.12
@@ -54,18 +54,18 @@ packages:
     peerDependencies:
       '@antora/lunr-extension': '>=1.0.0-alpha.12'
 
-  '@antora-supplemental/brand-placeholder@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/c33fdd58439edd55fc61107a01423d759d03ef9d#path:packages/brand-placeholder':
-    resolution: {path: packages/brand-placeholder, tarball: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/c33fdd58439edd55fc61107a01423d759d03ef9d}
+  '@antora-supplemental/brand-placeholder@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/67b6c8d768b5ed1d5360cf6452c60f2f608ed1aa#path:packages/brand-placeholder':
+    resolution: {path: packages/brand-placeholder, tarball: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/67b6c8d768b5ed1d5360cf6452c60f2f608ed1aa}
     version: 0.1.0
     hasBin: true
 
-  '@antora-supplemental/color-scheme@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/a92b6a10fdfca6a48ef6ba80ea1d0603c7c6dbd7#path:packages/color-scheme':
-    resolution: {path: packages/color-scheme, tarball: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/a92b6a10fdfca6a48ef6ba80ea1d0603c7c6dbd7}
-    version: 0.3.0
+  '@antora-supplemental/color-scheme@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/3ed7182d5279f70917c06972d41e64c58b12848a#path:packages/color-scheme':
+    resolution: {path: packages/color-scheme, tarball: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/3ed7182d5279f70917c06972d41e64c58b12848a}
+    version: 0.4.0
 
-  '@antora-supplemental/light-dark-mode@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/a92b6a10fdfca6a48ef6ba80ea1d0603c7c6dbd7#path:packages/light-dark-mode':
-    resolution: {path: packages/light-dark-mode, tarball: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/a92b6a10fdfca6a48ef6ba80ea1d0603c7c6dbd7}
-    version: 0.1.0
+  '@antora-supplemental/light-dark-mode@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/3ed7182d5279f70917c06972d41e64c58b12848a#path:packages/light-dark-mode':
+    resolution: {path: packages/light-dark-mode, tarball: https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/3ed7182d5279f70917c06972d41e64c58b12848a}
+    version: 0.1.2
 
   '@antora/asciidoc-loader@3.1.15':
     resolution: {integrity: sha512-MVspbcMPmBgxZms0EjmyC9nlCAWBJfHYSwQCXRZn6T7OujRrLvJFPgz+EROz9XOqh4v76BeqgEuLsUJIZjH3cw==}
@@ -1282,13 +1282,13 @@ snapshots:
     dependencies:
       '@antora/lunr-extension': 1.0.0-alpha.12
 
-  '@antora-supplemental/brand-placeholder@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/c33fdd58439edd55fc61107a01423d759d03ef9d#path:packages/brand-placeholder': {}
+  '@antora-supplemental/brand-placeholder@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/67b6c8d768b5ed1d5360cf6452c60f2f608ed1aa#path:packages/brand-placeholder': {}
 
-  '@antora-supplemental/color-scheme@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/a92b6a10fdfca6a48ef6ba80ea1d0603c7c6dbd7#path:packages/color-scheme': {}
+  '@antora-supplemental/color-scheme@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/3ed7182d5279f70917c06972d41e64c58b12848a#path:packages/color-scheme': {}
 
-  '@antora-supplemental/light-dark-mode@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/a92b6a10fdfca6a48ef6ba80ea1d0603c7c6dbd7#path:packages/light-dark-mode':
+  '@antora-supplemental/light-dark-mode@https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/3ed7182d5279f70917c06972d41e64c58b12848a#path:packages/light-dark-mode':
     dependencies:
-      '@antora-supplemental/color-scheme': https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/a92b6a10fdfca6a48ef6ba80ea1d0603c7c6dbd7#path:packages/color-scheme
+      '@antora-supplemental/color-scheme': https://codeload.github.com/antora-supplemental/antora-ui-chassis/tar.gz/3ed7182d5279f70917c06972d41e64c58b12848a#path:packages/color-scheme
 
   '@antora/asciidoc-loader@3.1.15':
     dependencies:

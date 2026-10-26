@@ -43,8 +43,8 @@
   "devDependencies": {
     "@antora-supplemental/antora-search-chat": "github:antora-supplemental/antora-search-chat#v0.1.20",
     "@antora-supplemental/brand-placeholder": "github:antora-supplemental/antora-ui-chassis#brand-placeholder-v0.1.0&path:packages/brand-placeholder",
-    "@antora-supplemental/color-scheme": "github:antora-supplemental/antora-ui-chassis#color-scheme-v0.3.0&path:packages/color-scheme",
-    "@antora-supplemental/light-dark-mode": "github:antora-supplemental/antora-ui-chassis#light-dark-mode-v0.1.0&path:packages/light-dark-mode",
+    "@antora-supplemental/color-scheme": "github:antora-supplemental/antora-ui-chassis#color-scheme-v0.4.0&path:packages/color-scheme",
+    "@antora-supplemental/light-dark-mode": "github:antora-supplemental/antora-ui-chassis#light-dark-mode-v0.1.2&path:packages/light-dark-mode",
     "@antora/lunr-extension": "1.0.0-alpha.12",
     "@asciidoctor/tabs": "^1.0.0-beta.6",
     "@dev-centr/themed-svg": "0.1.1",
