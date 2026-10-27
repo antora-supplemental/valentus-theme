@@ -79,7 +79,7 @@ Successor to the former `antora-dark-theme` monolithic package — use the Valen
 
 Valentus 4 is two packages joined by the `--cs-*` token contract: *Valentus Layout* (`packages/valentus-layout/`) and *Valentus Paint* (`paint/`). Mix either with other layers, e.g. Valentus Layout with `@antora-supplemental/default-paint`, or the plain Default UI with Valentus Paint. Upgrade notes: `docs/modules/guide/pages/v4-migration.adoc`.
 
-**Changelog:** link:CHANGELOG.adoc[CHANGELOG.adoc] and link:changelog-details/[`changelog-details/`].
+**Changelog:** link:docs/modules/changelog/pages/index.adoc[changelog module] (published as the Changelog page of the docs site), with detail reports under link:docs/modules/changelog/pages/changelog-details/history/[`changelog-details/history/`].
 
 **Value proposition / upstream fixes:** `docs/modules/guide/pages/value-proposition.adoc` — UX debt Valentus softens relative to Antora Default UI / Lunr, with GitLab trackers, for pitching this theme as a richer default.
 

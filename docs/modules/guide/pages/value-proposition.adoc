@@ -104,4 +104,4 @@ These are intentional differentiators — useful when proposing Valentus as a ri
 
 * xref:how-it-works.adoc[How It Works]
 * xref:customization.adoc[Customization]
-* link:../../../CHANGELOG.adoc[CHANGELOG] and `changelog-details/`
+* xref:changelog:index.adoc[Changelog] and its `changelog-details/history/` reports
