@@ -41,7 +41,7 @@
     "paint:bake": "node scripts/bake-paint.mjs"
   },
   "devDependencies": {
-    "@antora-supplemental/antora-search-chat": "github:antora-supplemental/antora-search-chat#v0.1.20",
+    "@antora-supplemental/antora-search-chat": "github:antora-supplemental/antora-search-chat#v0.1.26",
     "@antora-supplemental/asset-fingerprint": "github:antora-supplemental/antora-ui-chassis#asset-fingerprint-v0.1.0&path:packages/asset-fingerprint",
     "@antora-supplemental/brand-placeholder": "github:antora-supplemental/antora-ui-chassis#brand-placeholder-v0.1.0&path:packages/brand-placeholder",
     "@antora-supplemental/color-scheme": "github:antora-supplemental/antora-ui-chassis#color-scheme-v0.5.3&path:packages/color-scheme",
