@@ -1,0 +1,11 @@
+= 4.3.1: current breadcrumb not underlined
+
+== Request
+
+In the breadcrumb UI, the currently selected doc (the last crumb, the current page) should not be underlined.
+
+== Change
+
+* `site-doc-layout.css` and `site-visual.css` (Valentus layout and the `doc-layout` ui-module copy): the underline rule now covers only `.valentus-breadcrumb-trail-link`. The current crumb (`.valentus-breadcrumb-trail--current .valentus-breadcrumb-trail-text`, also any `[aria-current="page"]` inside the trail) gets `text-decoration: none`, also on hover and focus, and `cursor: default`.
+* Markup unchanged: the last crumb was already a `<span aria-current="page">` in `breadcrumbs.hbs` and the bc-mast `valentus-bc-trail.hbs`.
+* No other antora-supplemental package styles the breadcrumb trail.

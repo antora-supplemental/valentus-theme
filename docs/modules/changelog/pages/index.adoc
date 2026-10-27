@@ -26,6 +26,10 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Changelog: moved from the root `CHANGELOG.adoc` into the docs `changelog` module (`docs/modules/changelog/pages/index.adoc`), with all detail reports under `changelog-details/history/`. `release.yml` reads the new path, and its notes extraction now matches the `== X.Y.Z - date` headings (it had been falling back to the generic note).
 * Registry metadata: `antora-ui-model@3` moves from `antoraRegistry.uses` to `provides`. Valentus renders the Antora UI model itself, so the registry no longer pulls in the Default UI to satisfy it. Metadata only, no runtime change, no release.
 
+== 4.3.1 — 2026-10-26
+
+Patch release: the current page (last breadcrumb, `aria-current="page"`) is no longer underlined and gets no link hover styling. Linked parent crumbs keep their underline; plain folder labels are unchanged. Details: `changelog-details/history/2026-10-26 - 4.3.1 current crumb not underlined.adoc`.
+
 == 4.3.0 — 2026-10-26
 
 Minor release: upstreamed hub chrome fixes (inline code in titles, independent nav scroll, math after soft nav, Contents box without headings, opt-in breadcrumb component filter via `valentus_bc_components: site-nav-tree`). Details: `changelog-details/history/2026-10-26 - 4.3.0 upstreamed hub chrome fixes.adoc`.

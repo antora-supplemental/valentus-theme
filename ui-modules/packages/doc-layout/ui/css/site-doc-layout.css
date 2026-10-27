@@ -882,14 +882,26 @@ main.valentus-article > .content > article.doc {
   overflow: hidden;
 }
 
-/* Trail: accent + underline for visitable links and current page; plain folder labels stay un-underlined. */
-.valentus-breadcrumb-trail .valentus-breadcrumb-trail-link,
-.valentus-breadcrumb-trail--current .valentus-breadcrumb-trail-link,
-.valentus-breadcrumb-trail--current .valentus-breadcrumb-trail-text {
+/* Trail: accent + underline for visitable links; the current page and plain folder labels stay un-underlined. */
+.valentus-breadcrumb-trail .valentus-breadcrumb-trail-link {
   color: var(--valentus-accent);
   font-weight: 400;
   text-decoration: underline;
   text-underline-offset: 0.12em;
+}
+
+.valentus-breadcrumb-trail--current .valentus-breadcrumb-trail-text {
+  color: var(--valentus-accent);
+  font-weight: 400;
+}
+
+/* Current page (last crumb, aria-current="page"): plain text, no underline, no link hover. */
+.valentus-breadcrumb-trail--current .valentus-breadcrumb-trail-text,
+.valentus-breadcrumb-trail [aria-current="page"],
+.valentus-breadcrumb-trail [aria-current="page"]:hover,
+.valentus-breadcrumb-trail [aria-current="page"]:focus-visible {
+  text-decoration: none !important;
+  cursor: default;
 }
 
 .valentus-breadcrumb-trail:not(.valentus-breadcrumb-trail--current) .valentus-breadcrumb-trail-text {
