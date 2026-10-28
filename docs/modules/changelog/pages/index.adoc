@@ -27,6 +27,14 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Changelog: moved from the root `CHANGELOG.adoc` into the docs `changelog` module (`docs/modules/changelog/pages/index.adoc`), with all detail reports under `changelog-details/history/`. `release.yml` reads the new path, and its notes extraction now matches the `== X.Y.Z - date` headings (it had been falling back to the generic note).
 * Registry metadata: `antora-ui-model@3` moves from `antoraRegistry.uses` to `provides`. Valentus renders the Antora UI model itself, so the registry no longer pulls in the Default UI to satisfy it. Metadata only, no runtime change, no release.
 
+== 4.3.2 - 2026-10-28
+
+Patch release.
+
+* Paint slot and `valentus-chrome.css` moved from `head-meta.hbs` to a new `head-styles.hbs` partial. A hub's stale `head-meta.hbs` override (for example HCI-Nerdz/docs) no longer drops the paint, which had left the search dropdown white and highlight.js colors unpainted in dark mode. `scripts/bake-paint.mjs` bakes into whichever partial holds the slot.
+* Search input focus: a solid 2px accent outline replaces `outline: none` plus a faint accent-soft halo (the halo was 1.29:1 on dark).
+* `--adt-*` fallbacks: every single-value `--valentus-*` token falls back to its old `--adt-*` name. See the guide's xref:guide:v4-migration.adoc[migration page].
+
 == 4.3.1 — 2026-10-26
 
 Patch release: the current page (last breadcrumb, `aria-current="page"`) is no longer underlined and gets no link hover styling. Linked parent crumbs keep their underline; plain folder labels are unchanged. Details: `changelog-details/history/2026-10-26 - 4.3.1 current crumb not underlined.adoc`.

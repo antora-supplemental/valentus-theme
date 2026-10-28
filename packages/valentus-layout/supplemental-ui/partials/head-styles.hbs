@@ -1,0 +1,9 @@
+<link rel="stylesheet" href="{{{uiRootPath}}}/css/site.css">
+{{!-- Valentus colour layer (4.3.2+). Kept here, not in head-meta.hbs, so hubs that
+  override head-meta for fonts / favicons / meta still get the paint and chrome.
+  color-scheme / light-dark-mode insert their CSS right after site.css (above the
+  paint), and head-meta's layout CSS loads after this partial, so layout rules
+  still win over paint rules. Hubs that override head-styles must keep the
+  marker below. --}}
+{{!-- color-scheme:paint-slot --}}
+<link rel="stylesheet" href="{{{uiRootPath}}}/css/valentus-chrome.css">

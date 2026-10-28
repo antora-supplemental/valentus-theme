@@ -4,17 +4,17 @@
 
 :root {
   /* Constant nav↔doc / doc↔TOC gap (does not scale with reading width) */
-  --valentus-col-gap: 2rem;
-  --valentus-doc-max: 82ch;
-  --valentus-read-width-radius: 0.4rem;
-  --valentus-read-width-radius-sm: 0.25rem;
-  --valentus-read-width-border: var(--valentus-border, #d9dee7);
-  --valentus-read-width-bg: var(--valentus-elevated, #fff);
-  --valentus-read-width-fg: var(--valentus-ink-muted, #5a6270);
-  --valentus-read-width-fg-active: var(--valentus-accent, #0f766e);
-  --valentus-read-width-soft: var(--valentus-accent-soft, rgba(15, 118, 110, 0.1));
-  --valentus-read-width-ink: var(--valentus-ink, #141820);
-  --valentus-read-width-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  --valentus-col-gap: var(--adt-col-gap, 2rem);
+  --valentus-doc-max: var(--adt-doc-max, 82ch);
+  --valentus-read-width-radius: var(--adt-read-width-radius, 0.4rem);
+  --valentus-read-width-radius-sm: var(--adt-read-width-radius-sm, 0.25rem);
+  --valentus-read-width-border: var(--adt-read-width-border, var(--valentus-border, #d9dee7));
+  --valentus-read-width-bg: var(--adt-read-width-bg, var(--valentus-elevated, #fff));
+  --valentus-read-width-fg: var(--adt-read-width-fg, var(--valentus-ink-muted, #5a6270));
+  --valentus-read-width-fg-active: var(--adt-read-width-fg-active, var(--valentus-accent, #0f766e));
+  --valentus-read-width-soft: var(--adt-read-width-soft, var(--valentus-accent-soft, rgba(15, 118, 110, 0.1)));
+  --valentus-read-width-ink: var(--adt-read-width-ink, var(--valentus-ink, #141820));
+  --valentus-read-width-transition: var(--adt-read-width-transition, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease);
 }
 
 html[data-valentus-read-width="narrow"] {

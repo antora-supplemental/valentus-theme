@@ -3,91 +3,91 @@
    in-article toolbar, and a sidebar with component label + page navigation tree. */
 
 :root {
-  --valentus-mast-h: 2.75rem;
-  --valentus-mast-total: calc(3.5rem + var(--valentus-mast-h));
+  --valentus-mast-h: var(--adt-mast-h, 2.75rem);
+  --valentus-mast-total: var(--adt-mast-total, calc(3.5rem + var(--valentus-mast-h)));
   /* Left nav sticky offset tracks visible site chrome (mast hides with navbar on scroll-away). */
-  --valentus-chrome-sticky-top: var(--valentus-mast-total);
-  --valentus-font: "Source Sans 3", system-ui, "Segoe UI", sans-serif;
-  --valentus-font-display: "Plus Jakarta Sans", var(--valentus-font);
-  --valentus-font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace;
+  --valentus-chrome-sticky-top: var(--adt-chrome-sticky-top, var(--valentus-mast-total));
+  --valentus-font: var(--adt-font, "Source Sans 3", system-ui, "Segoe UI", sans-serif);
+  --valentus-font-display: var(--adt-font-display, "Plus Jakarta Sans", var(--valentus-font));
+  --valentus-font-mono: var(--adt-font-mono, "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace);
   /* Surfaces — site-visual.css may refine; keep sensible defaults if visual CSS is omitted */
-  --valentus-canvas: var(--cs-canvas, Canvas);
-  --valentus-elevated: var(--cs-elevated, Canvas);
-  --valentus-ink: var(--cs-ink, CanvasText);
-  --valentus-ink-muted: var(--cs-ink-muted, GrayText);
-  --valentus-accent: var(--cs-accent, LinkText);
-  --valentus-accent-hover: var(--cs-accent-hover, LinkText);
-  --valentus-accent-soft: var(--cs-accent-soft, transparent);
-  --valentus-border: var(--cs-border, GrayText);
+  --valentus-canvas: var(--adt-canvas, var(--cs-canvas, Canvas));
+  --valentus-elevated: var(--adt-elevated, var(--cs-elevated, Canvas));
+  --valentus-ink: var(--adt-ink, var(--cs-ink, CanvasText));
+  --valentus-ink-muted: var(--adt-ink-muted, var(--cs-ink-muted, GrayText));
+  --valentus-accent: var(--adt-accent, var(--cs-accent, LinkText));
+  --valentus-accent-hover: var(--adt-accent-hover, var(--cs-accent-hover, LinkText));
+  --valentus-accent-soft: var(--adt-accent-soft, var(--cs-accent-soft, transparent));
+  --valentus-border: var(--adt-border, var(--cs-border, GrayText));
   --soft-nav-context: var(--valentus-canvas);
   /* Opaque top-bar / mast surface (was --adt-chrome before 3.0.0; keep defined or bars go transparent). */
-  --valentus-chrome: var(--valentus-canvas);
-  --valentus-chrome-border: var(--valentus-border);
+  --valentus-chrome: var(--adt-chrome, var(--valentus-canvas));
+  --valentus-chrome-border: var(--adt-chrome-border, var(--valentus-border));
   /* Component + version breadcrumb kickers (same color for both) */
-  --valentus-bc-kicker-fg: var(--valentus-accent);
-  --valentus-bc-kicker-bg: var(--valentus-accent-soft);
-  --valentus-bc-kicker-border: color-mix(in srgb, var(--valentus-accent) 28%, transparent);
+  --valentus-bc-kicker-fg: var(--adt-bc-kicker-fg, var(--valentus-accent));
+  --valentus-bc-kicker-bg: var(--adt-bc-kicker-bg, var(--valentus-accent-soft));
+  --valentus-bc-kicker-border: var(--adt-bc-kicker-border, color-mix(in srgb, var(--valentus-accent) 28%, transparent));
   /* Shared mast control height: home chip + component/version kickers */
-  --valentus-bc-ctrl-h: 1.75rem;
+  --valentus-bc-ctrl-h: var(--adt-bc-ctrl-h, 1.75rem);
   /* Top bar: all controls (logo hit-area, title, theme, org GitHub) share one line height */
-  --valentus-header-ctrl: 2.5rem;
+  --valentus-header-ctrl: var(--adt-header-ctrl, 2.5rem);
   /* Light theme (default): chrome matches page canvas */
-  --valentus-header-bar-bg: var(--valentus-chrome);
-  --valentus-header-bar-fg: var(--valentus-ink);
-  --valentus-header-bar-border: var(--valentus-chrome-border);
-  --valentus-header-bar-hover: var(--valentus-accent-soft);
+  --valentus-header-bar-bg: var(--adt-header-bar-bg, var(--valentus-chrome));
+  --valentus-header-bar-fg: var(--adt-header-bar-fg, var(--valentus-ink));
+  --valentus-header-bar-border: var(--adt-header-bar-border, var(--valentus-chrome-border));
+  --valentus-header-bar-hover: var(--adt-header-bar-hover, var(--valentus-accent-soft));
   /* Raster/SVG VCS marks (white in file): invert for light top bar. */
-  --valentus-header-vcs-icon-filter: brightness(0) opacity(0.92);
+  --valentus-header-vcs-icon-filter: var(--adt-header-vcs-icon-filter, brightness(0) opacity(0.92));
   /* Doc-column toolbar (.valentus-doc-toolbar in main): read-width + condensed font-size.
      - --valentus-global-rail-top: shared top inset under mast for nav, TOC, and doc toolbar.
      - --valentus-tool-band: control row height token (read-width / font-size).
      - --valentus-tool-gap: space under the toolbar before the page title.
      Side columns no longer reserve phantom width for a full-shell tool band.
      Site-wide search lives in .valentus-site-navbar (own width, not column measure). */
-  --valentus-global-rail-top: 0.85rem;
-  --valentus-content-rail-top: 0;
-  --valentus-tool-band: 2.15rem;
-  --valentus-tool-gap: 0.65rem;
+  --valentus-global-rail-top: var(--adt-global-rail-top, 0.85rem);
+  --valentus-content-rail-top: var(--adt-content-rail-top, 0);
+  --valentus-tool-band: var(--adt-tool-band, 2.15rem);
+  --valentus-tool-gap: var(--adt-tool-gap, 0.65rem);
   /* Antora Default UI article inset (`.doc { padding: 0 1rem 4rem }`); toolbar is a `.content` sibling. */
-  --valentus-doc-pad-inline: 1rem;
-  --valentus-doc-pad-bottom: 4rem;
-  --valentus-col-rail-top: var(--valentus-global-rail-top);
-  --valentus-toc-rail-top: var(--valentus-col-rail-top);
+  --valentus-doc-pad-inline: var(--adt-doc-pad-inline, 1rem);
+  --valentus-doc-pad-bottom: var(--adt-doc-pad-bottom, 4rem);
+  --valentus-col-rail-top: var(--adt-col-rail-top, var(--valentus-global-rail-top));
+  --valentus-toc-rail-top: var(--adt-toc-rail-top, var(--valentus-col-rail-top));
   /* Horizontal rail: mast + left nav share an inset so home / component title line up. */
-  --valentus-mast-pad-h: 1.25rem;
-  --valentus-global-rail-hpad: var(--valentus-mast-pad-h);
+  --valentus-mast-pad-h: var(--adt-mast-pad-h, 1.25rem);
+  --valentus-global-rail-hpad: var(--adt-global-rail-hpad, var(--valentus-mast-pad-h));
   /* Centered page shell + reading measure (site-visual applies the layout rules).
      --valentus-shell-max is a soft fallback; site-visual derives it from nav + gaps + doc + toc.
      Nav and TOC share --valentus-side-width so the article sits optically centered. */
-  --valentus-shell-pad: 1.75rem;
-  --valentus-side-width: 16rem;
-  --valentus-nav-width: var(--valentus-side-width);
-  --valentus-col-gap: 2rem;
-  --valentus-toc-width: var(--valentus-side-width);
-  --valentus-doc-max: 82ch;
+  --valentus-shell-pad: var(--adt-shell-pad, 1.75rem);
+  --valentus-side-width: var(--adt-side-width, 16rem);
+  --valentus-nav-width: var(--adt-nav-width, var(--valentus-side-width));
+  --valentus-col-gap: var(--adt-col-gap, 2rem);
+  --valentus-toc-width: var(--adt-toc-width, var(--valentus-side-width));
+  --valentus-doc-max: var(--adt-doc-max, 82ch);
   --valentus-shell-max: calc(
     var(--valentus-nav-width) + var(--valentus-col-gap) + var(--valentus-doc-max) + var(--valentus-col-gap) + var(--valentus-toc-width) +
       2 * var(--valentus-shell-pad)
   );
-  --valentus-footer-pad-top: 1.5rem;
-  --valentus-footer-pad-h: 1.5rem;
-  --valentus-footer-pad-bottom: 1.5rem;
+  --valentus-footer-pad-top: var(--adt-footer-pad-top, 1.5rem);
+  --valentus-footer-pad-h: var(--adt-footer-pad-h, 1.5rem);
+  --valentus-footer-pad-bottom: var(--adt-footer-pad-bottom, 1.5rem);
 }
 
 html.dark-theme {
   --soft-nav-context: var(--valentus-canvas);
   /* Opaque top-bar / mast surface (was --adt-chrome before 3.0.0; keep defined or bars go transparent). */
-  --valentus-chrome: var(--valentus-canvas);
-  --valentus-chrome-border: var(--valentus-border);
-  --valentus-bc-kicker-fg: var(--valentus-accent);
-  --valentus-bc-kicker-bg: var(--valentus-accent-soft);
-  --valentus-bc-kicker-border: color-mix(in srgb, var(--valentus-accent) 35%, transparent);
+  --valentus-chrome: var(--adt-chrome, var(--valentus-canvas));
+  --valentus-chrome-border: var(--adt-chrome-border, var(--valentus-border));
+  --valentus-bc-kicker-fg: var(--adt-bc-kicker-fg, var(--valentus-accent));
+  --valentus-bc-kicker-bg: var(--adt-bc-kicker-bg, var(--valentus-accent-soft));
+  --valentus-bc-kicker-border: var(--adt-bc-kicker-border, color-mix(in srgb, var(--valentus-accent) 35%, transparent));
   /* Dark header: keep white foreground on dark bar (GitHub mark stays white; no filter) */
-  --valentus-header-bar-bg: var(--valentus-chrome);
-  --valentus-header-bar-fg: var(--valentus-ink);
-  --valentus-header-bar-border: var(--valentus-chrome-border);
-  --valentus-header-bar-hover: var(--valentus-accent-soft);
-  --valentus-header-vcs-icon-filter: none;
+  --valentus-header-bar-bg: var(--adt-header-bar-bg, var(--valentus-chrome));
+  --valentus-header-bar-fg: var(--adt-header-bar-fg, var(--valentus-ink));
+  --valentus-header-bar-border: var(--adt-header-bar-border, var(--valentus-chrome-border));
+  --valentus-header-bar-hover: var(--adt-header-bar-hover, var(--valentus-accent-soft));
+  --valentus-header-vcs-icon-filter: var(--adt-header-vcs-icon-filter, none);
 }
 
 html {

@@ -123,3 +123,15 @@ Register Valentus Paint as a live paint (color-scheme 0.3.0+, through light-dark
 ----
 
 For cross-site iframes, pass `?paint=valentus` in the iframe `src`; third-party cookies are often blocked.
+
+== 4.3.2: `--adt-*` fallbacks
+
+Valentus 4.3.2 reads the old Antora Dark Theme (`--adt-*`) custom properties as fallbacks. Every single-value `--valentus-*` token in the layout CSS (`site-visual.css`, `site-doc-layout.css`, `site-read-width.css`, `site-font-size.css`) is now declared as `var(--adt-<name>, <default>)`, in both `:root` and `html.dark-theme`.
+
+* A hub that still sets `--adt-accent`, `--adt-ink-muted` and similar keeps its colors after moving to Valentus without renaming anything.
+* New work should set `--valentus-*` (or a paint's `--vp-*`) directly. Setting `--valentus-<name>` overrides both the fallback and the default.
+* To migrate: rename `--adt-<name>` to `--valentus-<name>` in your brand CSS. Then drop the old names; the fallbacks stay for the rest of 4.x.
+
+== 4.3.2: paint slot moved to `head-styles.hbs`
+
+The `{{!-- color-scheme:paint-slot --}}` marker and the `valentus-chrome.css` link moved from `head-meta.hbs` to `head-styles.hbs`. A hub that overrides `head-meta.hbs` (often a stale copy from an older Valentus) no longer loses the paint and chrome CSS. If you override `head-styles.hbs`, keep the marker and the chrome link.

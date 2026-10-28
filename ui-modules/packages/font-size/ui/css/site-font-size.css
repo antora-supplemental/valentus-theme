@@ -4,17 +4,17 @@
    data-valentus-font-size scales article.doc (zoom + font-size fallback). */
 
 :root {
-  --valentus-doc-font-size: 0.94444rem;
-  --valentus-doc-zoom: 1;
-  --valentus-font-size-radius: 0.4rem;
-  --valentus-font-size-radius-sm: 0.25rem;
-  --valentus-font-size-border: var(--valentus-border, #d9dee7);
-  --valentus-font-size-bg: var(--valentus-elevated, #fff);
-  --valentus-font-size-fg: var(--valentus-ink-muted, #5a6270);
-  --valentus-font-size-fg-active: var(--valentus-accent, #0f766e);
-  --valentus-font-size-soft: var(--valentus-accent-soft, rgba(15, 118, 110, 0.1));
-  --valentus-font-size-ink: var(--valentus-ink, #141820);
-  --valentus-font-size-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  --valentus-doc-font-size: var(--adt-doc-font-size, 0.94444rem);
+  --valentus-doc-zoom: var(--adt-doc-zoom, 1);
+  --valentus-font-size-radius: var(--adt-font-size-radius, 0.4rem);
+  --valentus-font-size-radius-sm: var(--adt-font-size-radius-sm, 0.25rem);
+  --valentus-font-size-border: var(--adt-font-size-border, var(--valentus-border, #d9dee7));
+  --valentus-font-size-bg: var(--adt-font-size-bg, var(--valentus-elevated, #fff));
+  --valentus-font-size-fg: var(--adt-font-size-fg, var(--valentus-ink-muted, #5a6270));
+  --valentus-font-size-fg-active: var(--adt-font-size-fg-active, var(--valentus-accent, #0f766e));
+  --valentus-font-size-soft: var(--adt-font-size-soft, var(--valentus-accent-soft, rgba(15, 118, 110, 0.1)));
+  --valentus-font-size-ink: var(--adt-font-size-ink, var(--valentus-ink, #141820));
+  --valentus-font-size-transition: var(--adt-font-size-transition, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease);
 }
 
 html[data-valentus-font-size="small"] {

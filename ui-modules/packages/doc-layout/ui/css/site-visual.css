@@ -4,91 +4,91 @@
 
 :root {
   /* Surfaces */
-  --valentus-canvas: var(--cs-canvas, Canvas);
-  --valentus-elevated: var(--cs-elevated, Canvas);
-  --valentus-ink: var(--cs-ink, CanvasText);
-  --valentus-ink-muted: var(--cs-ink-muted, GrayText);
-  --valentus-accent: var(--cs-accent, LinkText);
-  --valentus-accent-hover: var(--cs-accent-hover, LinkText);
-  --valentus-accent-soft: var(--cs-accent-soft, transparent);
+  --valentus-canvas: var(--adt-canvas, var(--cs-canvas, Canvas));
+  --valentus-elevated: var(--adt-elevated, var(--cs-elevated, Canvas));
+  --valentus-ink: var(--adt-ink, var(--cs-ink, CanvasText));
+  --valentus-ink-muted: var(--adt-ink-muted, var(--cs-ink-muted, GrayText));
+  --valentus-accent: var(--adt-accent, var(--cs-accent, LinkText));
+  --valentus-accent-hover: var(--adt-accent-hover, var(--cs-accent-hover, LinkText));
+  --valentus-accent-soft: var(--adt-accent-soft, var(--cs-accent-soft, transparent));
   /* Admonition accents — alias Default UI --*-color so one override recolors pill + card.
      Sites set --tip-color (etc.); --valentus-admonition-* tracks them. */
-  --valentus-admonition-tip: var(--cs-admonition-tip, var(--tip-color, GrayText));
-  --valentus-admonition-note: var(--cs-admonition-note, var(--note-color, GrayText));
-  --valentus-admonition-important: var(--cs-admonition-important, var(--important-color, GrayText));
-  --valentus-admonition-warning: var(--cs-admonition-warning, var(--warning-color, GrayText));
-  --valentus-admonition-caution: var(--cs-admonition-caution, var(--caution-color, GrayText));
-  --valentus-border: var(--cs-border, GrayText);
+  --valentus-admonition-tip: var(--adt-admonition-tip, var(--cs-admonition-tip, var(--tip-color, GrayText)));
+  --valentus-admonition-note: var(--adt-admonition-note, var(--cs-admonition-note, var(--note-color, GrayText)));
+  --valentus-admonition-important: var(--adt-admonition-important, var(--cs-admonition-important, var(--important-color, GrayText)));
+  --valentus-admonition-warning: var(--adt-admonition-warning, var(--cs-admonition-warning, var(--warning-color, GrayText)));
+  --valentus-admonition-caution: var(--adt-admonition-caution, var(--cs-admonition-caution, var(--caution-color, GrayText)));
+  --valentus-border: var(--adt-border, var(--cs-border, GrayText));
   --soft-nav-context: var(--valentus-canvas);
   /* Opaque top-bar / mast surface (was --adt-chrome before 3.0.0; keep defined or bars go transparent). */
-  --valentus-chrome: var(--valentus-canvas);
-  --valentus-chrome-border: var(--valentus-border);
-  --valentus-nav-bg: transparent;
-  --valentus-nav-item-toggle: var(--valentus-ink-muted);
-  --valentus-nav-item-toggle-hover: var(--valentus-ink);
+  --valentus-chrome: var(--adt-chrome, var(--valentus-canvas));
+  --valentus-chrome-border: var(--adt-chrome-border, var(--valentus-border));
+  --valentus-nav-bg: var(--adt-nav-bg, transparent);
+  --valentus-nav-item-toggle: var(--adt-nav-item-toggle, var(--valentus-ink-muted));
+  --valentus-nav-item-toggle-hover: var(--adt-nav-item-toggle-hover, var(--valentus-ink));
   /* Side-rail wash (nav + sidebar TOC). Default: off (transparent) in light and dark.
      Opt in: html.valentus-side-panels / data-valentus-side-panels="true". */
-  --valentus-side-panel-bg: transparent;
-  --valentus-side-panel-radius: 2px;
-  --valentus-side-panel-pad: 0.45rem 0.55rem;
-  --valentus-nav-scroll-fade: 1.25rem;
-  --valentus-code-bg: var(--cs-code-bg, Canvas);
-  --valentus-code-fg: var(--cs-code-fg, CanvasText);
-  --valentus-code-border: rgba(20, 24, 32, 0.35);
-  --valentus-radius: 0.4rem;
-  --valentus-radius-sm: 0.25rem;
-  --valentus-shadow-float: 0 0.35rem 1rem rgba(20, 24, 32, 0.1);
-  --valentus-shadow-sticky: 0 4px 16px rgba(20, 24, 32, 0.07);
-  --valentus-font: "Source Sans 3", system-ui, "Segoe UI", sans-serif;
+  --valentus-side-panel-bg: var(--adt-side-panel-bg, transparent);
+  --valentus-side-panel-radius: var(--adt-side-panel-radius, 2px);
+  --valentus-side-panel-pad: var(--adt-side-panel-pad, 0.45rem 0.55rem);
+  --valentus-nav-scroll-fade: var(--adt-nav-scroll-fade, 1.25rem);
+  --valentus-code-bg: var(--adt-code-bg, var(--cs-code-bg, Canvas));
+  --valentus-code-fg: var(--adt-code-fg, var(--cs-code-fg, CanvasText));
+  --valentus-code-border: var(--adt-code-border, rgba(20, 24, 32, 0.35));
+  --valentus-radius: var(--adt-radius, 0.4rem);
+  --valentus-radius-sm: var(--adt-radius-sm, 0.25rem);
+  --valentus-shadow-float: var(--adt-shadow-float, 0 0.35rem 1rem rgba(20, 24, 32, 0.1));
+  --valentus-shadow-sticky: var(--adt-shadow-sticky, 0 4px 16px rgba(20, 24, 32, 0.07));
+  --valentus-font: var(--adt-font, "Source Sans 3", system-ui, "Segoe UI", sans-serif);
   /* Plus Jakarta Sans — modern geometric sans used on many SaaS/docs UIs */
-  --valentus-font-display: "Plus Jakarta Sans", var(--valentus-font);
-  --valentus-font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace;
+  --valentus-font-display: var(--adt-font-display, "Plus Jakarta Sans", var(--valentus-font));
+  --valentus-font-mono: var(--adt-font-mono, "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace);
   --valentus-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
     box-shadow 0.25s ease, opacity 0.2s ease;
 
   /* Bridge older layout tokens */
-  --valentus-bc-kicker-fg: var(--valentus-accent);
-  --valentus-bc-kicker-bg: var(--valentus-accent-soft);
-  --valentus-bc-kicker-border: color-mix(in srgb, var(--valentus-accent) 28%, transparent);
-  --valentus-header-bar-bg: var(--valentus-chrome);
-  --valentus-header-bar-fg: var(--valentus-ink);
-  --valentus-header-bar-border: var(--valentus-chrome-border);
-  --valentus-header-bar-hover: var(--valentus-accent-soft);
+  --valentus-bc-kicker-fg: var(--adt-bc-kicker-fg, var(--valentus-accent));
+  --valentus-bc-kicker-bg: var(--adt-bc-kicker-bg, var(--valentus-accent-soft));
+  --valentus-bc-kicker-border: var(--adt-bc-kicker-border, color-mix(in srgb, var(--valentus-accent) 28%, transparent));
+  --valentus-header-bar-bg: var(--adt-header-bar-bg, var(--valentus-chrome));
+  --valentus-header-bar-fg: var(--adt-header-bar-fg, var(--valentus-ink));
+  --valentus-header-bar-border: var(--adt-header-bar-border, var(--valentus-chrome-border));
+  --valentus-header-bar-hover: var(--adt-header-bar-hover, var(--valentus-accent-soft));
 
   /* Layout shell: body is intrinsic (nav + gap + doc + gap + toc).
      --valentus-shell-max caps the shell; read-width only changes --valentus-doc-max.
      Footer is full-bleed chrome (not tied to shell / read-width).
      Nav and TOC share --valentus-side-width for optical centering of the article. */
-  --valentus-shell-pad: 1.75rem;
-  --valentus-col-gap: 2rem;
-  --valentus-side-width: 16rem;
-  --valentus-nav-width: var(--valentus-side-width);
-  --valentus-toc-width: var(--valentus-side-width);
+  --valentus-shell-pad: var(--adt-shell-pad, 1.75rem);
+  --valentus-col-gap: var(--adt-col-gap, 2rem);
+  --valentus-side-width: var(--adt-side-width, 16rem);
+  --valentus-nav-width: var(--adt-nav-width, var(--valentus-side-width));
+  --valentus-toc-width: var(--adt-toc-width, var(--valentus-side-width));
   --valentus-shell-max: calc(
     var(--valentus-nav-width) + var(--valentus-col-gap) + var(--valentus-doc-max) + var(--valentus-col-gap) + var(--valentus-toc-width) +
       2 * var(--valentus-shell-pad)
   );
-  --valentus-global-rail-top: 0.85rem;
-  --valentus-content-rail-top: 0;
-  --valentus-tool-band: 2.15rem;
-  --valentus-tool-gap: 0.65rem;
-  --valentus-col-rail-top: var(--valentus-global-rail-top);
-  --valentus-toc-rail-top: var(--valentus-col-rail-top);
-  --valentus-mast-pad-h: 1.25rem;
+  --valentus-global-rail-top: var(--adt-global-rail-top, 0.85rem);
+  --valentus-content-rail-top: var(--adt-content-rail-top, 0);
+  --valentus-tool-band: var(--adt-tool-band, 2.15rem);
+  --valentus-tool-gap: var(--adt-tool-gap, 0.65rem);
+  --valentus-col-rail-top: var(--adt-col-rail-top, var(--valentus-global-rail-top));
+  --valentus-toc-rail-top: var(--adt-toc-rail-top, var(--valentus-col-rail-top));
+  --valentus-mast-pad-h: var(--adt-mast-pad-h, 1.25rem);
 }
 
 html.dark-theme {
   --soft-nav-context: var(--valentus-canvas);
   /* Opaque top-bar / mast surface (was --adt-chrome before 3.0.0; keep defined or bars go transparent). */
-  --valentus-chrome: var(--valentus-canvas);
-  --valentus-chrome-border: var(--valentus-border);
-  --valentus-nav-bg: transparent;
+  --valentus-chrome: var(--adt-chrome, var(--valentus-canvas));
+  --valentus-chrome-border: var(--adt-chrome-border, var(--valentus-border));
+  --valentus-nav-bg: var(--adt-nav-bg, transparent);
   /* Side-rail wash stays off until html.valentus-side-panels (same as light). */
-  --valentus-side-panel-bg: transparent;
-  --valentus-code-border: rgba(255, 255, 255, 0.08);
-  --valentus-shadow-float: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.45);
-  --valentus-shadow-sticky: 0 6px 18px rgba(0, 0, 0, 0.35);
-  --valentus-header-vcs-icon-filter: none;
+  --valentus-side-panel-bg: var(--adt-side-panel-bg, transparent);
+  --valentus-code-border: var(--adt-code-border, rgba(255, 255, 255, 0.08));
+  --valentus-shadow-float: var(--adt-shadow-float, 0 0.4rem 1.2rem rgba(0, 0, 0, 0.45));
+  --valentus-shadow-sticky: var(--adt-shadow-sticky, 0 6px 18px rgba(0, 0, 0, 0.35));
+  --valentus-header-vcs-icon-filter: var(--adt-header-vcs-icon-filter, none);
 }
 
 /* ——— Page canvas & type ——— */
@@ -459,9 +459,12 @@ footer.footer a {
 
 .valentus-nav-search #search-input:focus,
 .valentus-tool-search #search-input:focus {
-  outline: none;
+  /* Solid ring (4.3.2): the old faint accent-soft halo + border tint was a weak
+     focus indicator in dark mode. */
+  outline: 2px solid var(--valentus-accent);
+  outline-offset: 1px;
   border-color: var(--valentus-accent) !important;
-  box-shadow: 0 0 0 3px var(--valentus-accent-soft);
+  box-shadow: none;
 }
 
 .valentus-nav-search #search-field::after,

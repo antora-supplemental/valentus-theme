@@ -16,8 +16,8 @@ html.valentus-fouc-pending { visibility: hidden !important; }
 <script>
 document.documentElement.classList.add('valentus-fouc-pending')
 </script>
-{{!-- color-scheme:paint-slot --}}
-<link rel="stylesheet" href="{{{uiRootPath}}}/css/valentus-chrome.css">
+{{!-- Paint (slot) + valentus-chrome.css live in head-styles.hbs since 4.3.2, so a
+  hub override of this partial cannot drop the colour layer. --}}
 <meta name="dm-navbar" content="{{or site.keys.darkModeNavbar 'light'}}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

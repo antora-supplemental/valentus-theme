@@ -24,9 +24,9 @@ antora:
     - require: ./path/to/valentus-theme/paint/lib/index.js   # or @antora-supplemental/default-paint
 ----
 
-Paints link at `{{!-- color-scheme:paint-slot --}}` in `partials/head-meta.hbs`,
+Paints link at `{{!-- color-scheme:paint-slot --}}` in `partials/head-styles.hbs` (since 4.3.2; was `head-meta.hbs`),
 before the layout CSS, so layout rules win (same cascade as Valentus 3).
-Hub overrides of `head-meta.hbs` must keep that marker.
+Hub overrides of `head-styles.hbs` must keep that marker. A stale `head-meta.hbs` override no longer drops the paint.
 
 The logo fixture swatches (`.valentus-logo-fixture-bar--light/--dark`) keep fixed
 colors on purpose: they preview the logo on each scheme's surface.
