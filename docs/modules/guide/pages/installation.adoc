@@ -124,6 +124,24 @@ antora:
 
 It reads the built files, not the UI bundle, so it works with the Valentus release bundle, a vendored `supplemental-ui`, or any other theme. Without the extension: `npx asset-fingerprint build/site` after the build. Options (include/exclude globs, hash length, fonts, images) are in the package README.
 
+== Contrast check in CI (optional)
+
+The chassis https://github.com/antora-supplemental/antora-ui-chassis/tree/main/packages/contrast-check[contrast-check] composite Action runs after Antora writes the site. It loads each sampled page in headless Chrome, applies every color scheme your paint declares (`light`, `dark`, and any extra schemes from the `@color-schemes` manifest), and reports WCAG 2.x contrast errors and near-miss warnings. Findings include selectors, colors, ratios, and a suggested fix color.
+
+This repository's GitHub Pages workflow (link:https://github.com/antora-supplemental/valentus-theme/blob/main/.github/workflows/deploy.yml[`.github/workflows/deploy.yml`^]) runs it on the built demo site with `fail-on: none` so existing findings stay visible in annotations and the job summary without blocking deploys until they are triaged. Consumer sites can pin the same Action ref and set `fail-on: error` (default) once the report is clean.
+
+[source,yaml]
+----
+- name: Contrast check (every color scheme)
+  uses: antora-supplemental/antora-ui-chassis/packages/contrast-check@contrast-check-v0.3.1
+  with:
+    site: build/site
+    max-pages: "15"
+    fail-on: none
+----
+
+Version `0.3.x` adds dynamic UI state checks (for example open search results), reduced-motion end states, suppression lists (`suppress` input or config file), inline `data-contrast-check-ignore` opt-outs, and stale or expired suppression warnings. Pin the Action with a `contrast-check-v*` tag (same pattern as other chassis packages). Full CLI and config options are in the package `README.adoc`.
+
 == Verify
 
 Open the built site and use the sun/moon navbar toggle; preference should persist across pages.

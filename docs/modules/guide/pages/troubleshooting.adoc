@@ -86,6 +86,20 @@ html.dark-theme .your-custom-element {
 
 TIP: Use browser DevTools to inspect the unstyled element and find its CSS class.
 
+== Contrast-check CI reports failures
+
+*Symptom:* The GitHub Actions contrast-check step lists `color-contrast`, `token-pair`, focus, or hover findings in annotations or the job summary.
+
+*Context:* The checker runs every declared color scheme against sampled HTML pages and your paint CSS. It is not the same as a one-off axe scan in the browser; it replays schemes via `prefers-color-scheme` emulation and `?scheme=` URLs.
+
+*Fix paths:*
+
+. *Real defect* — adjust `--cs-*` tokens or component styles in your paint or brand overlay until the suggested color meets the threshold.
+. *Known exception* — add a suppression entry (YAML/JSON) with a `reason` and optional `expires`, or mark a subtree with `data-contrast-check-ignore` for rule-specific opt-out. See the chassis contrast-check README for match fields.
+. *Report-only CI* — set `fail-on: none` (as the Valentus demo deploy does) while triaging; switch to `error` when the suppress list is current.
+
+If suppressions stop matching any finding, the tool warns about stale entries; use `fail-on-stale: true` in CI when you want that to fail the job.
+
 == Code Blocks Look Wrong
 
 *Symptom:* Syntax highlighting colors clash with dark background.
