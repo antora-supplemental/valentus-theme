@@ -824,16 +824,9 @@ nav.nav-menu.valentus-nav-tree-only .nav-item-toggle {
   line-height: 1;
   cursor: pointer;
   color: var(--valentus-nav-item-toggle);
-  background-color: currentColor !important;
+  /* The focus box must not be clipped by the chevron mask. */
+  background-color: transparent !important;
   background-image: none !important;
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 3.5L11 8L6 12.5' stroke='black' stroke-width='1.85' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 3.5L11 8L6 12.5' stroke='black' stroke-width='1.85' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
   opacity: 0.9;
   transform: none;
   transform-origin: 50% 50%;
@@ -851,10 +844,20 @@ nav.nav-menu.valentus-nav-tree-only .nav-item.is-active > .nav-item-toggle {
   transform: rotate(90deg);
 }
 
-html.dark-theme nav.nav-menu.nav-tree-only .nav-item-toggle,
-html.dark-theme nav.nav-menu.valentus-nav-tree-only .nav-item-toggle {
+nav.nav-menu.nav-tree-only .nav-item-toggle::before,
+nav.nav-menu.valentus-nav-tree-only .nav-item-toggle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: currentColor;
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 3.5L11 8L6 12.5' stroke='black' stroke-width='1.85' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 3.5L11 8L6 12.5' stroke='black' stroke-width='1.85' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
 }
 
 .toc .toc-menu h3 {
@@ -1473,4 +1476,18 @@ main.valentus-article > .content {
 .doc .literalblock > .content {
   max-width: 100%;
   overflow-x: auto;
+}
+
+/* Shared controls must expose keyboard focus even when a widget resets outlines. */
+#search-input:focus,
+#valentus-search-scope:focus,
+nav.nav-menu .nav-item-toggle:focus,
+.source-toolbox .copy-button:focus-visible,
+.toc-menu a:focus-visible {
+  outline: 2px solid var(--valentus-accent) !important;
+  outline-offset: 2px;
+}
+/* Muted divider tokens are intentionally too soft for form-control boundaries. */
+.nav-panel-menu .nav-tree-filter-input {
+  border-color: var(--valentus-ink-muted);
 }

@@ -1,9 +1,14 @@
 = Changelog
+:toclevels: 3
 
-== 2026-09-25 -- Facto demo URL rename
+== 2026-09-25
+
+=== Facto demo URL rename
 
 * Point theme demo links at https://antora-supplemental.github.io/facto-stack/ (repo `antora-supplemental/facto-stack`; formerly `antora-facto`).
-== 2026-09-25 -- Link Facto stack demo
+== 2026-09-25
+
+=== Link Facto stack demo
 
 * Point theme demo (guide start, demo home, extensions tip, footer, README) at https://antora-supplemental.github.io/facto-stack/[Facto stack demo] for client Mermaid + lightbox + SoftNav.
 * Keep Valentus lean — those compose pieces stay out of core / `v2`.
@@ -21,13 +26,22 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
+== 2026-11-07
+
+=== v4.3.3 visible focus controls
+
+* Keep chevron masks on pseudo-elements so nav-toggle focus outlines remain visible. Apply solid theme-accent focus rings to search, scope, nav, copy and TOC controls.
+* Use readable muted ink for the nav filter boundary instead of a decorative divider token.
+
 == Unreleased
 
 * Demo dependency: `@antora-supplemental/antora-search-chat` `v0.1.20` -> `v0.1.26` (search box corners no longer show the search surface color, plus dark-mode result contrast). Demo/dev only, no theme release.
 * Changelog: moved from the root `CHANGELOG.adoc` into the docs `changelog` module (`docs/modules/changelog/pages/index.adoc`), with all detail reports under `changelog-details/history/`. `release.yml` reads the new path, and its notes extraction now matches the `== X.Y.Z - date` headings (it had been falling back to the generic note).
 * Registry metadata: `antora-ui-model@3` moves from `antoraRegistry.uses` to `provides`. Valentus renders the Antora UI model itself, so the registry no longer pulls in the Default UI to satisfy it. Metadata only, no runtime change, no release.
 
-== 4.3.2 - 2026-10-28
+== 2026-10-28
+
+=== v4.3.2
 
 Patch release.
 
@@ -176,7 +190,9 @@ Detail: `changelog-details/history/2026-10-25 - color scheme to chassis.adoc`, `
 
 * **Docs:** install and pinning examples use rolling `v3` / `v3.0.0` bundle URLs (aligned with current hubs and 3.0.0 release line).
 
-== [3.0.0] - 2026-10-21
+== 2026-10-21
+
+=== v3.0.0
 
 Public label: *3.0.0+antora.3* (Antora 3).
 
@@ -190,7 +206,9 @@ Public label: *3.0.0+antora.3* (Antora 3).
 
 * Breadcrumb trail — non-visitable intermediate folder crumbs (`.valentus-breadcrumb-trail-text` without a URL) keep accent color but no resting underline; links and the current page stay underlined.
 
-== [2.1.7] - 2026-10-17
+== 2026-10-17
+
+=== v2.1.7
 
 Public label: *2.1.7+antora.3* (Antora 3).
 
@@ -198,7 +216,9 @@ Public label: *2.1.7+antora.3* (Antora 3).
 
 * **Search dropdowns hidden behind the doc mast:** `.valentus-site-navbar` now stacks at `z-index: 20`, above `.valentus-doc-mast` (`z-index: 2`) inside the sticky header. The search scope menu, Lunr results, and Ask panel (children of the navbar at any inner z-index) were trapped in the navbar's old `z-index: 1` stacking context and painted under the mast. Both `ui-modules/` and `supplemental-ui/` copies updated; pairs with `@antora-supplemental/antora-search-chat` 0.1.7 top-layer menus.
 
-== [2.1.6] - 2026-10-17
+== 2026-10-17
+
+=== v2.1.6
 
 Public label: *2.1.6+antora.3* (Antora 3).
 
@@ -206,7 +226,9 @@ Public label: *2.1.6+antora.3* (Antora 3).
 
 * **Bundle parity:** the 2.1.3 nav-toggle icon and 2.1.4/2.1.5 mobile drawer shade landed only in `ui-modules/` sources; the release bundle ships the parallel `supplemental-ui/` copies, so hubs saw no change. Both copies are now synced — toggle icon and canvas drawer shade actually ship in the bundle.
 
-== [2.1.5] - 2026-10-17
+== 2026-10-17
+
+=== v2.1.5
 
 Public label: *2.1.5+antora.3* (Antora 3).
 
@@ -214,7 +236,9 @@ Public label: *2.1.5+antora.3* (Antora 3).
 
 * **Mobile nav drawer shade (correction):** the drawer fill is the page canvas itself (`--valentus-nav-bg: var(--valentus-canvas)`) — darker than the old bright white, not darker than the page base — with a soft edge shadow to keep the overlay layer readable.
 
-== [2.1.4] - 2026-10-17
+== 2026-10-17
+
+=== v2.1.4
 
 Public label: *2.1.4+antora.3* (Antora 3).
 
@@ -222,7 +246,9 @@ Public label: *2.1.4+antora.3* (Antora 3).
 
 * **Mobile nav drawer shade:** below 1024px the overlaying nav container painted bright `--valentus-elevated` (pure white in light mode) over the `#f3f5f8` canvas. It now uses a canvas-close `--valentus-nav-bg` in both themes, with a soft edge shadow to keep the drawer layer readable.
 
-== [2.1.3] - 2026-10-17
+== 2026-10-17
+
+=== v2.1.3
 
 Public label: *2.1.3+antora.3* (Antora 3).
 
@@ -230,7 +256,9 @@ Public label: *2.1.3+antora.3* (Antora 3).
 
 * **Invisible mast nav-toggle icon:** the toggle was an empty button relying on the Default UI `site.css` background (`menu.svg`/`back.svg`, hardcoded `#222`, with a dark-mode mask hack on the button in `site-extra.css`). When that bundle asset/load-order chain breaks, the button renders as an empty box. `valentus-doc-mast` now carries inline `currentColor` SVG icons (menu / back by `.is-active`) and `site-doc-layout.css` explicitly sizes and colors the button with `--valentus-ink`, neutralizing the bundle background and mask rules in both themes.
 
-== [2.1.2] - 2026-10-17
+== 2026-10-17
+
+=== v2.1.2
 
 Public label: *2.1.2+antora.3* (Antora 3).
 
@@ -238,7 +266,9 @@ Public label: *2.1.2+antora.3* (Antora 3).
 
 * **Read-width toolbar inset:** `.valentus-doc-toolbar` uses `--valentus-doc-pad-inline` (same as `article.doc` text inset) so the control’s left edge lines up with the H1 / prose column; tokens replace relying on Antora Default UI `.doc` padding alone while the toolbar sits outside `article.doc`.
 
-== [2.1.1] - 2026-10-17
+== 2026-10-17
+
+=== v2.1.1
 
 Public label: *2.1.1+antora.3* (Antora 3).
 
@@ -246,7 +276,9 @@ Public label: *2.1.1+antora.3* (Antora 3).
 
 * **Read-width control** in `.valentus-doc-toolbar` is left-aligned with the article column on desktop (2.1.0 used `justify-content: flex-end`). Condensed viewports keep centered font-size via `site-font-size.css`.
 
-== [2.1.0] - 2026-10-17
+== 2026-10-17
+
+=== v2.1.0
 
 Public label: *2.1.0+antora.3* (Antora 3).
 
@@ -262,7 +294,9 @@ Public label: *2.1.0+antora.3* (Antora 3).
 * Wide AsciiDoc tables scroll inside the article column (`valentus-table-scroll` wrapper).
 * GitHub Pages demo footer drops the Facto stack demo link; UI line adds `(demo)` after the `valentus-theme` repo link.
 
-== [2.0.35] - 2026-09-27
+== 2026-09-27
+
+=== v2.0.35
 
 Public label: *2.0.35+antora.3* (Antora 3).
 
@@ -270,7 +304,9 @@ Public label: *2.0.35+antora.3* (Antora 3).
 
 * Breadcrumb trail - intermediate crumbs (nav titles / unlinked section parents) resolve a landing URL from `page.navigation` (Overview/Home child or first descendant) and render as `<a href>`; current leaf stays a non-link with `aria-current="page"`. Site-home chip unchanged. See Detailed notes (`changelog-details/history/2026-09-27 - breadcrumb intermediate trail links.adoc`).
 
-== [2.0.34] - 2026-09-15
+== 2026-09-15
+
+=== v2.0.34
 
 Public label: *2.0.34+antora.3* (Antora 3).
 
@@ -278,7 +314,9 @@ Public label: *2.0.34+antora.3* (Antora 3).
 
 * Breadcrumb trail with site-nav-tree - drop leading foreign component-root crumbs (especially Home / site home) before the usual current-component-root strip so the underlined path stays within the page component; house chip still covers site home. See Detailed notes (`changelog-details/history/2026-09-15 - breadcrumb drop foreign home.adoc`).
 
-== [2.0.33] - 2026-09-15
+== 2026-09-15
+
+=== v2.0.33
 
 Public label: *2.0.33+antora.3* (Antora 3).
 
@@ -286,7 +324,9 @@ Public label: *2.0.33+antora.3* (Antora 3).
 
 * Breadcrumb component/version kickers — truncated labels show trailing `…` again (`display: block` + `white-space: nowrap` on `.valentus-bc-kicker-label` / `.valentus-bc-kicker-version`; `text-overflow` does not paint on the `inline-flex` used in 2.0.32). See Detailed notes (`changelog-details/history/2026-09-15 - breadcrumb kicker ellipsis.adoc`).
 
-== [2.0.32] - 2026-09-15
+== 2026-09-15
+
+=== v2.0.32
 
 Public label: *2.0.32+antora.3* (Antora 3).
 
@@ -294,7 +334,9 @@ Public label: *2.0.32+antora.3* (Antora 3).
 
 * Breadcrumb mast controls — shared `--valentus-bc-ctrl-h` so home chip, component kicker, and version kicker match height; label text uses `line-height: 1` + flex centering (component text was sitting high vs Version). Home→component gap restored by beating Default UI `.breadcrumbs li { margin: 0 }` with a more specific selector. See Detailed notes (`changelog-details/history/2026-09-15 - breadcrumb control align.adoc`).
 
-== [2.0.31] - 2026-09-10
+== 2026-09-10
+
+=== v2.0.31
 
 Public label: *2.0.31+antora.3* (Antora 3).
 
@@ -304,26 +346,34 @@ Public label: *2.0.31+antora.3* (Antora 3).
 +
 Debt: Mermaid host SVGs still carry a few hard-coded `fill:#…!important` rules (arrow/root anchors); regenerate with `@dev-centr/themed-svg@0.2.2` when practical.
 
-== [2.0.30] - 2026-09-10
+== 2026-09-10
+
+=== v2.0.30
 
 Public label: *2.0.30+antora.3* (Antora 3).
 
 * *Fix / UX:* Drop Antora’s extra `.75rem` left margin on the **top-level** tree `nav > .nav-list` (rail padding already insets); keep nested `.nav-list` margins for depth indentation.
 
-== [2.0.29] - 2026-09-10
+== 2026-09-10
+
+=== v2.0.29
 
 Public label: *2.0.29+antora.3* (Antora 3).
 
 * *Fix / UX:* page-context lead — outer `.page-context-lead` is seamless; byline sits above an inner `.page-context-panel` that holds only the metadata table (pairs with page-context **0.6.1**).
 * *Fix / UX:* Source row — VCS mark on the **Source** key; value cell is text-only `View | Edit` (pairs with page-edit **0.2.1**).
 
-== [2.0.28] - 2026-09-10
+== 2026-09-10
+
+=== v2.0.28
 
 Public label: *2.0.28+antora.3* (Antora 3).
 
 * *Fix / UX:* Breadcrumb mast — site home is a real `/` character (no chip); separators are real `/` text nodes so a drag-select copies as a pasteable path; home lights up on hover. See Detailed notes (`changelog-details/history/2026-09-10 - copyable breadcrumb path.adoc`).
 
-== [2.0.27] - 2026-09-10
+== 2026-09-10
+
+=== v2.0.27
 
 Public label: *2.0.27+antora.3* (Antora 3).
 
@@ -335,50 +385,66 @@ Public label: *2.0.27+antora.3* (Antora 3).
 * *Docs:* Customization — mast keeps component + conjoined `~` menu; trail dedupes component root under site-nav-tree.
 * *Diagrams:* Replace the duplicated authored PlantUML sequence with canonical Mermaid, extract both extension examples into named sources, and ship deterministic Themed SVG adaptive/host artifacts. The UI progressively upgrades `.themed-svg` image roles with the sanitized 0.1.1 runtime. See Detailed notes — themed diagram artifacts (`changelog-details/history/2026-09-08 - themed diagram artifacts.adoc`).
 
-== [2.0.26] - 2026-09-10
+== 2026-09-10
+
+=== v2.0.26
 
 Public label: *2.0.26+antora.3* (Antora 3).
 
 * *Fix / UX:* Hide tree-nav scrollbars (`scrollbar-width: none` + WebKit) while keeping overflow scroll and edge fades as the horizontal affordance.
 
-== [2.0.25] - 2026-09-10
+== 2026-09-10
+
+=== v2.0.25
 
 Public label: *2.0.25+antora.3* (Antora 3).
 
 * *Fix / UX:* Dark mode side-rail panel wash is opt-in (`html.valentus-side-panels`), matching light — default `--valentus-side-panel-bg` stays transparent so nav/TOC blend with the canvas until hubs enable the wash.
 
-== [2.0.24] - 2026-09-10
+== 2026-09-10
+
+=== v2.0.24
 
 Public label: *2.0.24+antora.3* (Antora 3).
 
 * *Fix:* Tree-nav panel no longer shrink-to-fits past the fixed `--valentus-nav-width` column — `.nav-panel-menu` / `nav.nav-menu` stay `width: 100%` with `min-width: 0`, so long nowrap labels scroll inside the column and edge fades can engage. See Detailed notes (`changelog-details/history/2026-09-10 - nav panel width containment.adoc`).
 
-== [2.0.23] - 2026-09-09
+== 2026-09-09
+
+=== v2.0.23
 
 Public label: *2.0.23+antora.3* (Antora 3).
 
 * *Fix / UX:* Edit leaves the breadcrumb; `@antora-supplemental/page-edit` bakes Edit + provider SVG into the page-context lead. Header VCS `<img>` uses `valentus-vcs-icon-id` at generate time. Drop `site-vcs-icons.js` from footer scripts.
 
-== [2.0.22] - 2026-09-09
+== 2026-09-09
+
+=== v2.0.22
 
 Public label: *2.0.22+antora.3* (Antora 3).
 
 * *Fix / UX:* `.page-context` bridge — aside is the panel; keys left-aligned with horizontal cell padding; footer margin top/bottom; table rows only (no double frame). Pairs with `@antora-supplemental/page-context` **0.3.3**.
 
-== [2.0.21] - 2026-09-09
+== 2026-09-09
+
+=== v2.0.21
 
 Public label: *2.0.21+antora.3* (Antora 3).
 
 * *Fix / UX:* Tree-nav horizontal scroll — long/nowrap labels expand the scrollport; left/right edge fades toggle with overflow (`valentus-nav-overflow-start` / `valentus-nav-overflow-end` via `site-visual.js`) so each fade shows only while that side still overflows; mask soft-clips highlight + text together. See Detailed notes (`changelog-details/history/2026-09-09 - nav scroll edge fades.adoc`).
 
-== [2.0.20] - 2026-09-09
+== 2026-09-09
+
+=== v2.0.20
 
 Public label: *2.0.20+antora.3* (Antora 3).
 
 * *Fix / UX:* Side-rail panel wash paints the content-sized nav menu (padding + 2px radius), not the full-height `.nav` column — fixes oversized dark panel; light still defaults clean, `valentus-side-panels` enables subtle wash.
 * *Fix / UX:* `.page-context-table` bridge — light-mode subtle surface + thin outer/inner borders; muted smaller type; explicit no-zebra overrides against dark-mode `table tbody tr:nth-child(even)`. See Detailed notes (`changelog-details/history/2026-09-09 - page-context table side panels.adoc`).
 
-== [2.0.19] - 2026-09-09
+== 2026-09-09
+
+=== v2.0.19
 
 Public label: *2.0.19+antora.3* (Antora 3).
 
@@ -389,31 +455,41 @@ Public label: *2.0.19+antora.3* (Antora 3).
 * *Feature:* In-doc Asciidoctor `:toc:` (`.doc .toc` / `#toc`) muted smaller own block — **not** part of `@antora-supplemental/page-context` metadata. Theme also bridges `.page-context` tokens.
 * *Docs:* Component picker already hidden when `site.keys.site_nav_tree=true` (2.0.14); reaffirm with site-nav-tree README.
 
-== [2.0.18] - 2026-09-01
+== 2026-09-01
+
+=== v2.0.18
 
 Public label: *2.0.18+antora.3* (Antora 3).
 
 * *Fix:* Page title mast vertical scrollbar — 2.0.17’s `overflow-x: hidden; overflow-y: visible` on `.valentus-page-title`, breadcrumb trail, and kickers forced `overflow-y` to compute as `auto` (CSS overflow pairing rule), showing a vscroll bar when descenders extended past the line box. Restore single-axis `overflow: hidden` with raised `line-height` and small `padding-bottom` so descenders stay visible without scrollbars. See Detailed notes — page title mast scrollbar (`changelog-details/history/2026-09-01 - page title mast scrollbar.adoc`).
 
-== [2.0.17] - 2026-09-01
+== 2026-09-01
+
+=== v2.0.17
 
 Public label: *2.0.17+antora.3* (Antora 3).
 
 * *Fix:* Page title, breadcrumb trail, and mast kicker labels — `overflow: hidden` with tight `line-height` (1.2) clipped lowercase descenders (g, p, y) on display fonts (Syne, Plus Jakarta Sans, etc.). Use horizontal-only ellipsis clipping, raise line-height, and keep `-webkit-line-clamp` line-height at 1.35 on narrow viewports. See Detailed notes — descender clip on page title (`changelog-details/history/2026-09-01 - descender clip page title.adoc`).
 
-== [2.0.16] - 2026-09-01
+== 2026-09-01
+
+=== v2.0.16
 
 Public label: *2.0.16+antora.3* (Antora 3).
 
 * *Fix:* Condensed (mobile) nav drawer backdrop — override `--valentus-nav-bg` on `:root` / `html.dark-theme` (not bare `html`) so the token beats transparent defaults; paint nav shell layers with `var(--valentus-elevated)` directly. Fixes sidebar text showing over page content in light and dark mode. See Detailed notes — mobile nav backdrop specificity (`changelog-details/history/2026-09-01 - mobile nav backdrop specificity.adoc`).
 
-== [2.0.15] - 2026-09-01
+== 2026-09-01
+
+=== v2.0.15
 
 Public label: *2.0.15+antora.3* (Antora 3).
 
 * *Feature:* Nav-tree expand/collapse chevrons (`.nav-item-toggle`) use themeable tokens `--valentus-nav-item-toggle` and `--valentus-nav-item-toggle-hover` (default to `--valentus-ink-muted` / `--valentus-ink`). Legacy dark-mode caret in `site-extra.css` follows the same token so site overlays can recolor component-level arrows without editing Valentus CSS.
 
-== [2.0.14] - 2026-09-01
+== 2026-09-01
+
+=== v2.0.14
 
 Public label: *2.0.14+antora.3* (Antora 3).
 
@@ -422,7 +498,9 @@ Public label: *2.0.14+antora.3* (Antora 3).
 * *Fix:* Version kicker label — implicit/default version shows **Version** on the button and **Default** in the dropdown (`valentus-version-label` helper); named versions unchanged.
 * *Fix:* Component/version breadcrumb dropdowns — raise `.valentus-doc-mast` stacking above `.valentus-tool-band` so the first menu rows receive clicks instead of the read-width band below.
 
-== [2.0.13] - 2026-08-20
+== 2026-08-20
+
+=== v2.0.13
 
 Public label: *2.0.13+antora.3* (Antora 3).
 
@@ -431,31 +509,41 @@ Public label: *2.0.13+antora.3* (Antora 3).
 * *Docs:* xref:guide:value-proposition.adoc[Value Proposition & Upstream Fixes] — add Default UI MRs/branches for nav label alignment (!210), sticky footer (!211), TOC heading rail inset, and dark-mode proposal (!207) with “ship via Valentus / antora-dark-mode today” guidance; FOUC / supplemental CSS cascade row.
 * *Docs:* Installation migrate-from-`antora-dark-theme` notes canonical org repos and points at the dark-mode legacy-names guide; Getting Started / README link the org Theme products map.
 
-== [2.0.12] - 2026-08-11
+== 2026-08-11
+
+=== v2.0.12
 
 Public label: *2.0.12+antora.3* (Antora 3).
 
 * *Feature:* KaTeX math plumbing always on — `site-math.js` / `site-math.css` load KaTeX + auto-render for AsciiDoc `stem: latexmath` (`\(` `\)` / `\[` `\]`) and `$…$` / `$$…$$`. Enable `stem: latexmath` in the playbook even when a page has no formulas yet.
 
-== [2.0.11] - 2026-08-08
+== 2026-08-08
+
+=== v2.0.11
 
 Public label: *2.0.11+antora.3* (Antora 3).
 
 * *Chore:* Alias `--valentus-admonition-*` to Default UI `--tip-color` / `--note-color` / etc. so one site override recolors TIP pill and card.
 
-== [2.0.10] - 2026-08-08
+== 2026-08-08
+
+=== v2.0.10
 
 Public label: *2.0.10+antora.3* (Antora 3).
 
 * *Fix / chore:* Sync antora-dark-mode **1.4.5** (single `background` for admonition card tints).
 
-== [2.0.9] - 2026-08-08
+== 2026-08-08
+
+=== v2.0.9
 
 Public label: *2.0.9+antora.3* (Antora 3).
 
 * *Fix:* Admonition TIP/NOTE pills use `--valentus-admonition-*` (same tokens as card border/tint) so one override recolors both; stops Default UI `#41af46` pill vs divergent card green. Sync antora-dark-mode **1.4.4**. See Detailed notes (`changelog-details/history/2026-08-08 - admonition pill and card share tokens.adoc`).
 
-== [2.0.8] - 2026-08-08
+== 2026-08-08
+
+=== v2.0.8
 
 Public label: *2.0.8+antora.3* (Antora 3).
 
@@ -464,37 +552,49 @@ Public label: *2.0.8+antora.3* (Antora 3).
 * *Fix:* TIP admonition accent restored to Antora default green `#41af46` (`--valentus-admonition-tip`), not emerald/teal `#059669`. See Detailed notes (`changelog-details/history/2026-08-08 - tip admonition green.adoc`).
 * *Fix:* Inline ``code`` in admonition ``td.content`` (often bare, no ``<p>``) gets the same border/radius chrome as ``.doc p code``.
 
-== [2.0.7] - 2026-08-08
+== 2026-08-08
+
+=== v2.0.7
 
 Public label: *2.0.7+antora.3* (Antora 3).
 
 * *Fix:* Theme toggle timing — sync antora-dark-mode **1.4.2** VT suppress (`html.valentus-theme-vt` / `:active-view-transition` → `transition: none`) so Valentus `--valentus-transition` (0.2s) chrome no longer finishes ahead of the 0.28s root crossfade. See Detailed notes (`changelog-details/history/2026-08-08 - theme transition vt suppress.adoc`).
 
-== [2.0.6] - 2026-08-08
+== 2026-08-08
+
+=== v2.0.6
 
 Public label: *2.0.6+antora.3* (Antora 3).
 
 * *Fix:* Dark-mode admonitions — TIP/NOTE label cell no longer shares the type-tint wash with `td.content` (synced antora-dark-mode 1.4.1 + `site-visual` overrides). See Detailed notes (`changelog-details/history/2026-08-08 - admonition dark-mode label wash.adoc`).
 
-== [2.0.5] - 2026-08-01
+== 2026-08-01
+
+=== v2.0.5
 
 Public label: *2.0.5+antora.3* (Antora 3).
 
 * *Fix / chore:* Root light↔dark theme transition now lives in vendored antora-dark-mode ≥ 1.4.0 (View Transitions + universal `html.valentus-theme-animating` fallback). Removed Valentus per-widget `valentus-theme-animating` selector list and click-capture cue from `site-visual.js`. Keeps transparent header paint so dark-mode’s solid `.navbar-menu` fill never flashes. See Detailed notes — 2026-08-01 root theme transition sync (`changelog-details/history/2026-08-01 - root theme transition sync.adoc`).
 
-== [2.0.4] - 2026-08-01
+== 2026-08-01
+
+=== v2.0.4
 
 Public label: *2.0.4+antora.3* (Antora 3).
 
 * *Fix:* Light↔dark theme crossfade — header end-controls strip (GitHub + theme toggle) and search omnibox no longer snap while the navbar fades. Transparent `.navbar-menu` / `.valentus-header-actions` paint + `filter` transition on the VCS mark; `valentus-theme-animating` covers search compound chrome. Pair with `@antora-supplemental/antora-search-chat` ≥ 0.1.3 for the opaque pill transition. See Detailed notes — 2026-08-01 theme transition header + search (`changelog-details/history/2026-08-01 - theme transition header search.adoc`).
 
-== [2.0.3] - 2026-07-31
+== 2026-07-31
+
+=== v2.0.3
 
 Public label: *2.0.3+antora.3* (Antora 3).
 
 * *Fix:* Condensed text-size control — hide with `!important` at ≥1024px (no longer beside read-width on desktop); scale `.doc` via `zoom` so rem headings change too (`font-size` fallback). See Detailed notes — 2026-07-31 font-size hide and scale (`changelog-details/history/2026-07-31 - font-size hide and scale.adoc`).
 
-== [2.0.2] - 2026-07-28
+== 2026-07-28
+
+=== v2.0.2
 
 Public label: *2.0.2+antora.3* (Antora 3).
 
@@ -522,7 +622,9 @@ Public label: *2.0.2+antora.3* (Antora 3).
 * *Fix:* Header brand links — title uses `relativize site.homeUrl`; logo only uses an absolute/external URL when `site.keys.siteHomeUrl` is set (no more silent fallback to playbook `site.url`, which sent local preview to production Pages).
 * *Fix / polish:* Search placeholder — Ask off → *Search* + muted *(AI mode not configured)*; Ask on → *Search or Ask*.
 
-== [2.0.1] - 2026-07-25
+== 2026-07-25
+
+=== v2.0.1
 
 Public label: *2.0.1+antora.3* (Antora 3).
 
@@ -530,7 +632,9 @@ Public label: *2.0.1+antora.3* (Antora 3).
 * *Fix:* Scope dropdown contrast (`--valentus-ink` on `--valentus-elevated`, light + dark) and padding/min-width so “This component” is not clipped by the chevron.
 * See Detailed notes — 2026-07-25 search navbar + read-width tool band (`changelog-details/history/2026-07-25 - search navbar read-width toolband.adoc`).
 
-== [2.0.0] - 2026-07-25
+== 2026-07-25
+
+=== v2.0.0
 
 Public label: *2.0.0+antora.3* (Antora 3).
 
@@ -556,7 +660,9 @@ Public label: *2.0.0+antora.3* (Antora 3).
 * See Detailed notes — 2026-07-25 tool band outside columns (`changelog-details/history/2026-07-25 - tool-band-outside-columns.adoc`).
 * See Detailed notes — 2026-07-25 dual-axis versioning (`changelog-details/history/2026-07-25 - 2.0.0 dual-axis versioning.adoc`).
 
-== [1.1.2] - 2026-07-24
+== 2026-07-24
+
+=== v1.1.2
 
 Public label (retroactive): *1.1.2+antora.3*. Git tag remains `v1.1.2`.
 
@@ -566,14 +672,18 @@ Public label (retroactive): *1.1.2+antora.3*. Git tag remains `v1.1.2`.
 * *Docs:* Guide page `header-logo.adoc` with brand/mono fixture mocks so single-file strategies are documented without a second logo in the live chrome.
 * See Detailed notes — 2026-07-24 (`changelog-details/history/2026-07-24 - 1.1.2 brand-first header logo.adoc`).
 
-== [1.1.1] - 2026-06-13
+== 2026-06-13
+
+=== v1.1.1
 
 Public label (retroactive): *1.1.1+antora.3*. Git tag remains `v1.1.1`.
 
 * *Dark-mode toggle:* Default `site.keys.dark_mode_navbar` to `light` so the theme toggle uses a dark icon on Valentus' light top bar; vendors `antora-dark-mode` v1.3.1 navbar-tone support.
 * *CI:* Fix Release workflow `matches()` guard, dynamic antora-dark-mode pin from `antora-playbook.yml`, `workflow_dispatch` re-publish.
 
-== [1.1.0] - 2026-06-13
+== 2026-06-13
+
+=== v1.1.0
 
 Public label (retroactive): *1.1.0+antora.3*. Git tag remains `v1.1.0`.
 
@@ -583,7 +693,9 @@ Public label (retroactive): *1.1.0+antora.3*. Git tag remains `v1.1.0`.
 
 Detailed notes — 2026-06-13 (`changelog-details/history/2026-06-13 - 1.1.0 bundled dark mode.adoc`)
 
-== [1.0.0] - 2026-06-09
+== 2026-06-09
+
+=== v1.0.0
 
 Public label (retroactive): *1.0.0+antora.3*. Git tag remains `v1.0.0`.
 
