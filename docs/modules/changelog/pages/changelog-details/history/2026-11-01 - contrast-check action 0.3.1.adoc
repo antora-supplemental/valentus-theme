@@ -1,0 +1,8 @@
+= 2026-11-01 — contrast-check Action 0.3.1 in deploy CI
+:description: Changelog detail for bumping the GitHub Actions contrast-check pin
+:navtitle: contrast-check 0.3.1
+
+* *Workflow:* `.github/workflows/deploy.yml` pins `antora-supplemental/antora-ui-chassis/packages/contrast-check@contrast-check-v0.3.1` (was `contrast-check-v0.1.0`).
+* *Behavior:* Still runs after the Antora build on the GitHub Pages artifact path, `max-pages: "15"`, `fail-on: none` (report-only until existing demo findings are triaged).
+* *Chassis changes in 0.2.x–0.3.1:* suppression lists and inline `data-contrast-check-ignore`; stale/expired suppression warnings; dynamic UI state checks and reduced-motion end states (0.3.0); focus checks use the strongest visible indicator (0.3.1 fix).
+* *Docs:* Installation guide section on optional CI contrast checking; Troubleshooting entry for reading Action output and suppressions.

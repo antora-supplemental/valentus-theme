@@ -56,7 +56,7 @@ jobs:
       - name: Contrast check (every color scheme)
         # Report-only until the existing findings are triaged: annotations and
         # the job summary list every error and warning; the build stays green.
-        uses: antora-supplemental/antora-ui-chassis/packages/contrast-check@contrast-check-v0.1.0
+        uses: antora-supplemental/antora-ui-chassis/packages/contrast-check@contrast-check-v0.3.1
         with:
           site: ${{ steps.antora.outputs.site-path }}
           max-pages: "15"
