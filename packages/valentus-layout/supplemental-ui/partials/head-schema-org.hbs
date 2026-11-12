@@ -1,0 +1,6 @@
+{{!-- One Schema.org graph per page. A second include returns nothing. --}}
+{{#with (schema-org-jsonld) as |json|}}
+<script type="application/ld+json">
+{{{json}}}
+</script>
+{{/with}}
