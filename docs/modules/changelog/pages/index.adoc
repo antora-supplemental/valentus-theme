@@ -26,6 +26,14 @@ Public labels use **`VALENTUS_SEMVER+antora.N`** (example: `2.0.0+antora.3`).
 * Git tags stay pure semver (`v2.0.0`). Release titles and this changelog use the full label.
 * Historical **1.x** releases were all Antora 3 → documented as `1.x.y+antora.3`. Existing tags (`v1.0.0`, …) were **not** renamed.
 
+== 2026-11-13
+
+=== Footer demo from metadata
+
+* The UI footer demo link reads `demo` from the bundle descriptor (`ui-bundle.json`, copied from `package.json` `antoraRegistry.demo`). Detail: xref:changelog-details/history/2026-11-13 - footer demo metadata.adoc[footer demo metadata].
+* Valentus demo: https://antora-supplemental.github.io/valentus-theme[antora-supplemental.github.io/valentus-theme].
+* The link no longer uses the site being built.
+
 == 2026-11-07
 
 === v4.3.3 visible focus controls

@@ -1,0 +1,16 @@
+= 2026-11-13
+:hide-page:
+:navtree-parent: index.adoc
+:page-audience: Theme maintainers
+:page-usage-context: Changelog detail
+:page-orig-author: Ryan Johnson
+:page-last-author: Cursor agent on behalf of Ryan Johnson
+:page-last-edited: 2026-11-13
+
+== Footer demo from metadata
+
+The footer line next to the UI name used `site.url`, so a consumer site such as docs.userdata.cloud linked its own origin as the Valentus demo.
+
+`package.json` `antoraRegistry.demo` is the demo URL. The UI bundle ships the same value in `ui-bundle.json`, and the `ui-bundle-demo` helper reads that field. Extension lister uses the same `demo` field for every extension it lists. The forge homepage is not the demo URL.
+
+The Valentus demo is https://antora-supplemental.github.io/valentus-theme[https://antora-supplemental.github.io/valentus-theme].
