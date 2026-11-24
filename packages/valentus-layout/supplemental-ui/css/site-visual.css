@@ -260,6 +260,15 @@ body.valentus-side-panels html.dark-theme {
     overflow-y: visible;
   }
 
+  .nav .nav-panel-menu:has(> nav.nav-menu.nav-tree-only),
+  .nav .nav-panel-menu:has(> nav.nav-menu.valentus-nav-tree-only) {
+    display: flex;
+    flex-direction: column;
+    height: 100% !important;
+    max-height: 100%;
+    overflow: hidden !important;
+  }
+
   .nav nav.nav-menu {
     background: var(--valentus-side-panel-bg, transparent);
     border-radius: var(--valentus-side-panel-radius);
@@ -700,7 +709,8 @@ footer.footer a {
  * Horizontal scroll + edge fades (site-visual.js toggles .valentus-nav-overflow-*).
  * Fades appear only when that edge still has overflow; mask soft-clips
  * overflowing labels and their highlight fill together.
- * Hide scrollbars — wheel/trackpad + edge fades remain the affordance.
+ * Keep thin scrollbars visible so desktop and mobile readers can see and drag
+ * horizontal overflow alongside wheel/trackpad/touch scrolling.
  */
 nav.nav-menu.nav-tree-only,
 nav.nav-menu.valentus-nav-tree-only {
@@ -708,15 +718,25 @@ nav.nav-menu.valentus-nav-tree-only {
   overflow-y: auto;
   -webkit-mask-image: none;
   mask-image: none;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--valentus-border) transparent;
 }
 
 nav.nav-menu.nav-tree-only::-webkit-scrollbar,
 nav.nav-menu.valentus-nav-tree-only::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
+  width: 6px;
+  height: 6px;
+}
+
+nav.nav-menu.nav-tree-only::-webkit-scrollbar-track,
+nav.nav-menu.valentus-nav-tree-only::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+nav.nav-menu.nav-tree-only::-webkit-scrollbar-thumb,
+nav.nav-menu.valentus-nav-tree-only::-webkit-scrollbar-thumb {
+  background: var(--valentus-border);
+  border-radius: 3px;
 }
 
 nav.nav-menu.nav-tree-only.valentus-nav-overflow-end:not(.valentus-nav-overflow-start),

@@ -635,9 +635,18 @@ html.dark-theme .valentus-doc-mast {
     min-width: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
     overflow-x: hidden !important;
     overflow-y: auto !important;
+  }
+
+  /* Tree-only nav: nav.nav-menu owns BOTH scroll axes so the horizontal scrollbar
+     stays pinned to the visible rail bottom and never creates a nested scrollport. */
+  .nav-panel-menu:has(> nav.nav-menu.nav-tree-only),
+  .nav-panel-menu:has(> nav.nav-menu.valentus-nav-tree-only) {
+    overflow: hidden !important;
   }
 
   .nav-panel-explore {
@@ -666,15 +675,27 @@ html.dark-theme .valentus-doc-mast {
   -ms-scroll-chaining: chained !important;
 }
 
-/* Mobile overlay: account for the mast in addition to the main navbar */
+/* Mobile overlay: account for the mast in addition to the main navbar.
+   Layer above the sticky search dock (15) and below the sticky header/mast (30)
+   so the drawer toggle remains clickable while the drawer covers the search dock. */
 @media screen and (max-width: 1023.5px) {
   .nav-container {
     top: var(--valentus-mast-total) !important;
+    z-index: 25 !important;
   }
 
   .nav {
     top: 2.5rem;
     height: calc(100vh - var(--valentus-mast-total) - 2.5rem);
+  }
+
+  .nav-panel-menu:has(> nav.nav-menu.nav-tree-only),
+  .nav-panel-menu:has(> nav.nav-menu.valentus-nav-tree-only) {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
   }
 }
 
@@ -1496,24 +1517,10 @@ nav.nav-menu.valentus-nav-tree-only {
   min-width: 0;
   overflow-x: auto;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
   padding: 0 var(--valentus-global-rail-hpad) 0.5rem var(--valentus-global-rail-hpad) !important;
-}
-
-/* Desktop: [data-panel=menu] (.nav-panel-menu) is the ONLY vertical scrollport in the rail
-   (it is also the SoftNav scroll-restore key). The tree grows with its content instead of
-   becoming a nested scroller; otherwise neither box scrolls cleanly and the wheel chains
-   to the page. */
-@media screen and (min-width: 1024px) {
-  body.valentus-body .nav nav.nav-menu.nav-tree-only,
-  body.valentus-body .nav nav.nav-menu.valentus-nav-tree-only,
-  nav.nav-menu.nav-tree-only,
-  nav.nav-menu.valentus-nav-tree-only {
-    flex: 0 0 auto;
-    height: auto;
-    max-height: none;
-    overflow-x: hidden;
-    overflow-y: visible;
-  }
 }
 
 /* Antora Default UI sets .nav-list { margin-left: .75rem } for nesting.
